@@ -5,18 +5,24 @@ import Textarea from "@mui/joy/Textarea";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect} from "react";
+
+import connect_axios from "../../api/connect";
+import { UserIdState, UserState, PATState  } from "../../recoil/atoms";
+import { useRecoilValue } from "recoil";
 
 export default function QuestionEditor() {
 
     const [tilContent, setTilContent] = useState({
         title: '',
         content: '',
+        message: '',
     });
 
     const titleRef = useRef();
     const editorRef = useRef();
+    const userId = useRecoilValue(UserIdState);
+
     useEffect(()=>{}, [tilContent]);
 
     const blank = {
@@ -26,7 +32,6 @@ export default function QuestionEditor() {
 
     const TitleHandler = (e) => {
         const {value} = e.target;
-
         setTilContent({
             ...tilContent,
             title : value,
@@ -35,7 +40,6 @@ export default function QuestionEditor() {
 
     const log = (e) => {
         if (editorRef.current) {
-
         setTilContent({
             ...tilContent,
             content : editorRef.current.getContent(),
@@ -43,6 +47,14 @@ export default function QuestionEditor() {
         sendData();
         }
     };
+
+    const MessageHandler = (e) => {
+      const {value} = e.target;
+      setTilContent({
+        ...tilContent,
+        message: value,
+      })
+    }
 
     const ConvertHtmltoMD  = () => {
 
@@ -66,15 +78,28 @@ export default function QuestionEditor() {
             return;
         }
 
-        // 여기에 html 을 백에 보냄
+        if(tilContent.message.length < 1){
+          alert("Commit Message을 입력해주세요");
+          titleRef.current.focus();
+          return;
+      }
 
+        const data = {
+          content: tilContent.content,
+          fileName: tilContent.title,
+          id : userId,
+          message: tilContent.message,
+          missionUid: "1000" ,
+        }
+
+        // 여기에 html 을 백에 보냄
+        connect_axios.post(`/til/crate` , JSON.stringify(data), {
+          headers: {
+              "Content-Type": `application/json`,
+            },
+      })
         console.log("알려줘!" , tilContent);
     }
-
-   
-    
-
-
 
   return (
     <>
@@ -91,26 +116,6 @@ export default function QuestionEditor() {
             menubar: false,
             toolbar : false,
             statusbar: false,
-            plugins: [
-              "advlist",
-              "autolink",
-              "lists",
-              "link",
-              "image",
-              "charmap",
-              "preview",
-              "anchor",
-              "searchreplace",
-              "visualblocks",
-              "code",
-              "fullscreen",
-              "insertdatetime",
-              "media",
-              "table",
-              "code",
-              "help",
-              "wordcount",
-            ],
             // toolbar:
             //   "undo redo | blocks | " +
             //   "bold italic forecolor | alignleft aligncenter " +
@@ -120,6 +125,8 @@ export default function QuestionEditor() {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
         />
+        <FormLabel style={blank}>Commit Message</FormLabel>
+        <Textarea ref= {titleRef }placeholder="Commit Message를 입력해주세요." minRows={1} name="message" onChange={MessageHandler}/>
         <Button
           style={blank}
           onClick={log}

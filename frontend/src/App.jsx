@@ -7,17 +7,18 @@ import WriteQuestionPage from "./pages/board/WriteQuestionPage";
 import QuestionDetail from "./pages/board/QuestionDetail";
 import NotFoundPage from "./pages/notFound/NotFoundPage";
 import Survey from "./components/survey/Survey";
+import Mission from "./pages/mission/Mission";
 
 // tmp
 import TmpPage from "./pages/main/TmpPage";
 
 // global css
 import GlobalStyle from "./styles/global";
-import KakaoRedirectPage from "./pages/auth/KakaoRedirectPage";
 import GithubRedirectPage from "./pages/auth/GithubRedirectPage";
 import SignupPage from "./pages/auth/SignupPage";
 import WriteTilPage from "./pages/til/WriteTilPage";
 import Navbar from "./components/navbar/NavBar";
+import LoginPage from "./pages/auth/LoginPage";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/intro" element={<IntroPage />} />
-        <Route path="/login" element={<IntroPage />} />
+        <Route path="/login" element={<LoginPage/>} />
         <Route path="/github" element={<GithubRedirectPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/myprofile" element={<MyProfilePage />} />
@@ -38,6 +39,7 @@ function App() {
         <Route path="/writetil" element={<WriteTilPage />} />
         <Route path="/tmp" element={<TmpPage />} />
         <Route path="/*" element={<NotFoundPage />} />
+        <Route path="/mission" element={<Mission />} />
       </Routes>
     </BrowserRouter>
   );
