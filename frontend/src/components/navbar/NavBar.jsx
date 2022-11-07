@@ -57,9 +57,6 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const logoutHandle = () => {
     logout();
   };
