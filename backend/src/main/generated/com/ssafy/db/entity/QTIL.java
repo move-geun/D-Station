@@ -26,6 +26,8 @@ public class QTIL extends EntityPathBase<TIL> {
 
     public final DateTimePath<java.time.LocalDateTime> date = createDateTime("date", java.time.LocalDateTime.class);
 
+    public final StringPath fileName = createString("fileName");
+
     public final QMission mission;
 
     public final NumberPath<Long> uid = createNumber("uid", Long.class);

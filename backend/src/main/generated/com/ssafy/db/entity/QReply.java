@@ -22,8 +22,6 @@ public class QReply extends EntityPathBase<Reply> {
 
     public static final QReply reply = new QReply("reply");
 
-    public final BooleanPath adopted = createBoolean("adopted");
-
     public final StringPath content = createString("content");
 
     public final QJisickin jisickin;

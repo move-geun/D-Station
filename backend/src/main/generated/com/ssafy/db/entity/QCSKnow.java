@@ -21,6 +21,8 @@ public class QCSKnow extends EntityPathBase<CSKnow> {
 
     public final StringPath csContents = createString("csContents");
 
+    public final StringPath csSubject = createString("csSubject");
+
     public final NumberPath<Long> uid = createNumber("uid", Long.class);
 
     public QCSKnow(String variable) {

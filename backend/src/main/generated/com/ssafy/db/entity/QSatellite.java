@@ -22,8 +22,6 @@ public class QSatellite extends EntityPathBase<Satellite> {
 
     public static final QSatellite satellite = new QSatellite("satellite");
 
-    public final ListPath<Jisickin, QJisickin> jisickins = this.<Jisickin, QJisickin>createList("jisickins", Jisickin.class, QJisickin.class, PathInits.DIRECT2);
-
     public final ListPath<Mission, QMission> missions = this.<Mission, QMission>createList("missions", Mission.class, QMission.class, PathInits.DIRECT2);
 
     public final QPlanet planet;

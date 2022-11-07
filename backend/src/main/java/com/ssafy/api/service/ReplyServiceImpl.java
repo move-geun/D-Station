@@ -2,7 +2,6 @@ package com.ssafy.api.service;
 
 import com.ssafy.api.request.reply.ReplyPostReq;
 import com.ssafy.api.response.reply.ReplyRes;
-import com.ssafy.common.util.SecurityUtil;
 import com.ssafy.db.entity.Jisickin;
 import com.ssafy.db.entity.Reply;
 import com.ssafy.db.entity.User;

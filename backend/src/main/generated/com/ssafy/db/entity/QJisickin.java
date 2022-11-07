@@ -26,15 +26,11 @@ public class QJisickin extends EntityPathBase<Jisickin> {
 
     public final DateTimePath<java.time.LocalDateTime> createdAt = createDateTime("createdAt", java.time.LocalDateTime.class);
 
-    public final NumberPath<Long> gUid = createNumber("gUid", Long.class);
-
     public final ListPath<Image, QImage> images = this.<Image, QImage>createList("images", Image.class, QImage.class, PathInits.DIRECT2);
-
-    public final NumberPath<Long> pUid = createNumber("pUid", Long.class);
 
     public final ListPath<Reply, QReply> replies = this.<Reply, QReply>createList("replies", Reply.class, QReply.class, PathInits.DIRECT2);
 
-    public final QSatellite satellite;
+    public final StringPath tag = createString("tag");
 
     public final StringPath title = createString("title");
 
@@ -62,7 +58,6 @@ public class QJisickin extends EntityPathBase<Jisickin> {
 
     public QJisickin(Class<? extends Jisickin> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.satellite = inits.isInitialized("satellite") ? new QSatellite(forProperty("satellite"), inits.get("satellite")) : null;
         this.user = inits.isInitialized("user") ? new QUser(forProperty("user"), inits.get("user")) : null;
     }
 

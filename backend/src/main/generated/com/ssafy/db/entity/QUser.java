@@ -48,6 +48,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath password = createString("password");
 
+    public final StringPath pat = createString("pat");
+
     public final StringPath principal = createString("principal");
 
     public final ListPath<Progress, QProgress> progresses = this.<Progress, QProgress>createList("progresses", Progress.class, QProgress.class, PathInits.DIRECT2);
@@ -55,6 +57,8 @@ public class QUser extends EntityPathBase<User> {
     public final QRank rank;
 
     public final ListPath<Reply, QReply> replies = this.<Reply, QReply>createList("replies", Reply.class, QReply.class, PathInits.DIRECT2);
+
+    public final StringPath repo = createString("repo");
 
     public final ListPath<TIL, QTIL> TIL = this.<TIL, QTIL>createList("TIL", TIL.class, QTIL.class, PathInits.DIRECT2);
 

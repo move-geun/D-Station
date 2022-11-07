@@ -35,9 +35,9 @@ public class ProfileController {
     public ResponseEntity<?> getUserProfile(
             @RequestParam @ApiParam(name = "유저 id") String userId
     ){
-        Optional<User> user = userService.getUserById(userId);
-        if ( user.isPresent() ) {
-            return ResponseEntity.status(200).body(profileService.getProfileImage(user.get()));
+        User user = userService.getUserById(userId);
+        if ( user != null ) {
+            return ResponseEntity.status(200).body(profileService.getProfileImage(user));
         }
         return ResponseEntity.status(404).body(BaseResponseBody.of(404, "존재하지 않는 유저입니다."));
     }

@@ -24,6 +24,10 @@ public class QMission extends EntityPathBase<Mission> {
 
     public final ListPath<MissionCompleted, QMissionCompleted> missionCompleted = this.<MissionCompleted, QMissionCompleted>createList("missionCompleted", MissionCompleted.class, QMissionCompleted.class, PathInits.DIRECT2);
 
+    public final StringPath mTag = createString("mTag");
+
+    public final StringPath mUrl = createString("mUrl");
+
     public final StringPath quest = createString("quest");
 
     public final QSatellite satellite;

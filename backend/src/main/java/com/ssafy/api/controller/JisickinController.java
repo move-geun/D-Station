@@ -42,9 +42,9 @@ public class JisickinController {
             @RequestBody @ApiParam(value = "질문 생성 폼", required = true) JisickinPostReq jisickinInfo,
             @RequestParam @ApiParam(value = "유저 정보", required = true) String userId
     ) {
-        Optional<User> user = userService.getUserById(userId);
-        if (user.isPresent()) {
-            jisickinService.createAsk(jisickinInfo, user.get());
+        User user = userService.getUserById(userId);
+        if (user != null) {
+            jisickinService.createAsk(jisickinInfo, user);
             return ResponseEntity.status(200).body(BaseResponseBody.of(200, "게시글이 생성되었습니다."));
         }
         return ResponseEntity.status(401).body(BaseResponseBody.of(401, "게시글 생성에 실패했습니다."));
@@ -105,10 +105,10 @@ public class JisickinController {
     ) {
         Optional<Jisickin> jisickin = jisickinService.getOne(uid);
         // 해당 질문이 존재하고, 유저가 존재할때
-        if (jisickin.isPresent() && userService.getUserById(userId).isPresent()) {
+        if (jisickin.isPresent() && userService.getUserById(userId) != null) {
             // 작성자와 현재 유저 정보가 일치하면
-            if (jisickin.get().getUser() == userService.getUserById(userId).get()) {
-                jisickinService.updateAsk(uid, jisickinInfo, userService.getUserById(userId).get());
+            if (jisickin.get().getUser() == userService.getUserById(userId)) {
+                jisickinService.updateAsk(uid, jisickinInfo, userService.getUserById(userId));
                 return ResponseEntity.status(200).body(BaseResponseBody.of(200, "질문이 수정되었습니다."));
             }
             return ResponseEntity.status(403).body(BaseResponseBody.of(403, "권한이 없습니다."));

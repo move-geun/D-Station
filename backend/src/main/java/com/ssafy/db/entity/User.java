@@ -116,4 +116,11 @@ public class User {
     @JoinColumn(name = "rank_uid")
     private Rank rank;
 
+    public void addExp(Long exp) {
+        this.exp += 5;
+    }
+
+    public void subtractExp(Long exp) {
+        this.exp -= 5;
+    }
 }

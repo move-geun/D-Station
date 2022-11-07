@@ -1,11 +1,8 @@
 package com.ssafy.api.service;
 
 import com.ssafy.api.request.jisickin.JisickinPostReq;
-import com.ssafy.api.response.jisickin.JisickinDetailRes;
 import com.ssafy.api.response.jisickin.JisickinRes;
-import com.ssafy.common.util.SecurityUtil;
 import com.ssafy.db.entity.Jisickin;
-import com.ssafy.db.entity.Satellite;
 import com.ssafy.db.entity.User;
 import com.ssafy.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;

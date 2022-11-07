@@ -1,7 +1,6 @@
 package com.ssafy.api.service;
 
 import com.ssafy.api.response.mission.MissionRes;
-import com.ssafy.common.util.SecurityUtil;
 import com.ssafy.db.entity.Mission;
 import com.ssafy.db.entity.MissionCompleted;
 import com.ssafy.db.entity.Satellite;
