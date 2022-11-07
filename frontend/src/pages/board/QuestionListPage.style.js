@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const Function = styled.div`
   display: flex;
+  margin-left: 5%;
   position: relative;
   align-items: center;
 

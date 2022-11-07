@@ -7,7 +7,6 @@ import SearchIcon from "@mui/icons-material/Search";
 const QuestionListPage = () => {
   return (
     <div>
-      <h1 style={{ textAlign: "center", marginTop: "0px" }}>D-Station</h1>
       <Function>
         <div className="write">
           <a className="writeBtn" href="./writequestion">
