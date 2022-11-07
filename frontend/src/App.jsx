@@ -14,11 +14,11 @@ import TmpPage from "./pages/main/TmpPage";
 
 // global css
 import GlobalStyle from "./styles/global";
-import KakaoRedirectPage from "./pages/auth/KakaoRedirectPage";
 import GithubRedirectPage from "./pages/auth/GithubRedirectPage";
 import SignupPage from "./pages/auth/SignupPage";
 import WriteTilPage from "./pages/til/WriteTilPage";
 import Navbar from "./components/navbar/NavBar";
+import LoginPage from "./pages/auth/LoginPage";
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/intro" element={<IntroPage />} />
-        <Route path="/login" element={<IntroPage />} />
+        <Route path="/login" element={<LoginPage/>} />
         <Route path="/github" element={<GithubRedirectPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/myprofile" element={<MyProfilePage />} />
