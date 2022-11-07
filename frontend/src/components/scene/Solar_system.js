@@ -3,12 +3,12 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 
 export function SolarSystem(props) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF("/solarsystem.glb");
+  const { nodes, materials, animations } = useGLTF("/glb/solarsystem.glb");
   const { actions } = useAnimations(animations, group);
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
-        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={0}>
+        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={2}>
           <group
             name="ffdbfd68ccdf454990b0c686aca1d5a7fbx"
             rotation={[Math.PI / 2, 0, 0]}
@@ -229,4 +229,4 @@ export function SolarSystem(props) {
   );
 }
 
-useGLTF.preload("/solarsystem.glb");
+useGLTF.preload("/glb/solarsystem.glb");
