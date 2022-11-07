@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Component = styled.div`
   position: relative;
-  top: 10%;
+  top: 0%;
   left: 20%;
   width: 60%;
 `;
