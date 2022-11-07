@@ -7,6 +7,7 @@ import WriteQuestionPage from "./pages/board/WriteQuestionPage";
 import QuestionDetail from "./pages/board/QuestionDetail";
 import NotFoundPage from "./pages/notFound/NotFoundPage";
 import Survey from "./components/survey/Survey";
+import Mission from "./pages/mission/Mission";
 
 // tmp
 import TmpPage from "./pages/main/TmpPage";
@@ -38,6 +39,7 @@ function App() {
         <Route path="/writetil" element={<WriteTilPage />} />
         <Route path="/tmp" element={<TmpPage />} />
         <Route path="/*" element={<NotFoundPage />} />
+        <Route path="/mission" element={<Mission />} />
       </Routes>
     </BrowserRouter>
   );
