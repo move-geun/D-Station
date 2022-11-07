@@ -15,7 +15,6 @@ import CommentDetail from "../../components/board/Comment";
 const QuestionDetail = () => {
   return (
     <Container>
-      <h1 style={{ marginTop: "0px" }}>D-Station</h1>
       {/* 제목 */}
       <Title>
         <p className="title">제목 들어갈 자리</p>
