@@ -65,8 +65,9 @@ public class User {
     private String notionId;
 
     // 경험치
-    @Column(name="exp", columnDefinition = "int unsigned")
-    private Long exp;
+    @Builder.Default
+    @Column(name="exp")
+    private Integer exp = 0;
     
     // Personal Access Token
     @Column(name="pat", length = 50)
@@ -116,11 +117,11 @@ public class User {
     @JoinColumn(name = "rank_uid")
     private Rank rank;
 
-    public void addExp(Long exp) {
+    public void addExp(int exp) {
         this.exp += 5;
     }
 
-    public void subtractExp(Long exp) {
+    public void subtractExp(int exp) {
         this.exp -= 5;
     }
 }
