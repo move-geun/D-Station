@@ -33,7 +33,7 @@ public class ProfileController {
             @ApiResponse(code = 200, message = "성공")
     })
     public ResponseEntity<?> getUserProfile(
-            @RequestParam @ApiParam(name = "유저 id") String userId
+            @RequestParam @ApiParam(name = "유저 id",required = true) String userId
     ){
         User user = userService.getUserById(userId);
         if ( user != null ) {

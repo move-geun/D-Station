@@ -30,6 +30,8 @@ public class ProfileServiceImpl implements ProfileService{
         Optional<User> userInfo = userRepository.getUsersById(user.getId());
         List<Rank> ranks = rankRepository.findAll();
         List<CharacterImage> images = characterImageRepository.findAll();
+        System.out.println(userInfo.get().getId());
+        System.out.println(userInfo.get().getExp());
         if ( userInfo.get().getExp() <= 30 ) {
             return ProfileDto.of(user, ranks.get(0), images.get(0));
         } else if ( userInfo.get().getExp() <= 70 ) {
