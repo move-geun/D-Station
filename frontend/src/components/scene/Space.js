@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Space(props) {
-  const { nodes, materials } = useGLTF("/space.glb");
+  const { nodes, materials } = useGLTF("/glb/space.glb");
   return (
     <group {...props} dispose={null}>
       <group
@@ -14,4 +14,4 @@ export function Space(props) {
   );
 }
 
-useGLTF.preload("/space.glb");
+useGLTF.preload("/glb/space.glb");

@@ -1,9 +1,19 @@
 import React from "react";
+import CodeTest from "../../components/mission/CodeTest";
+import CodeExam from "../../components/mission/CodeExam";
+import { Container } from "./Mission.style";
 
 const Mission = () => {
   return (
     <>
-      <h1>미션페이지</h1>
+      <Container>
+        <div className="left"></div>
+        <div className="center"></div>
+        <div className="right">
+          <CodeExam/>
+          <CodeTest />
+        </div>
+      </Container>
     </>
   );
 };
