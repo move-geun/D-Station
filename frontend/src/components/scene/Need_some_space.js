@@ -6,7 +6,7 @@ export function NeedSomeSpace(props) {
   const { nodes, materials } = useGLTF("/glb/need_some_space.glb");
   const myMesh = React.useRef();
   useFrame(({ clock }) => {
-    const a = clock.getElapsedTime() / 3;
+    const a = clock.getElapsedTime() / 4;
     myMesh.current.rotation.x = a;
     myMesh.current.rotation.z = a;
     myMesh.current.rotation.y = a;
