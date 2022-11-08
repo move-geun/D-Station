@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function SolarSystemOne(props) {
-  const { nodes, materials } = useGLTF("/solarsystem_1.glb");
+  const { nodes, materials } = useGLTF("/glb/solarsystem_1.glb");
   return (
     <group {...props} dispose={null}>
       <group position={[2.45, 4.33, -0.55]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -170,4 +170,4 @@ export function SolarSystemOne(props) {
   );
 }
 
-useGLTF.preload("/solarsystem_1.glb");
+useGLTF.preload("/glb/solarsystem_1.glb");

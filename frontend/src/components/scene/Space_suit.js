@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function SpaceSuit(props) {
-  const { nodes, materials } = useGLTF("/space_suit.glb");
+  const { nodes, materials } = useGLTF("/glb/space_suit.glb");
   return (
     <group {...props} dispose={null}>
       <group rotation={[-3.09, -0.39, 0.02]}>
@@ -18,4 +18,4 @@ export function SpaceSuit(props) {
   );
 }
 
-useGLTF.preload("/space_suit.glb");
+useGLTF.preload("/glb/space_suit.glb");

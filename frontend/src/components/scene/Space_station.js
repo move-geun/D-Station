@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function SpaceStation(props) {
-  const { nodes, materials } = useGLTF("/space_station.glb");
+  const { nodes, materials } = useGLTF("/glb/space_station.glb");
   return (
     <group {...props} dispose={null}>
       <group position={[2.06, -0.76, 0]} rotation={[-Math.PI / 2, 0.56, 0]}>
@@ -32,4 +32,4 @@ export function SpaceStation(props) {
   );
 }
 
-useGLTF.preload("/space_station.glb");
+useGLTF.preload("/glb/space_station.glb");
