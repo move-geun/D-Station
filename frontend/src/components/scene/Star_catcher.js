@@ -2,7 +2,9 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function StarCatcher(props) {
-  const { nodes, materials } = useGLTF("/star_catcher.glb");
+  const { nodes, materials } = useGLTF(
+    "https://d-station.s3.ap-northeast-2.amazonaws.com/glb/star_catcher.glb"
+  );
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={1.28}>
