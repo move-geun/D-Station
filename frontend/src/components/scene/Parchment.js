@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Parchment(props) {
-  const { nodes, materials } = useGLTF("/parchment.glb");
+  const { nodes, materials } = useGLTF("/glb/parchment.glb");
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -19,4 +19,4 @@ export function Parchment(props) {
   );
 }
 
-useGLTF.preload("/parchment.glb");
+useGLTF.preload("/glb/parchment.glb");

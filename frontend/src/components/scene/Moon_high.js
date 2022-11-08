@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function MoonHigh(props) {
-  const { nodes, materials } = useGLTF("/moon_high.glb");
+  const { nodes, materials } = useGLTF("/glb/moon_high.glb");
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -261,4 +261,4 @@ export function MoonHigh(props) {
   );
 }
 
-useGLTF.preload("/moon_high.glb");
+useGLTF.preload("/glb/moon_high.glb");
