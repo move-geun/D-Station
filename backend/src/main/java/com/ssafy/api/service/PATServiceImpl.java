@@ -44,7 +44,8 @@ public class PATServiceImpl implements PATService {
 		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(githubPw);
 		driver.findElement(By.xpath("//*[@id=\"login\"]/div[4]/form/div/input[11]")).sendKeys(Keys.ENTER);
 		driver.navigate().to("https://github.com/settings/tokens/new");
-		System.err.println(driver.getPageSource());
+		System.out.println("토큰 생성 페이지 이동");
+		System.out.println(driver.getPageSource());
 		driver.findElement(By.xpath("//*[@id=\"oauth_access_description\"]")).sendKeys("D-station");
 		driver.findElement(By.xpath("//*[@id=\"new_oauth_access\"]/div/dl[2]/dd/div/ul/li[1]/label/div/input")).click();
 		driver.findElement(By.xpath("//*[@id=\"new_oauth_access\"]/div/dl[2]/dd/div/ul/li[4]/label/div/input")).click();
