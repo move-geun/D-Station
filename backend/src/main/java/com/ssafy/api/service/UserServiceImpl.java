@@ -1,9 +1,12 @@
 package com.ssafy.api.service;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.StringTokenizer;
 
 import org.json.JSONObject;
@@ -44,9 +47,59 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User createUser(UserRegisterPostReq userRegisterInfo) {
+		// pixela 회원가입
+		try {
+			URL url = new URL("https://pixe.la/v1/users");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST"); // http 메서드
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setDoInput(true);
+
+			JSONObject object = new JSONObject();
+			object.put("token", "xhzmsdlqslek" + userRegisterInfo.getId());
+			object.put("username", userRegisterInfo.getId());
+			object.put("agreeTermsOfService", "yes");
+			object.put("notMinor", "yes");
+
+			String jsonInputString = object.toString();
+
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			bw.write(jsonInputString); // 버퍼에 담기
+			bw.flush(); // 버퍼에 담긴 데이터 전달
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		// pixela graph 만들기
+		try {
+			URL url = new URL("https://pixe.la/v1/users/" + userRegisterInfo.getId() + "/graphs");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST"); // http 메서드
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty("X-USER-TOKEN", "xhzmsdlqslek" + userRegisterInfo.getId());
+			conn.setDoInput(true);
+
+			JSONObject object = new JSONObject();
+			object.put("id", userRegisterInfo.getId() + "1");
+			object.put("name","Dstation");
+			object.put("unit", "commit");
+			object.put("type", "int");
+			object.put("color","" );
+			object.put("timezone", "Asia/Seoul");
+			object.put("isSecret", false);
+
+			String jsonInputString = object.toString();
+
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			bw.write(jsonInputString); // 버퍼에 담기
+			bw.flush(); // 버퍼에 담긴 데이터 전달
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
 		User user = new User();
 		user.setId(userRegisterInfo.getId());
 		user.setNickname(userRegisterInfo.getNickname());
+		user.setPrincipal("xhzmsdlqslek" + userRegisterInfo.getId());
 		// 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장.
 		// user.setPassword(passwordEncoder.encode(userRegisterInfo.getPassword()));
 		return userRepository.save(user);
@@ -150,17 +203,14 @@ public class UserServiceImpl implements UserService {
 		if (user.isPresent()) {
 			return user;
 
-		} 
+		}
 		return null;
 	}
 
 	@Override
 	public boolean login(String id) {
 
-
-
 		return false;
 	}
-
 
 }
