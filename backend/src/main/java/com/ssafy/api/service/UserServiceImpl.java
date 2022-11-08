@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 			conn.setDoInput(true);
 
 			JSONObject object = new JSONObject();
-			object.put("id", userRegisterInfo.getId() + "1");
+			object.put("id", userRegisterInfo.getId());
 			object.put("name","Dstation");
 			object.put("unit", "commit");
 			object.put("type", "int");
