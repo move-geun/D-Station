@@ -5,6 +5,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Html, useProgress } from "@react-three/drei";
 import { Galaxy } from "../../components/scene/Galaxy";
 import { NeedSomeSpace } from "../../components/scene/Need_some_space";
+import { SolarSystem } from "../../components/scene/Solar_system";
 extend({ OrbitControls });
 
 const CameraControls = () => {
@@ -48,7 +49,7 @@ function Loader() {
 
 const MainPage = ({ ...props }) => {
   return (
-    <Canvas camera={{ fov: 75, position: [100, 50, 700] }}>
+    <Canvas camera={{ fov: 100, position: [100, 50, 700] }}>
       <CameraControls />
       <directionalLight position={[0, 0, 5]} />
       <ambientLight />
@@ -56,6 +57,7 @@ const MainPage = ({ ...props }) => {
       <Suspense fallback={<Loader />}>
         <Galaxy />
         <NeedSomeSpace />
+        <SolarSystem />
       </Suspense>
       <SkyBox />
     </Canvas>
