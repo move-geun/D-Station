@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Taeria(props) {
-  const { nodes, materials } = useGLTF("/taeria.glb");
+  const { nodes, materials } = useGLTF("/glb/taeria.glb");
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -21,4 +21,4 @@ export function Taeria(props) {
   );
 }
 
-useGLTF.preload("/taeria.glb");
+useGLTF.preload("/glb/taeria.glb");
