@@ -217,8 +217,8 @@ public class TILServiceImpl implements TILService {
 		// mission uid로 dir 정보 얻어오기
 		Mission mission = missionRepository.findMissionByUid(tILCreateReq.getMissionUid());
 		MissionDirRes mdr = MissionDirRes.of(mission);
-		String dir = mdr.getPlanetName() + "/" + mdr.getSatellitesName();
-		String fileName = tILCreateReq.getFileName();
+		String dir = (mdr.getPlanetName() + "/" + mdr.getSatellitesName()).replace(" ", "_");
+		String fileName = (tILCreateReq.getFileName()).replace(" ", "_");
 
 		////////파일 변환 시작
 		String filePath = ".\\json\\testDir\\"; //파일 경로
