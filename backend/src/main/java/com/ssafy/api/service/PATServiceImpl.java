@@ -50,7 +50,7 @@ public class PATServiceImpl implements PATService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		driver.navigate().to("https://github.com/settings/tokens/new");
+		driver.get("https://github.com/settings/tokens/new");
 		System.out.println("토큰 생성 페이지 이동");
 		try {
 			Thread.sleep(5000);
