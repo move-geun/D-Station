@@ -76,18 +76,46 @@
 // };
 // export default MainPage;
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Canvas, extend, useThree, useFrame } from "@react-three/fiber";
 import {
   CubeTextureLoader,
   CubeCamera,
   WebGLCubeRenderTarget,
-  RGBFormat,
+  RGBAFormat,
   LinearMipmapLinearFilter,
 } from "three";
+import { Html } from "@react-three/drei";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { MainWrapper, WebWrapper } from "./MainPage.style";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 extend({ OrbitControls });
+
+function Marker({ children, ...props }) {
+  // This holds the local occluded state
+  const [occluded, occlude] = useState();
+  return (
+    <Html
+      // 3D-transform contents
+      transform
+      // Hide contents "behind" other meshes
+      occlude
+      // Tells us when contents are occluded (or not)
+      onOcclude={occlude}
+      // We just interpolate the visible state into css opacity and transforms
+      style={{
+        transition: "all 0.2s",
+        opacity: occluded ? 0 : 1,
+        transform: `scale(${occluded ? 0.25 : 1})`,
+      }}
+      {...props}
+    >
+      {children}
+    </Html>
+  );
+}
+
 const CameraControls = () => {
   // Get a reference to the Three.js Camera, and the canvas html element.
   // We need these to setup the OrbitControls class.
@@ -105,7 +133,7 @@ const CameraControls = () => {
     <orbitControls
       ref={controls}
       args={[camera, domElement]}
-      autoRotate={true}
+      autoRotate={false}
       enableZoom={true}
     />
   );
@@ -121,8 +149,8 @@ function SkyBox() {
     "../assets/2.jpg",
     "../assets/3.jpg",
     "../assets/4.jpg",
-    "../assets/5.jpg",
     "../assets/3.jpg",
+    "../assets/2.jpg",
   ]);
 
   // Set the scene background property to the resulting texture.
@@ -136,11 +164,11 @@ function Sphere() {
   // The cubeRenderTarget is used to generate a texture for the reflective sphere.
   // It must be updated on each frame in order to track camera movement and other changes.
   const cubeRenderTarget = new WebGLCubeRenderTarget(256, {
-    format: RGBFormat,
+    format: RGBAFormat,
     generateMipmaps: true,
     minFilter: LinearMipmapLinearFilter,
   });
-  const cubeCamera = new CubeCamera(1, 1000, cubeRenderTarget);
+  const cubeCamera = new CubeCamera(1000, 3000, cubeRenderTarget);
   cubeCamera.position.set(0, 0, 0);
   scene.add(cubeCamera);
 
@@ -166,7 +194,7 @@ function Sphere2() {
   // The cubeRenderTarget is used to generate a texture for the reflective sphere.
   // It must be updated on each frame in order to track camera movement and other changes.
   const cubeRenderTarget = new WebGLCubeRenderTarget(256, {
-    format: RGBFormat,
+    format: RGBAFormat,
     generateMipmaps: true,
     minFilter: LinearMipmapLinearFilter,
   });
@@ -196,7 +224,7 @@ function Sphere3() {
   // The cubeRenderTarget is used to generate a texture for the reflective sphere.
   // It must be updated on each frame in order to track camera movement and other changes.
   const cubeRenderTarget = new WebGLCubeRenderTarget(256, {
-    format: RGBFormat,
+    format: RGBAFormat,
     generateMipmaps: true,
     minFilter: LinearMipmapLinearFilter,
   });
@@ -226,7 +254,7 @@ function Sphere4() {
   // The cubeRenderTarget is used to generate a texture for the reflective sphere.
   // It must be updated on each frame in order to track camera movement and other changes.
   const cubeRenderTarget = new WebGLCubeRenderTarget(256, {
-    format: RGBFormat,
+    format: RGBAFormat,
     generateMipmaps: true,
     minFilter: LinearMipmapLinearFilter,
   });
@@ -256,7 +284,7 @@ function Sphere5() {
   // The cubeRenderTarget is used to generate a texture for the reflective sphere.
   // It must be updated on each frame in order to track camera movement and other changes.
   const cubeRenderTarget = new WebGLCubeRenderTarget(256, {
-    format: RGBFormat,
+    format: RGBAFormat,
     generateMipmaps: true,
     minFilter: LinearMipmapLinearFilter,
   });
@@ -281,17 +309,40 @@ function Sphere5() {
     </mesh>
   );
 }
+
 const MainPage = () => {
   return (
-    <Canvas className="canvas">
-      <CameraControls />
-      <Sphere />
-      <Sphere2 />
-      <Sphere3 />
-      <Sphere4 />
-      <Sphere5 />
-      <SkyBox />
-    </Canvas>
+    <MainWrapper>
+      <Canvas className="canvas">
+        <CameraControls />
+        <group>
+          <group>
+            <Marker rotation={[0, Math.PI / 2, Math.PI / 2]}>
+              <div
+                style={{
+                  position: "absolute",
+                  fontSize: 10,
+                  letterSpacing: -0.5,
+                  left: 17.5,
+                }}
+              >
+                왜 안나오지
+              </div>
+              <FaMapMarkerAlt style={{ color: "indianred" }} />
+            </Marker>
+            <Sphere />
+          </group>
+          <Sphere2 />
+          <Sphere3 />
+          <Sphere4 />
+          <Sphere5 />
+        </group>
+        <SkyBox />
+      </Canvas>
+      <WebWrapper>
+        <div>들어가나</div>
+      </WebWrapper>
+    </MainWrapper>
   );
 };
 export default MainPage;
