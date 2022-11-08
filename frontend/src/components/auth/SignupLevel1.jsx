@@ -1,14 +1,15 @@
 import React from "react";
-import { MainContainer, WelcomeText, InputContainer, Input, Button, ButtonContainer,DesText, 
-    HorizontalRule, IconsContainer, ForgotPassword } from './SignupLevel.style';
-import { PATState } from "../../recoil/atoms";
+import { MainContainer, WelcomeText, InputContainer, Input, Button, ButtonContainer,DesText} from './SignupLevel.style';
+
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { UserIdState, PATState  } from "../../recoil/atoms";
+import { useRecoilValue, useRecoilState } from "recoil";
+
 import connect_axios from "../../api/connect";
 
 const SignupLevel1 = ({levelHandler}) => {
 
-    const [userId, setUserId] = useState();
+    // const [userId, setUserId] = useState();
     const [githubData, setGithubData] = useState({
         id: '',
         password: '',
@@ -16,6 +17,9 @@ const SignupLevel1 = ({levelHandler}) => {
     const [successGetPAT, setSuccessGetPAT] = useState(false);
     const [getPAT, setGetPAT] = useRecoilState(PATState);
     const [authMessage, setAuthMessage] = useState('');
+
+    const userId = useRecoilValue(UserIdState);
+    console.log("level11111111    ", userId);
 
     useEffect(()=> {
         if(successGetPAT){
@@ -42,10 +46,6 @@ const SignupLevel1 = ({levelHandler}) => {
     }
 
     const AuthorizeGithub = () => {
-        console.log("아이디 ", githubData.id);
-        console.log("비번 ", githubData.password);
-
-        const userId = "minzzz1st7";
         connect_axios.post(`/PAT/create?githubId=${githubData.id}&githubPw=${githubData.password}&userId=${userId}`)
         .then((res) => {
             console.log("인증성공", res);
