@@ -52,11 +52,6 @@ public class TILServiceImpl implements TILService {
 	@Autowired
 	SatelliteRepository satelliteRepository;
 
-	@Override
-	public void createTIl(TILPostReq tilPostReq) {
-
-	}
-
 	// repo 생성
 	@Override
 	public String createRepo(TILRepoReq tILRepoReq) {
@@ -307,6 +302,9 @@ public class TILServiceImpl implements TILService {
 			til.setMission(mission);
 			til.setUser(user);
 			til.setFileName(fileName);
+			// 경험치 + 5
+	        user.addExp(user.getExp());
+	        userRepository.save(user);
 			tilRepository.save(til);
 
 		} catch (Exception e) {
