@@ -1,10 +1,16 @@
 import React, { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 
 export function StarCatcher(props) {
   const { nodes, materials } = useGLTF("/glb/star_catcher.glb");
+  const myMesh = React.useRef();
+  useFrame(({ clock }) => {
+    const a = clock.getElapsedTime();
+    myMesh.current.rotation.y = a;
+  });
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} ref={myMesh}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={1.28}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <mesh

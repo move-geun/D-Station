@@ -1,28 +1,61 @@
-import React, { Suspense, useState } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import React, { Suspense, useState, useRef } from "react";
+import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Html, useProgress } from "@react-three/drei";
+import { CubeTextureLoader } from "three";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { StarCatcher } from "../../components/scene/Star_catcher";
 import { Compass } from "../../components/scene/Compass";
 import { useNavigate } from "react-router-dom";
+
+extend({ OrbitControls });
+
 function Loader() {
   const { progress } = useProgress();
-  return <Html center>{progress} % loaded</Html>;
+  return <Html center>{progress} % 로딩중</Html>;
+}
+
+const CameraControls = () => {
+  const {
+    camera,
+    gl: { domElement },
+  } = useThree();
+
+  const controls = useRef();
+  useFrame(() => controls.current.update());
+  return (
+    <orbitControls
+      ref={controls}
+      args={[camera, domElement]}
+      autoRotate={false}
+      enableZoom={true}
+    />
+  );
+};
+
+function SkyBox() {
+  const { scene } = useThree();
+  const loader = new CubeTextureLoader();
+  const texture = loader.load([
+    "../assets/1.jpg",
+    "../assets/1.jpg",
+    "../assets/1.jpg",
+    "../assets/1.jpg",
+    "../assets/1.jpg",
+    "../assets/4.jpg",
+  ]);
+
+  scene.background = texture;
+  return null;
 }
 
 function Marker({ children, ...props }) {
-  // This holds the local occluded state
   const [occluded, occlude] = useState();
   return (
     <Html
-      // 3D-transform contents
       transform
-      // Hide contents "behind" other meshes
       occlude
-      // Tells us when contents are occluded (or not)
       onOcclude={occlude}
-      // We just interpolate the visible state into css opacity and transforms
       style={{
         transition: "all 0.2s",
         opacity: occluded ? 0 : 1,
@@ -38,12 +71,10 @@ const NotFoundPage = () => {
   const navigate = useNavigate();
   const goMain = () => {
     navigate("/");
-    console.log("클릭됨");
   };
   return (
     <Canvas camera={{ fov: 75, position: [0, 3, 13] }}>
-      <ambientLight />
-      <OrbitControls autoRotate={true} />
+      <CameraControls />
       <directionalLight position={[0, 0, 5]} />
       <Suspense fallback={<Loader />}>
         <group>
@@ -76,6 +107,7 @@ const NotFoundPage = () => {
         </group>
         <Compass onClick={() => goMain()} />
       </Suspense>
+      <SkyBox />
     </Canvas>
   );
 };
