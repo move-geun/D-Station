@@ -10,7 +10,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function PlanetTao(props) {
-  const { nodes, materials } = useGLTF("/planet_tao.glb");
+  const { nodes, materials } = useGLTF("/glb/planet_tao.glb");
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -23,4 +23,4 @@ export function PlanetTao(props) {
   );
 }
 
-useGLTF.preload("/planet_tao.glb");
+useGLTF.preload("/glb/planet_tao.glb");

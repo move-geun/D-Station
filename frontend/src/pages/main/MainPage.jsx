@@ -76,7 +76,7 @@
 // };
 // export default MainPage;
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Canvas, extend, useThree, useFrame } from "@react-three/fiber";
 import {
   CubeTextureLoader,
@@ -85,36 +85,10 @@ import {
   RGBAFormat,
   LinearMipmapLinearFilter,
 } from "three";
-import { Html } from "@react-three/drei";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { MainWrapper, WebWrapper } from "./MainPage.style";
-import { FaMapMarkerAlt } from "react-icons/fa";
 
 extend({ OrbitControls });
-
-function Marker({ children, ...props }) {
-  // This holds the local occluded state
-  const [occluded, occlude] = useState();
-  return (
-    <Html
-      // 3D-transform contents
-      transform
-      // Hide contents "behind" other meshes
-      occlude
-      // Tells us when contents are occluded (or not)
-      onOcclude={occlude}
-      // We just interpolate the visible state into css opacity and transforms
-      style={{
-        transition: "all 0.2s",
-        opacity: occluded ? 0 : 1,
-        transform: `scale(${occluded ? 0.25 : 1})`,
-      }}
-      {...props}
-    >
-      {children}
-    </Html>
-  );
-}
 
 const CameraControls = () => {
   // Get a reference to the Three.js Camera, and the canvas html element.
@@ -315,28 +289,11 @@ const MainPage = () => {
     <MainWrapper>
       <Canvas className="canvas">
         <CameraControls />
-        <group>
-          <group>
-            <Marker rotation={[0, Math.PI / 2, Math.PI / 2]}>
-              <div
-                style={{
-                  position: "absolute",
-                  fontSize: 10,
-                  letterSpacing: -0.5,
-                  left: 17.5,
-                }}
-              >
-                왜 안나오지
-              </div>
-              <FaMapMarkerAlt style={{ color: "indianred" }} />
-            </Marker>
-            <Sphere />
-          </group>
-          <Sphere2 />
-          <Sphere3 />
-          <Sphere4 />
-          <Sphere5 />
-        </group>
+        <Sphere />
+        <Sphere2 />
+        <Sphere3 />
+        <Sphere4 />
+        <Sphere5 />
         <SkyBox />
       </Canvas>
       <WebWrapper>
