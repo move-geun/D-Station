@@ -8,13 +8,16 @@ import SignupLevel2 from "../../components/auth/SignupLevel2";
 import SignupLevel3 from "../../components/auth/SignupLevel3";
 import SignupLevel4 from "../../components/auth/SignupLevel4";
 
+import { UserIdState, UserState, PATState  } from "../../recoil/atoms";
+import { useRecoilValue } from "recoil";
+
 
 const SignupPage = () => {
 
-
     const location = useLocation();
     const navigate = useNavigate();
- 
+    // console.log(location);
+
     const [levelState, setLevelState] = useState(1);
 
     const levelHandler = (data) => {
@@ -33,16 +36,14 @@ const SignupPage = () => {
             return(<><SignupLevel3 levelHandler={levelHandler}/></>)
         }else{
             return(<><SignupLevel4 levelHandler={levelHandler}/></>)
-        }
-    
+        } 
     }
 
     return(
         <>
             <SignupContent/>
         </>
-        
-
+    
     )
 
 

@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function SaturnOne(props) {
-  const { nodes, materials } = useGLTF("/saturn_1.glb");
+  const { nodes, materials } = useGLTF("/glb/saturn_1.glb");
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -31,4 +31,4 @@ export function SaturnOne(props) {
   );
 }
 
-useGLTF.preload("/saturn_1.glb");
+useGLTF.preload("/glb/saturn_1.glb");

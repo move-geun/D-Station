@@ -3,7 +3,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 
 export function Wormhole(props) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF("/wormhole.glb");
+  const { nodes, materials, animations } = useGLTF("/glb/wormhole.glb");
   const { actions } = useAnimations(animations, group);
   return (
     <group ref={group} {...props} dispose={null}>
@@ -58,4 +58,4 @@ export function Wormhole(props) {
   );
 }
 
-useGLTF.preload("/wormhole.glb");
+useGLTF.preload("/glb/wormhole.glb");
