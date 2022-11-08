@@ -9,15 +9,21 @@ function Loader() {
 }
 const NotFoundPage = () => {
   return (
-    <Canvas camera={{ fov: 75, position: [8, 8, 2] }}>
-      <OrbitControls autoRotate={true} />
-      <ambientLight />
-      <directionalLight position={[0, 0, 5]} />
-      <Suspense fallback={<Loader />}>
-        <StarCatcher />
-      </Suspense>
-      <Html> 404 Not Found</Html>
-    </Canvas>
+    <div>
+      <img
+        src="https://d-station.s3.ap-northeast-2.amazonaws.com/ham.jpg"
+        alt=""
+      />
+      {/* <Canvas camera={{ fov: 75, position: [8, 8, 2] }}>
+        <OrbitControls autoRotate={true} />
+        <ambientLight />
+        <directionalLight position={[0, 0, 5]} />
+        <Suspense fallback={<Loader />}>
+          <StarCatcher />
+        </Suspense>
+        <Html> 404 Not Found</Html>
+      </Canvas> */}
+    </div>
   );
 };
 
