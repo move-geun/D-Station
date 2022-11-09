@@ -88,13 +88,27 @@ export function Earth() {
 }
 
 function Jumbo({children}) {
-  const ref = useRef()
-  // useFrame(({ clock }) => (ref.current.rotation.x = ref.current.rotation.y = ref.current.rotation.z = Math.sin(clock.getElapsedTime()) * 0.3))
+  const ref = useRef();
+  const navigate = useNavigate();
+  const [active, setActive] = useState(false);
+
+
+  useEffect(()=>{
+    if(active){
+      startBtnHandler()
+    }
+  }, [active]);
+
+const startBtnHandler = () => {
+  console.log("click")
+  navigate('/login');
+}
   return (
     <Text
       position={[-5.5, 1, 0]}
       // lineHeight={0.8}
       font="../../assets/fonts/Ki-Medium.ttf"
+      onClick={() => setActive(true)}
     >
       {children}
     </Text>
@@ -121,11 +135,16 @@ function Box(props) {
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
 
-  // useEffect(()=>{startBtnHandler()}, [active])
-  // const startBtnHandler = () => {
-  //   console.log("click")
-  //   navigate('/login');
-  // }
+  useEffect(()=>{
+    if(active){
+      startBtnHandler()
+    }
+}, [active]);
+
+  const startBtnHandler = () => {
+    console.log("click")
+    navigate('/login');
+  }
   return (
     <mesh
       {...props}
@@ -157,7 +176,7 @@ const IntroThree2Page = () => {
         <div>반가워요 😀 </div>
    
       </Html> */}
-      <Jumbo>{`WELCOME\n`}</Jumbo>
+      <Jumbo>{`START\n`}</Jumbo>
       <Earth/>
       <Box position={[-3,-1,0]}/>
       <Rig />
