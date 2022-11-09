@@ -10,6 +10,7 @@ import { useState, useEffect} from "react";
 import connect_axios from "../../api/connect";
 import { UserIdState, UserState, PATState  } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
+import { getUserId } from "../../api/JWT";
 
 export default function QuestionEditor() {
 
@@ -21,8 +22,7 @@ export default function QuestionEditor() {
 
     const titleRef = useRef();
     const editorRef = useRef();
-    const userId = useRecoilValue(UserIdState);
-    console.log("유저아이디 들어와???  ", userId);
+    const userId = getUserId();
 
     useEffect(()=>{}, [tilContent]);
 

@@ -19,6 +19,7 @@ import SignupPage from "./pages/auth/SignupPage";
 import WriteTilPage from "./pages/til/WriteTilPage";
 import Navbar from "./components/navbar/NavBar";
 import LoginPage from "./pages/auth/LoginPage";
+import RoadmapPage from "./pages/roadmap/RoadmapPage";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/tmp" element={<TmpPage />} />
         <Route path="/*" element={<NotFoundPage />} />
         <Route path="/mission" element={<Mission />} />
+        <Route path="/test" element={<RoadmapPage/>} />
       </Routes>
     </BrowserRouter>
   );

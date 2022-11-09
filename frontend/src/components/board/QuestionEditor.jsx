@@ -33,7 +33,6 @@ export default function QuestionEditor() {
   };
 
   const userId = getUserId();
-  console.log("질문게시판 에디터 유저아이디 ", userId);
   const [titleCreate, setTitleCreate] = useState();
   const [contentCreate, setContentCreate] = useState();
   const [tagCreate, setTagCreate] = useState();
