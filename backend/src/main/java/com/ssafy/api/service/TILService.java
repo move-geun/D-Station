@@ -11,8 +11,6 @@ import com.ssafy.api.response.til.TILListByUserRes;
 
 public interface TILService {
 
-	void createTIl(TILPostReq tilPostReq);
-
 	String createRepo(TILRepoReq tILRepoReq);
 
 	ArrayList<String> getRepo(String id);
