@@ -28,7 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/intro" element={<IntroPage />} />
-        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/github" element={<GithubRedirectPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/myprofile" element={<MyProfilePage />} />
