@@ -12,6 +12,7 @@ const SignupLevel3 = ({levelHandler}) => {
 
     const [nicknamedata, setNicknameData] = useState();
     const userId = useRecoilValue(UserIdState);
+    console.log("레벨333333  ", userId);
     const [ nextMessage, setNextMessage] = useState("회원가입을 완료해주세요.");
     const [successSignup, setSuccessSignup] = useState(false);
 
