@@ -22,6 +22,7 @@ export default function QuestionEditor() {
     const titleRef = useRef();
     const editorRef = useRef();
     const userId = useRecoilValue(UserIdState);
+    console.log("유저아이디 들어와???  ", userId);
 
     useEffect(()=>{}, [tilContent]);
 
@@ -56,15 +57,6 @@ export default function QuestionEditor() {
       })
     }
 
-    const ConvertHtmltoMD  = () => {
-
-    }
-
-    const ConvertMDtoBase64 = () => {
-        
-    }
-    
-
     const sendData = () => {
         if(tilContent.title.length < 1){
             alert("제목을 입력해주세요");
@@ -98,7 +90,7 @@ export default function QuestionEditor() {
               "Content-Type": `application/json`,
             },
       })
-        console.log("알려줘!" , tilContent);
+        console.log("알려줘!" , data.id);
     }
 
   return (

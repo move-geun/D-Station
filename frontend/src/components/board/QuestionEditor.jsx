@@ -16,6 +16,7 @@ import Chip from "@mui/joy/Chip";
 import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Typography from "@mui/joy/Typography";
+import { getUserId } from "../../api/JWT";
 
 export default function QuestionEditor() {
   const blank = {
@@ -23,7 +24,8 @@ export default function QuestionEditor() {
     fontSize: "20px",
   };
 
-  const userId = useRecoilValue(UserIdState);
+  const userId = getUserId();
+  console.log("질문게시판 에디터 유저아이디 ", userId);
   const [titleCreate, setTitleCreate] = useState();
   const editorRef = useRef();
   const [selected, setSelected] = React.useState("");

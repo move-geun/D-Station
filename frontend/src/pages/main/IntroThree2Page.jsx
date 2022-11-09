@@ -7,18 +7,15 @@
 // import { OrbitControls, Stars, PresentationControls, Html } from "@react-three/drei";
 // import Text from "./Text";
 
-
 // import EarthDayMap from "../../assets/images/earthmap1k.jpg";
 // import EarthNormalMap from"../../assets/images/earthbump.jpg";
 // import EarthSpecularMap from "../../assets/images/specularmap.jpg";
 // import EarthCloudsMap from "../../assets/images/earthCloud.png";
 
-
 // // import EarthDayMap from "../../../public/assets/earthbump.jpg";
 // // import EarthNormalMap from "../../../public/assets/earthmap1k.jpg";
 // // import EarthSpecularMap from "../../../public/assets/specularmap.jpg";
 // // import EarthCloudsMap from "../../../public/assets/earthCloud.png";
-
 
 // export function Earth() {
 
@@ -26,7 +23,7 @@
 //     TextureLoader,
 //     [EarthDayMap, EarthNormalMap, EarthSpecularMap, EarthCloudsMap]
 //   );
-  
+
 //   const earthRef = useRef();
 //   const cloudsRef = useRef();
 // //회전을 위해
@@ -48,7 +45,7 @@
 //         saturation={0}
 //         fade={false}
 //       />
-      
+
 //       <mesh ref={cloudsRef} position = {[3.5, 0.3, -2]}>
 //     {/* sphereGeometry의 인자는 순서대로 반지름, 너비, 높이 이다 */}
 //         <sphereGeometry args={[2.550, 32, 32]}  />
@@ -60,7 +57,7 @@
 //           side={THREE.DoubleSide}
 //         />
 //       </mesh>
-      
+
 //       <mesh ref={earthRef} position = {[3.5, 0.3, -2]}>
 //         <sphereGeometry args={[2.5, 32, 32]} />
 //         {/* <meshPhongMaterial specularMap={specularMap} /> */}
@@ -73,7 +70,7 @@
 //           // metalness={0.2}
 //           roughness={100}
 //         />
-        
+
 //         <OrbitControls
 //           enableZoom={true}
 //           enablePan={true}
@@ -87,20 +84,32 @@
 //   );
 // }
 
-// function Jumbo({children}) {
-//   const ref = useRef()
-//   // useFrame(({ clock }) => (ref.current.rotation.x = ref.current.rotation.y = ref.current.rotation.z = Math.sin(clock.getElapsedTime()) * 0.3))
-//   return (
-//     <Text
-//       position={[-5.5, 1, 0]}
-//       // lineHeight={0.8}
-//       font="../../assets/fonts/Ki-Medium.ttf"
-//     >
-//       {children}
-//     </Text>
-//   )
-// }
+function Jumbo({ children }) {
+  const ref = useRef();
+  const navigate = useNavigate();
+  const [active, setActive] = useState(false);
 
+  useEffect(() => {
+    if (active) {
+      startBtnHandler();
+    }
+  }, [active]);
+
+  const startBtnHandler = () => {
+    console.log("click");
+    navigate("/login");
+  };
+  return (
+    <Text
+      position={[-5.5, 1, 0]}
+      // lineHeight={0.8}
+      font="../../assets/fonts/Ki-Medium.ttf"
+      onClick={() => setActive(true)}
+    >
+      {children}
+    </Text>
+  );
+}
 
 // function Rig({ children }) {
 //   const ref = useRef()
@@ -121,53 +130,53 @@
 //   const [hovered, setHover] = useState(false)
 //   const [active, setActive] = useState(false)
 
-//   // useEffect(()=>{startBtnHandler()}, [active])
-//   // const startBtnHandler = () => {
-//   //   console.log("click")
-//   //   navigate('/login');
-//   // }
-//   return (
-//     <mesh
-//       {...props}
-//       ref={mesh}
-//       onClick={() => setActive(true)}
-//       onPointerOver={(event) => setHover(true)}
-//       onPointerOut={(event) => setHover(false)}>
-//       <boxGeometry args={[2, 0.7, 0.3]} />
-//       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-//     </mesh>
-//   )
-// }
+useEffect(() => {
+  if (active) {
+    startBtnHandler();
+  }
+}, [active]);
 
-// const IntroThree2Page = () => {
-  
-//   return(
-//     <>
-//     <Canvas  dpr={[1, 1.5]} camera={{ position: [0, 0, 15] }}>
-      
-//       <directionalLight position={[0, 5, 0]} />
-//       <ambientLight />
-//       {/* <Html
-//         position={[-6, 2, 0]}
-//         style={{
-//           fontSize: "50px",
-//           fontFamily:"verdana",
-//           fontWeight: 1000,
-//         }}>
-//         <div>반가워요 😀 </div>
-   
-//       </Html> */}
-//       <Jumbo>{`WELCOME\n`}</Jumbo>
-//       <Earth/>
-//       <Box position={[-3,-1,0]}/>
-//       <Rig />
-    
-//   </Canvas>
-    
-    
-//     </>
-    
-//   )
-// }
+const startBtnHandler = () => {
+  console.log("click");
+  navigate("/login");
+  return (
+    <mesh
+      {...props}
+      ref={mesh}
+      onClick={() => setActive(true)}
+      onPointerOver={(event) => setHover(true)}
+      onPointerOut={(event) => setHover(false)}
+    >
+      <boxGeometry args={[2, 0.7, 0.3]} />
+      <meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
+    </mesh>
+  );
+};
 
-// export default IntroThree2Page;
+const IntroThree2Page = () => {
+  return (
+    <>
+      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 15] }}>
+        <directionalLight position={[0, 5, 0]} />
+        <ambientLight />
+        {/* <Html
+        position={[-6, 2, 0]}
+        style={{
+          fontSize: "50px",
+          fontFamily:"verdana",
+          fontWeight: 1000,
+        }}>
+        <div>반가워요 😀 </div>
+        </Html> */}
+        <Jumbo>{`START\n`}</Jumbo>
+        <Earth />
+        <Box position={[-3, -1, 0]} />
+        <Rig />
+        //{" "}
+      </Canvas>
+      //{" "}
+    </>
+  );
+};
+
+export default IntroThree2Page;
