@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 import com.aspose.words.Document;
 import com.ssafy.api.request.til.SatelliteTILReq;
 import com.ssafy.api.request.til.TILCreateReq;
-import com.ssafy.api.request.til.TILPostReq;
 import com.ssafy.api.request.til.TILRepoReq;
 import com.ssafy.api.response.til.MissionDirRes;
 import com.ssafy.api.response.til.SatelliteTILRes;
@@ -55,10 +54,10 @@ public class TILServiceImpl implements TILService {
 	// repo 생성
 	@Override
 	public String createRepo(TILRepoReq tILRepoReq) {
-		
-		//현재 사용자의 repo list 얻어오기
+
+		// 현재 사용자의 repo list 얻어오기
 		ArrayList<String> repoList = getRepo(tILRepoReq.getId());
-		//중복인 repo 이름 입력시 중복이라고 반환 
+		// 중복인 repo 이름 입력시 중복이라고 반환
 		for (int i = 0; i < repoList.size(); i++) {
 			if (repoList.get(i).equals(tILRepoReq.getRepoName())) {
 				return "중복";
@@ -82,12 +81,12 @@ public class TILServiceImpl implements TILService {
 			conn.setRequestProperty("Authorization", "Bearer " + personalAccessToken); // header의 auth 정보
 			conn.setDoOutput(true); // 서버로부터 받는 값이 있다면 true
 
-			JSONObject object = new JSONObject(); 
+			JSONObject object = new JSONObject();
 			object.put("name", tILRepoReq.getRepoName());
 			String jsonInputString = object.toString();
 
-			//요청 보내기
-			try (OutputStream os = conn.getOutputStream()) { 
+			// 요청 보내기
+			try (OutputStream os = conn.getOutputStream()) {
 				byte[] input = jsonInputString.getBytes("utf-8");
 				os.write(input, 0, input.length);
 			} catch (Exception e) {
@@ -104,6 +103,11 @@ public class TILServiceImpl implements TILService {
 
 			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
 			repoName = obj.getString("name");
+			System.out.println("==============여기지롱");
+			// default repo 저장
+			user.setRepo(repoName);
+			userRepository.save(user);
+
 			return repoName;
 
 		} catch (Exception e) {
@@ -187,7 +191,7 @@ public class TILServiceImpl implements TILService {
 
 			for (int i = 0; i < objList.length(); i++) {
 				JSONObject obj = objList.getJSONObject(i);
-				dirList.add((obj.getString("name"))); //name이라는 key값이 있으면 dirList에 저장
+				dirList.add((obj.getString("name"))); // name이라는 key값이 있으면 dirList에 저장
 			}
 
 			return dirList;
@@ -203,6 +207,7 @@ public class TILServiceImpl implements TILService {
 	public String createTIL(TILCreateReq tILCreateReq) {
 		String gitLink = "";
 		String gitLink2 = "";
+		String pixelaId = tILCreateReq.getId().toLowerCase();
 
 		// user id로 user 정보 얻어오기
 		User user = userRepository.getUsersById(tILCreateReq.getId()).get();
@@ -215,13 +220,13 @@ public class TILServiceImpl implements TILService {
 		String dir = (mdr.getPlanetName() + "/" + mdr.getSatellitesName()).replace(" ", "_");
 		String fileName = (tILCreateReq.getFileName()).replace(" ", "_");
 
-		////////파일 변환 시작
-		String filePath = ".\\json\\testDir\\"; //파일 경로
+		//////// 파일 변환 시작
+		String filePath = "./json/testDir/"; // 파일 경로
 
 		File file1 = new File(filePath + "document.html");
-		File file2 = new File(filePath + "Output.md"); 
-		
-		//이전에 파일이 있다면 삭제하기
+		File file2 = new File(filePath + "Output.md");
+
+		// 이전에 파일이 있다면 삭제하기
 		if (file1.exists() || file2.exists()) {
 			if (file1.delete() && file2.delete()) {
 				System.out.println("파일삭제 성공");
@@ -229,11 +234,11 @@ public class TILServiceImpl implements TILService {
 				System.out.println("파일삭제 실패");
 			}
 		}
-		
-		//사용자가 입력한 content
+
+		// 사용자가 입력한 content
 		String content = tILCreateReq.getContent();
-		
-		//전달 받은 내용(html)으로 파일 생성하기
+
+		// 전달 받은 내용(html)으로 파일 생성하기
 		FileWriter fw;
 		try {
 			fw = new FileWriter(filePath + "document.html");
@@ -242,8 +247,8 @@ public class TILServiceImpl implements TILService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		//html to markdown
+
+		// html to markdown
 		Document doc;
 		try {
 			doc = new Document(filePath + "document.html");
@@ -254,11 +259,11 @@ public class TILServiceImpl implements TILService {
 
 		// markdown 파일 입력받기
 		byte[] binary = getFileBinary(filePath + "Output.md");
-		
+
 		// markdown to base64
 		String base64data = Base64.getEncoder().encodeToString(binary);
-		////////파일 변환 끝
-		
+		//////// 파일 변환 끝
+
 		// git API 사용, til 작성하기
 		try {
 
@@ -280,7 +285,6 @@ public class TILServiceImpl implements TILService {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			bw.write(jsonInputString); // 버퍼에 담기
 			bw.flush(); // 버퍼에 담긴 데이터 전달
-
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = "";
 			StringBuilder sb = new StringBuilder();
@@ -293,7 +297,6 @@ public class TILServiceImpl implements TILService {
 			JSONObject link = info.getJSONObject("_links");
 
 			gitLink = (String) link.get("html");
-
 			gitLink2 = URLDecoder.decode(gitLink, "UTF-8");
 
 			// db에 til 저장
@@ -303,14 +306,22 @@ public class TILServiceImpl implements TILService {
 			til.setUser(user);
 			til.setFileName(fileName);
 			// 경험치 + 5
-	        user.addExp(user.getExp());
-	        userRepository.save(user);
+			user.addExp(user.getExp());
+			userRepository.save(user);
 			tilRepository.save(til);
 
 		} catch (Exception e) {
 			System.err.println(e);
 			return gitLink2;
 		}
+
+		boolean isSuccess = false;
+		int i = 0; // 이거 나중에 지우삼
+		// pixela update 하기
+		while (!isSuccess) {
+			isSuccess = updatePixela(pixelaId);
+		}
+
 		return gitLink2;
 	}
 
@@ -346,7 +357,6 @@ public class TILServiceImpl implements TILService {
 				resList.add(TILListByUserRes.of(list.get(i)));
 			}
 
-
 			for (int i = 0; i < mList.size(); i++) {
 				for (int j = 0; j < resList.size(); j++) {
 					if (resList.get(j).getMissionUid() == mList.get(i).getUid()) {
@@ -359,7 +369,6 @@ public class TILServiceImpl implements TILService {
 		return stresList;
 	}
 
-
 	// 파일 읽어드리는 함수
 	private static byte[] getFileBinary(String filePath) {
 		File file = new File(filePath);
@@ -370,6 +379,48 @@ public class TILServiceImpl implements TILService {
 			e.printStackTrace();
 		}
 		return data;
+	}
+
+	// pixela update
+	public boolean updatePixela(String pixelaId) {
+
+		boolean isSuccess = false;
+
+		try {
+
+			URL url = new URL("https://pixe.la/v1/users/" + pixelaId + "/graphs/" + pixelaId + "/increment");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("PUT"); // http 메서드
+			conn.setRequestProperty("X-USER-TOKEN", "xhzmsdlqslek" + pixelaId);
+			conn.setRequestProperty("Content-Length", "0");
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			bw.write(""); // 버퍼에 담기
+			bw.flush(); // 버퍼
+
+//			System.out.println("=============ContentLength : " + conn.getContentLength());
+//			System.out.println("=============ResponseMessage : " + conn.getResponseMessage());
+//			System.out.println("=============ResponseCode : " + conn.getResponseCode());
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line = "";
+			StringBuilder sb = new StringBuilder();
+			while ((line = br.readLine()) != null) { // 읽을 수 있을 때 까지 반복
+				sb.append(line);
+			}
+
+//			System.out.println("=============sb: " + sb.toString());
+
+			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
+			isSuccess = obj.getBoolean("isSuccess");
+			return isSuccess;
+		} catch (Exception e) {
+			System.out.println("========" + e);
+//			System.err.println("실패실패");
+			return isSuccess;
+		}
 	}
 
 }
