@@ -25,12 +25,10 @@ export default function QuestionEditor() {
   };
 
   const userId = getUserId();
-  console.log("질문게시판 에디터 유저아이디 ", userId);
   const [titleCreate, setTitleCreate] = useState();
   const editorRef = useRef();
   const [selected, setSelected] = React.useState("");
 
-  console.log("유저아이디ㅣㅣㅣㅣ  ", userId);
   useEffect(() => {}, [titleCreate]);
   const titleHandler = (e) => {
     setTitleCreate(e.target.value);
@@ -45,13 +43,13 @@ export default function QuestionEditor() {
 
   const writeQuestion = () => {
     const data = {
-      id: "gheunS2",
+      id: userId,
       title: titleCreate,
       content: editorRef.current.getContent(),
       tag: selected,
     };
     connect_axios
-      .post(`/ask/?content=${data.content}&tag=${data.tag}&title=${data.title}&userId=gheunS2`)
+      .post(`/ask/?content=${data.content}&tag=${data.tag}&title=${data.title}&userId=${userId}`)
       .then((res) => {
         console.log("업로드 완료");
         console.log(res.data);
