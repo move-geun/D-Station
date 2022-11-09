@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
@@ -16,7 +16,6 @@ import Chip from "@mui/joy/Chip";
 import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Typography from "@mui/joy/Typography";
-import { useEffect } from "react";
 
 export default function QuestionEditor() {
   const blank = {

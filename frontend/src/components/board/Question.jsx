@@ -1,13 +1,10 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import Pagination from "react-js-pagination";
 import QuestionCard from "./QuestionCard";
 import {
   Container,
-  Paginations,
   Carousel,
   Item,
-  Item3,
   Ui,
 } from "./Question.style";
 
@@ -43,17 +40,6 @@ const Question = () => {
         <button onClick={handleLeft}>{"<<"}</button>
         <button onClick={handleRight}>{">>"}</button>
       </Ui>
-      {/* <Paginations>
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={5}
-          totalItemsCount={500}
-          pageRangeDisplayed={5}
-          prevPageText={"<"}
-          nextPageText={">"}
-          onChange={handlePageChange}
-        />
-      </Paginations> */}
     </div>
   );
 };
