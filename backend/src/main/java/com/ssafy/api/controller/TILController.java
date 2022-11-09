@@ -138,12 +138,12 @@ public class TILController {
 			@RequestBody @ApiParam(value = "", required = true) SatelliteTILReq satelliteTILReq) {
 
 		ArrayList<SatelliteTILRes> list = tilService.getUserTILBySatellite(satelliteTILReq);
-
 		if (list == null) {
 			return ResponseEntity.status(401).body(list);
 		} else {
 			return ResponseEntity.status(200).body(list);
 		}
 	}
+	
 
 }

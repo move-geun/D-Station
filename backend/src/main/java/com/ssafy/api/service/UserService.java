@@ -21,4 +21,5 @@ public interface UserService {
 	Optional<User> getUserByUid(Long uid);
 
 	boolean login(String id);
+	
 }
