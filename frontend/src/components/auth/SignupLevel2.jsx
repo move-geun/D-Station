@@ -52,7 +52,7 @@ const SignupLevel2 = ({levelHandler}) => {
 
 
     const nextBtnHandler = ()=> {
-        levelHandler(3);
+        levelHandler(4);
     }
 
     return (

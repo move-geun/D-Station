@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Component, HeadGroup } from "./WriteQuestionPage.style";
 import QuestionEditor from "../../components/board/QuestionEditor";
 
+
 const WriteQuestionPage = () => {
   // async function postData() {
   //   try {
@@ -17,7 +18,6 @@ const WriteQuestionPage = () => {
   //     console.error(error);
   //   }
   // }
-  
   return (
     <Component>
       <HeadGroup>

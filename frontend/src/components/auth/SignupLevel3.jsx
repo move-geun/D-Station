@@ -12,6 +12,10 @@ const SignupLevel3 = ({levelHandler}) => {
 
     const [nicknamedata, setNicknameData] = useState();
     const userId = useRecoilValue(UserIdState);
+    const [ nextMessage, setNextMessage] = useState("회원가입을 완료해주세요.");
+    const [successSignup, setSuccessSignup] = useState(false);
+
+    useEffect(()=>{}, [successSignup]);
 
     const nicknameHandler = (e) => {
         setNicknameData(e.target.value);
@@ -29,13 +33,15 @@ const SignupLevel3 = ({levelHandler}) => {
           })
         .then((res) => {
             console.log("회원가입 성공했서?   ", res);
-            levelHandler(4);
+            setNextMessage("회원가입이 완료되었습니다.");
+            levelHandler(1);
             // navigate('/');  
 
         }).catch(function(err){
             console.log(err);
         });
     }
+
 
 
     return (
@@ -47,7 +53,11 @@ const SignupLevel3 = ({levelHandler}) => {
             </InputContainer>
 
             <ButtonContainer>
-                <Button content="다음" onClick={signupHandler}>회원가입</Button>
+                <Button content="회원가입" onClick={signupHandler}>회원가입</Button>
+            </ButtonContainer>
+            <DesText>{nextMessage}</DesText>
+            <ButtonContainer>
+                <Button content="다음" disabled={!successSignup} onClick={signupHandler}>다음</Button>
             </ButtonContainer>
            
         </MainContainer>

@@ -1,5 +1,4 @@
 import React from "react";
-import auth_axios from "../../api/user";
 import { useLocation, useNavigate } from "react-router-dom";
 import {Container, InputNickname} from './SignupPage.style';
 import { useEffect, useState } from "react";
@@ -15,10 +14,10 @@ import { useRecoilValue } from "recoil";
 const SignupPage = () => {
 
     const location = useLocation();
-    const navigate = useNavigate();
+
     // console.log(location);
 
-    const [levelState, setLevelState] = useState(1);
+    const [levelState, setLevelState] = useState(3);
 
     const levelHandler = (data) => {
         setLevelState(data);
