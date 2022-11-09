@@ -44,16 +44,16 @@ export default function QuestionEditor() {
 
   const writeQuestion = () => {
     const data = {
-      id: userId,
+      id: "gheunS2",
       title: titleCreate,
       content: editorRef.current.getContent(),
       tag: selected,
     };
     connect_axios
-      .post(`/ask`, data)
+      .post(`/ask/?content=${data.content}&tag=${data.tag}&title=${data.title}&userId=gheunS2`)
       .then((res) => {
         console.log("업로드 완료");
-        console.log(res);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);

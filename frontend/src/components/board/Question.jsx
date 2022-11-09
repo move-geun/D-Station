@@ -29,10 +29,10 @@ const Question = () => {
     <div>
       <Container>
         <Carousel ref={carousel}>
-          {item.map((it) => {
+          {item.map((it, idx) => {
             const { icon, copy, name, like, seen } = it;
             return (
-              <Item>
+              <Item key={idx}>
                 <QuestionCard />
               </Item>
             );
