@@ -19,7 +19,6 @@ const SignupLevel1 = ({levelHandler}) => {
     const [authMessage, setAuthMessage] = useState('');
 
     const userId = useRecoilValue(UserIdState);
-    console.log("level11111111    ", userId);
 
     useEffect(()=> {
         if(successGetPAT){
