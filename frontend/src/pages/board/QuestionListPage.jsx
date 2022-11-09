@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Function, Container, Page } from "./QuestionListPage.style";
 import Question from "../../components/board/Question";
 import CreateIcon from "@mui/icons-material/Create";
 import SearchIcon from "@mui/icons-material/Search";
-
-
-import { UserIdState } from "../../recoil/atoms";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { getUserId } from "../../api/JWT";
+import connect_axios from "../../api/connect";
 
 const QuestionListPage = () => {
-  // const [userId, setUserId] = useRecoilState(UserIdState);
-  // const userId = useRecoilValue(UserIdState);
   const userId = getUserId();
 
-  console.log("질문게시판 아이디   ", userId);
+  useEffect(() => {
+    connect_axios.get(`/ask/`).then((res) => {
+      console.log("받아왔서열");
+      console.log(res);
+    });
+  }, []);
+
   return (
     <div>
       <Function>
@@ -32,7 +33,6 @@ const QuestionListPage = () => {
       </Function>
       <Container>
         <Question />
-
       </Container>
     </div>
   );
