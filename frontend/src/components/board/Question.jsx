@@ -1,17 +1,25 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Componenet } from "react";
 import QuestionCard from "./QuestionCard";
-import {
-  Container,
-  Carousel,
-  Item,
-  Ui,
-} from "./Question.style";
+import { Container, Carousel, Item, Ui } from "./Question.style";
+import http from "../../api/http";
 
 const Question = () => {
-  const items = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-  const [item, setItem] = useState(items);
+  const [item, setItem] = useState();
+  const [isData, setIsData] = useState(false);
   const carousel = useRef(null);
+
+  useEffect(() => {
+    http.connect_axios.get(`/ask/`).then((res) => {
+      console.log("받아왔서열");
+      console.log(res);
+      setItem(res.data.list);
+    });
+  }, []);
+
+  useEffect(() => {
+    setIsData(true);
+  }, [item]);
 
   const handleLeft = (e) => {
     e.preventDefault();
@@ -26,14 +34,20 @@ const Question = () => {
     <div>
       <Container>
         <Carousel ref={carousel}>
-          {item.map((it, idx) => {
-            const { icon, copy, name, like, seen } = it;
-            return (
-              <Item key={idx}>
-                <QuestionCard />
-              </Item>
-            );
-          })}
+          {isData ? (
+            item.map((item) => {
+              return (
+                <QuestionCard
+                  // Tag={item.tag}
+                  Title={item.title}
+                  theDate={item.theDate}
+                  Nickname={item.Nickname}
+                />
+              );
+            })
+          ) : (
+            <div> 데이터가 없습니다.</div>
+          )}
         </Carousel>
       </Container>
       <Ui>
