@@ -34,9 +34,10 @@ export const Ui = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  left: 10%;
-  top: 70%;
-  width: 80%;
+  left: 5%;
+  right: 5%;
+  top: 50%;
+  width: 90%;
 
   button {
     cursor: pointer;
