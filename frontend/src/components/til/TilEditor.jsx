@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useState, useEffect } from "react";
 
-import connect_axios from "../../api/http";
+import http from "../../api/http";
 import { UserIdState, UserState, PATState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 import { getUserId } from "../../api/JWT";
@@ -19,9 +19,15 @@ export default function QuestionEditor() {
     message: "",
   });
 
+<<<<<<< HEAD
     const titleRef = useRef();
     const editorRef = useRef();
     const userId = getUserId();
+=======
+  const titleRef = useRef();
+  const editorRef = useRef();
+  const userId = getUserId();
+>>>>>>> f13449ae456e7cf2bb70b51921181192545d2a8f
 
   useEffect(() => {}, [tilContent]);
 
@@ -84,7 +90,7 @@ export default function QuestionEditor() {
     };
 
     // 여기에 html 을 백에 보냄
-    connect_axios.post(`/til/crate`, JSON.stringify(data), {
+    http.connect_axios.post(`/til/crate`, JSON.stringify(data), {
       headers: {
         "Content-Type": `application/json`,
       },

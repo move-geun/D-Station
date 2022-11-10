@@ -6,7 +6,7 @@ import { PlanetHTMLWrapper, PlanetThreeWrapper } from "../../components/roadmap/
 import RoadPlanetThree from "../../components/roadmap/Threesection/RoadPlanetThree";
 
 const PlanetPage = () => {
-
+  
     const [planetData, setPlanetData] = useState('');
     const [satelliteList, setSatelliteList] = useState();
     useEffect(()=>{}, [planetData, satelliteList]);
@@ -38,3 +38,7 @@ const PlanetPage = () => {
 }
 
 export default PlanetPage;
+
+
+
+
