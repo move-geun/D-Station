@@ -7,9 +7,9 @@ import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import { Interval } from "./QuestionCard.style";
 // api 연결 관련
-import connect_axios from "../../api/http";
+import http from "../../api/http";
 
-const QuestionCard = () => {
+const QuestionCard = ({ Title, theDate, Nickname }) => {
   const bull = (
     <Box
       component="span"
@@ -23,16 +23,18 @@ const QuestionCard = () => {
     <Interval>
       <Card sx={{ minWidth: 250 }}>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            태그자리
-          </Typography>
+          <Typography
+            sx={{ fontSize: 14 }}
+            color="text.secondary"
+            gutterBottom
+          ></Typography>
           <Typography variant="h5" component="div">
-            제목자리
+            {Title}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            글쓴이
+            {Nickname}
           </Typography>
-          {/* <Typography variant="body2">게시글 요약내용</Typography> */}
+          <Typography variant="body2">{theDate}</Typography>
         </CardContent>
         <CardActions>
           <Link
