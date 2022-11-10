@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -42,7 +42,6 @@ const LogoImgMoblie = styled.img`
 `;
 
 const Navbar = () => {
-
   const [signup, setSignup] = useState(false);
   function logout() {
     deleteToken();
@@ -61,12 +60,21 @@ const Navbar = () => {
     logout();
   };
 
+  const questionHandle = () =>{
+    navigate("/questionlist");
+  }
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
   return (
-    <AppBar style={{ background: "black"}} position="static">
+    <AppBar
+      style={{ background: "black" }}
+      position="absolute"
+      top="0"
+      height="10%"
+    >
       <Container maxWidth="0">
         <Toolbar disableGutters>
           {/* <LogoImgDesk src={"/assets/cap.png"}></LogoImgDesk> */}
@@ -85,7 +93,7 @@ const Navbar = () => {
           >
             D-Station
           </Typography>
-        
+
           {/* 데스크탑 일 때 보이는 메뉴 */}
           <Box
             sx={{
@@ -134,8 +142,13 @@ const Navbar = () => {
           <>
             {isAuthenticated() ? (
               <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="questionlist">
+                  <IconButton onClick={questionHandle} sx={{color: "white" }}>
+                    질문하기
+                  </IconButton>
+                </Tooltip>
                 <Tooltip title="Logout">
-                  <IconButton onClick={logoutHandle} sx={{color: "white" }}>
+                  <IconButton onClick={logoutHandle} sx={{ color: "white" }}>
                     로그아웃
                   </IconButton>
                 </Tooltip>
@@ -143,7 +156,7 @@ const Navbar = () => {
             ) : (
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Login">
-                  <IconButton onClick={login} sx={{color: "white"}}>
+                  <IconButton onClick={login} sx={{ color: "white" }}>
                     로그인
                   </IconButton>
                 </Tooltip>

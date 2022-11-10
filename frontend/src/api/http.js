@@ -1,28 +1,16 @@
-import baseAxios from "axios";
-import { getToken } from "./JWT";
+import axios from "axios";
 
-const auth_axios = baseAxios.create({
-  baseURL: "https://k7e106.p.ssafy.io:8081/api",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${getToken()}`,
-  },
+const connect_axios = axios.create({
+  baseURL: "http://k7e106.p.ssafy.io:8081/api",
 });
 
-const axios = baseAxios.create({
-  baseURL: "https://k7e106.p.ssafy.io:8081/api",
-  headers: {
-    "Content-Type": "application/json",
-  },
+const auth_axios = axios.create({
+  baseURL: "http://k7e106.p.ssafy.io:8081/api/user",
 });
-// axios.interceptors.request.use((config) => {
-// config.headers["access-Token"] = `${getToken()}`;
-//   return config;
-// });
 
 const http = {
+  connect_axios,
   auth_axios,
-  axios,
 };
 
 export default http;

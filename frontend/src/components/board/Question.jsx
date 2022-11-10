@@ -1,20 +1,19 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import Pagination from "react-js-pagination";
 import QuestionCard from "./QuestionCard";
-import {
-  Container,
-  Paginations,
-  Carousel,
-  Item,
-  Item3,
-  Ui,
-} from "./Question.style";
+import { Container, Carousel, Ui } from "./Question.style";
+import http from "../../api/http";
 
 const Question = () => {
-  const items = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-  const [item, setItem] = useState(items);
+  const [items, setItems] = useState(null);
   const carousel = useRef(null);
+  console.log(items);
+
+  useEffect(() => {
+    http.connect_axios.get(`/ask/`).then((res) => {
+      setItems(res.data.list);
+    });
+  }, []);
 
   const handleLeft = (e) => {
     e.preventDefault();
@@ -29,31 +28,28 @@ const Question = () => {
     <div>
       <Container>
         <Carousel ref={carousel}>
-          {item.map((it) => {
-            const { icon, copy, name, like, seen } = it;
-            return (
-              <Item>
-                <QuestionCard />
-              </Item>
-            );
-          })}
+          {items ? (
+            items.map((item, idx) => {
+              return (
+                <QuestionCard
+                  key={idx}
+                  Tag={item.tag}
+                  Title={item.title}
+                  theDate={item.theDate}
+                  Nickname={item.nickname}
+                  Uid={item.uid}
+                />
+              );
+            })
+          ) : (
+            <div> 게시글이 없습니다😥.</div>
+          )}
         </Carousel>
       </Container>
       <Ui>
         <button onClick={handleLeft}>{"<<"}</button>
         <button onClick={handleRight}>{">>"}</button>
       </Ui>
-      {/* <Paginations>
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={5}
-          totalItemsCount={500}
-          pageRangeDisplayed={5}
-          prevPageText={"<"}
-          nextPageText={">"}
-          onChange={handlePageChange}
-        />
-      </Paginations> */}
     </div>
   );
 };

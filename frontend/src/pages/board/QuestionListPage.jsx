@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Function, Container, Page } from "./QuestionListPage.style";
 import Question from "../../components/board/Question";
 import CreateIcon from "@mui/icons-material/Create";
 import SearchIcon from "@mui/icons-material/Search";
+import { getUserId } from "../../api/JWT";
+import http from "../../api/http";
 
 const QuestionListPage = () => {
+  const userId = getUserId();
+
   return (
     <div>
       <Function>
@@ -22,7 +26,6 @@ const QuestionListPage = () => {
       </Function>
       <Container>
         <Question />
-
       </Container>
     </div>
   );

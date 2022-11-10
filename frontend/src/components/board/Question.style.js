@@ -18,25 +18,14 @@ export const Carousel = styled.div`
   }
 `;
 
-export const Item = styled.div`
-  display: flex;
-  min-width: 150px;
-  flex-direction: column;
-  justify-content: space-around;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 16px;
-  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
-  flex: none;
-`;
-
 export const Ui = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  left: 10%;
-  top: 70%;
-  width: 80%;
+  left: 5%;
+  right: 5%;
+  top: 50%;
+  width: 90%;
 
   button {
     cursor: pointer;
@@ -63,7 +52,3 @@ export const Ui = styled.div`
   }
 `;
 
-export const Item3 = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;

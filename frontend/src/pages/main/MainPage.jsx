@@ -1,11 +1,24 @@
 import React, { Suspense, useRef } from "react";
 import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
-import { CubeTextureLoader } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { Html, useProgress } from "@react-three/drei";
-import { Galaxy } from "../../components/scene/Galaxy";
-import { NeedSomeSpace } from "../../components/scene/Need_some_space";
+import { Html, useProgress, Stars } from "@react-three/drei";
+import {
+  MainWrapper,
+  CanvasWrapper,
+  FootNav,
+  RocketMap,
+  Newsmap,
+} from "./MainPage.style";
 import { SolarSystem } from "../../components/scene/Solar_system";
+import { FeGalaxy } from "../../components/scene/FeGalaxy";
+import { SpaceStation } from "../../components/scene/Space_station";
+import MapNav from "../../components/main/MapNav";
+import DailyContent from "../../components/main/DailyContent";
+import { CameraSight } from "../../recoil/atoms";
+import { useRecoilState } from "recoil";
+import { useState } from "react";
+import { useEffect } from "react";
+
 extend({ OrbitControls });
 
 const CameraControls = () => {
@@ -26,269 +39,87 @@ const CameraControls = () => {
   );
 };
 
-function SkyBox() {
-  const { scene } = useThree();
-  const loader = new CubeTextureLoader();
-  const texture = loader.load([
-    "../assets/6.jpg",
-    "../assets/6.jpg",
-    "../assets/6.jpg",
-    "../assets/6.jpg",
-    "../assets/6.jpg",
-    "../assets/6.jpg",
-  ]);
-
-  scene.background = texture;
-  return null;
-}
-
 function Loader() {
   const { progress } = useProgress();
-  return <Html center>{progress} % 로딩중</Html>;
+  return <Html center>{Math.ceil(progress)} % 로딩중</Html>;
 }
 
 const MainPage = ({ ...props }) => {
+  const [mapOpen, setMapOpen] = useState(false);
+  const [newsOpen, setNewsOpen] = useState(false);
+
+  const openmap = () => {
+    setMapOpen(!mapOpen);
+  };
+
+  const opennews = () => {
+    setNewsOpen(!newsOpen);
+  };
+
+  const [getCamera, setGetCamera] = useRecoilState(CameraSight);
+
+  const change = () => {
+    setGetCamera({ fov: 110, position: [700, 200, 0] });
+    console.log("클릭");
+  };
+
+  const a = () => {
+    console.log(getCamera);
+  };
+
+  useEffect(() => {
+    console.log(getCamera);
+    setGetCamera({ fov: 110, position: [0, 0, 300] });
+  }, getCamera);
   return (
-    <Canvas camera={{ fov: 100, position: [100, 50, 700] }}>
-      <CameraControls />
-      <directionalLight position={[0, 0, 5]} />
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <Suspense fallback={<Loader />}>
-        <Galaxy />
-        <NeedSomeSpace />
-        <SolarSystem />
-      </Suspense>
-      <SkyBox />
-    </Canvas>
+    <MainWrapper>
+      <CanvasWrapper>
+        <Canvas className="tmp" camera={getCamera}>
+          <CameraControls />
+          <directionalLight position={[0, 0, 5]} />
+          <Stars
+            radius={300}
+            depth={60}
+            count={8000}
+            factor={5}
+            saturation={7}
+            fade={false}
+          />
+          <ambientLight />
+          <pointLight position={[10, 10, 10]} />
+          <Suspense fallback={<Loader />}>
+            <SolarSystem />
+            <FeGalaxy onClick={() => a()} />
+            <SolarSystem position={[-380, 0, -40]} />
+            <FeGalaxy position={[-380, 0, -40]} />
+            <SolarSystem position={[380, 0, -40]} />
+            <FeGalaxy position={[380, 0, -40]} />
+            <SpaceStation position={[600, 150, 0]} onClick={() => change()} />
+          </Suspense>
+        </Canvas>
+      </CanvasWrapper>
+      <FootNav>
+        <div className="flexWrapInfo">
+          <img src="" alt="유저 등급사진" />
+          <div>유저 네임</div>
+          <div>유저 경험치</div>
+        </div>
+        <div className="flexWrap">
+          <div onClick={openmap}>
+            <MapNav></MapNav>
+          </div>
+          <div onClick={opennews} className="news">
+            <DailyContent></DailyContent>
+            {newsOpen ? <Newsmap></Newsmap> : null}
+          </div>
+        </div>
+      </FootNav>
+      {mapOpen ? (
+        <RocketMap>
+          <div>바로가기</div>
+        </RocketMap>
+      ) : null}
+    </MainWrapper>
   );
 };
 export default MainPage;
-
-// import React, { useRef } from "react";
-// import { Canvas, extend, useThree, useFrame } from "@react-three/fiber";
-// import {
-//   CubeTextureLoader,
-//   CubeCamera,
-//   WebGLCubeRenderTarget,
-//   RGBAFormat,
-//   LinearMipmapLinearFilter,
-// } from "three";
-// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-// import { MainWrapper, WebWrapper } from "./MainPage.style";
-
-// extend({ OrbitControls });
-
-// const CameraControls = () => {
-//   // Get a reference to the Three.js Camera, and the canvas html element.
-//   // We need these to setup the OrbitControls class.
-//   // https://threejs.org/docs/#examples/en/controls/OrbitControls
-
-//   const {
-//     camera,
-//     gl: { domElement },
-//   } = useThree();
-
-//   // Ref to the controls, so that we can update them on every frame using useFrame
-//   const controls = useRef();
-//   useFrame(() => controls.current.update());
-//   return (
-//     <orbitControls
-//       ref={controls}
-//       args={[camera, domElement]}
-//       autoRotate={false}
-//       enableZoom={true}
-//     />
-//   );
-// };
-
-// // Loads the skybox texture and applies it to the scene.
-// function SkyBox() {
-//   const { scene } = useThree();
-//   const loader = new CubeTextureLoader();
-//   // The CubeTextureLoader load method takes an array of urls representing all 6 sides of the cube.
-//   const texture = loader.load([
-//     "../assets/1.jpg",
-//     "../assets/2.jpg",
-//     "../assets/3.jpg",
-//     "../assets/4.jpg",
-//     "../assets/3.jpg",
-//     "../assets/2.jpg",
-//   ]);
-
-//   // Set the scene background property to the resulting texture.
-//   scene.background = texture;
-//   return null;
-// }
-
-// // Geometry
-// function Sphere() {
-//   const { scene, gl } = useThree();
-//   // The cubeRenderTarget is used to generate a texture for the reflective sphere.
-//   // It must be updated on each frame in order to track camera movement and other changes.
-//   const cubeRenderTarget = new WebGLCubeRenderTarget(256, {
-//     format: RGBAFormat,
-//     generateMipmaps: true,
-//     minFilter: LinearMipmapLinearFilter,
-//   });
-//   const cubeCamera = new CubeCamera(1000, 3000, cubeRenderTarget);
-//   cubeCamera.position.set(0, 0, 0);
-//   scene.add(cubeCamera);
-
-//   // Update the cubeCamera with current renderer and scene.
-//   useFrame(() => cubeCamera.update(gl, scene));
-
-//   return (
-//     <mesh visible position={[0, 0, 0]} rotation={[0, 0, 0]} castShadow>
-//       <directionalLight intensity={0.5} />
-//       <sphereGeometry attach="geometry" args={[2, 32, 32]} />
-//       <meshBasicMaterial
-//         attach="material"
-//         envMap={cubeCamera.renderTarget.texture}
-//         color="white"
-//         roughness={0.1}
-//         metalness={1}
-//       />
-//     </mesh>
-//   );
-// }
-// function Sphere2() {
-//   const { scene, gl } = useThree();
-//   // The cubeRenderTarget is used to generate a texture for the reflective sphere.
-//   // It must be updated on each frame in order to track camera movement and other changes.
-//   const cubeRenderTarget = new WebGLCubeRenderTarget(256, {
-//     format: RGBAFormat,
-//     generateMipmaps: true,
-//     minFilter: LinearMipmapLinearFilter,
-//   });
-//   const cubeCamera = new CubeCamera(1, 1000, cubeRenderTarget);
-//   cubeCamera.position.set(0, 0, 0);
-//   scene.add(cubeCamera);
-
-//   // Update the cubeCamera with current renderer and scene.
-//   useFrame(() => cubeCamera.update(gl, scene));
-
-//   return (
-//     <mesh visible position={[5, 0, 0]} rotation={[0, 0, 0]} castShadow>
-//       <directionalLight intensity={0.5} />
-//       <sphereGeometry attach="geometry" args={[2, 32, 32]} />
-//       <meshBasicMaterial
-//         attach="material"
-//         envMap={cubeCamera.renderTarget.texture}
-//         color="white"
-//         roughness={0.1}
-//         metalness={1}
-//       />
-//     </mesh>
-//   );
-// }
-// function Sphere3() {
-//   const { scene, gl } = useThree();
-//   // The cubeRenderTarget is used to generate a texture for the reflective sphere.
-//   // It must be updated on each frame in order to track camera movement and other changes.
-//   const cubeRenderTarget = new WebGLCubeRenderTarget(256, {
-//     format: RGBAFormat,
-//     generateMipmaps: true,
-//     minFilter: LinearMipmapLinearFilter,
-//   });
-//   const cubeCamera = new CubeCamera(1, 1000, cubeRenderTarget);
-//   cubeCamera.position.set(0, 0, 0);
-//   scene.add(cubeCamera);
-
-//   // Update the cubeCamera with current renderer and scene.
-//   useFrame(() => cubeCamera.update(gl, scene));
-
-//   return (
-//     <mesh visible position={[-5, 0, 0]} rotation={[0, 0, 0]} castShadow>
-//       <directionalLight intensity={0.5} />
-//       <sphereGeometry attach="geometry" args={[2, 32, 32]} />
-//       <meshBasicMaterial
-//         attach="material"
-//         envMap={cubeCamera.renderTarget.texture}
-//         color="white"
-//         roughness={0.1}
-//         metalness={1}
-//       />
-//     </mesh>
-//   );
-// }
-// function Sphere4() {
-//   const { scene, gl } = useThree();
-//   // The cubeRenderTarget is used to generate a texture for the reflective sphere.
-//   // It must be updated on each frame in order to track camera movement and other changes.
-//   const cubeRenderTarget = new WebGLCubeRenderTarget(256, {
-//     format: RGBAFormat,
-//     generateMipmaps: true,
-//     minFilter: LinearMipmapLinearFilter,
-//   });
-//   const cubeCamera = new CubeCamera(1, 1000, cubeRenderTarget);
-//   cubeCamera.position.set(0, 0, 0);
-//   scene.add(cubeCamera);
-
-//   // Update the cubeCamera with current renderer and scene.
-//   useFrame(() => cubeCamera.update(gl, scene));
-
-//   return (
-//     <mesh visible position={[0, 5, 0]} rotation={[0, 0, 0]} castShadow>
-//       <directionalLight intensity={0.5} />
-//       <sphereGeometry attach="geometry" args={[2, 32, 32]} />
-//       <meshBasicMaterial
-//         attach="material"
-//         envMap={cubeCamera.renderTarget.texture}
-//         color="white"
-//         roughness={0.1}
-//         metalness={1}
-//       />
-//     </mesh>
-//   );
-// }
-// function Sphere5() {
-//   const { scene, gl } = useThree();
-//   // The cubeRenderTarget is used to generate a texture for the reflective sphere.
-//   // It must be updated on each frame in order to track camera movement and other changes.
-//   const cubeRenderTarget = new WebGLCubeRenderTarget(256, {
-//     format: RGBAFormat,
-//     generateMipmaps: true,
-//     minFilter: LinearMipmapLinearFilter,
-//   });
-//   const cubeCamera = new CubeCamera(1, 1000, cubeRenderTarget);
-//   cubeCamera.position.set(0, 0, 0);
-//   scene.add(cubeCamera);
-
-//   // Update the cubeCamera with current renderer and scene.
-//   useFrame(() => cubeCamera.update(gl, scene));
-
-//   return (
-//     <mesh visible position={[0, -5, 0]} rotation={[0, 0, 0]} castShadow>
-//       <directionalLight intensity={0.5} />
-//       <sphereGeometry attach="geometry" args={[2, 32, 32]} />
-//       <meshBasicMaterial
-//         attach="material"
-//         envMap={cubeCamera.renderTarget.texture}
-//         color="white"
-//         roughness={0.1}
-//         metalness={1}
-//       />
-//     </mesh>
-//   );
-// }
-
-// const MainPage = () => {
-//   return (
-//     <MainWrapper>
-//       <Canvas className="canvas">
-//         <CameraControls />
-//         <Sphere />
-//         <Sphere2 />
-//         <Sphere3 />
-//         <Sphere4 />
-//         <Sphere5 />
-//         <SkyBox />
-//       </Canvas>
-//       <WebWrapper>
-//         <div>들어가나</div>
-//       </WebWrapper>
-//     </MainWrapper>
-//   );
-// };
-// export default MainPage;

@@ -19,6 +19,8 @@ import SignupPage from "./pages/auth/SignupPage";
 import WriteTilPage from "./pages/til/WriteTilPage";
 import Navbar from "./components/navbar/NavBar";
 import LoginPage from "./pages/auth/LoginPage";
+import RoadmapPage from "./pages/roadmap/RoadmapPage";
+import PlanetPage from "./pages/roadmap/PlanetPage";
 
 function App() {
   return (
@@ -28,7 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/intro" element={<IntroPage />} />
-        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/github" element={<GithubRedirectPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/myprofile" element={<MyProfilePage />} />
@@ -40,6 +42,9 @@ function App() {
         <Route path="/tmp" element={<TmpPage />} />
         <Route path="/*" element={<NotFoundPage />} />
         <Route path="/mission" element={<Mission />} />
+        <Route path="/roadmap" element={<RoadmapPage/>} />
+        {/* <Route path="/planet/:id" element={<PlanetPage/>} /> */}
+        <Route path="/planet" element={<PlanetPage/>} />
       </Routes>
     </BrowserRouter>
   );
