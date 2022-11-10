@@ -19,15 +19,11 @@ export default function QuestionEditor() {
     message: "",
   });
 
-<<<<<<< HEAD
+
     const titleRef = useRef();
     const editorRef = useRef();
     const userId = getUserId();
-=======
-  const titleRef = useRef();
-  const editorRef = useRef();
-  const userId = getUserId();
->>>>>>> f13449ae456e7cf2bb70b51921181192545d2a8f
+
 
   useEffect(() => {}, [tilContent]);
 

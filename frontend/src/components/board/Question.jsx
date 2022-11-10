@@ -4,6 +4,7 @@ import QuestionCard from "./QuestionCard";
 import { Container, Carousel, Item, Ui } from "./Question.style";
 import http from "../../api/http";
 
+const defaultValue = {};
 const Question = () => {
   const [item, setItem] = useState();
   const [isData, setIsData] = useState(false);
@@ -19,7 +20,7 @@ const Question = () => {
 
   useEffect(() => {
     setIsData(true);
-  }, [item]);
+  }, [item, isData]);
 
   const handleLeft = (e) => {
     e.preventDefault();
@@ -34,7 +35,7 @@ const Question = () => {
     <div>
       <Container>
         <Carousel ref={carousel}>
-          {isData ? (
+          {isData== true ? (
             item.map((item) => {
               return (
                 <QuestionCard
