@@ -19,12 +19,6 @@ export default function QuestionEditor() {
     message: "",
   });
 
-    const [tilContent, setTilContent] = useState({
-        title: '',
-        content: '',
-        message: '',
-    });
-
     const titleRef = useRef();
     const editorRef = useRef();
     const userId = getUserId();
