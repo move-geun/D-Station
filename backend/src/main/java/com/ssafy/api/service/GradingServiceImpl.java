@@ -3,10 +3,12 @@ package com.ssafy.api.service;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.PumpStreamHandler;
+import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.StringTokenizer;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -15,6 +17,8 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aspose.html.internal.ms.core._net.l.an;
+import com.ssafy.db.entity.Problem;
 import com.ssafy.db.repository.ProblemRepository;
 
 @Service
@@ -64,14 +68,41 @@ public class GradingServiceImpl implements GradingService{
 	}
 
 	@Override
-	public String gradingPython(String code) throws IOException {
-        String[] command = new String[4];
-        command[0] = "python";
-        command[1] = "/ssafy-web-project/test.py";
-        command[2] = "10";
-        command[3] = "20";
-        interpreter = new PythonInterpreter();
-        interpreter.execfile("./test.py");
-		return "asdfa";
+	public String gradingPython(int uid, String code) throws IOException {
+		FileWriter fw;
+		fw = new FileWriter("Solution.py", false);
+		fw.write(code);
+		fw.close();
+		interpreter = new PythonInterpreter();
+		interpreter.execfile("./Solution.py");
+		
+		Problem problem = problemRepository.findById((long)uid).get();
+		String input = problem.getInput();
+		String output = problem.getOutput();
+		
+		StringTokenizer st1 = new StringTokenizer(input);
+		StringTokenizer st2 = new StringTokenizer(output);
+		
+		boolean success = true;
+		
+		while(st1.hasMoreTokens()) {
+			String expect = st2.nextToken();
+			String problemInput = st1.nextToken();
+			interpreter.exec("x = solution("+problemInput+")");
+			String answer = interpreter.get("x").toString();
+			if(answer.charAt(answer.length()-1)=='L') {
+				answer = answer.substring(0, answer.length()-1);
+			}
+			System.out.println(answer);
+			System.out.println(expect);
+			if(answer.compareTo(expect)!=0) {
+				success = false;
+				break;
+			}
+		}
+		if(success) {
+			return "success";
+		}
+		return "fail";
     }
 }
