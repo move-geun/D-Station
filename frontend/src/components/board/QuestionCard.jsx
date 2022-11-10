@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import { CardActions } from "@mui/material";
@@ -7,7 +7,7 @@ import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
 import { Interval } from "./QuestionCard.style";
 // api 연결 관련
-import connect_axios from "../../api/connect";
+import connect_axios from "../../api/http";
 
 const QuestionCard = () => {
   const bull = (
@@ -35,7 +35,12 @@ const QuestionCard = () => {
           {/* <Typography variant="body2">게시글 요약내용</Typography> */}
         </CardContent>
         <CardActions>
-          <Link to="/questiondetail" style={{color: "green", marginLeft:"10px"}}>Detail</Link>
+          <Link
+            to="/questiondetail"
+            style={{ color: "green", marginLeft: "10px" }}
+          >
+            Detail
+          </Link>
         </CardActions>
       </Card>
     </Interval>
