@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
@@ -6,7 +6,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 // api 연결 관련 import구문
-import connect_axios from "../../api/connect";
+import connect_axios from "../../api/http";
 import { UserIdState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 // tag 선택 탭
@@ -19,14 +19,6 @@ import Typography from "@mui/joy/Typography";
 import { getUserId } from "../../api/JWT";
 
 export default function QuestionEditor() {
-  const [selected, setSelected] = React.useState("");
-  const editorRef = useRef();
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
-
   const blank = {
     marginTop: "20px",
     fontSize: "20px",
@@ -34,30 +26,35 @@ export default function QuestionEditor() {
 
   const userId = getUserId();
   const [titleCreate, setTitleCreate] = useState();
-  const [contentCreate, setContentCreate] = useState();
-  const [tagCreate, setTagCreate] = useState();
+  const editorRef = useRef();
+  const [selected, setSelected] = React.useState("");
 
+  useEffect(() => {}, [titleCreate]);
   const titleHandler = (e) => {
     setTitleCreate(e.target.value);
-    console.log(e.target.value);
   };
 
   const contentHandler = (e) => {
-    setContentCreate(e.current.getContent());
+    if (editorRef.current) {
+      const editorCreate = editorRef.current.getContent();
+      console.log(editorCreate);
+    }
   };
 
   const writeQuestion = () => {
     const data = {
       id: userId,
       title: titleCreate,
-      content: contentCreate,
-      tag: tagCreate,
+      content: editorRef.current.getContent(),
+      tag: selected,
     };
     connect_axios
-      .post(`/ask`, JSON.stringify(data))
+      .post(
+        `/ask/?content=${data.content}&tag=${data.tag}&title=${data.title}&userId=${userId}`
+      )
       .then((res) => {
         console.log("업로드 완료");
-        console.log(res);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -66,55 +63,53 @@ export default function QuestionEditor() {
 
   return (
     <>
-      <FormControl>
-        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-          <Box>
-            <Typography level="h2" fontSize="lg" id="best-movie" mb={2}>
-              분류
-            </Typography>
-            <RadioGroup
-              name="best-movie"
-              aria-labelledby="best-movie"
-              row
-              sx={{ flexWrap: "wrap", gap: 1 }}
-            >
-              {["백엔드😀", "프론트엔드😆", "데브옵스😎", "CS🧷", "기타🎸"].map(
-                (name) => {
-                  const checked = selected === name;
-                  return (
-                    <Chip
-                      key={name}
-                      variant={checked ? "soft" : "plain"}
+      <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+        <Box>
+          <Typography level="h2" fontSize="lg" id="best-movie" mb={2}>
+            분류
+          </Typography>
+          <RadioGroup
+            name="best-movie"
+            aria-labelledby="best-movie"
+            row
+            sx={{ flexWrap: "wrap", gap: 1 }}
+          >
+            {["백엔드😀", "프론트엔드😆", "데브옵스😎", "CS🧷", "기타🎸"].map(
+              (name) => {
+                const checked = selected === name;
+                return (
+                  <Chip
+                    key={name}
+                    variant={checked ? "soft" : "plain"}
+                    color={checked ? "primary" : "neutral"}
+                    startDecorator={
+                      checked && (
+                        <CheckIcon sx={{ zIndex: 1, pointerEvents: "none" }} />
+                      )
+                    }
+                  >
+                    <Radio
+                      variant="outlined"
                       color={checked ? "primary" : "neutral"}
-                      startDecorator={
-                        checked && (
-                          <CheckIcon
-                            sx={{ zIndex: 1, pointerEvents: "none" }}
-                          />
-                        )
-                      }
-                    >
-                      <Radio
-                        variant="outlined"
-                        color={checked ? "primary" : "neutral"}
-                        disableIcon
-                        overlay
-                        label={name}
-                        value={name}
-                        checked={checked}
-                        onChange={(event) => {
-                          if (event.target.checked) {
-                            setSelected(name);
-                          }
-                        }}
-                      />
-                    </Chip>
-                  );
-                }
-              )}
-            </RadioGroup>
-          </Box>
+                      disableIcon
+                      overlay
+                      label={name}
+                      value={name}
+                      checked={checked}
+                      onChange={(event) => {
+                        if (event.target.checked) {
+                          setSelected(name);
+                        }
+                      }}
+                    />
+                  </Chip>
+                );
+              }
+            )}
+          </RadioGroup>
         </Box>
+      </Box>
+      <FormControl>
         <FormLabel style={blank}>제목</FormLabel>
         <Textarea
           placeholder="제목을 입력해주세요."
