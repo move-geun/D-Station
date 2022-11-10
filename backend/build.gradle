@@ -195,6 +195,9 @@ dependencies {
     // 유정 추가
   //  implementation group: 'com.aspose', name: 'aspose-html', version: '21.6'
 	  // implementation 'com.aspose:aspose-html:26.1'
+	
+    implementation files("json/aspose-html-21.12-jdk1.8.jar")
+    implementation files("json/aspose-words-22.10-jdk16.jar")
 }
 
 test {
