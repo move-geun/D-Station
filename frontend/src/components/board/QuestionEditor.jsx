@@ -6,9 +6,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 // api 연결 관련 import구문
-import connect_axios from "../../api/http";
-import { UserIdState } from "../../recoil/atoms";
-import { useRecoilValue } from "recoil";
+import http from "../../api/http";
 // tag 선택 탭
 import CheckIcon from "@mui/icons-material/Check";
 import Box from "@mui/joy/Box";
@@ -48,7 +46,7 @@ export default function QuestionEditor() {
       content: editorRef.current.getContent(),
       tag: selected,
     };
-    connect_axios
+    http.connect_axios
       .post(
         `/ask/?content=${data.content}&tag=${data.tag}&title=${data.title}&userId=${userId}`
       )
