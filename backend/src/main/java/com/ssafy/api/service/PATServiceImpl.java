@@ -1,6 +1,7 @@
 package com.ssafy.api.service;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -41,9 +42,25 @@ public class PATServiceImpl implements PATService {
 		driver.get("https://github.com/login");
 		driver.findElement(By.xpath("//*[@id=\"login_field\"]")).sendKeys(githubId);
 		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(githubPw);
-		driver.findElement(By.xpath("//*[@id=\"login\"]/div[4]/form/div/input[11]")).click();
-		driver.navigate().to("https://github.com/settings/tokens/new");
-		System.err.println(driver.getPageSource());
+		driver.findElement(By.xpath("//*[@id=\"login\"]/div[4]/form/div/input[11]")).sendKeys(Keys.ENTER);
+		Thread t = new Thread();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.get("https://github.com/settings/tokens/new");
+		System.out.println("토큰 생성 페이지 이동");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		driver.findElement(By.xpath("//*[@id=\"login\"]/div[4]/form/div/input[11]")).sendKeys(Keys.ENTER);
+		System.out.println(driver.getPageSource());
 		driver.findElement(By.xpath("//*[@id=\"oauth_access_description\"]")).sendKeys("D-station");
 		driver.findElement(By.xpath("//*[@id=\"new_oauth_access\"]/div/dl[2]/dd/div/ul/li[1]/label/div/input")).click();
 		driver.findElement(By.xpath("//*[@id=\"new_oauth_access\"]/div/dl[2]/dd/div/ul/li[4]/label/div/input")).click();
