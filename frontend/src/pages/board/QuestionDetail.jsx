@@ -36,7 +36,13 @@ const QuestionDetail = () => {
     });
   }, []);
 
-  const data = items;
+  // const del = () => {
+  //   const Uid = items.uid;
+  //   http.connect_axios.delete(`/ask/detail`).then((res) => {
+  //     console.log(res);
+  //   })
+  // }
+
 
   return (
     <Container>
@@ -50,7 +56,7 @@ const QuestionDetail = () => {
       {/* 버튼그룹 */}
       <Buttons>
         <Button style={{ color: "yellow" }}>수정</Button>
-        <Button style={{ color: "orangered" }}>삭제</Button>
+        <Button style={{ color: "orangered" }} >삭제</Button>
         <Button style={{ color: "yellowgreen" }}>
           <Link
             to="/questionlist"
