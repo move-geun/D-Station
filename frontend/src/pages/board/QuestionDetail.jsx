@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Container,
@@ -11,33 +11,52 @@ import {
 } from "./QuestionDetail.style";
 import CommentEditor from "../../components/board/CommentEditor";
 import CommentDetail from "../../components/board/Comment";
-import { useEffect } from "react";
 import http from "../../api/http";
 
 const QuestionDetail = () => {
   const location = useLocation();
+  const [items, setItems] = useState(null);
+  const [title, setTitle] = useState();
+  const [date, setDate] = useState();
+  const [nickname, setNickname] = useState();
+  const [tag, setTag] = useState();
+  const [content, setContent]= useState();
+  console.log(items);
+  console.log(title);
 
   useEffect(() => {
     const Uid = location.state.id.Uid;
-    console.log(Uid);
-    http.connect_axios.get(`/ask/detail?uid=${Uid}`).then(function (res) {
-      console.log(res.data);
+    http.connect_axios.get(`/ask/detail?uid=${Uid}`).then((res) => {
+      setItems(res.data);
+      setTitle(res.data.title);
+      setDate(res.data.theDate);
+      setNickname(res.data.nickname);
+      setTag(res.data.tag);
+      setContent(res.data.content);
     });
   }, []);
+
+  // const del = () => {
+  //   const Uid = items.uid;
+  //   http.connect_axios.delete(`/ask/detail`).then((res) => {
+  //     console.log(res);
+  //   })
+  // }
+
 
   return (
     <Container>
       {/* 제목 */}
       <Title>
-        <p className="title">제목 들어갈 자리</p>
-        <Tag>작성일/조회수/글쓴이</Tag>
+        <p className="title">제목: {title}</p>
+        <Tag>{tag}/{nickname}/{date}</Tag>
       </Title>
       {/* 게시내용 */}
-      <Content>내용들어갈 자리</Content>
+      <Content>{content}</Content>
       {/* 버튼그룹 */}
       <Buttons>
         <Button style={{ color: "yellow" }}>수정</Button>
-        <Button style={{ color: "orangered" }}>삭제</Button>
+        <Button style={{ color: "orangered" }} >삭제</Button>
         <Button style={{ color: "yellowgreen" }}>
           <Link
             to="/questionlist"
