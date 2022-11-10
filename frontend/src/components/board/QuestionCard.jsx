@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
-import { CardActions } from "@mui/material";
-import { CardContent } from "@mui/material";
-import { Typography } from "@mui/material";
+import { CardActions, CardContent, Typography, Button } from "@mui/material";
+// import Chip from "@mui/joy/Chip";
 import { Interval } from "./QuestionCard.style";
 
 const QuestionCard = ({ Tag, Title, theDate, Nickname }) => {
@@ -11,24 +10,32 @@ const QuestionCard = ({ Tag, Title, theDate, Nickname }) => {
     <Interval>
       <Card sx={{ minWidth: 250 }}>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          {/* <Chip variant="solid" color="danger"> */}
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: 14, color: "hotpink" }}
+            color="text.secondary"
+            gutterBottom
+          >
             {Tag}
           </Typography>
-          <Typography variant="h5" component="div">
+          {/* </Chip> */}
+          <Typography variant="h5" component="div" sx={{ mt: 2 }}>
             {Title}
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {Nickname}닉네임
+          <Typography sx={{ mb: 1.5, mt: 2 }} color="text.secondary">
+            {Nickname}
           </Typography>
           <Typography variant="body2">{theDate}</Typography>
         </CardContent>
         <CardActions>
-          <Link
-            to="/questiondetail"
-            style={{ color: "green", marginLeft: "10px" }}
-          >
-            Detail
-          </Link>
+          <Button>
+            <Link
+              to="/questiondetail"
+              style={{ color: "green", marginRight: "10px" }}
+            >
+              Detail
+            </Link>
+          </Button>
         </CardActions>
       </Card>
     </Interval>
