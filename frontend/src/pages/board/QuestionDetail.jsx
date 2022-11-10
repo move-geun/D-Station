@@ -17,13 +17,22 @@ const QuestionDetail = () => {
   const location = useLocation();
   const [items, setItems] = useState(null);
   const [title, setTitle] = useState();
+  const [date, setDate] = useState();
+  const [nickname, setNickname] = useState();
+  const [tag, setTag] = useState();
+  const [content, setContent]= useState();
   console.log(items);
+  console.log(title);
 
   useEffect(() => {
     const Uid = location.state.id.Uid;
     http.connect_axios.get(`/ask/detail?uid=${Uid}`).then((res) => {
       setItems(res.data);
       setTitle(res.data.title);
+      setDate(res.data.theDate);
+      setNickname(res.data.nickname);
+      setTag(res.data.tag);
+      setContent(res.data.content);
     });
   }, []);
 
@@ -33,11 +42,11 @@ const QuestionDetail = () => {
     <Container>
       {/* 제목 */}
       <Title>
-        <p className="title" value={title}>제목: </p>
-        <Tag>작성일/조회수/글쓴이</Tag>
+        <p className="title">제목: {title}</p>
+        <Tag>{tag}/{nickname}/{date}</Tag>
       </Title>
       {/* 게시내용 */}
-      <Content>내용</Content>
+      <Content>{content}</Content>
       {/* 버튼그룹 */}
       <Buttons>
         <Button style={{ color: "yellow" }}>수정</Button>
