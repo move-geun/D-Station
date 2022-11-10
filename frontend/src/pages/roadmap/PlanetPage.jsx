@@ -25,6 +25,8 @@ const PlanetPage = () => {
             <AboutPlanetWrapper>
                 <RoadPlanetHTML data={planetData} />
             </AboutPlanetWrapper>
+  
+            
            
         
         </>

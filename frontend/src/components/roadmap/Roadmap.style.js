@@ -6,4 +6,6 @@ const AboutPlanetWrapper = styled.div`
     background-color: pink;
 `;
 
+
+
 export { AboutPlanetWrapper };
