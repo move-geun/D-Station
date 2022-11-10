@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { UserState } from "../../recoil/atoms";
+import { UserState, UserIdState} from "../../recoil/atoms";
 import auth_axios from "../../api/user";
 import { useEffect } from "react";
 
@@ -9,6 +9,7 @@ import { useEffect } from "react";
 const GithubRedirectPage = () => {
     const navigate = useNavigate();
     const [userLogIn, setUserLogIn] = useRecoilState(UserState);
+    const [userId, setUserId] = useRecoilState(UserIdState);
 
     // const href = window.location.href;
     useEffect(()=> {
@@ -32,7 +33,8 @@ const GithubRedirectPage = () => {
                 // 401 : 로그인
                 await auth_axios.get(`/id-info?id=${githubId}`)
                 .then((response) => {
-                    if(response.data.statusCode == 200){              
+                    if(response.data.statusCode == 200){   
+                        setUserId(githubId);           
                         navigate('/signup', {
                             state : {
                                 id: githubId

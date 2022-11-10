@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function DecoWood(props) {
-  const { nodes, materials } = useGLTF("/decorative_wooden.glb");
+  const { nodes, materials } = useGLTF("/glb/decorative_wooden.glb");
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -19,4 +19,4 @@ export function DecoWood(props) {
   );
 }
 
-useGLTF.preload("/decorative_wooden.glb");
+useGLTF.preload("/glb/decorative_wooden.glb");

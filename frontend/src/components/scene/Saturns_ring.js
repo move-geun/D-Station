@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function SaturnRing(props) {
-  const { nodes, materials } = useGLTF("/saturns_ring.glb");
+  const { nodes, materials } = useGLTF("/glb/saturns_ring.glb");
   return (
     <group {...props} dispose={null}>
       <group
@@ -149,4 +149,4 @@ export function SaturnRing(props) {
   );
 }
 
-useGLTF.preload("/saturns_ring.glb");
+useGLTF.preload("/glb/saturns_ring.glb");

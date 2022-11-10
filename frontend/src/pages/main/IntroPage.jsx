@@ -4,6 +4,7 @@ import Signup from "../../components/auth/Signup";
 import { IntroWrapper} from "./IntroPage.style";
 import Login from "../../components/auth/Login";
 import ThreeTestPage from "./ThreeTestPage";
+import IntroThreePage from "./IntroThreePage";
 
 
 const DIVIDER_HEIGHT = 5;
@@ -93,7 +94,7 @@ const IntroPage = () => {
   return (
     <IntroWrapper ref={wrapperDivRef}>
         <Dots scrollIndex={scrollIndex} />
-        <ThreeTestPage />
+        <IntroThreePage/>
         <div className="inner bg-blue">
           
         <Login />

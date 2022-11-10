@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function RoundStar(props) {
-  const { nodes, materials } = useGLTF("/round_star.glb");
+  const { nodes, materials } = useGLTF("/glb/round_star.glb");
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -21,4 +21,4 @@ export function RoundStar(props) {
   );
 }
 
-useGLTF.preload("/round_star.glb");
+useGLTF.preload("/glb/round_star.glb");

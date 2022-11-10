@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Mars(props) {
-  const { nodes, materials } = useGLTF("/mars.glb");
+  const { nodes, materials } = useGLTF("/glb/mars.glb");
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -277,4 +277,4 @@ export function Mars(props) {
   );
 }
 
-useGLTF.preload("/mars.glb");
+useGLTF.preload("/glb/mars.glb");
