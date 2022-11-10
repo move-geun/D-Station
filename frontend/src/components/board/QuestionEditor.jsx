@@ -6,7 +6,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 // api 연결 관련 import구문
-import connect_axios from "../../api/connect";
+import connect_axios from "../../api/http";
 import { UserIdState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 // tag 선택 탭
@@ -49,7 +49,9 @@ export default function QuestionEditor() {
       tag: selected,
     };
     connect_axios
-      .post(`/ask/?content=${data.content}&tag=${data.tag}&title=${data.title}&userId=${userId}`)
+      .post(
+        `/ask/?content=${data.content}&tag=${data.tag}&title=${data.title}&userId=${userId}`
+      )
       .then((res) => {
         console.log("업로드 완료");
         console.log(res.data);

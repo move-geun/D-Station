@@ -1,8 +1,8 @@
 import React from "react";
 import KeyboardDoubleArrowUpOutlinedIcon from "@mui/icons-material/KeyboardDoubleArrowUpOutlined";
-import { StudyWraper } from "./StudyContent.style";
+import { StudyWraper } from "./DailyContent.style";
 
-const StudyContent = () => {
+const DailyContent = () => {
   return (
     <StudyWraper>
       <KeyboardDoubleArrowUpOutlinedIcon />
@@ -10,4 +10,4 @@ const StudyContent = () => {
   );
 };
 
-export default StudyContent;
+export default DailyContent;
