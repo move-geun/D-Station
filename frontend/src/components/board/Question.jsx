@@ -5,21 +5,18 @@ import { Container, Carousel, Item, Ui } from "./Question.style";
 import http from "../../api/http";
 
 const Question = () => {
-  const [item, setItem] = useState();
-  const [isData, setIsData] = useState(false);
+  const [item, setItem] = useState(null);
   const carousel = useRef(null);
 
   useEffect(() => {
     http.connect_axios.get(`/ask/`).then((res) => {
       console.log("받아왔서열");
-      console.log(res);
+      console.log(res.data.list);
       setItem(res.data.list);
+      console.log(item);
     });
   }, []);
-
-  useEffect(() => {
-    setIsData(true);
-  }, [item]);
+  console.log(item, "밖이당");
 
   const handleLeft = (e) => {
     e.preventDefault();
@@ -34,14 +31,15 @@ const Question = () => {
     <div>
       <Container>
         <Carousel ref={carousel}>
-          {isData ? (
-            item.map((item) => {
+          {item ? (
+            item.map((it, idx) => {
               return (
                 <QuestionCard
-                  // Tag={item.tag}
-                  Title={item.title}
-                  theDate={item.theDate}
-                  Nickname={item.Nickname}
+                  key={idx}
+                  Tag={item.tag}
+                  Title={it.title}
+                  theDate={it.theDate}
+                  Nickname={it.Nickname}
                 />
               );
             })
