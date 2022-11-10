@@ -1,6 +1,7 @@
 package com.ssafy.db.entity;
 
 import lombok.*;
+import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -29,12 +30,7 @@ public class Mission {
     String quest;
 
     // 미션 태그
-    @Column(name = "m_tag", nullable = false, length = 50)
-    String mTag;
-
-    // 미션 URL
-    @Column(name = "m_url", nullable = false, length = 300)
-    String mUrl;
+    @C
 
     // MissionCompleted
     @Builder.Default
