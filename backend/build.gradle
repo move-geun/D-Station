@@ -198,6 +198,7 @@ dependencies {
 	
     implementation files("json/aspose-html-21.12-jdk1.8.jar")
     implementation files("json/aspose-words-22.10-jdk16.jar")
+    implementation files("json/jython-standalone-2.7.3.jar")
 }
 
 test {

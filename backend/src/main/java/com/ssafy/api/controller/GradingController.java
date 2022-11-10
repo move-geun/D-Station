@@ -45,4 +45,15 @@ public class GradingController {
 	public String javaGrading(@RequestBody @ApiParam(value="자바 코드", required = true) String code) throws IOException {
 		return gradingService.gradingJava(code);
 	}
+	@PostMapping("/python")
+	@ApiOperation(value = "채점", notes = "<strong>파이썬 코드</strong>를 채점 한다.") 
+	@ApiResponses({
+		@ApiResponse(code = 200, message = "성공", response = UserLoginPostRes.class),
+		@ApiResponse(code = 401, message = "인증 실패", response = BaseResponseBody.class),
+		@ApiResponse(code = 404, message = "사용자 없음", response = BaseResponseBody.class),
+		@ApiResponse(code = 500, message = "서버 오류", response = BaseResponseBody.class)
+	})
+	public String pythonGrading(@RequestBody @ApiParam(value="파이썬 코드", required = true) String code) throws IOException {
+		return gradingService.gradingPython(code);
+	}
 }

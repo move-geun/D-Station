@@ -1,5 +1,12 @@
 package com.ssafy.api.service;
 
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.PumpStreamHandler;
+import org.python.util.PythonInterpreter;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,7 +21,8 @@ import com.ssafy.db.repository.ProblemRepository;
 public class GradingServiceImpl implements GradingService{
 	@Autowired
 	ProblemRepository problemRepository;
-	
+
+    public static PythonInterpreter interpreter;
 	@Override
 	public String gradingJava(String code) throws IOException {
 		FileWriter fw;
@@ -49,15 +57,21 @@ public class GradingServiceImpl implements GradingService{
 			System.out.println(res+"<->"+outputLine);
 		}
 		
-//		System.out.println(problemRepository.findProblemByUid(uid).get().getName());
-//		System.out.println(problemRepository.findProblemByUid(uid).get().getContent());
-//		System.out.println(problemRepository.findProblemByUid(uid).get().getInput());
-//		System.out.println(problemRepository.findProblemByUid(uid).get().getOutput());
 		command = cmd.inputCommand("java Solution");
 		res = cmd.execCommand(command);
-//		System.out.println(res);
 		
 		return null;
 	}
 
+	@Override
+	public String gradingPython(String code) throws IOException {
+        String[] command = new String[4];
+        command[0] = "python";
+        command[1] = "/ssafy-web-project/test.py";
+        command[2] = "10";
+        command[3] = "20";
+        interpreter = new PythonInterpreter();
+        interpreter.execfile("./test.py");
+		return "asdfa";
+    }
 }
