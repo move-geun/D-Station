@@ -55,7 +55,7 @@ const MainPage = ({ ...props }) => {
   return (
     <MainWrapper>
       <CanvasWrapper>
-        <Canvas className="tmp" camera={{ fov: 100, position: [0, 0, 600] }}>
+        <Canvas className="tmp" camera={{ fov: 100, position: [0, 0, 300] }}>
           <CameraControls />
           <directionalLight position={[0, 0, 5]} />
           <Stars
@@ -71,6 +71,10 @@ const MainPage = ({ ...props }) => {
           <Suspense fallback={<Loader />}>
             <SolarSystem />
             <FeGalaxy />
+            <SolarSystem position={[-350, 0, -20]} />
+            <FeGalaxy position={[-350, 0, -20]} />
+            <SolarSystem position={[350, 0, -20]} />
+            <FeGalaxy position={[350, 0, -20]} />
           </Suspense>
         </Canvas>
       </CanvasWrapper>

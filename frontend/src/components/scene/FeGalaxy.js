@@ -1,13 +1,18 @@
 import React, { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
 export function FeGalaxy(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/glb/fegalaxy.glb");
   const { actions } = useAnimations(animations, group);
+  useFrame(({ clock }) => {
+    const a = clock.getElapsedTime();
+    group.current.rotation.y = a;
+  });
   return (
     <group ref={group} {...props} dispose={null}>
-      <group name="Object_2">
+      <group name="Object_2" scale={0.3}>
         <group name="RootNode">
           {/* <group name="Galaxy" rotation={[-Math.PI / 2, 0, 0]}>
             <mesh
