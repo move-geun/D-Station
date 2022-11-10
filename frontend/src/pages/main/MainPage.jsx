@@ -10,6 +10,7 @@ import {
   Newsmap,
 } from "./MainPage.style";
 import { SolarSystem } from "../../components/scene/Solar_system";
+import { FeGalaxy } from "../../components/scene/FeGalaxy";
 import MapNav from "../../components/main/MapNav";
 import DailyContent from "../../components/main/DailyContent";
 import { useState } from "react";
@@ -54,7 +55,7 @@ const MainPage = ({ ...props }) => {
   return (
     <MainWrapper>
       <CanvasWrapper>
-        <Canvas className="tmp" camera={{ fov: 100, position: [0, 0, 150] }}>
+        <Canvas className="tmp" camera={{ fov: 100, position: [0, 0, 600] }}>
           <CameraControls />
           <directionalLight position={[0, 0, 5]} />
           <Stars
@@ -69,6 +70,7 @@ const MainPage = ({ ...props }) => {
           <pointLight position={[10, 10, 10]} />
           <Suspense fallback={<Loader />}>
             <SolarSystem />
+            <FeGalaxy />
           </Suspense>
         </Canvas>
       </CanvasWrapper>

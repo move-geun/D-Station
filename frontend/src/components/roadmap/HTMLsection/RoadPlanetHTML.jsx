@@ -1,19 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import connect_axios from "../../../api/connect";
+import http from "../../../api/http";
 
 import { AboutPlanetWrapper } from "../Roadmap.style";
 
 const RoadPlanetHTML = (data) => {
+  const planetData = data;
+  console.log("RoadPlanetHTMLData    ", data);
 
-    const planetData = data;
-    console.log("RoadPlanetHTMLData    ", data);
-
-    return(
-        <>
-            
-        </>
-    )
-}
+  return <></>;
+};
 
 export default RoadPlanetHTML;
