@@ -12,7 +12,7 @@ extend({ OrbitControls });
 
 function Loader() {
   const { progress } = useProgress();
-  return <Html center>{progress} % 로딩중</Html>;
+  return <Html center>{Math.ceil(progress)} % 로딩중</Html>;
 }
 
 const CameraControls = () => {

@@ -12,7 +12,7 @@ import {
 import CommentEditor from "../../components/board/CommentEditor";
 import CommentDetail from "../../components/board/Comment";
 import { useEffect } from "react";
-import connect_axios from "../../api/connect";
+import connect_axios from "../../api/http";
 
 const QuestionDetail = () => {
   useEffect(() => {

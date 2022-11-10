@@ -4,7 +4,7 @@ import Question from "../../components/board/Question";
 import CreateIcon from "@mui/icons-material/Create";
 import SearchIcon from "@mui/icons-material/Search";
 import { getUserId } from "../../api/JWT";
-import connect_axios from "../../api/connect";
+import connect_axios from "../../api/http";
 
 const QuestionListPage = () => {
   const userId = getUserId();
