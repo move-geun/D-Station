@@ -48,12 +48,35 @@ const FootNav = styled.div`
     svg {
       margin: 0 20px;
     }
+
+    .news {
+      position: relative;
+    }
   }
 `;
 
 const RocketMap = styled.div`
-  width: 200px;
-  height: 300px;
+  width: 800px;
+  height: 350px;
+  background-color: #110f1c;
+  position: absolute;
+  right: 25%;
+  top: 25%;
+  border-radius: 3px;
+  color: white;
+  border: 2px solid rgba(255, 255, 255);
 `;
 
-export { MainWrapper, CanvasWrapper, FootNav, RocketMap };
+const Newsmap = styled.div`
+  width: 350px;
+  height: 500px;
+  /* background-color: #110f1c; */
+  background-color: tomato;
+  position: absolute;
+  bottom: 45px;
+  left: -150px;
+  border-radius: 3px;
+  color: white;
+`;
+
+export { MainWrapper, CanvasWrapper, FootNav, RocketMap, Newsmap };

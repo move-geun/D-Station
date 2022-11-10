@@ -7,10 +7,11 @@ import {
   CanvasWrapper,
   FootNav,
   RocketMap,
+  Newsmap,
 } from "./MainPage.style";
 import { SolarSystem } from "../../components/scene/Solar_system";
 import MapNav from "../../components/main/MapNav";
-import StudyContent from "../../components/main/StudyContent";
+import DailyContent from "../../components/main/DailyContent";
 import { useState } from "react";
 
 extend({ OrbitControls });
@@ -35,14 +36,19 @@ const CameraControls = () => {
 
 function Loader() {
   const { progress } = useProgress();
-  return <Html center>{progress} % 로딩중</Html>;
+  return <Html center>{Math.ceil(progress)} % 로딩중</Html>;
 }
 
 const MainPage = ({ ...props }) => {
   const [mapOpen, setMapOpen] = useState(false);
+  const [newsOpen, setNewsOpen] = useState(false);
 
-  const a = () => {
+  const openmap = () => {
     setMapOpen(!mapOpen);
+  };
+
+  const opennews = () => {
+    setNewsOpen(!newsOpen);
   };
 
   return (
@@ -73,14 +79,20 @@ const MainPage = ({ ...props }) => {
           <div>유저 경험치</div>
         </div>
         <div className="flexWrap">
-          <div onClick={a}>
+          <div onClick={openmap}>
             <MapNav></MapNav>
           </div>
-
-          <StudyContent></StudyContent>
+          <div onClick={opennews} className="news">
+            <DailyContent></DailyContent>
+            {newsOpen ? <Newsmap></Newsmap> : null}
+          </div>
         </div>
       </FootNav>
-      {mapOpen ? <RocketMap></RocketMap> : null}
+      {mapOpen ? (
+        <RocketMap>
+          <div>바로가기</div>
+        </RocketMap>
+      ) : null}
     </MainWrapper>
   );
 };
