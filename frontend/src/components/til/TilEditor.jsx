@@ -19,10 +19,15 @@ export default function QuestionEditor() {
     message: "",
   });
 
-  const titleRef = useRef();
-  const editorRef = useRef();
-  const userId = useRecoilValue(UserIdState);
-  console.log("유저아이디 들어와???  ", userId);
+    const [tilContent, setTilContent] = useState({
+        title: '',
+        content: '',
+        message: '',
+    });
+
+    const titleRef = useRef();
+    const editorRef = useRef();
+    const userId = getUserId();
 
   useEffect(() => {}, [tilContent]);
 
