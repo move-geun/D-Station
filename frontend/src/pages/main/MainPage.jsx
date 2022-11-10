@@ -11,9 +11,13 @@ import {
 } from "./MainPage.style";
 import { SolarSystem } from "../../components/scene/Solar_system";
 import { FeGalaxy } from "../../components/scene/FeGalaxy";
+import { SpaceStation } from "../../components/scene/Space_station";
 import MapNav from "../../components/main/MapNav";
 import DailyContent from "../../components/main/DailyContent";
+import { CameraSight } from "../../recoil/atoms";
+import { useRecoilState } from "recoil";
 import { useState } from "react";
+import { useEffect } from "react";
 
 extend({ OrbitControls });
 
@@ -52,10 +56,25 @@ const MainPage = ({ ...props }) => {
     setNewsOpen(!newsOpen);
   };
 
+  const [getCamera, setGetCamera] = useRecoilState(CameraSight);
+
+  const change = () => {
+    setGetCamera({ fov: 110, position: [700, 200, 0] });
+    console.log("클릭");
+  };
+
+  const a = () => {
+    console.log(getCamera);
+  };
+
+  useEffect(() => {
+    console.log(getCamera);
+    setGetCamera({ fov: 110, position: [0, 0, 300] });
+  }, getCamera);
   return (
     <MainWrapper>
       <CanvasWrapper>
-        <Canvas className="tmp" camera={{ fov: 100, position: [0, 0, 300] }}>
+        <Canvas className="tmp" camera={getCamera}>
           <CameraControls />
           <directionalLight position={[0, 0, 5]} />
           <Stars
@@ -70,11 +89,12 @@ const MainPage = ({ ...props }) => {
           <pointLight position={[10, 10, 10]} />
           <Suspense fallback={<Loader />}>
             <SolarSystem />
-            <FeGalaxy />
-            <SolarSystem position={[-350, 0, -20]} />
-            <FeGalaxy position={[-350, 0, -20]} />
-            <SolarSystem position={[350, 0, -20]} />
-            <FeGalaxy position={[350, 0, -20]} />
+            <FeGalaxy onClick={() => a()} />
+            <SolarSystem position={[-380, 0, -40]} />
+            <FeGalaxy position={[-380, 0, -40]} />
+            <SolarSystem position={[380, 0, -40]} />
+            <FeGalaxy position={[380, 0, -40]} />
+            <SpaceStation position={[600, 150, 0]} onClick={() => change()} />
           </Suspense>
         </Canvas>
       </CanvasWrapper>
