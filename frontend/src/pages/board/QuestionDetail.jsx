@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Container,
   Title,
@@ -12,11 +12,15 @@ import {
 import CommentEditor from "../../components/board/CommentEditor";
 import CommentDetail from "../../components/board/Comment";
 import { useEffect } from "react";
-import connect_axios from "../../api/http";
+import http from "../../api/http";
 
 const QuestionDetail = () => {
+  const location = useLocation();
+
   useEffect(() => {
-    connect_axios.get("/ask").then(function (res) {
+    const Uid = location.state.id.Uid;
+    console.log(Uid);
+    http.connect_axios.get(`/ask/detail?uid=${Uid}`).then(function (res) {
       console.log(res.data);
     });
   }, []);

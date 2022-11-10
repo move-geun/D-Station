@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
-import { CardActions, CardContent, Typography, Button } from "@mui/material";
+import { CardActions, CardContent, Typography } from "@mui/material";
 // import Chip from "@mui/joy/Chip";
 import { Interval } from "./QuestionCard.style";
 
-const QuestionCard = ({ Tag, Title, theDate, Nickname }) => {
+const QuestionCard = ({ Tag, Title, theDate, Nickname, Uid }) => {
   return (
     <Interval>
       <Card sx={{ minWidth: 250 }}>
@@ -28,16 +28,12 @@ const QuestionCard = ({ Tag, Title, theDate, Nickname }) => {
           <Typography variant="body2">{theDate}</Typography>
         </CardContent>
         <CardActions>
-          <Button>
-            <Link
-              to="/questiondetail"
-              style={{ color: "green", marginRight: "10px" }}
-            >
-              Detail
-            </Link>
-          </Button>
+          <Link to="/questiondetail" state={{ id: { Uid } }}>
+            Detail
+          </Link>
         </CardActions>
       </Card>
+      ㄱ
     </Interval>
   );
 };

@@ -7,6 +7,7 @@ import http from "../../api/http";
 const Question = () => {
   const [items, setItems] = useState(null);
   const carousel = useRef(null);
+  console.log(items);
 
   useEffect(() => {
     http.connect_axios.get(`/ask/`).then((res) => {
@@ -36,11 +37,12 @@ const Question = () => {
                   Title={item.title}
                   theDate={item.theDate}
                   Nickname={item.nickname}
+                  Uid={item.uid}
                 />
               );
             })
           ) : (
-            <div> 데이터가 없습니다😥.</div>
+            <div> 게시글이 없습니다😥.</div>
           )}
         </Carousel>
       </Container>
