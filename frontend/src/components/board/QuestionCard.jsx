@@ -9,7 +9,7 @@ import { Interval } from "./QuestionCard.style";
 // api 연결 관련
 import http from "../../api/http";
 
-const QuestionCard = ({ Title, theDate, Nickname }) => {
+const QuestionCard = ({ Tag, Title, theDate, Nickname }) => {
   const bull = (
     <Box
       component="span"
@@ -23,11 +23,9 @@ const QuestionCard = ({ Title, theDate, Nickname }) => {
     <Interval>
       <Card sx={{ minWidth: 250 }}>
         <CardContent>
-          <Typography
-            sx={{ fontSize: 14 }}
-            color="text.secondary"
-            gutterBottom
-          ></Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            {Tag}
+          </Typography>
           <Typography variant="h5" component="div">
             {Title}
           </Typography>
