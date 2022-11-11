@@ -29,14 +29,30 @@ public class Satellite {
     private String sName;
 
     // 위성 설명
-    @Column(name = "s_description", nullable = false, length = 300)
+    @Column(name = "s_description", length = 300)
     private String sDescription;
     
+    // 은하 uid
+    @Column(name = "g_uid")
+    private long gUid;
+    
+    // 은하 이름
+    @Column(name = "g_name", length = 50)
+    private String gName;
+    
+    // 위성 명
+    @Column(name = "p_name", length = 50)
+    private String pName;
+    
+    
+    
     //missions
+    @Builder.Default
     @OneToMany(mappedBy = "satellite", cascade = CascadeType.ALL)
     private List<Mission> missions = new ArrayList<>();
 
     //progresses
+    @Builder.Default
     @OneToMany(mappedBy = "satellite", cascade = CascadeType.ALL)
     private List<Progress> progresses = new ArrayList<>();
 
