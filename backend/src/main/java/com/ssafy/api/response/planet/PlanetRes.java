@@ -22,11 +22,15 @@ public class PlanetRes {
     @ApiModelProperty(name = "행성 이미지")
     String pImage;
 
+    @ApiModelProperty(name = "행성 설명")
+    String pDescription;
+
     public static PlanetRes of(Planet planet) {
         PlanetRes res = new PlanetRes();
         res.setUid(planet.getUid());
         res.setPName(planet.getPName());
         res.setPImage(planet.getPImage());
+        res.setPDescription(planet.getPDescription());
         return res;
     }
 }

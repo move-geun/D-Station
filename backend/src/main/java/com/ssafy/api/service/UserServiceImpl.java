@@ -1,9 +1,12 @@
 package com.ssafy.api.service;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.StringTokenizer;
 
 import org.json.JSONObject;
@@ -44,9 +47,105 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User createUser(UserRegisterPostReq userRegisterInfo) {
+
+		String pixelaId = userRegisterInfo.getId().toLowerCase();
+		boolean isSuccess = false;
+		// pixela 회원가입
+		while (!isSuccess) {
+			isSuccess = createPixela(pixelaId);
+			System.out.println("===================createPixela============= : " + isSuccess);
+		}
+		isSuccess = false;
+		
+		
+		// pixela graph 만들기
+		while (!isSuccess) {
+			isSuccess = createPixelaGraph(pixelaId);
+			System.out.println("===================createPixelaGraph============= : " + isSuccess);
+		}
+//		try {
+//
+//			URL url = new URL("https://pixe.la/v1/users");
+//			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//			conn.setRequestMethod("POST"); // http 메서드
+//			conn.setRequestProperty("Content-Type", "application/json");
+//			conn.setDoInput(true);
+//			conn.setDoOutput(true);
+//
+//			JSONObject object = new JSONObject();
+//			object.put("token", "xhzmsdlqslek" + pixelaId);
+//			object.put("username", pixelaId);
+//			object.put("agreeTermsOfService", "yes");
+//			object.put("notMinor", "yes");
+//
+//			String jsonInputString = object.toString();
+//
+//			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+//			bw.write(jsonInputString); // 버퍼에 담기
+//			bw.flush(); // 버퍼에 담긴 데이터 전달
+//
+//			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//			String line = "";
+//			StringBuilder sb = new StringBuilder();
+//
+//			while ((line = br.readLine()) != null) { // 읽을 수 있을 때 까지 반복
+//				sb.append(line);
+//			}
+//
+//			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
+//			System.err.println("====================" + obj);
+//			System.err.println("회원가입 완료? " + obj.getBoolean("isSuccess"));
+//			System.out.println("==============여기지롱");
+//		} catch (Exception e) {
+//			System.out.println(e);
+//		}
+		// pixela graph 만들기
+//		try {
+//			URL url = new URL("https://pixe.la/v1/users/" + pixelaId + "/graphs");
+//			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//			conn.setRequestMethod("POST"); // http 메서드
+//			conn.setRequestProperty("Content-Type", "application/json");
+//			conn.setRequestProperty("X-USER-TOKEN", "xhzmsdlqslek" + pixelaId);
+//			conn.setDoInput(true);
+//			conn.setDoOutput(true);
+//
+//			JSONObject object = new JSONObject();
+//			System.out.println("===============열받게하지마라" + pixelaId);
+//			object.put("id", pixelaId);
+//			object.put("name", pixelaId);
+//			object.put("unit", "commit");
+//			object.put("type", "int");
+//			object.put("color", "ajisai");
+//			object.put("timezone", "Asia/Seoul");
+//			object.put("isSecret", false);
+//
+//			String jsonInputString = object.toString();
+//
+//			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+//			bw.write(jsonInputString); // 버퍼에 담기
+//			bw.flush(); // 버퍼에 담긴 데이터 전달
+//
+//			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//			String line = "";
+//			StringBuilder sb = new StringBuilder();
+//
+//			while ((line = br.readLine()) != null) { // 읽을 수 있을 때 까지 반복
+//				sb.append(line);
+//			}
+//
+//			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
+//			System.err.println("====================" + obj);
+//			System.err.println("그래프 생성 완료? " + obj.getBoolean("isSuccess"));
+//			System.out.println("==============여기지롱");
+//
+//		} catch (Exception e) {
+//			System.out.println(e);
+//		}
+
 		User user = new User();
 		user.setId(userRegisterInfo.getId());
 		user.setNickname(userRegisterInfo.getNickname());
+		user.setPrincipal("xhzmsdlqslek" + pixelaId);
 		// 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장.
 		// user.setPassword(passwordEncoder.encode(userRegisterInfo.getPassword()));
 		return userRepository.save(user);
@@ -150,17 +249,104 @@ public class UserServiceImpl implements UserService {
 		if (user.isPresent()) {
 			return user;
 
-		} 
+		}
 		return null;
 	}
 
 	@Override
 	public boolean login(String id) {
 
-
-
 		return false;
 	}
 
+	public boolean createPixela(String pixelaId) {
+		boolean isSuccess = false;
+		try {
+
+			URL url = new URL("https://pixe.la/v1/users");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST"); // http 메서드
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+
+			JSONObject object = new JSONObject();
+			object.put("token", "xhzmsdlqslek" + pixelaId);
+			object.put("username", pixelaId);
+			object.put("agreeTermsOfService", "yes");
+			object.put("notMinor", "yes");
+
+			String jsonInputString = object.toString();
+
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			bw.write(jsonInputString); // 버퍼에 담기
+			bw.flush(); // 버퍼에 담긴 데이터 전달
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line = "";
+			StringBuilder sb = new StringBuilder();
+
+			while ((line = br.readLine()) != null) { // 읽을 수 있을 때 까지 반복
+				sb.append(line);
+			}
+
+			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
+//			System.err.println("====================" + obj);
+//			System.err.println("회원가입 완료? " + obj.getBoolean("isSuccess"));
+			isSuccess = obj.getBoolean("isSuccess");
+//			System.out.println("==============여기지롱");
+			return isSuccess;
+		} catch (Exception e) {
+			System.out.println(e);
+			return isSuccess;
+		}
+	}
+
+	// pixela graph 만들기
+	public boolean createPixelaGraph(String pixelaId) {
+		boolean isSuccess = false;
+		try {
+			URL url = new URL("https://pixe.la/v1/users/" + pixelaId + "/graphs");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST"); // http 메서드
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty("X-USER-TOKEN", "xhzmsdlqslek" + pixelaId);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+
+			JSONObject object = new JSONObject();
+			object.put("id", pixelaId);
+			object.put("name", pixelaId);
+			object.put("unit", "commit");
+			object.put("type", "int");
+			object.put("color", "ajisai");
+			object.put("timezone", "Asia/Seoul");
+			object.put("isSecret", false);
+
+			String jsonInputString = object.toString();
+
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			bw.write(jsonInputString); // 버퍼에 담기
+			bw.flush(); // 버퍼에 담긴 데이터 전달
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line = "";
+			StringBuilder sb = new StringBuilder();
+
+			while ((line = br.readLine()) != null) { // 읽을 수 있을 때 까지 반복
+				sb.append(line);
+			}
+
+			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
+//			System.err.println("====================" + obj);
+//			System.err.println("그래프 생성 완료? " + obj.getBoolean("isSuccess"));
+			isSuccess = obj.getBoolean("isSuccess");
+//			System.out.println("==============여기지롱");
+			return isSuccess;
+		} catch (Exception e) {
+			System.out.println(e);
+			return isSuccess;
+		}
+	}
 
 }

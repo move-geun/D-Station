@@ -18,18 +18,6 @@ export const Carousel = styled.div`
   }
 `;
 
-export const Item = styled.div`
-  display: flex;
-  min-width: 150px;
-  flex-direction: column;
-  justify-content: space-around;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 16px;
-  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
-  flex: none;
-`;
-
 export const Ui = styled.div`
   display: flex;
   justify-content: space-between;

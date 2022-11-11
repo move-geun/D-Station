@@ -4,6 +4,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   text-align: start;
+  margin-top: 10%;
   margin-left: 15%;
   margin-right: 15%;
 `;

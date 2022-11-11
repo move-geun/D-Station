@@ -1,14 +1,24 @@
 import React from "react";
 import { useState } from "react";
-import http from "../../../api/http";
 
-import { AboutPlanetWrapper } from "../Roadmap.style";
+import { AboutPlanetWrapper, DescWrapper, ListWrapper } from "../Roadmap.style";
+import SatelliteList from "../SatelliteList";
 
-const RoadPlanetHTML = (data) => {
-  const planetData = data;
-  console.log("RoadPlanetHTMLData    ", data);
+const RoadPlanetHTML = ({satellitedata}) => {
 
-  return <></>;
-};
+    const satellite = satellitedata;
+
+    return(
+        <>
+            <DescWrapper>
+                <div> 설명 설명</div>
+            </DescWrapper>
+            <ListWrapper>
+                <SatelliteList data = {satellite}/>
+            </ListWrapper>
+            
+        </>
+    )
+}
 
 export default RoadPlanetHTML;

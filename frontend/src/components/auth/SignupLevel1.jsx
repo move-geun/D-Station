@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { UserIdState, PATState } from "../../recoil/atoms";
 import { useRecoilValue, useRecoilState } from "recoil";
 
-import connect_axios from "../../api/http";
+import http from "../../api/http";
 
 const SignupLevel1 = ({ levelHandler }) => {
   // const [userId, setUserId] = useState();
@@ -52,7 +52,7 @@ const SignupLevel1 = ({ levelHandler }) => {
   };
 
   const AuthorizeGithub = () => {
-    connect_axios
+    http.connect_axios
       .post(
         `/PAT/create?githubId=${githubData.id}&githubPw=${githubData.password}&userId=${userId}`
       )

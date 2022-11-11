@@ -12,13 +12,13 @@ buildscript{
     repositories {
         mavenCentral()
         jcenter()
-    }
+    } 
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVer}"
         classpath "io.spring.gradle:dependency-management-plugin:${springDependencyMgmtVer}.RELEASE"
         classpath "org.springframework:springloaded:${springLoadedVer}.RELEASE"
         //이클립스인 경우를 위한 QueryDSL 플러그인. IntelliJ는 불필요. [시작]
-//        classpath "gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:${querydslPluginVer}"
+        classpath "gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:${querydslPluginVer}"
         //[끝] 
         classpath "com.github.node-gradle:gradle-node-plugin:3.1.0"
     }
@@ -195,6 +195,9 @@ dependencies {
     // 유정 추가
   //  implementation group: 'com.aspose', name: 'aspose-html', version: '21.6'
 	  // implementation 'com.aspose:aspose-html:26.1'
+	
+    implementation files("json/aspose-html-21.12-jdk1.8.jar")
+    implementation files("json/aspose-words-22.10-jdk16.jar")
 }
 
 test {

@@ -9,7 +9,7 @@ import {
   DesText,
 } from "./SignupLevel.style";
 import { useEffect, useState } from "react";
-import connect_axios from "../../api/http";
+import http from "../../api/http";
 import { UserIdState, UserState, PATState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 
@@ -41,7 +41,7 @@ const SignupLevel2 = ({ levelHandler }) => {
       id: userId,
       repoName: repoName,
     };
-    connect_axios
+    http.connect_axios
       .post(`/til/create-repo`, JSON.stringify(data), {
         headers: {
           "Content-Type": `application/json`,
