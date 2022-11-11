@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 // api 연결 관련 import구문
 import http from "../../api/http";
+import { getUserId } from "../../api/JWT";
 // tag 선택 탭
 import CheckIcon from "@mui/icons-material/Check";
 import Box from "@mui/joy/Box";
@@ -14,7 +15,6 @@ import Chip from "@mui/joy/Chip";
 import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Typography from "@mui/joy/Typography";
-import { getUserId } from "../../api/JWT";
 
 export default function QuestionEditor() {
   const blank = {
