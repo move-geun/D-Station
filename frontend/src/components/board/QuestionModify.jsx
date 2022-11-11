@@ -1,33 +1,74 @@
-import React, { useRef, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import http from "../../api/http";
+import { getUserId } from "../../api/JWT";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-// api 연결 관련 import구문
-import http from "../../api/http";
-import { getUserId } from "../../api/JWT";
-// tag 선택 탭
 import CheckIcon from "@mui/icons-material/Check";
 import Box from "@mui/joy/Box";
 import Chip from "@mui/joy/Chip";
 import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Typography from "@mui/joy/Typography";
+import { Container } from "./QuestionModify.style";
 
-export default function QuestionEditor() {
+const QuestionModify = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const userId = getUserId();
+  const [title, setTitle] = useState();
+  const [tag, setTag] = useState();
+  const [content, setContent] = useState();
+  const [id, setId] = useState();
+
+  const [titleCreate, setTitleCreate] = useState();
+  const editorRef = useRef();
+  const [selected, setSelected] = useState(tag);
+
   const blank = {
     marginTop: "20px",
     fontSize: "20px",
   };
 
-  const userId = getUserId();
-  const [titleCreate, setTitleCreate] = useState();
-  const editorRef = useRef();
-  const [selected, setSelected] = React.useState("");
+  useEffect(() => {
+    const Uid = location.state.id.id;
+    http.connect_axios.get(`/ask/detail?uid=${Uid}`).then((res) => {
+      setTitle(res.data.title);
+      setTag(res.data.tag);
+      setContent(res.data.content);
+      setId(res.data.uid);
+    });
+  }, []);
+
+  const modify = () => {
+    const Uid = location.state.id.id;
+    const Content = editorRef.current.getContent();
+    const data = {
+      uId: Uid,
+      userId: userId,
+      title: titleCreate,
+      content: Content,
+      tag: selected,
+    };
+    http.connect_axios
+      .put(
+        `ask/detail?content=${data.content}&tag=${data.tag}&title=${data.title}&uid=${data.uId}&userId=${data.userId}`
+      )
+      .then((res) => {
+        console.log("수정 완료");
+        console.log(res.data);
+        alert("수정이 완료되었습니다.");
+        navigate(``);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("수정 안됨 ㅠㅠ");
+      });
+  };
 
   useEffect(() => {}, [titleCreate]);
   const titleHandler = (e) => {
@@ -37,31 +78,13 @@ export default function QuestionEditor() {
   const contentHandler = (e) => {
     if (editorRef.current) {
       const editorCreate = editorRef.current.getContent();
+      console.log(editorCreate);
     }
   };
 
-  const writeQuestion = () => {
-    const data = {
-      id: userId,
-      title: titleCreate,
-      content: editorRef.current.getContent(),
-      tag: selected,
-    };
-    http.connect_axios
-      .post(
-        `/ask/?content=${data.content}&tag=${data.tag}&title=${data.title}&userId=${userId}`
-      )
-      .then((res) => {
-        alert("게시물 업로드 성공🤗");
-        navigate(`/questionlist`);
-      })
-      .catch((err) => {
-        alert("게시물 업로드 실패😥");
-      });
-  };
-
   return (
-    <>
+    <Container>
+      <h1>👀게시글 수정하기</h1>
       <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
         <Box>
           <Typography level="h2" fontSize="lg" id="best-movie" mb={2}>
@@ -110,17 +133,13 @@ export default function QuestionEditor() {
       </Box>
       <FormControl>
         <FormLabel style={blank}>제목</FormLabel>
-        <Textarea
-          placeholder="제목을 입력해주세요."
-          minRows={1}
-          onChange={titleHandler}
-        />
+        <Textarea value={title} minRows={1} onChange={titleHandler}></Textarea>
         <FormLabel style={blank}>내용</FormLabel>
         <Editor
           apiKey="mv47x1bf7revpqmsvwdqta54w2b390xyi1wmkmlthp83qlkj"
           onInit={(evt, editor) => (editorRef.current = editor)}
           onChange={contentHandler}
-          initialValue="<p>내용을 입력해주세요.</p>"
+          initialValue={content}
           init={{
             height: 400,
             menubar: true,
@@ -155,13 +174,15 @@ export default function QuestionEditor() {
         />
         <Button
           style={blank}
-          onClick={writeQuestion}
           variant="contained"
           endIcon={<SendIcon />}
+          onClick={modify}
         >
           작성완료
         </Button>
       </FormControl>
-    </>
+    </Container>
   );
-}
+};
+
+export default QuestionModify;

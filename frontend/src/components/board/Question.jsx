@@ -7,7 +7,6 @@ import http from "../../api/http";
 const Question = () => {
   const [items, setItems] = useState(null);
   const carousel = useRef(null);
-  console.log(items);
 
   useEffect(() => {
     http.connect_axios.get(`/ask/`).then((res) => {

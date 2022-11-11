@@ -9,10 +9,10 @@ import EarthNormalMap from "../../../assets/images/earthbump.jpg";
 import EarthSpecularMap from "../../../assets/images/specularmap.jpg";
 import EarthCloudsMap from "../../../assets/images/earthCloud.png";
 
-import SatelliteColor from "../../../assets/images/canyonRockColor.jpg";
-import SatelliteBump from "../../../assets/images/canyonRockBump.png";
-import SatelliteSpecular from "../../../assets/images/canyonRockSpecular.jpg";
-import SatelliteNormal from "../../../assets/images/canyonRockNormal.jpg";
+// import SatelliteColor from "../../../assets/images/canyonRockColor.jpg";
+// import SatelliteBump from "../../../assets/images/canyonRockBump.png";
+// import SatelliteSpecular from "../../../assets/images/canyonRockSpecular.jpg";
+// import SatelliteNormal from "../../../assets/images/canyonRockNormal.jpg";
 
 export function Earth() {
   const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(
