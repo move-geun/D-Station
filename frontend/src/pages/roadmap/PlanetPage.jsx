@@ -4,6 +4,7 @@ import http from "../../api/http";
 import RoadPlanetHTML from "../../components/roadmap/HTMLsection/RoadPlanetHTML";
 import { PlanetHTMLWrapper, PlanetThreeWrapper } from "../../components/roadmap/Roadmap.style";
 import RoadPlanetThree from "../../components/roadmap/Threesection/RoadPlanetThree";
+import { PlanetContatiner } from "./PlanetPage.style";
 
 const PlanetPage = () => {
   
@@ -14,7 +15,6 @@ const PlanetPage = () => {
         const planetUid = 1;
         http.connect_axios.get(`/satellite/list_by_planet?uid=${planetUid}`)
         .then((res)=>{
-            console.log("RoadPlanet   ", res.data.list);
             // setPlanetData(res.data);
             setSatelliteList(res.data.list);
         }).catch((err)=>{
@@ -24,15 +24,17 @@ const PlanetPage = () => {
    
 
     return(
-        <>
-            <PlanetThreeWrapper>
+
+        <PlanetContatiner>
+           <PlanetThreeWrapper>
                 <RoadPlanetThree />
             </PlanetThreeWrapper>
             <PlanetHTMLWrapper>
-                <RoadPlanetHTML satallitedata={satelliteList} />
+                <RoadPlanetHTML satellitedata={satelliteList} />
             </PlanetHTMLWrapper>
-           
-        </>
+
+        </PlanetContatiner>
+
                 
     )
 }
