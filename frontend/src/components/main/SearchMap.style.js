@@ -9,10 +9,11 @@ const SearchWraper = styled.div`
   align-items: center;
 
   .title {
-    width: 100%;
+    width: 90%;
     font-size: 20px;
     font-style: bold;
     text-align: left;
+    margin-top: 10px;
   }
 `;
 
@@ -34,8 +35,8 @@ const RecoSide = styled.div`
   align-items: center;
 
   .title {
-    width: 100%;
-    font-size: 1rem;
+    width: 90%;
+    font-size: 1.2rem;
     margin: 20px;
     text-align: left;
   }

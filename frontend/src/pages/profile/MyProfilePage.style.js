@@ -1,11 +1,32 @@
 import styled from "styled-components";
 
 const Container = styled.div`
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   width: 100%;
   align-items: center;
   /* padding-left: 6rem; */
+
+  .graph {
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 100%;
+  }
+
+  .hide {
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+
+    .hideblack {
+      width: 100%;
+      height: 65px;
+      position: absolute;
+      background-color: black;
+      bottom: 5px;
+    }
+  }
 `;
 
 const Profile = styled.div`

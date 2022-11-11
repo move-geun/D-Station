@@ -28,10 +28,10 @@ const Board = styled.div`
     :first-child {
       margin-left: 10px;
     }
-    margin: 5px;
+    margin: 13px;
     width: 70px;
     height: 70px;
-    border-radius: 50%;
+    /* border-radius: 50%; */
   }
 `;
 
