@@ -92,7 +92,7 @@ public class JisickinController {
     }
 
     // 질문 수정 ========================================================================================================
-    @PutMapping("detail")
+    @PutMapping("/detail")
     @ApiOperation(value = "질문 수정", notes = "해당 질문의 내용을 수정한다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공", response = JisickinDetailRes.class),
