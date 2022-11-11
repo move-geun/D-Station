@@ -4,12 +4,17 @@ import {
   ContentWrapper,
   RecoSide,
   SearchSide,
+  SearchFunction,
 } from "./SearchMap.style";
+import SearchIcon from "@mui/icons-material/Search";
+
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Stack from "@mui/material/Stack";
 
 const SearchMap = () => {
   return (
     <SearchWraper>
-      <div className="title">바로가기</div>
+      <div className="title">Navigation</div>
       <ContentWrapper>
         <RecoSide>
           <div className="title">추천 과정</div>
@@ -37,7 +42,52 @@ const SearchMap = () => {
           </div>
         </RecoSide>
         <SearchSide>
-          <div className="title">검색창</div>
+          <SearchFunction>
+            <div className="search">
+              <input className="searchInput" type="text" placeholder="search" />
+              <SearchIcon />
+            </div>
+          </SearchFunction>
+          <div className="search_title">검색 결과 . . .</div>
+          <Stack spacing={2} className="spacing">
+            <Breadcrumbs separator="›" aria-label="breadcrumb" color="white">
+              <div underline="hover" key="1" color="inherit">
+                Start
+              </div>
+              <div underline="hover" key="2" color="inherit">
+                Core
+              </div>
+              <div key="3" color="text.primary" href="/">
+                Breadcrumb
+              </div>
+            </Breadcrumbs>
+          </Stack>
+          <Stack spacing={2} className="spacing">
+            <Breadcrumbs separator="›" aria-label="breadcrumb" color="white">
+              <div underline="hover" key="1" color="inherit">
+                Start
+              </div>
+              <div underline="hover" key="2" color="inherit">
+                Core
+              </div>
+              <div key="3" color="text.primary" href="/">
+                Breadcrumb
+              </div>
+            </Breadcrumbs>
+          </Stack>
+          <Stack spacing={2} className="spacing">
+            <Breadcrumbs separator="›" aria-label="breadcrumb" color="white">
+              <div underline="hover" key="1" color="inherit">
+                Start
+              </div>
+              <div underline="hover" key="2" color="inherit">
+                Core
+              </div>
+              <div key="3" color="text.primary" href="/">
+                Breadcrumb
+              </div>
+            </Breadcrumbs>
+          </Stack>
         </SearchSide>
       </ContentWrapper>
     </SearchWraper>

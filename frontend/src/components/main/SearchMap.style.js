@@ -74,6 +74,82 @@ const SearchSide = styled.div`
   .title {
     font-size: 1rem;
   }
+
+  .spacing {
+    width: 80%;
+    text-align: start;
+    margin: 5px 0;
+  }
+
+  .search_title {
+    width: 100%;
+    font-size: 1.2rem;
+    text-align: start;
+    margin-top: 65px;
+    margin-bottom: 10px;
+  }
 `;
 
-export { SearchWraper, ContentWrapper, RecoSide, SearchSide };
+const SearchFunction = styled.div`
+  display: flex;
+  margin-left: 5%;
+  margin-top: 5%;
+  position: relative;
+  align-items: center;
+
+  .search {
+    position: absolute;
+    padding: 10px;
+    top: 0px;
+    left: 130px;
+    transform: translate(-100%, 0);
+    height: 30px;
+    background-color: #fff;
+    border: 1px solid #51e3d4;
+    border-radius: 30px;
+    transition: 0.4s;
+    width: 30px;
+  }
+
+  .search:hover {
+    box-shadow: 0px 0px 0.5px 1px #51e3d4;
+    width: 282px;
+  }
+
+  .searchBtn {
+    text-decoration: none;
+    float: right;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #51e3d4;
+  }
+
+  .search:hover > .searchBtn {
+    background-color: #fff;
+  }
+
+  .searchInput {
+    display: flex;
+    padding: 0;
+    width: 0px;
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    font-size: 1rem;
+    line-height: 30px;
+    transition: 0.4s;
+  }
+
+  .search:hover > .searchInput {
+    width: 240px;
+    padding: 0 6px;
+  }
+`;
+
+export { SearchWraper, ContentWrapper, RecoSide, SearchSide, SearchFunction };
