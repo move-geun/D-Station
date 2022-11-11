@@ -15,7 +15,7 @@ const Container = styled.div`
   }
 
   .hide {
-    width: 100%;
+    width: 90%;
     position: relative;
     margin: 0 auto;
 

@@ -71,7 +71,7 @@ const MainPage = ({ ...props }) => {
   useEffect(() => {
     console.log(getCamera);
     setGetCamera({ fov: 110, position: [0, 0, 300] });
-  }, getCamera);
+  }, []);
   return (
     <MainWrapper>
       <CanvasWrapper>
