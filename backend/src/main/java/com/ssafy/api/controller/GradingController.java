@@ -3,12 +3,14 @@ package com.ssafy.api.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.api.response.grading.GradingRes;
 import com.ssafy.api.response.user.UserLoginPostRes;
 import com.ssafy.api.service.GradingService;
 import com.ssafy.common.model.response.BaseResponseBody;
@@ -49,5 +51,15 @@ public class GradingController {
 	public String pythonGrading(@RequestParam @ApiParam(value = "문제 uid", required = true) int uid,
 			@RequestParam @ApiParam(value = "파이썬 코드", required = true) String code) throws IOException {
 		return gradingService.gradingPython(uid, code);
+	}
+	
+	@GetMapping("/problem")
+	@ApiOperation(value = "문제", notes = "<strong>문제 정보</strong>를 가져온다.")
+	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = UserLoginPostRes.class),
+		@ApiResponse(code = 401, message = "인증 실패", response = BaseResponseBody.class),
+		@ApiResponse(code = 404, message = "사용자 없음", response = BaseResponseBody.class),
+		@ApiResponse(code = 500, message = "서버 오류", response = BaseResponseBody.class) })
+	public GradingRes getProblem(@RequestParam @ApiParam(value = "문제 uid", required = true) int uid) throws IOException {
+		return gradingService.getProblem(uid);
 	}
 }

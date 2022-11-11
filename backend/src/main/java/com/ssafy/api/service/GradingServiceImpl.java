@@ -1,23 +1,17 @@
 package com.ssafy.api.service;
 
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.PumpStreamHandler;
-import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.StringTokenizer;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.aspose.html.internal.ms.core._net.l.an;
+import com.ssafy.api.response.grading.GradingRes;
 import com.ssafy.db.entity.Problem;
 import com.ssafy.db.repository.ProblemRepository;
 
@@ -105,4 +99,10 @@ public class GradingServiceImpl implements GradingService{
 		}
 		return "fail";
     }
+
+	@Override
+	public GradingRes getProblem(int uid) {
+		Problem problem = problemRepository.getOne((long)uid);
+		return GradingRes.of(problem);
+	}
 }
