@@ -15,20 +15,40 @@ public class MissionRes {
     Long uid;
 
     @ApiModelProperty(name = "미션 이름")
-    String quest;
+    String mName;
 
     @ApiModelProperty(name = "미션 태그")
-    String mTag;
+    String mDescription;
 
-    @ApiModelProperty(name = "미션 URL")
-    String mUrl;
-
+    @ApiModelProperty(name = "위성 uid")
+    long sUid;
+    
+    @ApiModelProperty(name = "위성 이름")
+    String sName;
+    
+    @ApiModelProperty(name = "행성 uid")
+    long pUid;
+    
+    @ApiModelProperty(name = "행성 이름")
+    String pName;
+    
+    @ApiModelProperty(name = "은하 uid")
+    long gUid;
+    
+    @ApiModelProperty(name = "은하 이름")
+    String gName;
+    
     public static MissionRes of(Mission mission) {
         MissionRes res = new MissionRes();
         res.setUid(mission.getUid());
-//        res.setQuest(mission.getQuest());
-//        res.setMTag(mission.getMTag());
-//        res.setMUrl(mission.getMUrl());
+        res.setMName(mission.getMName());
+        res.setMDescription(mission.getMDescription());
+        res.setSUid(mission.getSatellite().getUid());
+        res.setSName(mission.getSName());
+        res.setPUid(mission.getPUid());
+        res.setPName(mission.getPName());
+        res.setGUid(mission.getGUid());
+        res.setGName(mission.getSName());
         return res;
     }
 }
