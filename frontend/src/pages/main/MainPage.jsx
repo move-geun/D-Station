@@ -59,7 +59,7 @@ const MainPage = ({ ...props }) => {
   const [getCamera, setGetCamera] = useRecoilState(CameraSight);
 
   const change = () => {
-    setGetCamera({ fov: 110, position: [700, 200, 0] });
+    setGetCamera({ fov: 110, zoom: [700, 200, 0], near: -1 });
     console.log("클릭");
   };
 
