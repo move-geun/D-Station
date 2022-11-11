@@ -9,6 +9,7 @@ import {
   RocketMap,
   Newsmap,
 } from "./MainPage.style";
+import SearchMap from "../../components/main/SearchMap";
 import { SolarSystem } from "../../components/scene/Solar_system";
 import { FeGalaxy } from "../../components/scene/FeGalaxy";
 import { SpaceStation } from "../../components/scene/Space_station";
@@ -116,7 +117,7 @@ const MainPage = ({ ...props }) => {
       </FootNav>
       {mapOpen ? (
         <RocketMap>
-          <div>바로가기</div>
+          <SearchMap></SearchMap>
         </RocketMap>
       ) : null}
     </MainWrapper>
