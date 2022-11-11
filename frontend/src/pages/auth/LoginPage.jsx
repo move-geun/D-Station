@@ -1,11 +1,11 @@
 import React from "react";
-import Login from "../../components/auth/Login";
+import GithubLogIn from "../../components/auth/GithubLogIn";
 
 const LoginPage = () => {
     return(
-        <>
-            <Login/>
-        </>
+        <div style={{padding: "100px"}}>
+            <GithubLogIn />
+        </div>
     )
 }
 

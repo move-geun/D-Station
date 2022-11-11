@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import auth_axios from "../../api/http";
+import http from "../../api/http";
 import { UserIdState, UserState, PATState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 
@@ -34,7 +34,7 @@ const SignupLevel3 = ({ levelHandler }) => {
       id: userId,
       nickname: nicknamedata,
     };
-    auth_axios
+    http.auth_axios
       .post(`/signup`, JSON.stringify(data), {
         headers: {
           "Content-Type": `application/json`,

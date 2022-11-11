@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Dots from "../../components/dots/Dots";
 import Signup from "../../components/auth/Signup";
 import { IntroWrapper} from "./IntroPage.style";
-import Login from "../../components/auth/Login";
+
 import ThreeTestPage from "./ThreeTestPage";
 import IntroThree2Page from "./IntroThree2Page";
 
@@ -109,7 +109,7 @@ const IntroPage = () => {
         </div>
         <div className="divider"></div>
         <div className="inner bg-yellow">
-        <Login />
+
         </div>
     </IntroWrapper>
   );
