@@ -1,11 +1,22 @@
 import React, { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 
 export function SpaceStation(props) {
   const { nodes, materials } = useGLTF("/glb/space_station.glb");
+  const myMesh = React.useRef();
+  useFrame(({ clock }) => {
+    const a = clock.getElapsedTime();
+    myMesh.current.rotation.x = a / 6;
+  });
   return (
-    <group {...props} dispose={null}>
-      <group position={[2.06, -0.76, 0]} rotation={[-Math.PI / 2, 0.56, 0]}>
+    <group {...props} dispose={null} ref={myMesh}>
+      <group
+        position={[2.06, -0.76, 0]}
+        // rotation={[-Math.PI / 2, 0.56, 0]}
+        rotation={[0, 0.56, 0]}
+        scale={1}
+      >
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group
             position={[-0.19, -107.59, -1.37]}

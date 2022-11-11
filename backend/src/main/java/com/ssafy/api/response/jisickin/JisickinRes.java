@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 @ApiModel("JisickinResponse")
 public class JisickinRes {
 
+    @ApiModelProperty(name = "uid")
+    Long uid;
+
     @ApiModelProperty(name = "tag")
     String tag;
 
@@ -27,6 +30,7 @@ public class JisickinRes {
 
     public static JisickinRes of (Jisickin jisickin) {
         JisickinRes res = new JisickinRes();
+        res.setUid(jisickin.getUid());
         res.setTag(jisickin.getTag());
         res.setTitle(jisickin.getTitle());
         res.setNickname(jisickin.getUser().getNickname());
