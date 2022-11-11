@@ -130,7 +130,7 @@ const QuestionModify = () => {
           </RadioGroup>
         </Box>
       </Box>
-      <FormControl>
+      <FormControl> 
         <FormLabel style={blank}>제목</FormLabel>
         <Textarea value={title} minRows={1} onChange={titleHandler}></Textarea>
         <FormLabel style={blank}>내용</FormLabel>
