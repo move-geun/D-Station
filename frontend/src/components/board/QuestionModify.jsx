@@ -46,11 +46,12 @@ const QuestionModify = () => {
 
   const modify = () => {
     const Uid = location.state.id.id;
+    const Content = editorRef.current.getContent();
     const data = {
       uId: Uid,
       userId: userId,
       title: titleCreate,
-      content: editorRef.current.getContent(),
+      content: Content,
       tag: selected,
     };
     http.connect_axios
@@ -130,7 +131,7 @@ const QuestionModify = () => {
           </RadioGroup>
         </Box>
       </Box>
-      <FormControl> 
+      <FormControl>
         <FormLabel style={blank}>제목</FormLabel>
         <Textarea value={title} minRows={1} onChange={titleHandler}></Textarea>
         <FormLabel style={blank}>내용</FormLabel>
