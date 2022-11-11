@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { UserState, UserIdState } from "../../recoil/atoms";
-import auth_axios from "../../api/http";
+import http from "../../api/http";
 import { useEffect } from "react";
 
 const GithubRedirectPage = () => {
@@ -21,7 +21,7 @@ const GithubRedirectPage = () => {
 
   async function getGithubTokenHandler(code) {
     try {
-      const res = await auth_axios.post(`/github/check?githubCode=${code}`);
+      const res = await http.auth_axios.post(`/github/check?githubCode=${code}`);
 
       if (res.data.statusCode === 200) {
         const githubId = res.data.githubId;
@@ -29,7 +29,7 @@ const GithubRedirectPage = () => {
         // 회원가입 유무
         // 200 : 회원가입
         // 401 : 로그인
-        await auth_axios.get(`/id-info?id=${githubId}`).then((response) => {
+        await http.auth_axios.get(`/id-info?id=${githubId}`).then((response) => {
           if (response.data.statusCode === 200) {
             setUserId(githubId);
             navigate("/signup", {
@@ -38,7 +38,7 @@ const GithubRedirectPage = () => {
               },
             });
           } else if (response.data.statusCode === 401) {
-            auth_axios
+            http.auth_axios
               .post(`/login?id=${githubId}`)
               .then((res) => {
                 console.log("로그인 성공   ", res);
