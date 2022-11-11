@@ -47,7 +47,7 @@ public class TILListByUserRes{
 				.galaxyName(til.getMission().getSatellite().getPlanet().getGalaxy().getGName())
 				.planetName(til.getMission().getSatellite().getPlanet().getPName())
 				.satelliteName(til.getMission().getSatellite().getSName())
-				.mission(til.getMission().getQuest())
+				.mission(til.getMission().getMName())
 				.fileName(til.getFileName())
 				.link(til.getAddress())
 				.regDate(til.getDate())
