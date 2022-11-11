@@ -33,6 +33,14 @@ const MyProfilePage = () => {
         </div>
       </Percent>
       <Achievement></Achievement>
+      <div className="hide">
+        <img
+          src="https://pixe.la/v1/users/gheuns2/graphs/gheuns2?appearance=dark"
+          alt="잔디"
+          className="graph"
+        ></img>
+        <div className="hideblack"></div>
+      </div>
     </Container>
   );
 };
