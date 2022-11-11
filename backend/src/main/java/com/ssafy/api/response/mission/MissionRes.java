@@ -26,9 +26,9 @@ public class MissionRes {
     public static MissionRes of(Mission mission) {
         MissionRes res = new MissionRes();
         res.setUid(mission.getUid());
-        res.setQuest(mission.getQuest());
-        res.setMTag(mission.getMTag());
-        res.setMUrl(mission.getMUrl());
+//        res.setQuest(mission.getQuest());
+//        res.setMTag(mission.getMTag());
+//        res.setMUrl(mission.getMUrl());
         return res;
     }
 }
