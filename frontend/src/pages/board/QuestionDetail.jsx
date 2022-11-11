@@ -24,8 +24,7 @@ const QuestionDetail = () => {
   const [nickname, setNickname] = useState();
   const [tag, setTag] = useState();
   const [content, setContent] = useState();
-  console.log(items);
-  console.log(title);
+  const [id, setId] = useState();
 
   useEffect(() => {
     const Uid = location.state.id.Uid;
@@ -36,8 +35,13 @@ const QuestionDetail = () => {
       setNickname(res.data.nickname);
       setTag(res.data.tag);
       setContent(res.data.content);
+      setId(res.data.uid);
     });
   }, []);
+
+  const modify = () => {
+    navigate(`/questionmodify`);
+  };
 
   const del = () => {
     const Uid = items.uid;
@@ -67,7 +71,11 @@ const QuestionDetail = () => {
       <Content>{content}</Content>
       {/* 버튼그룹 */}
       <Buttons>
-        <Button style={{ color: "yellow" }}>수정</Button>
+        <Link to="/questionModify" state={{ id: { id } }}>
+          <Button style={{ color: "yellow" }} onClick={modify}>
+            수정
+          </Button>
+        </Link>
         <Button style={{ color: "orangered" }} onClick={del}>
           삭제
         </Button>
