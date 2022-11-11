@@ -208,7 +208,7 @@ public class TILServiceImpl implements TILService {
 		String gitLink = "";
 		String gitLink2 = "";
 		String pixelaId = tILCreateReq.getId().toLowerCase();
-
+		
 		// user id로 user 정보 얻어오기
 		User user = userRepository.getUsersById(tILCreateReq.getId()).get();
 		String repoName = user.getRepo();
