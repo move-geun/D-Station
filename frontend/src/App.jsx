@@ -5,6 +5,7 @@ import MyProfilePage from "./pages/profile/MyProfilePage";
 import QuestionListPage from "./pages/board/QuestionListPage";
 import WriteQuestionPage from "./pages/board/WriteQuestionPage";
 import QuestionDetail from "./pages/board/QuestionDetail";
+import QuestionModify from "./components/board/QuestionModify";
 import NotFoundPage from "./pages/notFound/NotFoundPage";
 import Survey from "./components/survey/Survey";
 import Mission from "./pages/mission/Mission";
@@ -38,12 +39,13 @@ function App() {
         <Route path="/questionlist" element={<QuestionListPage />} />
         <Route path="/writequestion" element={<WriteQuestionPage />} />
         <Route path="/questiondetail" element={<QuestionDetail />} />
+        <Route path="/questionmodify" element={<QuestionModify />} />
         <Route path="/survey" element={<Survey />} />
         <Route path="/writetil" element={<WriteTilPage />} />
         <Route path="/tmp" element={<TmpPage />} />
         <Route path="/*" element={<NotFoundPage />} />
         <Route path="/mission" element={<Mission />} />
-        <Route path="/roadmap" element={<RoadmapPage/>} />
+        <Route path="/roadmap" element={<RoadmapPage />} />
         {/* <Route path="/planet/:id" element={<PlanetPage/>} /> */}
         <Route path="/planet" element={<PlanetPage/>} />
         <Route path="/satellite/:sllNo" element={<SatellitePage/>} />

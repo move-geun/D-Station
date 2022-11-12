@@ -1,48 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
-import { CardActions } from "@mui/material";
-import { CardContent } from "@mui/material";
-import { Typography } from "@mui/material";
-import { Box } from "@mui/material";
+import { CardActions, CardContent, Typography } from "@mui/material";
+// import Chip from "@mui/joy/Chip";
 import { Interval } from "./QuestionCard.style";
-// api 연결 관련
-import http from "../../api/http";
 
-const QuestionCard = ({ Tag, Title, theDate, Nickname }) => {
-  const bull = (
-    <Box
-      component="span"
-      sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-    >
-      •
-    </Box>
-  );
-
+const QuestionCard = ({ Tag, Title, theDate, Nickname, Uid }) => {
   return (
     <Interval>
       <Card sx={{ minWidth: 250 }}>
         <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          {/* <Chip variant="solid" color="danger"> */}
+          <Typography
+            sx={{ fontWeight: "bold", fontSize: 14, color: "hotpink" }}
+            color="text.secondary"
+            gutterBottom
+          >
             {Tag}
           </Typography>
-          <Typography variant="h5" component="div">
+          {/* </Chip> */}
+          <Typography variant="h5" component="div" sx={{ mt: 2 }}>
             {Title}
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+          <Typography sx={{ mb: 1.5, mt: 2 }} color="text.secondary">
             {Nickname}
           </Typography>
           <Typography variant="body2">{theDate}</Typography>
         </CardContent>
         <CardActions>
-          <Link
-            to="/questiondetail"
-            style={{ color: "green", marginLeft: "10px" }}
-          >
+          <Link to="/questiondetail" state={{ id: { Uid } }}>
             Detail
           </Link>
         </CardActions>
       </Card>
+      ㄱ
     </Interval>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
@@ -7,6 +8,7 @@ import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 // api 연결 관련 import구문
 import http from "../../api/http";
+import { getUserId } from "../../api/JWT";
 // tag 선택 탭
 import CheckIcon from "@mui/icons-material/Check";
 import Box from "@mui/joy/Box";
@@ -14,9 +16,9 @@ import Chip from "@mui/joy/Chip";
 import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Typography from "@mui/joy/Typography";
-import { getUserId } from "../../api/JWT";
 
 export default function QuestionEditor() {
+  const navigate = useNavigate();
   const blank = {
     marginTop: "20px",
     fontSize: "20px",
@@ -35,7 +37,6 @@ export default function QuestionEditor() {
   const contentHandler = (e) => {
     if (editorRef.current) {
       const editorCreate = editorRef.current.getContent();
-      console.log(editorCreate);
     }
   };
 
@@ -51,11 +52,11 @@ export default function QuestionEditor() {
         `/ask/?content=${data.content}&tag=${data.tag}&title=${data.title}&userId=${userId}`
       )
       .then((res) => {
-        console.log("업로드 완료");
-        console.log(res.data);
+        alert("게시물 업로드 성공🤗");
+        navigate(`/questionlist`);
       })
       .catch((err) => {
-        console.log(err);
+        alert("게시물 업로드 실패😥");
       });
   };
 

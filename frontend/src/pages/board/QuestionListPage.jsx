@@ -9,13 +9,6 @@ import http from "../../api/http";
 const QuestionListPage = () => {
   const userId = getUserId();
 
-  // useEffect(() => {
-  //   http.connect_axios.get(`/ask/`).then((res) => {
-  //     console.log("받아왔서열");
-  //     console.log(res);
-  //   });
-  // }, []);
-
   return (
     <div>
       <Function>
