@@ -143,7 +143,6 @@ function Box(props) {
   }, [active]);
 
   const startBtnHandler = () => {
-    console.log("click");
     navigate("/login");
   };
   return (

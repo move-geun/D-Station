@@ -1,14 +1,16 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
+import http from "../../../api/http";
 
 const defaultValue = {};
-const SatelliteList = (prop = defaultValue) => {
-
+const MissionList = (prop = defaultValue) => {
     const [slist, setSList] =  useState(null);
 
-    useEffect(()=>{if(prop.data !== null){
-        setSList(prop.data);
-    }}, [prop]);
+    useEffect(()=>{
+        const planetUId = prop.planetUId; 
+      
+
+    }, [prop]);
 
     useEffect(()=>{},[slist]);
 
@@ -17,8 +19,9 @@ const SatelliteList = (prop = defaultValue) => {
         <>
             {slist? (
                 slist.map((item, idx) => {
+                    // console.log("itteemm  ", item);
                     return(
-                        <div>{item.sname}</div>
+                        <div>{item.uid} {item.sname}</div>
                     )
                 })
             ) : (
@@ -29,4 +32,4 @@ const SatelliteList = (prop = defaultValue) => {
 
 }
 
-export default SatelliteList;
+export default MissionList;
