@@ -1,12 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import http from "../../api/http";
+import { getUserId } from "../../api/JWT";
 
 export default function CommentEditor() {
+  const userId = getUserId();
   const editorRef = useRef();
+  const [comment, setComment] = useState();
+
   const log = () => {
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
@@ -22,6 +27,19 @@ export default function CommentEditor() {
   const buttonBox = {
     display: "flex",
     justifyContent: "end",
+  };
+
+  const writeComment = () => {
+    const comment = editorRef.current.getContent();
+    http.connect_axios
+      .post(`reply/?userId=${userId}&content=${comment}&jisickinUid=11`)
+      .then((res) => {
+        console.log(res);
+        alert("댓글 등록 성공");
+      })
+      .catch((err) => {
+        alert("댓글 등록 실패");
+      });
   };
 
   return (
@@ -67,7 +85,7 @@ export default function CommentEditor() {
         <div style={buttonBox}>
           <Button
             style={blank}
-            onClick={log}
+            onClick={writeComment}
             variant="contained"
             endIcon={<CheckCircleIcon />}
           >
