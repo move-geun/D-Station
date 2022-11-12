@@ -15,4 +15,5 @@ import com.ssafy.db.entity.Quiz;
 public interface QuizRepository extends JpaRepository<Quiz, Long> {
 
 	Quiz getQuizByMission(Optional<Mission> mission);
+	Quiz getQuizByUid(long uid);
 }
