@@ -39,19 +39,35 @@ public class QuizServiceImpl implements QuizService {
 
 	@Override
 	public Boolean isCorrect(QuizReq quizReq) {
-		Quiz quiz = quizRepository.getQuizByUid(quizReq.getQUid());
 		boolean answer = quizRepository.getQuizByUid(quizReq.getQUid()).isAnswer();
+		
+		
+		//정답을 맞췄을때
 		if (answer == quizReq.getUserAnswer()) {
 			User user = userRepository.getUsersById(quizReq.getId()).get();
-			
+			Mission mission = missionRepository.getMissionByUid(quizReq.getMUid()).get();
 			MissionCompleted mc = new MissionCompleted();
+
 			mc.setUser(user);
-			mc.setMission(missionRepository.getMissionByUid(quizReq.getMUid()).get());
+			mc.setMission(mission);
 			mc.setCompleted(true);
-			missionCompletedRepository.save(mc);
-			//경험치 +5
-			user.addExp(5);
-			userRepository.save(user);
+
+			Optional<MissionCompleted> mc2 = missionCompletedRepository.getMissionCompletedByUserAndMission(user, mission);
+			
+			//mc2가 존재하면
+			if (mc2.isPresent()) {
+				MissionCompleted m = mc2.get();
+				if ((mc.getUser() == m.getUser()) && (mc.getMission() == m.getMission())) {
+					System.out.println("이미 존재");
+				}
+			} else {
+				System.out.println("존재안함");
+				missionCompletedRepository.save(mc);
+				
+				// 경험치 +5
+				user.addExp(5);
+				userRepository.save(user);
+			}
 			return true;
 		} else {
 			return false;
