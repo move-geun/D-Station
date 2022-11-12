@@ -21,6 +21,7 @@ import Navbar from "./components/navbar/NavBar";
 import LoginPage from "./pages/auth/LoginPage";
 import RoadmapPage from "./pages/roadmap/RoadmapPage";
 import PlanetPage from "./pages/roadmap/PlanetPage";
+import SatellitePage from "./pages/roadmap/SatellitePage";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
         <Route path="/roadmap" element={<RoadmapPage/>} />
         {/* <Route path="/planet/:id" element={<PlanetPage/>} /> */}
         <Route path="/planet" element={<PlanetPage/>} />
+        <Route path="/satellite/:sllNo" element={<SatellitePage/>} />
       </Routes>
     </BrowserRouter>
   );

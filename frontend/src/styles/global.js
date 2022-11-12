@@ -10,11 +10,11 @@ const GlobalStyle = createGlobalStyle`
 body{
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
+    padding-top:73px;
     background-color: #000923;
     font-family: 'MICEGothic Bold';
     color: white;
-    height: 100%;
+    height: 100vh;
     /* overflow-y: hidden; */
 }
 a{
