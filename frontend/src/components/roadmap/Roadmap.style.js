@@ -1,32 +1,42 @@
 import styled from "styled-components";
 
-const PlanetHTMLWrapper = styled.div`
+const HTMLWrapper = styled.div`
     width: 30%;
     height: 100%;
     float: right;
-    background-color:gray;
-    /* opacity: 0.3; */
+    background-color: rgba( 0, 50, 100, 0.42 );
+    border-radius: 50px 0 0 50px;
 `;
 
 
-const PlanetThreeWrapper = styled.div`
+const ThreeWrapper = styled.div`
     width: 70%;
     height: 100%;
     float: left;
 `;
 
 const DescWrapper = styled.div`
-    height: 60%;
-    background-color: gold;
-    padding: 2rem;
+    height: 30%;
+
+    padding: 2.5rem;
+    word-wrap: break-word;
+
+    .name{
+        height: 50px;
+    }
+
+    .des{
+        height: 60%;
+        overflow: hidden;
+        word-wrap: break-all;
+    }
 `
 
 const ListWrapper = styled.div`
-    height: 150px;
+    height: 70%;
     float: bottom;
     padding: 2rem;
-    background-color: pink;
 `
 
 
-export {PlanetHTMLWrapper, PlanetThreeWrapper, DescWrapper, ListWrapper};
+export {HTMLWrapper, ThreeWrapper, DescWrapper, ListWrapper};

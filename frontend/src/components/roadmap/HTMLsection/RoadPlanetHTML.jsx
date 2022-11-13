@@ -1,20 +1,43 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 
 import { AboutPlanetWrapper, DescWrapper, ListWrapper } from "../Roadmap.style";
-import SatelliteList from "../SatelliteList";
+import SatelliteList from "./SatelliteList";
 
-const RoadPlanetHTML = ({satellitedata}) => {
 
-    const satellite = satellitedata;
+const defaultValue = {};
+const RoadPlanetHTML = (prop = defaultValue) => {
+
+    const [pData, setPData] = useState(null);
+    useEffect(()=>{
+        if(prop.Pdata.uid){
+            setPData(prop.Pdata);
+        }
+    }, [prop]);
+    useEffect(()=>{}, [pData]);
+    
 
     return(
         <>
             <DescWrapper>
-                <div> 설명 설명</div>
+                {pData !== null ?
+                (<>
+                    <div className="name"><h1>{pData.pname}</h1></div>
+                    <div className="des">{pData.pdescription}</div>
+                </>)     
+                :
+                (<div>데이터를 불러오는 중입니다.</div>)                        
+            }
             </DescWrapper>
             <ListWrapper>
-                <SatelliteList data = {satellite}/>
+
+            {pData !== null ?
+                (<SatelliteList planetUId = {pData.uid}/>)     
+                :
+                (<div>데이터를 불러오는 중입니다.</div>)                        
+            }
+                
             </ListWrapper>
             
         </>
