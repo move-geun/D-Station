@@ -7,15 +7,10 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import http from "../../api/http";
 import { getUserId } from "../../api/JWT";
 
-export default function CommentEditor() {
+export default function CommentEditor(props) {
   const userId = getUserId();
   const editorRef = useRef();
-
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+  const Uid = props.uid;
 
   const blank = {
     marginTop: "20px",
@@ -31,10 +26,11 @@ export default function CommentEditor() {
   const writeComment = () => {
     const comment = editorRef.current.getContent();
     http.connect_axios
-      .post(`reply/?userId=${userId}&content=${comment}&jisickinUid=11`)
+      .post(`reply/?userId=${userId}&content=${comment}&jisickinUid=${Uid}`)
       .then((res) => {
         console.log(res);
         alert("댓글 등록 성공");
+        window.location.reload();
       })
       .catch((err) => {
         alert("댓글 등록 실패");

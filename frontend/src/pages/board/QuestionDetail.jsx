@@ -39,7 +39,6 @@ const QuestionDetail = () => {
       setId(res.data.uid);
     });
     http.connect_axios.get(`reply/?jisickinUid=${Uid}`).then((res) => {
-      console.log(res);
       setComments(res.data.list);
     });
   }, []);
@@ -108,7 +107,7 @@ const QuestionDetail = () => {
       ) : (
         <div>댓글이 없습니다😥.</div>
       )}
-      <CommentEditor />
+      <CommentEditor uid={id} />
     </Container>
   );
 };
