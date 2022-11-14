@@ -40,7 +40,6 @@ const QuestionDetail = () => {
     });
     http.connect_axios.get(`reply/?jisickinUid=${Uid}`).then((res) => {
       setComments(res.data.list);
-      console.log(res);
     });
   }, []);
 
@@ -100,6 +99,7 @@ const QuestionDetail = () => {
           return (
             <CommentDetail
               key={idx}
+              Uid={comment.uid}
               Nickname={comment.nickname}
               Content={comment.content}
             />

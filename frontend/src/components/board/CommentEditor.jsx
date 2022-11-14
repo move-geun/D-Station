@@ -30,7 +30,7 @@ export default function CommentEditor(props) {
       .then((res) => {
         console.log(res);
         alert("댓글 등록 성공");
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((err) => {
         alert("댓글 등록 실패");
