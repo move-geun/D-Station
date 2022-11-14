@@ -22,7 +22,7 @@ public class ReplyRes {
 
     public static ReplyRes of(Reply reply) {
         ReplyRes res = new ReplyRes();
-        res.setUid(res.getUid());
+        res.setUid(reply.getUid());
         res.setNickname(reply.getUser().getNickname());
         res.setContent(reply.getContent());
         return res;
