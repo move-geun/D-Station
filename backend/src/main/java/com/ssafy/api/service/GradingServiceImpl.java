@@ -63,6 +63,8 @@ public class GradingServiceImpl implements GradingService{
 
 	@Override
 	public String gradingPython(int uid, String code) throws IOException {
+		System.setProperty("python.import.site", "false");
+		
 		FileWriter fw;
 		fw = new FileWriter("Solution.py", false);
 		fw.write(code);
