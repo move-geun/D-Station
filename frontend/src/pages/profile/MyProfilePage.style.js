@@ -5,6 +5,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: center;
+  margin-top: 50px;
   /* padding-left: 6rem; */
 
   .graph {
@@ -20,7 +21,7 @@ const Container = styled.div`
 
     .hideblack {
       width: 100%;
-      height: 65px;
+      height: 61px;
       position: absolute;
       background-color: black;
       bottom: 5px;
