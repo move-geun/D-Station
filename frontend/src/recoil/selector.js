@@ -1,11 +1,8 @@
-import {selector} from "recoil";
-import { UserState } from "./atoms";
+import http from "../api/http";
+import { selector } from "recoil";
+import { UserInfo } from "./atoms";
 
-export const UserStateSelector = selector({
-    key: "UserStateSelector",
-    get: ({get}) => {
-        // 아 몰라 여기 뭐 들어가야해....
-        const token = get(UserState);
-        return token;
-    }
-})
+export const UserInfoSelector = selector({
+  key: "UserInfoSelector",
+  get: async () => http.axios.get("/profile"),
+});

@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 const GithubRedirectPage = () => {
   const navigate = useNavigate();
-  const [userLogIn, setUserLogIn] = useRecoilState(UserState);
+  // const [userLogIn, setUserLogIn] = useRecoilState(UserState);
   const [userId, setUserId] = useRecoilState(UserIdState);
 
   // const href = window.location.href;
@@ -21,7 +21,9 @@ const GithubRedirectPage = () => {
 
   async function getGithubTokenHandler(code) {
     try {
-      const res = await http.auth_axios.post(`/github/check?githubCode=${code}`);
+      const res = await http.auth_axios.post(
+        `/github/check?githubCode=${code}`
+      );
 
       if (res.data.statusCode === 200) {
         const githubId = res.data.githubId;
@@ -29,26 +31,28 @@ const GithubRedirectPage = () => {
         // 회원가입 유무
         // 200 : 회원가입
         // 401 : 로그인
-        await http.auth_axios.get(`/id-info?id=${githubId}`).then((response) => {
-          if (response.data.statusCode === 200) {
-            setUserId(githubId);
-            navigate("/signup", {
-              state: {
-                id: githubId,
-              },
-            });
-          } else if (response.data.statusCode === 401) {
-            http.auth_axios
-              .post(`/login?id=${githubId}`)
-              .then((res) => {
-                console.log("로그인 성공   ", res);
-                sessionStorage.setItem("Token", res.data.accessToken);
-                localStorage.setItem("userId", res.data.id);
-                logInHandler(res.data.accessToken);
-              })
-              .catch(() => {});
-          }
-        });
+        await http.auth_axios
+          .get(`/id-info?id=${githubId}`)
+          .then((response) => {
+            if (response.data.statusCode === 200) {
+              setUserId(githubId);
+              navigate("/signup", {
+                state: {
+                  id: githubId,
+                },
+              });
+            } else if (response.data.statusCode === 401) {
+              http.auth_axios
+                .post(`/login?id=${githubId}`)
+                .then((res) => {
+                  console.log("로그인 성공   ", res);
+                  sessionStorage.setItem("Token", res.data.accessToken);
+                  localStorage.setItem("userId", res.data.id);
+                  logInHandler(res.data.accessToken);
+                })
+                .catch(() => {});
+            }
+          });
       }
     } catch (err) {
       return err.response;
@@ -56,8 +60,8 @@ const GithubRedirectPage = () => {
   }
 
   const logInHandler = (data) => {
-    setUserLogIn(data);
-    navigate("/intro");
+    // setUserLogIn(data);
+    navigate("/");
   };
 
   return (
