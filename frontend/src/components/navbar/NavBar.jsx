@@ -60,9 +60,9 @@ const Navbar = () => {
     logout();
   };
 
-  const questionHandle = () =>{
+  const questionHandle = () => {
     navigate("/questionlist");
-  }
+  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -143,7 +143,7 @@ const Navbar = () => {
             {isAuthenticated() ? (
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="questionlist">
-                  <IconButton onClick={questionHandle} sx={{color: "white" }}>
+                  <IconButton onClick={questionHandle} sx={{ color: "white" }}>
                     질문하기
                   </IconButton>
                 </Tooltip>

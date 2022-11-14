@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Routes, BrowserRouter, Route, Navigate } from "react-router-dom";
 import MainPage from "./pages/main/MainPage";
 import IntroPage from "./pages/main/IntroPage";
 import MyProfilePage from "./pages/profile/MyProfilePage";
@@ -9,12 +9,6 @@ import QuestionModify from "./components/board/QuestionModify";
 import NotFoundPage from "./pages/notFound/NotFoundPage";
 import Survey from "./components/survey/Survey";
 import Mission from "./pages/mission/Mission";
-
-// tmp
-import TmpPage from "./pages/main/TmpPage";
-
-// global css
-import GlobalStyle from "./styles/global";
 import GithubRedirectPage from "./pages/auth/GithubRedirectPage";
 import SignupPage from "./pages/auth/SignupPage";
 import WriteTilPage from "./pages/til/WriteTilPage";
@@ -23,7 +17,14 @@ import LoginPage from "./pages/auth/LoginPage";
 import RoadmapPage from "./pages/roadmap/RoadmapPage";
 import PlanetPage from "./pages/roadmap/PlanetPage";
 import SatellitePage from "./pages/roadmap/SatellitePage";
+import AlreadyLoginPage from "./pages/auth/AlreadyLoginPage";
 import MissionPage from "./pages/roadmap/MissionPage";
+
+// 로그인 확인
+import isAuthenticated from "./api/isAuthenticated";
+
+// global css
+import GlobalStyle from "./styles/global";
 
 function App() {
   return (
@@ -31,26 +32,84 @@ function App() {
       <GlobalStyle />
       <Navbar />
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/intro" element={<IntroPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/github" element={<GithubRedirectPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/myprofile" element={<MyProfilePage />} />
+        {/* 비로그인 접근가능 */}
+        <Route path="/" element={<IntroPage />} />
         <Route path="/questionlist" element={<QuestionListPage />} />
-        <Route path="/writequestion" element={<WriteQuestionPage />} />
         <Route path="/questiondetail" element={<QuestionDetail />} />
-        <Route path="/questionmodify" element={<QuestionModify />} />
-        <Route path="/survey" element={<Survey />} />
-        <Route path="/writetil" element={<WriteTilPage />} />
-        <Route path="/tmp" element={<TmpPage />} />
         <Route path="/*" element={<NotFoundPage />} />
-        <Route path="/mission" element={<Mission />} />
-        <Route path="/roadmap" element={<RoadmapPage />} />
-        {/* <Route path="/planet/:id" element={<PlanetPage/>} /> */}
-        <Route path="/planet" element={<PlanetPage/>} />
-        <Route path="/satellite/:sllNo" element={<SatellitePage/>} />
-        <Route path="/mission/:misNo" element={<MissionPage/>} />
+
+        {/* 로그인시 접근불가 */}
+        <Route
+          path="/login"
+          element={!isAuthenticated() ? <LoginPage /> : <AlreadyLoginPage />}
+        />
+        <Route
+          path="/github"
+          element={
+            !isAuthenticated() ? <GithubRedirectPage /> : <AlreadyLoginPage />
+          }
+        />
+        <Route
+          path="/signup"
+          element={!isAuthenticated() ? <SignupPage /> : <AlreadyLoginPage />}
+        />
+
+        {/* 로그인 필수 */}
+        <Route
+          path="/main"
+          element={isAuthenticated() ? <MainPage /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/myprofile"
+          element={
+            isAuthenticated() ? <MyProfilePage /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/writequestion"
+          element={
+            isAuthenticated() ? <WriteQuestionPage /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/questionmodify"
+          element={
+            isAuthenticated() ? <QuestionModify /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/survey"
+          element={isAuthenticated() ? <Survey /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/writetil"
+          element={
+            isAuthenticated() ? <WriteTilPage /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/mission"
+          element={isAuthenticated() ? <Mission /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/roadmap"
+          element={
+            isAuthenticated() ? <RoadmapPage /> : <Navigate to="/login" />
+          }
+        />
+        {/* <Route path="/planet/:id" element={<PlanetPage/>} />  */}
+        <Route
+          path="/planet"
+          element={
+            isAuthenticated() ? <PlanetPage /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/satellite/:sllNo"
+          element={
+            isAuthenticated() ? <SatellitePage /> : <Navigate to="/login" />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

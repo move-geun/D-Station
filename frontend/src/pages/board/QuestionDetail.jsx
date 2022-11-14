@@ -12,6 +12,7 @@ import {
 import CommentEditor from "../../components/board/CommentEditor";
 import CommentDetail from "../../components/board/Comment";
 import http from "../../api/http";
+import isAuthenticated from "../../api/isAuthenticated";
 import { getUserId } from "../../api/JWT";
 
 const QuestionDetail = () => {
@@ -26,6 +27,7 @@ const QuestionDetail = () => {
   const [content, setContent] = useState();
   const [id, setId] = useState();
   const [comments, setComments] = useState();
+  const [checkId, setCheckId] = useState();
 
   useEffect(() => {
     const Uid = location.state.id.Uid;
@@ -37,9 +39,9 @@ const QuestionDetail = () => {
       setTag(res.data.tag);
       setContent(res.data.content);
       setId(res.data.uid);
+      setCheckId(res.data.userId);
     });
     http.connect_axios.get(`reply/?jisickinUid=${Uid}`).then((res) => {
-      console.log(res);
       setComments(res.data.list);
     });
   }, []);
@@ -76,14 +78,18 @@ const QuestionDetail = () => {
       <Content>{content}</Content>
       {/* 버튼그룹 */}
       <Buttons>
-        <Link to="/questionModify" state={{ id: { id } }}>
-          <Button style={{ color: "yellow" }} onClick={modify}>
-            수정
-          </Button>
-        </Link>
-        <Button style={{ color: "orangered" }} onClick={del}>
-          삭제
-        </Button>
+        {isAuthenticated() && userId == checkId ? (
+          <>
+            <Link to="/questionModify" state={{ id: { id } }}>
+              <Button style={{ color: "yellow" }} onClick={modify}>
+                수정
+              </Button>
+            </Link>
+            <Button style={{ color: "orangered" }} onClick={del}>
+              삭제
+            </Button>
+          </>
+        ) : null}
         <Button style={{ color: "yellowgreen" }}>
           <Link
             to="/questionlist"
@@ -98,17 +104,22 @@ const QuestionDetail = () => {
       {comments ? (
         comments.map((comment, idx) => {
           return (
-            <CommentDetail
-              key={idx}
-              Nickname={comment.nickname}
-              Content={comment.content}
-            />
+            <>
+              <CommentDetail
+                key={idx}
+                Uid={comment.uid}
+                Nickname={comment.nickname}
+                Content={comment.content}
+                User={comment.userId}
+                JisikinId={id}
+              />
+            </>
           );
         })
       ) : (
         <div>댓글이 없습니다😥.</div>
       )}
-      <CommentEditor />
+      {isAuthenticated() ? <CommentEditor uid={id} /> : null}
     </Container>
   );
 };
