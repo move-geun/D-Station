@@ -18,7 +18,6 @@ const PlanetPage = () => {
         const PId = 1;
         http.connect_axios.get(`/planet/uid?uid=${PId}`)
         .then((res)=>{
-            console.log("res", res);
             setPlanetData(res.data);
             setPlanetUid(PId);
             // setSatelliteList(res.data.list);

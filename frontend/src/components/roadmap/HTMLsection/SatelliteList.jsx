@@ -11,10 +11,8 @@ const SatelliteList = (prop = defaultValue) => {
 
     useEffect(()=>{
         const planetId = prop.planetUId; 
-        console.log("======== ", prop);
         http.connect_axios.get(`/satellite/list_by_planet?uid=${planetId}`)
         .then((res)=>{
-            console.log(res);
             setSList(res.data.list);
         })
         .catch((err)=>{ console.log(err)})

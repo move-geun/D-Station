@@ -1,9 +1,15 @@
-import { Canvas } from "@react-three/fiber";
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import http from "../../api/http";
+
+
 import SllHTML from "../../components/roadmap/HTMLsection/SllHTML";
 import {HTMLWrapper, ThreeWrapper, DescWrapper, ListWrapper} from "../../components/roadmap/Roadmap.style";
+import { SatelliteContatiner } from "./RoadmapPage.style";
+
+
+import { Canvas } from "@react-three/fiber";
 import BaseBackground from "../../components/roadmap/Threesection/Base/BaseBackground";
 import { Sll1 } from "../../components/roadmap/Threesection/Satellite/PythonPlanet/Sll1";
 import { Sll2 } from "../../components/roadmap/Threesection/Satellite/PythonPlanet/Sll2";
@@ -11,13 +17,9 @@ import { Sll3 } from "../../components/roadmap/Threesection/Satellite/PythonPlan
 import { Sll4 } from "../../components/roadmap/Threesection/Satellite/PythonPlanet/Sll4";
 import { Sll5 } from "../../components/roadmap/Threesection/Satellite/PythonPlanet/Sll5";
 import { Sll6 } from "../../components/roadmap/Threesection/Satellite/PythonPlanet/Sll6";
-import { PlanetContatiner, SatelliteContatiner } from "./RoadmapPage.style";
-import { SatelliteRouter } from "./SatelliteRouter";
-// import { Sll1, Sll2, Sll3 } from "../../components/roadmap/Threesection/Satellite/PythonPlanet";
 
 
 const SatellitePage = () => {
-    
     const sllId = useParams().sllNo;
     useEffect(()=>{SllRouter()},[])
 
@@ -28,7 +30,6 @@ const SatellitePage = () => {
         else if(sllId === "4"){return (<><Sll4/></>)}
         else if(sllId === "5"){return (<><Sll5/></>)}
         else if(sllId === "6"){return (<><Sll6/></>)}
-
     }
 
 

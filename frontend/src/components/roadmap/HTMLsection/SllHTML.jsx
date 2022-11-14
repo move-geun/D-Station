@@ -39,7 +39,6 @@ const SllHTML = (prop = defaultValue) => {
         await http.connect_axios.get(`/mission/list_by_satellite?uid=${sllId}`)
         .then((res)=>{
             setMissionList(res.data.list);
-            console.log(res.data.list);
         })
         .catch((err) => {
             console.log(err);
@@ -63,7 +62,7 @@ const SllHTML = (prop = defaultValue) => {
             <ListWrapper>
 
             {missonList !== null ?
-                (<MissionList sllUId ={sData.uid}/>)
+                (<MissionList sllUId ={sData.uid} />)
                 :
                 (<div>데이터를 불러오는 중입니다.</div>)                        
             }
