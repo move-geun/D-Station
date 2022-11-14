@@ -18,7 +18,7 @@ import SatelliteNormal from "../../../../../assets/images/canyonRockNormal.jpg";
 import { useEffect } from "react";
 
 
-  export function Sll1() {
+  export function Sll5() {
     const [colorMap, bumpMap, roughMap, normalMap] = useLoader(
       TextureLoader,[SatelliteColor, SatelliteBump, SatelliteRough, SatelliteNormal]
     );
@@ -41,7 +41,7 @@ import { useEffect } from "react";
     });
 
     const goToSatellite = () => {
-        navigate("/satellite/1");
+        navigate("/satellite/5");
     }
   
     return (

@@ -44,8 +44,6 @@ const PlanetPage = () => {
                 <PythonPlanetThree />
             </ThreeWrapper>
             <HTMLWrapper>
-                {/* <RoadHTML Pdata = {planetData} S/> */}
-                {/* <RoadHTML satellitedata={satelliteList} /> */}
                 <PlanetHTML Pdata = {planetData} />
             </HTMLWrapper>
 
