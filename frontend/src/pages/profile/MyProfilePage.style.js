@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -15,7 +14,7 @@ const Container = styled.div`
   }
 
   .hide {
-    width: 100%;
+    width: 90%;
     position: relative;
     margin: 0 auto;
 
