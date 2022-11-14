@@ -49,5 +49,18 @@ const ListWrapper = styled.div`
     padding: 2rem;
 `
 
+const RefListWrapper = styled.div`
+    background-color: lightpink;
+`
 
-export {HTMLWrapper, ThreeWrapper, DescWrapper, ListWrapper};
+const QuizWrapper = styled.div`
+    background-color: gold;
+`
+
+const MissTILWrapper = styled.div`
+    background-color: lightgreen;
+`
+
+
+export {HTMLWrapper, ThreeWrapper, DescWrapper, ListWrapper, 
+    RefListWrapper, QuizWrapper, MissTILWrapper };
