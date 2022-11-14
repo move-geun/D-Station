@@ -37,13 +37,19 @@ export function Universe() {
 
   const BaseBackground = () => {
     return(
-        <>
-            <Canvas>
-                <directionalLight position={[0,5,0]}/>
-                <ambientLight/>
-                <Universe/>               
-            </Canvas>
-        </>
+      <>
+        <Universe/>
+      </>
+
+
+
+        // <>
+        //     <Canvas>
+        //         <directionalLight position={[0,5,0]}/>
+        //         <ambientLight/>
+        //         <Universe/>               
+        //     </Canvas>
+        // </>
     )
 };
 

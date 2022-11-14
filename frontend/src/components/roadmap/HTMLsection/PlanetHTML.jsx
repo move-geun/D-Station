@@ -7,7 +7,7 @@ import SatelliteList from "./SatelliteList";
 
 
 const defaultValue = {};
-const RoadPlanetHTML = (prop = defaultValue) => {
+const PlanetHTML = (prop = defaultValue) => {
 
     const [pData, setPData] = useState(null);
     useEffect(()=>{
@@ -44,4 +44,4 @@ const RoadPlanetHTML = (prop = defaultValue) => {
     )
 }
 
-export default RoadPlanetHTML;
+export default PlanetHTML;

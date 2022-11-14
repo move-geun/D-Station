@@ -5,6 +5,7 @@ import React from "react";
 // 가져올 위성 컴포넌트 리턴해주기
 export function SatelliteRouter(prop) {
     const sllId = prop;
+    console.log("라우터임  ", prop);
 
     let getSllName = `Sll${sllId}`;
 

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import http from "../../api/http";
 // import RoadHTML from "../../components/roadmap/HTMLsection/RoadHTML";
-import RoadPlanetHTML from "../../components/roadmap/HTMLsection/RoadPlanetHTML";
+import PlanetHTML from "../../components/roadmap/HTMLsection/PlanetHTML";
 import { HTMLWrapper, ThreeWrapper } from "../../components/roadmap/Roadmap.style";
 import PythonPlanetThree from "../../components/roadmap/Threesection/Planet/PythonPlanetThree";
 
@@ -46,7 +46,7 @@ const PlanetPage = () => {
             <HTMLWrapper>
                 {/* <RoadHTML Pdata = {planetData} S/> */}
                 {/* <RoadHTML satellitedata={satelliteList} /> */}
-                <RoadPlanetHTML Pdata = {planetData} />
+                <PlanetHTML Pdata = {planetData} />
             </HTMLWrapper>
 
         </PlanetContatiner>

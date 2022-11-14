@@ -10,8 +10,9 @@ const SatelliteList = (prop = defaultValue) => {
     const [slist, setSList] =  useState(null);
 
     useEffect(()=>{
-        const planetUId = prop.planetUId; 
-        http.connect_axios.get(`/satellite/list_by_planet?uid=${planetUId}`)
+        const planetId = prop.planetUId; 
+        console.log("======== ", prop);
+        http.connect_axios.get(`/satellite/list_by_planet?uid=${planetId}`)
         .then((res)=>{
             console.log(res);
             setSList(res.data.list);
@@ -32,9 +33,8 @@ const SatelliteList = (prop = defaultValue) => {
         <ListWrapper>
             {slist? (
                 slist.map((item, idx) => {
-                    // console.log("itteemm  ", item);
                     return(
-                        <div className="slist" onClick={() => goToSll(item.uid)}>{item.uid} {item.sname}</div>
+                        <div className="slist" key={idx} onClick={() => goToSll(item.uid)}>{item.uid} {item.sname}</div>
                     )
                 })
             ) : (
