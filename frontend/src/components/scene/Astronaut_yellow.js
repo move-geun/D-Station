@@ -5,10 +5,10 @@ import { useEffect } from "react";
 export function AstronautYellow(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/glb/astronaut_yellow.glb");
-  const { actions } = useAnimations(animations, group);
-  useEffect(() => {
-    actions.play();
-  });
+  // const { actions } = useAnimations(animations, group);
+  // useEffect(() => {
+  //   actions.play();
+  // });
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">

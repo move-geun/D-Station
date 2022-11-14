@@ -11,7 +11,7 @@ body{
     box-sizing: border-box;
     margin: 0;
     padding-top:73px;
-    background-color: #000923;
+    background-color: black;
     font-family: 'MICEGothic Bold';
     color: white;
     height: 100vh;
