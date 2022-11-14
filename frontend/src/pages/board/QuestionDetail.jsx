@@ -25,6 +25,7 @@ const QuestionDetail = () => {
   const [tag, setTag] = useState();
   const [content, setContent] = useState();
   const [id, setId] = useState();
+  const [comments, setComments] = useState();
 
   useEffect(() => {
     const Uid = location.state.id.Uid;
@@ -36,6 +37,10 @@ const QuestionDetail = () => {
       setTag(res.data.tag);
       setContent(res.data.content);
       setId(res.data.uid);
+    });
+    http.connect_axios.get(`reply/?jisickinUid=${Uid}`).then((res) => {
+      console.log(res);
+      setComments(res.data.list);
     });
   }, []);
 
@@ -89,12 +94,20 @@ const QuestionDetail = () => {
         </Button>
       </Buttons>
       {/* 댓글시작 */}
-      <Comment>
-        <p>댓글총개수</p>
-        <CommentDetail />
-        <CommentDetail />
-        <CommentDetail />
-      </Comment>
+      <h1>댓글</h1>
+      {comments ? (
+        comments.map((comment, idx) => {
+          return (
+            <CommentDetail
+              key={idx}
+              Nickname={comment.nickname}
+              Content={comment.content}
+            />
+          );
+        })
+      ) : (
+        <div>댓글이 없습니다😥.</div>
+      )}
       <CommentEditor />
     </Container>
   );

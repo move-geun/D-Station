@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const SurveyContainer = styled.div`
+  margin-top: 100px;
   height: 100%;
   background-color: #d5c9e8;
   position: relative;

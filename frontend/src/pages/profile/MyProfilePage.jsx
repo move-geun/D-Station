@@ -14,7 +14,7 @@ const MyProfilePage = () => {
       </Profile>
       <Percent>
         <Link to={"/survey"} className="title">
-          내 개발 성향 알아보러 가기 >>
+          내 개발 성향 알아보러 가기
         </Link>
       </Percent>
       <Percent>

@@ -10,7 +10,6 @@ import { getUserId } from "../../api/JWT";
 export default function CommentEditor() {
   const userId = getUserId();
   const editorRef = useRef();
-  const [comment, setComment] = useState();
 
   const log = () => {
     if (editorRef.current) {

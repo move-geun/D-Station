@@ -13,6 +13,7 @@ import SearchMap from "../../components/main/SearchMap";
 import { SolarSystem } from "../../components/scene/Solar_system";
 import { FeGalaxy } from "../../components/scene/FeGalaxy";
 import { SpaceStation } from "../../components/scene/Space_station";
+import { AstronautYellow } from "../../components/scene/Astronaut_yellow";
 import MapNav from "../../components/main/MapNav";
 import DailyContent from "../../components/main/DailyContent";
 import { CameraSight } from "../../recoil/atoms";
@@ -71,7 +72,7 @@ const MainPage = ({ ...props }) => {
   useEffect(() => {
     console.log(getCamera);
     setGetCamera({ fov: 110, position: [0, 0, 300] });
-  }, getCamera);
+  }, []);
   return (
     <MainWrapper>
       <CanvasWrapper>
@@ -96,6 +97,7 @@ const MainPage = ({ ...props }) => {
             <SolarSystem position={[380, 0, -40]} />
             <FeGalaxy position={[380, 0, -40]} />
             <SpaceStation position={[600, 150, 0]} onClick={() => change()} />
+            <AstronautYellow />
           </Suspense>
         </Canvas>
       </CanvasWrapper>
