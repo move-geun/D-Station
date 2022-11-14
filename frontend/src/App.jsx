@@ -32,7 +32,7 @@ function App() {
       <Navbar />
       <Routes>
         {/* 비로그인 접근가능 */}
-        <Route path="/intro" element={<IntroPage />} />
+        <Route path="/" element={<IntroPage />} />
         <Route path="/questionlist" element={<QuestionListPage />} />
         <Route path="/questiondetail" element={<QuestionDetail />} />
         <Route path="/*" element={<NotFoundPage />} />
@@ -55,7 +55,7 @@ function App() {
 
         {/* 로그인 필수 */}
         <Route
-          path="/"
+          path="/main"
           element={isAuthenticated() ? <MainPage /> : <Navigate to="/login" />}
         />
         <Route
