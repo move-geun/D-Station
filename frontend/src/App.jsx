@@ -23,6 +23,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import RoadmapPage from "./pages/roadmap/RoadmapPage";
 import PlanetPage from "./pages/roadmap/PlanetPage";
 import SatellitePage from "./pages/roadmap/SatellitePage";
+import MissionPage from "./pages/roadmap/MissionPage";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
         {/* <Route path="/planet/:id" element={<PlanetPage/>} /> */}
         <Route path="/planet" element={<PlanetPage/>} />
         <Route path="/satellite/:sllNo" element={<SatellitePage/>} />
+        <Route path="/mission/:misNo" element={<MissionPage/>} />
       </Routes>
     </BrowserRouter>
   );

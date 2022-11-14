@@ -4,9 +4,9 @@ import { TextureLoader } from "three";
 import * as THREE from "three";
 import { OrbitControls, Stars, Billboard, Html } from "@react-three/drei";
 
-import EarthDayMap from "../../../assets/images/PLogo.png";
-import EarthNormalMap from "../../../assets/images/earthbump.jpg";
-import EarthSpecularMap from "../../../assets/images/specularmap.jpg";
+import EarthDayMap from "../../../assets/images/PebblesColor.jpg";
+import EarthNormalMap from "../../../assets/images/PebblesBump.png";
+import EarthSpecularMap from "../../../assets/images/PebblesColor.jpg";
 import EarthCloudsMap from "../../../assets/images/earthCloud.png";
 
 import SatelliteColor from "../../../assets/images/canyonRockColor.jpg";
@@ -64,9 +64,8 @@ export function Earth() {
           zoomSpeed={0.6}
           panSpeed={0.5}
           rotateSpeed={0.4}
-          // target={<Sate1/>}
         />
-        {/* <Sate1/> */}
+
       </mesh>
     </>
   );

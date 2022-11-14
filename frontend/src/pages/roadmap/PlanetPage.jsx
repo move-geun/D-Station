@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import http from "../../api/http";
 // import RoadHTML from "../../components/roadmap/HTMLsection/RoadHTML";
-import RoadPlanetHTML from "../../components/roadmap/HTMLsection/RoadPlanetHTML";
+import PlanetHTML from "../../components/roadmap/HTMLsection/PlanetHTML";
 import { HTMLWrapper, ThreeWrapper } from "../../components/roadmap/Roadmap.style";
 import PythonPlanetThree from "../../components/roadmap/Threesection/Planet/PythonPlanetThree";
 
@@ -18,7 +18,6 @@ const PlanetPage = () => {
         const PId = 1;
         http.connect_axios.get(`/planet/uid?uid=${PId}`)
         .then((res)=>{
-            console.log("res", res);
             setPlanetData(res.data);
             setPlanetUid(PId);
             // setSatelliteList(res.data.list);
@@ -44,9 +43,7 @@ const PlanetPage = () => {
                 <PythonPlanetThree />
             </ThreeWrapper>
             <HTMLWrapper>
-                {/* <RoadHTML Pdata = {planetData} S/> */}
-                {/* <RoadHTML satellitedata={satelliteList} /> */}
-                <RoadPlanetHTML Pdata = {planetData} />
+                <PlanetHTML Pdata = {planetData} />
             </HTMLWrapper>
 
         </PlanetContatiner>
