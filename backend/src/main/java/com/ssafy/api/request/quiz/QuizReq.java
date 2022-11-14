@@ -13,9 +13,6 @@ public class QuizReq {
 	@ApiModelProperty(name = "퀴즈 uid", example = "1")
 	long qUid;
 	
-	@ApiModelProperty(name = "미션 uid", example = "1")
-	long mUid;
-	
 	@ApiModelProperty(name = "유저 ID", example = "ssafy")
 	String id;
 	
