@@ -40,6 +40,7 @@ const QuestionDetail = () => {
     });
     http.connect_axios.get(`reply/?jisickinUid=${Uid}`).then((res) => {
       setComments(res.data.list);
+      console.log(res);
     });
   }, []);
 
