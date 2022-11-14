@@ -18,6 +18,7 @@ import RoadmapPage from "./pages/roadmap/RoadmapPage";
 import PlanetPage from "./pages/roadmap/PlanetPage";
 import SatellitePage from "./pages/roadmap/SatellitePage";
 import AlreadyLoginPage from "./pages/auth/AlreadyLoginPage";
+import MissionPage from "./pages/roadmap/MissionPage";
 
 // 로그인 확인
 import isAuthenticated from "./api/isAuthenticated";
