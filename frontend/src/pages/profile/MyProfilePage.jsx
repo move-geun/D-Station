@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Profile, Percent } from "./MyProfilePage.style";
 import Achievement from "../../components/profile/Achievement";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const MyProfilePage = () => {
   const a = "76";
+  const [nik, setNik] = useState(null);
+  useEffect(() => {
+    setNik(window.localStorage.getItem("userId").toLowerCase());
+  }, []);
+  const pix =
+    "https://pixe.la/v1/users/" + nik + "/graphs/" + nik + "?appearance=dark";
   return (
     <Container>
       <Profile>
@@ -34,11 +41,7 @@ const MyProfilePage = () => {
       </Percent>
       <Achievement></Achievement>
       <div className="hide">
-        <img
-          src="https://pixe.la/v1/users/gheuns2/graphs/gheuns2?appearance=dark"
-          alt="잔디"
-          className="graph"
-        ></img>
+        <img src={pix} alt="잔디" className="graph"></img>
         <div className="hideblack"></div>
       </div>
     </Container>
