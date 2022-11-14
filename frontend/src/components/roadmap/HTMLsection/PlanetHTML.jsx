@@ -24,7 +24,9 @@ const PlanetHTML = (prop = defaultValue) => {
                 {pData !== null ?
                 (<>
                     <div className="name"><h1>{pData.pname}</h1></div>
-                    <div className="des">{pData.pdescription}</div>
+                    <div className="des">
+                        {pData.pdescription}
+                    </div>
                 </>)     
                 :
                 (<div>데이터를 불러오는 중입니다.</div>)                        
