@@ -35,4 +35,5 @@ public class MissionCompleted {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "m_uid")
     private Mission mission;
+
 }
