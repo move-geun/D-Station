@@ -3,8 +3,9 @@ import { Container, Contents, Name, ButtonGroup } from "./Comment.style";
 import http from "../../api/http";
 import isAuthenticated from "../../api/isAuthenticated";
 import { getUserId } from "../../api/JWT";
+import CommentModify from "./CommentModify";
 
-const Comment = ({ Uid, Nickname, Content }) => {
+const Comment = ({ Uid, Nickname, Content, User, JisikinId }) => {
   const userId = getUserId();
 
   const del = () => {
@@ -18,13 +19,20 @@ const Comment = ({ Uid, Nickname, Content }) => {
         alert("댓글 삭제 실패😅");
       });
   };
+
+  const modify = () => {
+    <CommentModify />;
+  };
+
   return (
     <Container>
       <Contents>{Content}</Contents>
       <Name>{Nickname}</Name>
-      {isAuthenticated() ? (
+      {isAuthenticated() && userId == User ? (
         <ButtonGroup>
-          <button className="modify">수정</button>
+          <button className="modify" onClick={modify} value={(Uid, JisikinId)}>
+            수정
+          </button>
           <button className="delete" onClick={del}>
             삭제
           </button>

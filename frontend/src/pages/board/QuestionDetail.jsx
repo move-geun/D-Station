@@ -78,7 +78,7 @@ const QuestionDetail = () => {
       <Content>{content}</Content>
       {/* 버튼그룹 */}
       <Buttons>
-        {isAuthenticated() && (userId==checkId) ? (
+        {isAuthenticated() && userId == checkId ? (
           <>
             <Link to="/questionModify" state={{ id: { id } }}>
               <Button style={{ color: "yellow" }} onClick={modify}>
@@ -104,12 +104,16 @@ const QuestionDetail = () => {
       {comments ? (
         comments.map((comment, idx) => {
           return (
-            <CommentDetail
-              key={idx}
-              Uid={comment.uid}
-              Nickname={comment.nickname}
-              Content={comment.content}
-            />
+            <>
+              <CommentDetail
+                key={idx}
+                Uid={comment.uid}
+                Nickname={comment.nickname}
+                Content={comment.content}
+                User={comment.userId}
+                JisikinId={id}
+              />
+            </>
           );
         })
       ) : (
