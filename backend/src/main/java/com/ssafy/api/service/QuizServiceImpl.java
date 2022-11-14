@@ -45,7 +45,8 @@ public class QuizServiceImpl implements QuizService {
 		//정답을 맞췄을때
 		if (answer == quizReq.getUserAnswer()) {
 			User user = userRepository.getUsersById(quizReq.getId()).get();
-			Mission mission = missionRepository.getMissionByUid(quizReq.getMUid()).get();
+			Quiz quiz = quizRepository.getQuizByUid(quizReq.getQUid());
+			Mission mission = missionRepository.getMissionByUid(quiz.getMission().getUid()).get();
 			MissionCompleted mc = new MissionCompleted();
 
 			mc.setUser(user);
