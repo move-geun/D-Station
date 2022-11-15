@@ -37,8 +37,7 @@ export function Sll3() {
     });
 
     const goToSatellite = () => {
-        console.log("자료구조 클릭");
-        navigate("/satellite");
+        navigate("/satellite/3");
     }
   
     return (
@@ -53,7 +52,7 @@ export function Sll3() {
 
             {/* {hovered? <Html position={[2, 0.6, 0]}>자료구조</Html> : <></>} */}
 
-            <sphereGeometry args={[0.5, 32, 32]} />
+            <sphereGeometry args={[0.3, 32, 32]} />
             <meshPhongMaterial specularMap={specularMap} />
             <meshStandardMaterial
                 map={colorMap}
@@ -62,6 +61,15 @@ export function Sll3() {
                 normalMap={normalMap}
                 bumpScale={0.3}
             /> 
+            <OrbitControls
+                enableZoom={true}
+                enablePan={true}
+                enableRotate={true}
+                zoomSpeed={0.6}
+                panSpeed={0.5}
+                rotateSpeed={0.4}
+                
+            />
 
         </mesh>
       </>

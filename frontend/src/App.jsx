@@ -17,6 +17,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import RoadmapPage from "./pages/roadmap/RoadmapPage";
 import PlanetPage from "./pages/roadmap/PlanetPage";
 import SatellitePage from "./pages/roadmap/SatellitePage";
+import MissionPage from "./pages/roadmap/MissionPage";
 
 // 로그인 확인
 import { UserLogin } from "./recoil/atoms";
@@ -80,7 +81,7 @@ function App() {
         />
         <Route
           path="/mission"
-          element={isLogin ? <Mission /> : <Navigate to="/login" />}
+          element={isLogin ? <MissionPage /> : <Navigate to="/login" />}
         />
         <Route
           path="/roadmap"

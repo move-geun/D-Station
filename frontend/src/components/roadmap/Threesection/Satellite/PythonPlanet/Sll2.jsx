@@ -11,10 +11,10 @@ import {
   Html,
 } from "@react-three/drei";
 
-import SatelliteColor from "../../../../../assets/images/canyonRockColor.jpg";
-import SatelliteBump from "../../../../../assets/images/canyonRockBump.png";
-import SatelliteSpecular from "../../../../../assets/images/canyonRockSpecular.jpg";
-import SatelliteNormal from "../../../../../assets/images/canyonRockNormal.jpg";
+import SatelliteColor from "../../../../../assets/images/TilesHexagonsColor.jpg";
+import SatelliteBump from "../../../../../assets/images/TilesHexagonsBump.png";
+import SatelliteSpecular from "../../../../../assets/images/TilesHexagonsRoughness.jpg";
+import SatelliteNormal from "../../../../../assets/images/TilesHexagonsNormal.jpg";
 import { useEffect } from "react";
 
 export function Sll2() {
@@ -37,8 +37,7 @@ export function Sll2() {
     });
 
     const goToSatellite = () => {
-        console.log("자료구조 클릭");
-        navigate("/satellite");
+        navigate("/satellite/2");
     }
   
     return (
@@ -53,15 +52,24 @@ export function Sll2() {
 
             {/* {hovered? <Html position={[2, 0.6, 0]}>자료구조</Html> : <></>} */}
 
-            <sphereGeometry args={[0.5, 32, 32]} />
+            <sphereGeometry args={[0.3, 32, 32]} />
             <meshPhongMaterial specularMap={specularMap} />
             <meshStandardMaterial
                 map={colorMap}
-                metalness={0.4}
+                metalness={0.1}
                 bumpMap={bumpMap}
                 normalMap={normalMap}
                 bumpScale={0.3}
             /> 
+            <OrbitControls
+                enableZoom={true}
+                enablePan={true}
+                enableRotate={true}
+                zoomSpeed={0.6}
+                panSpeed={0.5}
+                rotateSpeed={0.4}
+                
+            />
 
         </mesh>
       </>
