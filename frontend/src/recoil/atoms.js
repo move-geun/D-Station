@@ -26,24 +26,3 @@ export const CameraSight = atom({
   default: { fov: 110, position: [0, 0, 300] },
   effects_UNSTABLE: [persistAtom],
 });
-
-export const UserInfo = atom({
-  key: "UserInfo",
-  default: {
-    rankName: null,
-    imageUrl: null,
-    userId: null,
-    userNickname: null,
-    exp: null,
-    maxExp: null,
-    expNow: null,
-    expPer: null,
-  },
-  effects_UNSTABLE: [persistAtom],
-});
-
-export const Usertmp = atom({
-  key: "Usertmp",
-  default: null,
-  effects_UNSTABLE: [persistAtom],
-});

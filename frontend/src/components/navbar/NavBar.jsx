@@ -15,8 +15,8 @@ import { UserLogin } from "../../recoil/atoms";
 import isAuthenticated from "../../api/isAuthenticated";
 
 let loginPages = [
-  { 질문하기: "/questionlist" },
   { 전체로드맵: "/main" },
+  { 질문하기: "/questionlist" },
   { 마이페이지: "/myprofile" },
 ];
 

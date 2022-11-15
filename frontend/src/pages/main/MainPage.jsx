@@ -49,6 +49,8 @@ function Loader() {
 const MainPage = ({ ...props }) => {
   const [mapOpen, setMapOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
+  const user = useRecoilValue(userInfoSelector);
+  const imgsrc = "../assets/" + user.imageUrl;
 
   const openmap = () => {
     setMapOpen(!mapOpen);
@@ -106,9 +108,17 @@ const MainPage = ({ ...props }) => {
       </CanvasWrapper>
       <FootNav>
         <div className="flexWrapInfo">
-          <img src="" alt="유저 등급사진" />
-          <div>유저 네임</div>
-          <div>유저 경험치</div>
+          <img className="profile" src={imgsrc} alt="유저 등급사진" />
+          <div>
+            <div>안녕하세요, {user.userNickname}님</div>
+            <div>🕹{user.rankName}</div>
+          </div>
+          <div className="expBar">
+            <div>{user.exp}%</div>
+            <div className="perbox">
+              <div className="nowper" style={{ width: `${user.exp}%` }}></div>
+            </div>
+          </div>
         </div>
         <div className="flexWrap">
           <div onClick={openmap}>

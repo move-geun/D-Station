@@ -5,10 +5,9 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { UserIdState } from "../../recoil/atoms";
-import { userInfoSelector } from "../../recoil/selector";
+import { userInfoSelector, userStudySelector } from "../../recoil/selector";
 
 const MyProfilePage = () => {
-  const a = "76";
   const [nik, setNik] = useRecoilState(UserIdState);
   const [lownik, setLowNik] = useState(nik);
   const user = useRecoilValue(userInfoSelector);
@@ -16,7 +15,6 @@ const MyProfilePage = () => {
 
   useEffect(() => {
     setLowNik(nik.toLowerCase());
-    console.log(lownik, "이게 아톰");
   }, []);
   // 유저 픽셀라 이미지 주소
   const pix =
@@ -29,7 +27,7 @@ const MyProfilePage = () => {
   return (
     <Container>
       <Profile>
-        <img className="profile" src={imgsrc} alt="" />
+        <img className="profile" src={imgsrc} alt="유저 등급사진" />
         <div className="name">{user.userNickname}</div>
         <div className="user">님의 행성</div>
       </Profile>
@@ -45,12 +43,12 @@ const MyProfilePage = () => {
             <div className="per">{user.exp}%</div>
           </div>
           <div className="status">
-            우주선 청소부
+            {user.nextRankName}
             <div className="per">까지 {100 - user.exp}%</div>
           </div>
         </div>
         <div className="perbox">
-          <div className="nowper" style={{ width: `${a}%` }}></div>
+          <div className="nowper" style={{ width: `${user.exp}%` }}></div>
         </div>
       </Percent>
       <Achievement></Achievement>
