@@ -24,7 +24,6 @@ const IntroPage = () => {
 
   useEffect(() => {
     setUserLogIn(isAuthenticated());
-    a();
   }, []);
   // useEffect(() => {
   //   const wheelHandler = (e) => {

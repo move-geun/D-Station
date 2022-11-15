@@ -49,7 +49,6 @@ function Loader() {
 const MainPage = ({ ...props }) => {
   const [mapOpen, setMapOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
-  const userInfo = useRecoilValue(userInfoSelector);
 
   const openmap = () => {
     setMapOpen(!mapOpen);
@@ -64,7 +63,6 @@ const MainPage = ({ ...props }) => {
   const change = () => {
     setGetCamera({ fov: 110, zoom: [700, 200, 0], near: -1 });
     console.log("클릭");
-    console.log(userInfo);
   };
 
   const a = () => {
@@ -75,6 +73,9 @@ const MainPage = ({ ...props }) => {
     console.log(getCamera);
     setGetCamera({ fov: 110, position: [0, 0, 300] });
   }, []);
+
+  // const check = useRecoilValue(userInfoSelector);
+
   return (
     <MainWrapper>
       <CanvasWrapper>

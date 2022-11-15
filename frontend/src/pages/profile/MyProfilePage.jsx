@@ -2,28 +2,35 @@ import React from "react";
 import { Container, Profile, Percent } from "./MyProfilePage.style";
 import Achievement from "../../components/profile/Achievement";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-
-import { useRecoilState } from "recoil";
+import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { UserIdState } from "../../recoil/atoms";
+import { userInfoSelector } from "../../recoil/selector";
 
 const MyProfilePage = () => {
   const a = "76";
   const [nik, setNik] = useRecoilState(UserIdState);
+  const [lownik, setLowNik] = useState(nik);
+  const user = useRecoilValue(userInfoSelector);
+  const imgsrc = "../assets/" + user.imageUrl;
 
   useEffect(() => {
-    setNik(nik.toLowerCase());
-    console.log(nik, "이게 아톰");
+    setLowNik(nik.toLowerCase());
+    console.log(lownik, "이게 아톰");
   }, []);
   // 유저 픽셀라 이미지 주소
   const pix =
-    "https://pixe.la/v1/users/" + nik + "/graphs/" + nik + "?appearance=dark";
+    "https://pixe.la/v1/users/" +
+    lownik +
+    "/graphs/" +
+    lownik +
+    "?appearance=dark";
 
   return (
     <Container>
       <Profile>
-        <img className="profile" src="../assets/profile.png" alt="" />
-        <div className="name">개린이</div>
+        <img className="profile" src={imgsrc} alt="" />
+        <div className="name">{user.userNickname}</div>
         <div className="user">님의 행성</div>
       </Profile>
       <Percent>
@@ -34,12 +41,12 @@ const MyProfilePage = () => {
       <Percent>
         <div className="title">
           <div className="status">
-            설거지 당번
-            <div className="per">76%</div>
+            {user.rankName}
+            <div className="per">{user.exp}%</div>
           </div>
           <div className="status">
             우주선 청소부
-            <div className="per">까지 24%</div>
+            <div className="per">까지 {100 - user.exp}%</div>
           </div>
         </div>
         <div className="perbox">

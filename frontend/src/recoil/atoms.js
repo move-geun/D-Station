@@ -41,3 +41,9 @@ export const UserInfo = atom({
   },
   effects_UNSTABLE: [persistAtom],
 });
+
+export const Usertmp = atom({
+  key: "Usertmp",
+  default: null,
+  effects_UNSTABLE: [persistAtom],
+});
