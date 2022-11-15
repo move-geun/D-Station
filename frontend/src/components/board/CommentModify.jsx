@@ -8,15 +8,11 @@ import http from "../../api/http";
 import { getUserId } from "../../api/JWT";
 import { useEffect } from "react";
 
-const CommentModify = (props) => {
+const CommentModify = ({ Uid, JisikinId }) => {
   const userId = getUserId();
   const editorRef = useRef();
   const [content, setContent] = useState();
   const formData = new FormData();
-  const JisikinId = props.value.JisikinId;
-  const uid = props.alue.Uid;
-  console.log(JisikinId);
-  console.log(uid);
 
   const blank = {
     marginTop: "20px",
@@ -31,7 +27,7 @@ const CommentModify = (props) => {
 
   useEffect(() => {
     http.connect_axios.get(`reply/?jisickinUid=${JisikinId}`).then((res) => {
-      console.log(res);
+      console.log(res.data.list);
     });
   });
 
@@ -44,7 +40,7 @@ const CommentModify = (props) => {
       },
     ];
     formData.append("data", data);
-    http.connect_axios.put(`/reply/?uid=${uid}&userId=${userId}`);
+    http.connect_axios.put(`/reply/?uid=${Uid}&userId=${userId}`);
   };
 
   return (

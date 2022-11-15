@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Contents, Name, ButtonGroup } from "./Comment.style";
 import http from "../../api/http";
 import isAuthenticated from "../../api/isAuthenticated";
@@ -7,6 +7,7 @@ import CommentModify from "./CommentModify";
 
 const Comment = ({ Uid, Nickname, Content, User, JisikinId }) => {
   const userId = getUserId();
+  const [show, setShow] = useState(false);
 
   const del = () => {
     http.connect_axios
@@ -20,8 +21,8 @@ const Comment = ({ Uid, Nickname, Content, User, JisikinId }) => {
       });
   };
 
-  const modify = () => {
-    <CommentModify />;
+  const handleModi = () => {
+    setShow(!show);
   };
 
   return (
@@ -30,7 +31,7 @@ const Comment = ({ Uid, Nickname, Content, User, JisikinId }) => {
       <Name>{Nickname}</Name>
       {isAuthenticated() && userId == User ? (
         <ButtonGroup>
-          <button className="modify" onClick={modify} value={(Uid, JisikinId)}>
+          <button className="modify" onClick={handleModi}>
             수정
           </button>
           <button className="delete" onClick={del}>
@@ -38,6 +39,7 @@ const Comment = ({ Uid, Nickname, Content, User, JisikinId }) => {
           </button>
         </ButtonGroup>
       ) : null}
+      {show ? <CommentModify Uid={Uid} JisikinId={JisikinId} /> : null}
     </Container>
   );
 };
