@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import http from "../../api/http";
 import { getUserId } from "../../api/JWT";
@@ -11,7 +10,6 @@ import { Buttons } from "./CommentModify.style";
 const CommentModify = ({ Uid, JisikinId, Content }) => {
   const userId = getUserId();
   const editorRef = useRef();
-  const formData = new FormData();
 
   const blank = {
     marginTop: "20px",
@@ -26,16 +24,14 @@ const CommentModify = ({ Uid, JisikinId, Content }) => {
 
   const modify = () => {
     const comment = editorRef.current.getContent();
-    const data = [
-      {
-        content: comment,
-        jisikinUid: JisikinId,
-      },
-    ];
-    console.log(data);
-    formData.append(data);
-    console.log(formData);
-    // http.connect_axios.put(`/reply/?uid=${Uid}&userId=${userId}`, data);
+    http.connect_axios
+      .put(
+        `reply/?jisickinUid=${JisikinId}&userId=${userId}&content=${comment}&uid=${Uid}`
+      )
+      .then((res) => {
+        alert("댓글 수정완료😆");
+        window.location.reload();
+      });
   };
 
   return (
