@@ -75,6 +75,7 @@ public class ReplyServiceImpl implements ReplyService{
         Optional<User> user = userRepository.getUsersById(userId);
         if (user.isPresent()) {
             Reply reply = Reply.builder()
+                    .uid(uid)
                     .content(replyPostReq.getContent())
                     .user(user.get())
                     .jisickin(jisickinRepository.getOne(replyPostReq.getJisickinUid()))
