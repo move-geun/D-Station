@@ -14,8 +14,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProfileDto {
 
-    // 유저 계급
+    // 유저 현재 계급
     private String rankName;
+
+    // 유저 다음 계급
+    private String nextRank;
 
     // 계급별 이미지
     private String imageUrl;
@@ -86,9 +89,10 @@ public class ProfileDto {
         }
     }
 
-    public static ProfileDto of(User user, Rank rank, CharacterImage image) {
+    public static ProfileDto of(User user, Rank rank, String nextRank, CharacterImage image) {
         return ProfileDto.builder()
                 .rankName(rank.getRank())
+                .nextRank(nextRank)
                 .imageUrl(image.getUrl())
                 .userId(user.getId())
                 .userNickname(user.getNickname())
