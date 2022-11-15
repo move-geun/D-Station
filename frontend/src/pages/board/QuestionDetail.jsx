@@ -99,7 +99,7 @@ const QuestionDetail = () => {
         </Button>
       </Buttons>
       {/* 댓글시작 */}
-      <h1>댓글</h1>
+      <h1>📌댓글</h1>
       {comments ? (
         comments.map((comment, idx) => {
           return (
