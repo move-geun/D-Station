@@ -54,34 +54,4 @@ public class MissionServiceImpl implements MissionService{
                 .stream().map(m -> MissionRes.of(m)).collect(Collectors.toList());
         return list;
     }
-
-    @Override
-    public boolean changeMissionCompleted(Mission mission, String userId) {
-        Optional<User> user = userRepository.getUsersById(userId);
-        // 유저가 존재하면
-        if (user.isPresent()) {
-            // mission_completed안에 없을 때
-            Optional<MissionCompleted> missionCompleted = missionCompletedRepository.getMissionCompletedByUserAndMission(user.get(), mission);
-            if (!missionCompleted.isPresent()) {
-                MissionCompleted mc = MissionCompleted.builder()
-                        .completed(true)
-                        .user(user.get())
-                        .mission(mission)
-                        .build();
-                missionCompletedRepository.save(mc);
-                // 경험치 + 5
-                user.get().addExp(user.get().getExp());
-                userRepository.save(user.get());
-                return true;
-            // mission_completed안에 있을 때
-            } else {
-                missionCompletedRepository.delete(missionCompleted.get());
-                // 경험치 - 5
-                user.get().subtractExp(user.get().getExp());
-                userRepository.save(user.get());
-                return true;
-            }
-        }
-        return false;
-    }
 }

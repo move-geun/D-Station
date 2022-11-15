@@ -28,10 +28,10 @@ public class ProfileServiceImpl implements ProfileService{
     @Override
     public ProfileDto getProfileImage(User user) {
         Optional<User> userInfo = userRepository.getUsersById(user.getId());
+        // 계급 리스트
         List<Rank> ranks = rankRepository.findAll();
+        // 프로필 이미지 리스트
         List<CharacterImage> images = characterImageRepository.findAll();
-        System.out.println(userInfo.get().getId());
-        System.out.println(userInfo.get().getExp());
         if ( userInfo.get().getExp() <= 30 ) {
             return ProfileDto.of(user, ranks.get(0), images.get(0));
         } else if ( userInfo.get().getExp() <= 70 ) {

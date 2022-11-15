@@ -1,5 +1,6 @@
 package com.ssafy.api.service;
 
+import com.ssafy.api.response.planet.PioneerPlanetRes;
 import com.ssafy.api.response.planet.PlanetRes;
 import com.ssafy.db.entity.Planet;
 
@@ -16,4 +17,7 @@ public interface PlanetService {
 
     // 은하 uid로 행성 리스트 조회
     List<PlanetRes> getPlanetsByGUid(Long uid);
+
+    // 개척중인 행성 리스트 조회
+    List<PioneerPlanetRes> getPlanetListByUser(String userId);
 }

@@ -23,10 +23,6 @@ public class Progress {
     @Column(name = "uid", columnDefinition = "int unsigned")
     private Long uid;
 
-    // 행성 / 위성 인덱스
-    @Column(name = "type", nullable = false, length = 50)
-    private String type;
-
     // 진행도 여부
     @ColumnDefault("0")
     @Column(name = "progress", nullable = false)
@@ -36,11 +32,6 @@ public class Progress {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_uid", nullable = false)
     private User user;
-
-    // planets
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "p_uid", nullable = false)
-    private Planet planet;
 
     // satellites
     @ManyToOne(fetch = FetchType.LAZY)

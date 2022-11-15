@@ -18,6 +18,4 @@ public interface MissionService {
     // 위성 uid로 미션 리스트 조회
     List<MissionRes> getMissionsBySUid(Long uid);
 
-    // 미션 완료/취소 변경
-    boolean changeMissionCompleted(Mission mission, String userId);
 }
