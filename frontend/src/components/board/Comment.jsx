@@ -39,7 +39,9 @@ const Comment = ({ Uid, Nickname, Content, User, JisikinId }) => {
           </button>
         </ButtonGroup>
       ) : null}
-      {show ? <CommentModify Uid={Uid} JisikinId={JisikinId} /> : null}
+      {show ? (
+        <CommentModify Uid={Uid} JisikinId={JisikinId} Content={Content} />
+      ) : null}
     </Container>
   );
 };

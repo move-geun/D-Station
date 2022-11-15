@@ -6,12 +6,11 @@ import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import http from "../../api/http";
 import { getUserId } from "../../api/JWT";
-import { useEffect } from "react";
+import { Buttons } from "./CommentModify.style";
 
-const CommentModify = ({ Uid, JisikinId }) => {
+const CommentModify = ({ Uid, JisikinId, Content }) => {
   const userId = getUserId();
   const editorRef = useRef();
-  const [content, setContent] = useState();
   const formData = new FormData();
 
   const blank = {
@@ -25,12 +24,6 @@ const CommentModify = ({ Uid, JisikinId }) => {
     justifyContent: "end",
   };
 
-  useEffect(() => {
-    http.connect_axios.get(`reply/?jisickinUid=${JisikinId}`).then((res) => {
-      console.log(res.data.list);
-    });
-  });
-
   const modify = () => {
     const comment = editorRef.current.getContent();
     const data = [
@@ -39,8 +32,10 @@ const CommentModify = ({ Uid, JisikinId }) => {
         jisikinUid: JisikinId,
       },
     ];
-    formData.append("data", data);
-    http.connect_axios.put(`/reply/?uid=${Uid}&userId=${userId}`);
+    console.log(data);
+    formData.append(data);
+    console.log(formData);
+    // http.connect_axios.put(`/reply/?uid=${Uid}&userId=${userId}`, data);
   };
 
   return (
@@ -50,9 +45,9 @@ const CommentModify = ({ Uid, JisikinId }) => {
         <Editor
           apiKey="mv47x1bf7revpqmsvwdqta54w2b390xyi1wmkmlthp83qlkj"
           onInit={(evt, editor) => (editorRef.current = editor)}
-          initialValue="<p>내용을 입력해주세요.</p>"
+          initialValue={Content}
           init={{
-            height: 300,
+            height: 200,
             menubar: true,
             plugins: [
               "advlist",
@@ -84,14 +79,12 @@ const CommentModify = ({ Uid, JisikinId }) => {
           }}
         />
         <div style={buttonBox}>
-          <Button
-            style={blank}
-            onClick={modify}
-            variant="contained"
-            endIcon={<CheckCircleIcon />}
-          >
+          <Buttons onClick={modify}>
             수정
-          </Button>
+            <div>
+              <CheckCircleIcon />
+            </div>
+          </Buttons>
         </div>
       </FormControl>
     </>
