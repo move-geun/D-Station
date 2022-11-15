@@ -15,6 +15,7 @@ const MyProfilePage = () => {
 
   useEffect(() => {
     setLowNik(nik.toLowerCase());
+    console.log(user);
   }, []);
   // 유저 픽셀라 이미지 주소
   const pix =
