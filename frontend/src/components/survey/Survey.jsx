@@ -1,5 +1,11 @@
 import React from "react";
-import { SurveyContainer, Bubble } from "./Survey.style";
+import http from "../../api/http";
+import {
+  SurveyContainer,
+  Bubble,
+  ResultContainer,
+  ResultContent,
+} from "./Survey.style";
 import { useEffect, useState } from "react";
 
 const Survey = () => {
@@ -14,11 +20,9 @@ const Survey = () => {
     "나 교통사고 났어",
     "나 우울해서 미용실 갔다왔어",
     "차에 뭐 놓고 왔네. 어쩌지?",
-    "슬픔을 나누면?",
     "여행은 어떻게 할까?",
     "뭐하냐~ 심심한데 나와!",
     "요리할 때",
-    "카카오톡으로 확인해보기",
   ];
   const aws1 = [
     "재미로 보는거야",
@@ -31,11 +35,9 @@ const Survey = () => {
     "어머! 많이 다쳤어? 괜찮아?(공감과 걱정 먼저 제시)",
     "왜 우울해? 무슨 일 있었어?",
     "같이 가자! 혼자가면 외로워",
-    "반이 된다. 슬픔은 공유해야지!",
     "몇시에 출발해서 어디서 밥 먹고 어디 들려서 이렇게 놀자! (계획철저)",
     "응? 갑자기? 나 오늘 계획 다 세워놨는뎅..",
     "레시피랑 계량대로 잘 만드는게 중요함",
-    "읽지 않은 알람이 하나도 없다.",
   ];
   const aws2 = [
     "시작하기",
@@ -48,11 +50,9 @@ const Survey = () => {
     "보험은 들어놨어? 누구 과실이야? (해결방안 제시)",
     "펌했어? 염색? 사진 찍어 보내봐",
     "나 혼자 다녀올게! 너 할 거 하고 있어",
-    "둘이 된다. 왜냐면 슬픈 사람이 두명이 되기 때문이지",
     "응? 응 좋아. 그러자. 동의! (J형의 좋은 여행메이트)",
     "오~ 당근 좋지. 어디로 갈까?",
     "음식은 손맛이지. 감으로 하는겨~",
-    " 읽지 않은 알림이...... 매우 많다",
   ];
   const [user, setUser] = useState([]);
   const [idx, setIdx] = useState(0);
@@ -61,25 +61,41 @@ const Survey = () => {
     opt1: aws1[idx],
     opt2: aws2[idx],
   });
+  const [result, setResult] = useState(null);
 
   const first = () => {
     setIdx(idx + 1);
-    setUser([...user, "e"]);
+    setUser([...user, "1"]);
   };
 
   const second = () => {
     setIdx(idx + 1);
-    setUser([...user, "d"]);
+    setUser([...user, "2"]);
   };
 
   const prev = () => {
     setIdx(idx - 1);
     user.splice(-1, 1);
-    console.log(user);
   };
 
   const next = () => {
     setIdx(idx + 1);
+  };
+
+  const send = async () => {
+    user.splice(0, 1);
+    await http.connect_axios
+      .post("MBTI/result/", {
+        ans: user,
+      })
+      .then((res) => {
+        setResult(res.data);
+        setIdx(idx + 1);
+      })
+      .catch((e) => {
+        alert("에러입니다. 새로고침 됩니다.");
+        window.location.reload();
+      });
   };
 
   useEffect(() => {
@@ -90,15 +106,11 @@ const Survey = () => {
     });
   }, [idx]);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
-  return (
-    <SurveyContainer>
-      <img src="../assets/helper.png" alt="" />
-      <Bubble>
-        {idx < 15 ? (
+  if (idx < 13) {
+    return (
+      <SurveyContainer>
+        <img src="../assets/helper.png" alt="" />
+        <Bubble>
           <div className="bubble_container">
             <div className="txt">{content.qstion}</div>
             <button onClick={first}>{content.opt1}</button>
@@ -109,14 +121,45 @@ const Survey = () => {
                 <div onClick={next}>다음으로</div>
               </div>
             ) : null}
-            {idx >= 15 ? <div> 결과페이지 </div> : null}
           </div>
-        ) : (
-          <div className="bubble_container">제출하기</div>
-        )}
-      </Bubble>
-    </SurveyContainer>
-  );
+        </Bubble>
+      </SurveyContainer>
+    );
+  } else if (idx == 13) {
+    return (
+      <SurveyContainer>
+        <img src="../assets/helper.png" alt="" />
+        <Bubble>
+          <div className="bubble_container" onClick={send}>
+            제출하기
+          </div>
+        </Bubble>
+      </SurveyContainer>
+    );
+  } else {
+    return (
+      <ResultContainer>
+        <div className="nav"></div>
+        <ResultContent>
+          <div className="neonText">{result.type}</div>
+          <div className="neonText">{result.title}</div>
+          <div className="neonText">{result.description}</div>
+          <img src={result.imgsrc} alt="" />
+          <div className="neonText">{result.bigSort}</div>
+          {result.smallSort
+            ? result.smallSort.map((small, idx) => {
+                return (
+                  <div className="neonText" key={idx}>
+                    {small}
+                  </div>
+                );
+              })
+            : null}
+        </ResultContent>
+        <button> 메인페이지로 가기</button>
+      </ResultContainer>
+    );
+  }
 };
 
 export default Survey;
