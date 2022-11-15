@@ -4,7 +4,6 @@ import Question from "../../components/board/Question";
 import CreateIcon from "@mui/icons-material/Create";
 import SearchIcon from "@mui/icons-material/Search";
 import { getUserId } from "../../api/JWT";
-import http from "../../api/http";
 
 const QuestionListPage = () => {
   const userId = getUserId();
@@ -12,11 +11,13 @@ const QuestionListPage = () => {
   return (
     <div>
       <Function>
-        <div className="write">
-          <a className="writeBtn" href="./writequestion">
-            <CreateIcon />
-          </a>
-        </div>
+        {userId ? (
+          <div className="write">
+            <a className="writeBtn" href="./writequestion">
+              <CreateIcon />
+            </a>
+          </div>
+        ) : null}
         <div className="search">
           <input className="searchInput" type="text" placeholder="search" />
           <a className="searchBtn" href="#">
