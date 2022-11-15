@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Function, Container, Page } from "./QuestionListPage.style";
 import Question from "../../components/board/Question";
 import CreateIcon from "@mui/icons-material/Create";
@@ -9,7 +9,7 @@ const QuestionListPage = () => {
   const userId = getUserId();
 
   return (
-    <div>
+    <>
       <Function>
         {userId ? (
           <div className="write">
@@ -28,7 +28,7 @@ const QuestionListPage = () => {
       <Container>
         <Question />
       </Container>
-    </div>
+    </>
   );
 };
 

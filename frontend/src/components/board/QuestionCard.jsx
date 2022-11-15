@@ -8,7 +8,7 @@ import { Interval } from "./QuestionCard.style";
 const QuestionCard = ({ Tag, Title, theDate, Nickname, Uid }) => {
   return (
     <Interval>
-      <Card sx={{ minWidth: 250 }}>
+      <Card sx={{ minWidth: 250, marginRight: 3 }}>
         <CardContent>
           {/* <Chip variant="solid" color="danger"> */}
           <Typography
@@ -33,7 +33,6 @@ const QuestionCard = ({ Tag, Title, theDate, Nickname, Uid }) => {
           </Link>
         </CardActions>
       </Card>
-      ㄱ
     </Interval>
   );
 };
