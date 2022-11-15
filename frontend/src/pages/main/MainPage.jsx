@@ -17,9 +17,9 @@ import { AstronautYellow } from "../../components/scene/Astronaut_yellow";
 import MapNav from "../../components/main/MapNav";
 import DailyContent from "../../components/main/DailyContent";
 import { CameraSight } from "../../recoil/atoms";
-import { useRecoilState } from "recoil";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userInfoSelector } from "../../recoil/selector";
+import { useState, useEffect } from "react";
 
 extend({ OrbitControls });
 
@@ -73,6 +73,9 @@ const MainPage = ({ ...props }) => {
     console.log(getCamera);
     setGetCamera({ fov: 110, position: [0, 0, 300] });
   }, []);
+
+  // const check = useRecoilValue(userInfoSelector);
+
   return (
     <MainWrapper>
       <CanvasWrapper>

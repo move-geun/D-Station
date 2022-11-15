@@ -17,16 +17,18 @@ import LoginPage from "./pages/auth/LoginPage";
 import RoadmapPage from "./pages/roadmap/RoadmapPage";
 import PlanetPage from "./pages/roadmap/PlanetPage";
 import SatellitePage from "./pages/roadmap/SatellitePage";
-import AlreadyLoginPage from "./pages/auth/AlreadyLoginPage";
 import MissionPage from "./pages/roadmap/MissionPage";
 
 // 로그인 확인
-import isAuthenticated from "./api/isAuthenticated";
+import { UserLogin } from "./recoil/atoms";
+import { useRecoilValue } from "recoil";
 
 // global css
 import GlobalStyle from "./styles/global";
 
 function App() {
+  const isLogin = useRecoilValue(UserLogin);
+
   return (
     <BrowserRouter>
       <GlobalStyle />
@@ -41,74 +43,58 @@ function App() {
         {/* 로그인시 접근불가 */}
         <Route
           path="/login"
-          element={!isAuthenticated() ? <LoginPage /> : <AlreadyLoginPage />}
+          element={!isLogin ? <LoginPage /> : <Navigate to="/main" />}
         />
         <Route
           path="/github"
-          element={
-            !isAuthenticated() ? <GithubRedirectPage /> : <AlreadyLoginPage />
-          }
+          element={!isLogin ? <GithubRedirectPage /> : <Navigate to="/main" />}
         />
         <Route
           path="/signup"
-          element={!isAuthenticated() ? <SignupPage /> : <AlreadyLoginPage />}
+          element={!isLogin ? <SignupPage /> : <Navigate to="/main" />}
         />
 
         {/* 로그인 필수 */}
         <Route
           path="/main"
-          element={isAuthenticated() ? <MainPage /> : <Navigate to="/login" />}
+          element={isLogin ? <MainPage /> : <Navigate to="/login" />}
         />
         <Route
           path="/myprofile"
-          element={
-            isAuthenticated() ? <MyProfilePage /> : <Navigate to="/login" />
-          }
+          element={isLogin ? <MyProfilePage /> : <Navigate to="/login" />}
         />
         <Route
           path="/writequestion"
-          element={
-            isAuthenticated() ? <WriteQuestionPage /> : <Navigate to="/login" />
-          }
+          element={isLogin ? <WriteQuestionPage /> : <Navigate to="/login" />}
         />
         <Route
           path="/questionmodify"
-          element={
-            isAuthenticated() ? <QuestionModify /> : <Navigate to="/login" />
-          }
+          element={isLogin ? <QuestionModify /> : <Navigate to="/login" />}
         />
         <Route
           path="/survey"
-          element={isAuthenticated() ? <Survey /> : <Navigate to="/login" />}
+          element={isLogin ? <Survey /> : <Navigate to="/login" />}
         />
         <Route
           path="/writetil"
-          element={
-            isAuthenticated() ? <WriteTilPage /> : <Navigate to="/login" />
-          }
+          element={isLogin ? <WriteTilPage /> : <Navigate to="/login" />}
         />
         <Route
           path="/mission"
-          element={isAuthenticated() ? <Mission /> : <Navigate to="/login" />}
+          element={isLogin ? <MissionPage /> : <Navigate to="/login" />}
         />
         <Route
           path="/roadmap"
-          element={
-            isAuthenticated() ? <RoadmapPage /> : <Navigate to="/login" />
-          }
+          element={isLogin ? <RoadmapPage /> : <Navigate to="/login" />}
         />
         {/* <Route path="/planet/:id" element={<PlanetPage/>} />  */}
         <Route
           path="/planet"
-          element={
-            isAuthenticated() ? <PlanetPage /> : <Navigate to="/login" />
-          }
+          element={isLogin ? <PlanetPage /> : <Navigate to="/login" />}
         />
         <Route
           path="/satellite/:sllNo"
-          element={
-            isAuthenticated() ? <SatellitePage /> : <Navigate to="/login" />
-          }
+          element={isLogin ? <SatellitePage /> : <Navigate to="/login" />}
         />
       </Routes>
     </BrowserRouter>
