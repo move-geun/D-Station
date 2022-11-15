@@ -17,9 +17,9 @@ import { AstronautYellow } from "../../components/scene/Astronaut_yellow";
 import MapNav from "../../components/main/MapNav";
 import DailyContent from "../../components/main/DailyContent";
 import { CameraSight } from "../../recoil/atoms";
-import { useRecoilState } from "recoil";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userInfoSelector } from "../../recoil/selector";
+import { useState, useEffect } from "react";
 
 extend({ OrbitControls });
 
@@ -49,6 +49,7 @@ function Loader() {
 const MainPage = ({ ...props }) => {
   const [mapOpen, setMapOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
+  const userInfo = useRecoilValue(userInfoSelector);
 
   const openmap = () => {
     setMapOpen(!mapOpen);
@@ -63,6 +64,7 @@ const MainPage = ({ ...props }) => {
   const change = () => {
     setGetCamera({ fov: 110, zoom: [700, 200, 0], near: -1 });
     console.log("클릭");
+    console.log(userInfo);
   };
 
   const a = () => {

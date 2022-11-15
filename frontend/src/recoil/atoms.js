@@ -17,7 +17,7 @@ export const PATState = atom({
 
 export const UserIdState = atom({
   key: "UserIdState",
-  default: "",
+  default: "guest",
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -39,5 +39,11 @@ export const UserInfo = atom({
     expNow: null,
     expPer: null,
   },
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const UserTmp = atom({
+  key: "UserTmp",
+  default: "",
   effects_UNSTABLE: [persistAtom],
 });

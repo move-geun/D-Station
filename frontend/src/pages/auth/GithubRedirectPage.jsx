@@ -24,6 +24,7 @@ const GithubRedirectPage = () => {
       const res = await http.auth_axios.post(
         `/github/check?githubCode=${code}`
       );
+      console.log("가입시작", userId);
 
       if (res.data.statusCode === 200) {
         const githubId = res.data.githubId;
@@ -48,6 +49,8 @@ const GithubRedirectPage = () => {
                   console.log("로그인 성공   ", res);
                   sessionStorage.setItem("Token", res.data.accessToken);
                   localStorage.setItem("userId", res.data.id);
+                  setUserId(res.data.id);
+                  console.log("userID는 이거다", userId);
                   logInHandler(res.data.accessToken);
                 })
                 .catch(() => {});
@@ -62,6 +65,7 @@ const GithubRedirectPage = () => {
   const logInHandler = (data) => {
     // setUserLogIn(data);
     navigate("/");
+    console.log(userId);
   };
 
   return (
