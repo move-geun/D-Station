@@ -1,13 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { UserState, UserIdState } from "../../recoil/atoms";
+import { useRecoilState } from "recoil";
+import { UserLogin, UserIdState } from "../../recoil/atoms";
 import http from "../../api/http";
+import isAuthenticated from "../../api/isAuthenticated";
 import { useEffect } from "react";
 
 const GithubRedirectPage = () => {
   const navigate = useNavigate();
-  // const [userLogIn, setUserLogIn] = useRecoilState(UserState);
+  const [userLogIn, setUserLogIn] = useRecoilState(UserLogin);
   const [userId, setUserId] = useRecoilState(UserIdState);
 
   // const href = window.location.href;
@@ -24,8 +25,7 @@ const GithubRedirectPage = () => {
       const res = await http.auth_axios.post(
         `/github/check?githubCode=${code}`
       );
-      console.log("가입시작", userId);
-
+      console.log("니 지금 로그인 상태", userLogIn);
       if (res.data.statusCode === 200) {
         const githubId = res.data.githubId;
 
@@ -46,11 +46,9 @@ const GithubRedirectPage = () => {
               http.auth_axios
                 .post(`/login?id=${githubId}`)
                 .then((res) => {
-                  console.log("로그인 성공   ", res);
                   sessionStorage.setItem("Token", res.data.accessToken);
                   localStorage.setItem("userId", res.data.id);
                   setUserId(res.data.id);
-                  console.log("userID는 이거다", userId);
                   logInHandler(res.data.accessToken);
                 })
                 .catch(() => {});
@@ -63,7 +61,7 @@ const GithubRedirectPage = () => {
   }
 
   const logInHandler = (data) => {
-    // setUserLogIn(data);
+    setUserLogIn(isAuthenticated());
     navigate("/");
     console.log(userId);
   };

@@ -10,6 +10,8 @@ import Tooltip from "@mui/material/Tooltip";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { deleteToken } from "../../api/JWT";
+import { useRecoilState } from "recoil";
+import { UserLogin } from "../../recoil/atoms";
 import isAuthenticated from "../../api/isAuthenticated";
 
 let loginPages = [
@@ -19,8 +21,11 @@ let loginPages = [
 ];
 
 const Navbar = () => {
+  const [userLogin, setUserLogin] = useRecoilState(UserLogin);
+
   function logout() {
     deleteToken();
+    setUserLogin(isAuthenticated());
     navigate("/");
   }
 

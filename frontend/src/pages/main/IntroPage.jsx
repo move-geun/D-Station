@@ -6,8 +6,9 @@ import { IntroWrapper } from "./IntroPage.style";
 import ThreeTestPage from "./ThreeTestPage";
 import IntroThree2Page from "./IntroThree2Page";
 
-import { UserIdState } from "../../recoil/atoms";
-import { useRecoilValue } from "recoil";
+import { UserIdState, UserLogin } from "../../recoil/atoms";
+import { useRecoilValue, useRecoilState } from "recoil";
+import isAuthenticated from "../../api/isAuthenticated";
 
 const DIVIDER_HEIGHT = 5;
 const IntroPage = () => {
@@ -15,13 +16,16 @@ const IntroPage = () => {
   const [scrollIndex, setScrollIndex] = useState(1);
 
   const checkId = useRecoilValue(UserIdState);
+  const [userLogIn, setUserLogIn] = useRecoilState(UserLogin);
   const a = () => {
-    console.log(checkId);
+    console.log("인트로페이지 유즈이펙트 체크 아이디", checkId);
+    console.log("인트로페이지 유즈이펙트 체크 로그인", userLogIn);
   };
 
   useEffect(() => {
+    setUserLogIn(isAuthenticated());
     a();
-  });
+  }, []);
   // useEffect(() => {
   //   const wheelHandler = (e) => {
   //     e.preventDefault();
