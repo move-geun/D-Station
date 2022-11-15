@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
 const SurveyContainer = styled.div`
-  margin-top: 100px;
+  width: 90%;
   height: 100%;
-  background-color: #d5c9e8;
+  margin: 0 auto;
+  /* background-color: #d5c9e8; */
+  background-color: black;
   position: relative;
 
   img {
     position: absolute;
-    right: -30px;
-    bottom: 20px;
-    width: 40%;
-    height: 70%;
+    right: 60px;
+    bottom: 150px;
+    width: 30%;
+    height: 50%;
     animation: ani 1.5s infinite alternate;
   }
   @keyframes ani {
@@ -25,6 +27,7 @@ const SurveyContainer = styled.div`
 `;
 
 const Bubble = styled.div`
+  margin-top: 50px;
   position: absolute;
   width: 60%;
   height: 60%;
@@ -69,4 +72,46 @@ const Bubble = styled.div`
   }
 `;
 
-export { SurveyContainer, Bubble };
+const ResultContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .nav {
+    height: 80px;
+  }
+`;
+
+const ResultContent = styled.div`
+  width: 700px;
+  height: 700px;
+  background-color: black;
+  border-radius: 10px;
+  color: black;
+
+  @keyframes flicker {
+    0%,
+    18%,
+    22%,
+    25%,
+    53%,
+    57%,
+    100% {
+      text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #0fa,
+        0 0 80px #0fa, 0 0 90px #0fa, 0 0 100px #0fa, 0 0 150px #0fa;
+    }
+    20%,
+    24%,
+    55% {
+      text-shadow: none;
+    }
+  }
+  .neonText {
+    animation: flicker 1.5s infinite alternate;
+  }
+`;
+
+export { SurveyContainer, Bubble, ResultContainer, ResultContent };

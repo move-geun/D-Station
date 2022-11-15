@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { UserIdState } from "../../recoil/atoms";
-import { userInfoSelector, userStudySelector } from "../../recoil/selector";
+import { userInfoSelector } from "../../recoil/selector";
 
 const MyProfilePage = () => {
   const [nik, setNik] = useRecoilState(UserIdState);
@@ -43,7 +43,7 @@ const MyProfilePage = () => {
             <div className="per">{user.exp}%</div>
           </div>
           <div className="status">
-            {user.nextRankName}
+            {user.nextRank}
             <div className="per">까지 {100 - user.exp}%</div>
           </div>
         </div>
