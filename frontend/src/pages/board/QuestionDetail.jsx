@@ -7,7 +7,6 @@ import {
   Content,
   Buttons,
   Button,
-  Comment,
 } from "./QuestionDetail.style";
 import CommentEditor from "../../components/board/CommentEditor";
 import CommentDetail from "../../components/board/Comment";
@@ -85,7 +84,7 @@ const QuestionDetail = () => {
                 수정
               </Button>
             </Link>
-            <Button style={{ color: "orangered" }} onClick={del}>
+            <Button style={{ color: "orangered" }} onClick={del} key={del}>
               삭제
             </Button>
           </>
@@ -100,7 +99,7 @@ const QuestionDetail = () => {
         </Button>
       </Buttons>
       {/* 댓글시작 */}
-      <h1>댓글</h1>
+      <h1>📌댓글</h1>
       {comments ? (
         comments.map((comment, idx) => {
           return (

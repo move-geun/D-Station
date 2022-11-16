@@ -2,21 +2,14 @@ import React, { useRef, useState } from "react";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import http from "../../api/http";
 import { getUserId } from "../../api/JWT";
-import { useEffect } from "react";
+import { Buttons } from "./CommentModify.style";
 
-const CommentModify = (props) => {
+const CommentModify = ({ Uid, JisikinId, Content }) => {
   const userId = getUserId();
   const editorRef = useRef();
-  const [content, setContent] = useState();
-  const formData = new FormData();
-  const JisikinId = props.value.JisikinId;
-  const uid = props.alue.Uid;
-  console.log(JisikinId);
-  console.log(uid);
 
   const blank = {
     marginTop: "20px",
@@ -29,22 +22,16 @@ const CommentModify = (props) => {
     justifyContent: "end",
   };
 
-  useEffect(() => {
-    http.connect_axios.get(`reply/?jisickinUid=${JisikinId}`).then((res) => {
-      console.log(res);
-    });
-  });
-
   const modify = () => {
     const comment = editorRef.current.getContent();
-    const data = [
-      {
-        content: comment,
-        jisikinUid: JisikinId,
-      },
-    ];
-    formData.append("data", data);
-    http.connect_axios.put(`/reply/?uid=${uid}&userId=${userId}`);
+    http.connect_axios
+      .put(
+        `reply/?jisickinUid=${JisikinId}&userId=${userId}&content=${comment}&uid=${Uid}`
+      )
+      .then((res) => {
+        alert("댓글 수정완료😆");
+        window.location.reload();
+      });
   };
 
   return (
@@ -54,9 +41,9 @@ const CommentModify = (props) => {
         <Editor
           apiKey="mv47x1bf7revpqmsvwdqta54w2b390xyi1wmkmlthp83qlkj"
           onInit={(evt, editor) => (editorRef.current = editor)}
-          initialValue="<p>내용을 입력해주세요.</p>"
+          initialValue={Content}
           init={{
-            height: 300,
+            height: 200,
             menubar: true,
             plugins: [
               "advlist",
@@ -88,14 +75,12 @@ const CommentModify = (props) => {
           }}
         />
         <div style={buttonBox}>
-          <Button
-            style={blank}
-            onClick={modify}
-            variant="contained"
-            endIcon={<CheckCircleIcon />}
-          >
+          <Buttons onClick={modify}>
             수정
-          </Button>
+            <div>
+              <CheckCircleIcon />
+            </div>
+          </Buttons>
         </div>
       </FormControl>
     </>

@@ -62,7 +62,7 @@ const QuestionModify = () => {
         console.log("수정 완료");
         console.log(res.data);
         alert("수정이 완료되었습니다.");
-        navigate(``);
+        navigate(`/questionlist`);
       })
       .catch((err) => {
         console.log(err);
