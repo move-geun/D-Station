@@ -29,7 +29,7 @@ public class Planet {
     private String pName;
 
     // 행성 설명
-    @Column(name = "p_description", nullable = false, length = 300)
+    @Column(name = "p_description", nullable = false, length = 1000)
     private String pDescription;
 
     // 행성 이미지
