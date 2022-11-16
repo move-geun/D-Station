@@ -3,12 +3,9 @@ package com.ssafy.api.controller;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.api.response.planet.PlanetRes;
 import com.ssafy.api.response.satellite.SatelliteListRes;
 import com.ssafy.api.response.satellite.SatelliteRes;
-import com.ssafy.api.response.til.TILListByUserRes;
+import com.ssafy.api.response.satellite.SearchListRes;
+import com.ssafy.api.response.satellite.SearchRes;
 import com.ssafy.api.service.PlanetService;
 import com.ssafy.api.service.SatelliteService;
 import com.ssafy.common.model.response.BaseResponseBody;
@@ -82,13 +80,14 @@ public class SatelliteController {
 	@ApiOperation(value = "키워드 검색", notes = "<strong>키워드로 위성 목록을</strong> 검색한다.")
 	@ApiResponses({ @ApiResponse(code = 200, message = "성공"), @ApiResponse(code = 401, message = "인증 실패"),
 			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
-	public ResponseEntity<SatelliteListRes> getSatelliteByKeyword(
+	public ResponseEntity<SearchListRes> getSatelliteByKeyword(
 			@RequestParam @ApiParam(name = "키워드", required = true) String keyword) {
-		ArrayList<SatelliteRes> reslist = satelliteService.getSatelliteByKeyword(keyword);
+		 ArrayList<SearchRes> reslist = satelliteService.SearchByKeyword(keyword);
 		if (reslist.size() == 0) {
-			return ResponseEntity.status(404).body(SatelliteListRes.of(reslist));
+			return ResponseEntity.status(404).body(SearchListRes.of(reslist));
 		} else {
-			return ResponseEntity.status(200).body(SatelliteListRes.of(reslist));
+			return ResponseEntity.status(200).body(SearchListRes.of(reslist));
 		}
+		//return null;
 	}
 }
