@@ -35,7 +35,7 @@ public class QuizController {
 			@ApiResponse(code = 404, message = "사용자 없음"), @ApiResponse(code = 500, message = "서버 오류") })
 	public ResponseEntity<QuizRes> getQuizByMUid(@RequestParam @ApiParam(value = "mUid 정보", required = true) long uid) {
 		Quiz quiz = quizService.getQuizByMUid(uid);
-		return ResponseEntity.status(401).body(QuizRes.of(quiz));
+		return ResponseEntity.status(200).body(QuizRes.of(quiz));
 	}
 
 	@GetMapping("/correct")
