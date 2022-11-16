@@ -4,8 +4,8 @@ import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import { Button } from "./QuestionEditor.style";
 // api 연결 관련 import구문
 import http from "../../api/http";
 import { getUserId } from "../../api/JWT";
@@ -153,13 +153,9 @@ export default function QuestionEditor() {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
         />
-        <Button
-          style={blank}
-          onClick={writeQuestion}
-          variant="contained"
-          endIcon={<SendIcon />}
-        >
+        <Button onClick={writeQuestion}>
           작성완료
+          <SendIcon />
         </Button>
       </FormControl>
     </>
