@@ -22,7 +22,6 @@ const PlanetPage = () => {
       .get(`/planet/uid?uid=${PId}`)
       .then((res) => {
         setPlanetData(res.data);
-        console.log("확인1!!!!"   , res);
         setPlanetUid(PId);
         // setSatelliteList(res.data.list);
       })

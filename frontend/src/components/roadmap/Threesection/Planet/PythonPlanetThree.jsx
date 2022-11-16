@@ -24,6 +24,7 @@ import { Sll6 } from "../Satellite/PythonPlanet/Sll6";
 
 
 
+
 export function PlanetPython() {
     const [colorMap, bumpMap, specularMap, normalMap] = useLoader(
       TextureLoader,
@@ -38,7 +39,7 @@ export function PlanetPython() {
     //회전을 위해
     useFrame(({ clock }) => {
         const elapsedTime = clock.getElapsedTime();
-        objRef.current.rotation.y += 0.0015;
+        // objRef.current.rotation.y += 0.0015;
         earthRef.current.rotation.y = elapsedTime / 6;
     });
   
@@ -58,15 +59,15 @@ export function PlanetPython() {
             ref={earthRef} 
             // position={[-2, 0, -4]}
             >
-            {/* <sphereGeometry args={[2, 32, 32]} /> */}
-            {/* <meshStandardMaterial
+            <sphereGeometry args={[2, 32, 32]} />
+            <meshStandardMaterial
                 map={colorMap}
                 metalness={0.4}
                 normalMap={normalMap}
                 displacementMap={bumpMap}    
                 displacementScale={0.5}
                 roughness={0.8}            
-            /> */}
+            />
      
             <OrbitControls
                 enableZoom={true}
@@ -84,7 +85,8 @@ export function PlanetPython() {
             <Sll2/>
             <Sll3 />
             <Sll4/>
-            <Sll6 position={[0,0,0]}/>
+            {/* <Sll6 position={[0,0,0]}/> */}
+            {/* <DecoWood/> */}
         </object3D>   
       </>
     );

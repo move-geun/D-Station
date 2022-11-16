@@ -24,7 +24,6 @@ const MissionHTML = (prop = defaultValue) => {
   useEffect(() => {
     getMissionData();
     getRefListData();
-    getQuizData();
   }, []);
 
   useEffect(() => {}, [mData]);
@@ -52,14 +51,7 @@ const MissionHTML = (prop = defaultValue) => {
       });
   }
 
-  async function getQuizData() {
-    await http.connect_axios
-      .get(`/quiz?uid=${misId}`)
-      .then((res) => {})
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  
 
   const goUpTil = (prop) => {
     tilOpen ? setTilOpen(false) : setTilOpen(true);
@@ -71,7 +63,7 @@ const MissionHTML = (prop = defaultValue) => {
         {mData !== null ? (
           <>
             <div className="name">
-              <h1>{mData.mname}</h1>
+              <h2>{mData.mname}</h2>
             </div>
             <div className="des">{mData.mdescription}</div>
           </>
