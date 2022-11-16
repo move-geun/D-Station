@@ -66,6 +66,7 @@ const FootNav = styled.div`
           background-color: tomato;
           border-radius: 10px;
           height: 20px;
+          left: -8px;
         }
       }
     }
