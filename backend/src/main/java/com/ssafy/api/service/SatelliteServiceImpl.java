@@ -1,18 +1,21 @@
 package com.ssafy.api.service;
 
-import com.ssafy.api.response.satellite.SatelliteRes;
-import com.ssafy.api.response.til.TILListByUserRes;
-import com.ssafy.db.entity.Planet;
-import com.ssafy.db.entity.Satellite;
-import com.ssafy.db.repository.PlanetRepository;
-import com.ssafy.db.repository.SatelliteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ssafy.api.response.satellite.SatelliteRes;
+import com.ssafy.api.response.satellite.SearchRes;
+import com.ssafy.db.entity.Galaxy;
+import com.ssafy.db.entity.Planet;
+import com.ssafy.db.entity.Satellite;
+import com.ssafy.db.repository.GalaxyRepository;
+import com.ssafy.db.repository.PlanetRepository;
+import com.ssafy.db.repository.SatelliteRepository;
 
 @Service
 public class SatelliteServiceImpl implements SatelliteService {
@@ -22,6 +25,9 @@ public class SatelliteServiceImpl implements SatelliteService {
 
 	@Autowired
 	PlanetRepository planetRepository;
+	
+	@Autowired
+	GalaxyRepository galaxyRepository;
 
 	@Override
 	public List<SatelliteRes> getSatelliteList() {
@@ -48,12 +54,21 @@ public class SatelliteServiceImpl implements SatelliteService {
 	}
 
 	@Override
-	public ArrayList<SatelliteRes> getSatelliteByKeyword(String keyword) {
+	public ArrayList<SearchRes> SearchByKeyword(String keyword) {
 		ArrayList<Satellite> list = satelliteRepository.getBysNameContaining(keyword);
-		ArrayList<SatelliteRes> resList = new ArrayList<SatelliteRes>();
+		ArrayList<Planet> list2 = planetRepository.getBypNameContaining(keyword);
+		ArrayList<Galaxy> list3 = galaxyRepository.getBygNameContaining(keyword);
+		ArrayList<SearchRes> resList = new ArrayList<>();
 		for (int i = 0; i < list.size(); i++) {
-			resList.add(SatelliteRes.of(list.get(i)));
-			
+			resList.add(SearchRes.of(list.get(i)));
+		}
+		
+		for (int i = 0; i < list2.size(); i++) {
+			resList.add(SearchRes.of(list2.get(i)));			
+		}
+		
+		for (int i = 0; i < list3.size(); i++) {
+			resList.add(SearchRes.of(list3.get(i)));			
 		}
 		return resList;
 	}

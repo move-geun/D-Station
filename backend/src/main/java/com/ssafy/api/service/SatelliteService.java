@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ssafy.api.response.satellite.SatelliteRes;
+import com.ssafy.api.response.satellite.SearchRes;
 import com.ssafy.db.entity.Satellite;
 
 public interface SatelliteService {
@@ -19,5 +20,5 @@ public interface SatelliteService {
 	List<SatelliteRes> getSatellitesByGUid(Long uid);
 
 	//키워득 검색
-	ArrayList<SatelliteRes> getSatelliteByKeyword(String keyword);
+	ArrayList<SearchRes> SearchByKeyword(String keyword);
 }
