@@ -6,7 +6,6 @@ import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import CheckIcon from "@mui/icons-material/Check";
 import Box from "@mui/joy/Box";
@@ -15,6 +14,7 @@ import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Typography from "@mui/joy/Typography";
 import { Container } from "./QuestionModify.style";
+import { Button } from "./QuestionModify.style";
 
 const QuestionModify = () => {
   const navigate = useNavigate();
@@ -172,13 +172,9 @@ const QuestionModify = () => {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
         />
-        <Button
-          style={blank}
-          variant="contained"
-          endIcon={<SendIcon />}
-          onClick={modify}
-        >
+        <Button onClick={modify}>
           작성완료
+          <SendIcon />
         </Button>
       </FormControl>
     </Container>
