@@ -114,9 +114,16 @@ const MainPage = ({ ...props }) => {
             <div>🕹{user.rankName}</div>
           </div>
           <div className="expBar">
-            <div>{user.exp}%</div>
+            {user.exp >= 300 ? null : <div className="per">{user.expPer}%</div>}
             <div className="perbox">
-              <div className="nowper" style={{ width: `${user.exp}%` }}></div>
+              {user.exp >= 300 ? (
+                <div className="nowper" style={{ width: "100%" }}></div>
+              ) : (
+                <div
+                  className="nowper"
+                  style={{ width: `${user.expPer}%` }}
+                ></div>
+              )}
             </div>
           </div>
         </div>

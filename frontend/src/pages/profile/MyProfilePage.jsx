@@ -41,15 +41,23 @@ const MyProfilePage = () => {
         <div className="title">
           <div className="status">
             {user.rankName}
-            <div className="per">{user.exp}%</div>
+            {user.exp >= 300 ? null : <div className="per">{user.expPer}%</div>}
           </div>
-          <div className="status">
-            {user.nextRank}
-            <div className="per">까지 {100 - user.exp}%</div>
-          </div>
+          {user.exp >= 300 ? (
+            <div className="per">100%</div>
+          ) : (
+            <div className="status">
+              {user.nextRank}
+              <div className="per">까지 {100 - user.expPer}%</div>
+            </div>
+          )}
         </div>
         <div className="perbox">
-          <div className="nowper" style={{ width: `${user.exp}%` }}></div>
+          {user.exp >= 300 ? (
+            <div className="nowper" style={{ width: "100%" }}></div>
+          ) : (
+            <div className="nowper" style={{ width: `${user.expPer}%` }}></div>
+          )}
         </div>
       </Percent>
       <Achievement></Achievement>
