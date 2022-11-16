@@ -14,7 +14,7 @@ body{
     background-color: black;
     font-family: 'MICEGothic Bold';
     color: white;
-    height: 100vh;
+    height: 100%;
     /* overflow-y: hidden; */
 }
 a{
