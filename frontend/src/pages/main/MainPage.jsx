@@ -9,11 +9,9 @@ import {
   RocketMap,
   Newsmap,
 } from "./MainPage.style";
+import { TestBack } from "../../components/scene/TestBack";
+import { TestFront } from "../../components/scene/TestFront";
 import SearchMap from "../../components/main/SearchMap";
-import { SolarSystem } from "../../components/scene/Solar_system";
-import { FeGalaxy } from "../../components/scene/FeGalaxy";
-import { SpaceStation } from "../../components/scene/Space_station";
-import { AstronautYellow } from "../../components/scene/Astronaut_yellow";
 import MapNav from "../../components/main/MapNav";
 import DailyContent from "../../components/main/DailyContent";
 import { CameraSight } from "../../recoil/atoms";
@@ -56,6 +54,10 @@ const MainPage = ({ ...props }) => {
     setMapOpen(!mapOpen);
   };
 
+  const closemap = () => {
+    setMapOpen(false);
+    setNewsOpen(false);
+  };
   const opennews = () => {
     setNewsOpen(!newsOpen);
   };
@@ -67,42 +69,27 @@ const MainPage = ({ ...props }) => {
     console.log("클릭");
   };
 
-  const a = () => {
-    console.log(getCamera);
-  };
-
-  useEffect(() => {
-    console.log(getCamera);
-    setGetCamera({ fov: 110, position: [0, 0, 300] });
-  }, []);
-
   // const check = useRecoilValue(userInfoSelector);
 
   return (
     <MainWrapper>
-      <CanvasWrapper>
+      <CanvasWrapper onClick={closemap}>
         <Canvas className="tmp" camera={getCamera}>
           <CameraControls />
           <directionalLight position={[0, 0, 5]} />
-          <Stars
-            radius={300}
-            depth={60}
-            count={8000}
-            factor={5}
-            saturation={7}
-            fade={false}
-          />
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
           <Suspense fallback={<Loader />}>
-            <SolarSystem />
-            <FeGalaxy onClick={() => a()} />
-            <SolarSystem position={[-380, 0, -40]} />
-            <FeGalaxy position={[-380, 0, -40]} />
-            <SolarSystem position={[380, 0, -40]} />
-            <FeGalaxy position={[380, 0, -40]} />
-            <SpaceStation position={[600, 150, 0]} onClick={() => change()} />
-            <AstronautYellow />
+            <Stars
+              radius={300}
+              depth={60}
+              count={8000}
+              factor={5}
+              saturation={7}
+              fade={false}
+            />
+            <ambientLight />
+            <pointLight position={[10, 10, 10]} />
+            <TestBack />
+            <TestFront />
           </Suspense>
         </Canvas>
       </CanvasWrapper>
