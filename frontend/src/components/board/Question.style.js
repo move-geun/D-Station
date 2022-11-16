@@ -20,10 +20,10 @@ export const Carousel = styled.div`
 
 export const Ui = styled.div`
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   position: absolute;
-  left: 5%;
-  right: 5%;
+  left: 0%;
+  right: 0%;
   top: 50%;
   width: 90%;
 
@@ -49,6 +49,12 @@ export const Ui = styled.div`
       outline: none;
       border: 1px solid rgba(255, 255, 255, 1);
     }
+
+    .left {
+      left: 0;
+    }
+
+    .right {
+    }
   }
 `;
-
