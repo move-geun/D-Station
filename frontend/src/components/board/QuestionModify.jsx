@@ -29,6 +29,11 @@ const QuestionModify = () => {
   const editorRef = useRef();
   const [selected, setSelected] = useState(tag);
 
+  // 버튼 조건용
+  const [checkTag, setCheckTag] = useState(false);
+  const [checkTitle, setCheckTitle] = useState(false);
+  const [checkContent, setCheckContent] = useState(false);
+
   const blank = {
     marginTop: "20px",
     fontSize: "20px",
@@ -73,12 +78,13 @@ const QuestionModify = () => {
   useEffect(() => {}, [titleCreate]);
   const titleHandler = (e) => {
     setTitleCreate(e.target.value);
+    setCheckTitle(true);
   };
 
   const contentHandler = (e) => {
     if (editorRef.current) {
       const editorCreate = editorRef.current.getContent();
-      console.log(editorCreate);
+      setCheckContent(true);
     }
   };
 
@@ -121,6 +127,7 @@ const QuestionModify = () => {
                       onChange={(event) => {
                         if (event.target.checked) {
                           setSelected(name);
+                          setCheckTag(true);
                         }
                       }}
                     />
@@ -177,10 +184,12 @@ const QuestionModify = () => {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
         />
-        <Button onClick={modify}>
-          작성완료
-          <SendIcon />
-        </Button>
+        {checkTag && checkTitle && checkContent ? (
+          <Button onClick={modify}>
+            작성완료
+            <SendIcon />
+          </Button>
+        ) : null}
       </FormControl>
     </Container>
   );

@@ -31,7 +31,7 @@ const QuestionCard = ({ Tag, Title, theDate, Nickname, Uid }) => {
           <Typography variant="body2">{theDate}</Typography>
         </CardContent>
         <LinkBox>
-          <Button onClick={navi}>
+          <Button>
             <Link
               to="/questiondetail"
               state={{ id: { Uid } }}
