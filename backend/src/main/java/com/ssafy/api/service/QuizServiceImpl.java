@@ -66,7 +66,7 @@ public class QuizServiceImpl implements QuizService {
 				missionCompletedRepository.save(mc);
 				
 				// 경험치 +5
-				user.addExp(5);
+				user.addExp(user.getExp());
 				userRepository.save(user);
 			}
 			return true;

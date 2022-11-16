@@ -41,11 +41,6 @@ public class Planet {
     @JoinColumn(name = "g_uid")
     private Galaxy galaxy;
 
-    // progresses
-    @Builder.Default
-    @OneToMany(mappedBy = "planet", cascade =  CascadeType.ALL)
-    private List<Progress> progresses = new ArrayList<>();
-
     // satellites
     @Builder.Default
     @OneToMany(mappedBy = "planet", cascade =  CascadeType.ALL)

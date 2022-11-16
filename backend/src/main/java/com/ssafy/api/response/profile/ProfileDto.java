@@ -14,12 +14,31 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProfileDto {
 
+    // 유저 현재 계급
     private String rankName;
+
+    // 유저 다음 계급
+    private String nextRank;
+
+    // 계급별 이미지
     private String imageUrl;
+
+    // 유저 아이디
+    private String userId;
+
+    // 유저 닉네임
     private String userNickname;
+
+    // 유저 총 경험치
     private int exp;
+
+    // 해당 계급의 경험치 총량
     private int maxExp;
+
+    // 해당 계급의 경험치 총량에 해당하는 현재 유저의 경험치
     private int expNow;
+
+    // 해당 계급의 경험치 총량에 해당하는 현재 유저의 경험치 퍼센트
     private Double expPer;
 
     public static int userExpNow(int exp) {
@@ -70,10 +89,12 @@ public class ProfileDto {
         }
     }
 
-    public static ProfileDto of(User user, Rank rank, CharacterImage image) {
+    public static ProfileDto of(User user, Rank rank, String nextRank, CharacterImage image) {
         return ProfileDto.builder()
                 .rankName(rank.getRank())
+                .nextRank(nextRank)
                 .imageUrl(image.getUrl())
+                .userId(user.getId())
                 .userNickname(user.getNickname())
                 .exp(user.getExp())
                 .expNow(userExpNow(user.getExp()))

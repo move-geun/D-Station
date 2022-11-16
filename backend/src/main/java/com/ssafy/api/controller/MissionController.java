@@ -71,24 +71,4 @@ public class MissionController {
         return ResponseEntity.status(404).body(BaseResponseBody.of(404, "해당 위성이 존재하지 않습니다."));
     }
 
-    // 미션 체크/취소하기 ================================================================================================
-    @PostMapping("/check")
-    @ApiOperation(value = "미션 체크/취소하기", notes = "<strong>유저 uid</strong>와 <strong>미션 uid</strong>를 통해 미션완료여부를 변경한다.")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "성공")
-    })
-    public ResponseEntity<?> checkMission (
-            @RequestParam @ApiParam(value = "미션 정보", required = true) Long m_uid,
-            @RequestParam @ApiParam(value = "유저 정보", required = true) String userId
-    ) {
-        Optional<Mission> mission = missionService.getMission(m_uid);
-        if (mission.isPresent()) {
-            if(missionService.changeMissionCompleted(mission.get(), userId)) {
-                return ResponseEntity.status(200).body(BaseResponseBody.of(200, "변경 완료"));
-            }
-            return ResponseEntity.status(403).body(BaseResponseBody.of(403, "권한이 없는 유저입니다."));
-        }
-        return ResponseEntity.status(404).body(BaseResponseBody.of(404, "존재하지 않는 미션입니다."));
-
-    }
 }
