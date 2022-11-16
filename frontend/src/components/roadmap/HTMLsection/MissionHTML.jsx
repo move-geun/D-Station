@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { TilIntoThree } from "../../../recoil/atoms";
+import { QuizIntoThree, TilIntoThree } from "../../../recoil/atoms";
 import http from "../../../api/http";
 import TilEditor from "../../til/TilEditor";
 
@@ -20,13 +20,13 @@ const MissionHTML = (prop = defaultValue) => {
   const [quizData, setQuizData] = useState(null);
 
   const [tilOpen, setTilOpen] = useRecoilState(TilIntoThree);
+  const [quizOpen, setQuizOpen] = useRecoilState(QuizIntoThree);
 
   useEffect(() => {
     getMissionData();
     getRefListData();
   }, []);
 
-  useEffect(() => {}, [mData]);
   useEffect(() => {}, [mData, refData, quizData]);
 
   async function getMissionData() {
@@ -53,9 +53,24 @@ const MissionHTML = (prop = defaultValue) => {
 
   
 
-  const goUpTil = (prop) => {
-    tilOpen ? setTilOpen(false) : setTilOpen(true);
+  function goUpTil(prop){
+    tilOpen ? 
+    setTilOpen(false) 
+    : 
+    setTilOpen(true);
+    setQuizOpen(false);
   };
+
+  function goUpQuiz(prop){
+    quizOpen ? 
+    setQuizOpen(false)
+    : 
+    setQuizOpen(true);
+    setTilOpen(false);
+      
+     
+    
+  }
 
   return (
     <>
@@ -79,7 +94,7 @@ const MissionHTML = (prop = defaultValue) => {
         )}
       </RefListWrapper>
       <QuizWrapper>
-        <button> 퀴즈 풀기</button>
+        <button onClick={() => goUpQuiz(misId)}> 퀴즈 풀기</button>
       </QuizWrapper>
       <MissTILWrapper>
         <button onClick={() => goUpTil(misId)}>TIL작성하기</button>

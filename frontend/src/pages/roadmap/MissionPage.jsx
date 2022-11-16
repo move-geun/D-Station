@@ -11,29 +11,37 @@ import { MissionContainer } from "./RoadmapPage.style";
 import { Canvas } from "@react-three/fiber";
 import BaseBackground from "../../components/roadmap/Threesection/Base/BaseBackground";
 import { Man } from "../../components/roadmap/Threesection/Mission/Man";
-import { useRecoilValue } from "recoil";
-import { TilIntoThree } from "../../recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { QuizIntoThree, TilIntoThree } from "../../recoil/atoms";
 import TilEditor from "../../components/til/TilEditor";
 import { DecoWood } from "../../components/scene/DecoWood.jsx";
+import { Html } from "@react-three/drei";
 
 const MissionPage = () => {
   const misId = useParams().missNo;
-  const tilOpenState = useRecoilValue(TilIntoThree);
-
 
   const [quizData, setQuizData] = useState(null);
+  const [tilOpen, setTilOpen] = useRecoilState(TilIntoThree);
+  const [quizOpen, setQuizOpen] = useRecoilState(QuizIntoThree);
+  const [whichOneOpen, setWhichOneOpen] = useState(null);
 
   useEffect(() => {
     MisRouter();
     getQuizData();
   }, []);
 
-  useEffect(() => {}, [tilOpenState, quizData]);
+  useEffect(() => {}, [quizData]);
+  useEffect(() => { WhichOneOpenHandler()}, [tilOpen, quizOpen]);
 
   function MisRouter() {
     if (misId === "1") {
       return <Man />;
     }
+  }
+
+  function WhichOneOpenHandler(){
+    if(tilOpen && quizOpen){setWhichOneOpen(null)}
+
   }
 
   async function getQuizData() {
@@ -60,12 +68,13 @@ const MissionPage = () => {
   return (
     <MissionContainer>
       <ThreeWrapper>
-        {tilOpenState === true ? <TilEditor /> : <div>til 안 열었음</div>}
+        {tilOpen === true ? <TilEditor /> : <div>til 안 열었음</div>}
         <Canvas>
           <directionalLight position={[0, 5, 0]} />
           <ambientLight />
           <BaseBackground />
-          <DecoWood data = {quizData} />
+          {quizOpen === true ? <DecoWood data = {quizData} /> : <Html>퀴즈 가져오는 중</Html>}
+          
           {MisRouter()}
         </Canvas>
       </ThreeWrapper>
