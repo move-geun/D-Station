@@ -8,7 +8,8 @@ const HTMLWrapper = styled.div`
     border-radius: 50px 0 0 50px; */
 
     width: 30%;
-    height: 100%;
+    height: 100vh;
+    position: relative;
     display: flex;
     flex-direction: column;
     background-color: rgba( 0, 50, 100, 0.42 );
@@ -19,8 +20,10 @@ const HTMLWrapper = styled.div`
 
 const ThreeWrapper = styled.div`
     width: 70%;
-    height: 100%;
+    height: 100vh;
     float: left;
+    position :relative;
+    z-index: 1;
 `;
 
 const DescWrapper = styled.div`

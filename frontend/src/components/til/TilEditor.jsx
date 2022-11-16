@@ -8,8 +8,8 @@ import SendIcon from "@mui/icons-material/Send";
 import { useState, useEffect } from "react";
 
 import http from "../../api/http";
-import { UserIdState, UserState, PATState } from "../../recoil/atoms";
-import { useRecoilValue } from "recoil";
+import { UserIdState, UserState, PATState, TilIntoThree } from "../../recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { getUserId } from "../../api/JWT";
 import { EditorContainer } from "./TilEditor.style";
 
@@ -21,9 +21,8 @@ export default function TilEditor(prop = defaultValue) {
     content: "",
     message: "",
   });
-
+  const [tilOpen, setTilOpen] = useRecoilState(TilIntoThree);
   const missionId = prop.mUId;
-  console.log("에디터 misiionid    ",missionId);
 
   const titleRef = useRef();
   const editorRef = useRef();
@@ -96,7 +95,10 @@ export default function TilEditor(prop = defaultValue) {
         "Content-Type": `application/json`,
       },
     })
-    .then((res)=> {console.log("전송전송     ", data.missionUid)})
+    .then((res)=> {console.log("전송전송     ", data.missionUid)
+      setTilOpen(false);
+  
+  })
     .catch((err)=> {console.log(err)});
   };
 
@@ -117,7 +119,7 @@ export default function TilEditor(prop = defaultValue) {
           onInit={(evt, editor) => (editorRef.current = editor)}
           onChange={log}
           init={{
-            height: 400,
+            height: 300,
             menubar: false,
             toolbar: false,
             statusbar: false,

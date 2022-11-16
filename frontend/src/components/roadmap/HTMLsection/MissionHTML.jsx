@@ -1,8 +1,9 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { TilIntoThree } from "../../../recoil/atoms";
 import http from "../../../api/http";
 import TilEditor from "../../til/TilEditor";
+
 import {
   DescWrapper,
   MissTILWrapper,
@@ -18,14 +19,16 @@ const MissionHTML = (prop = defaultValue) => {
   const [refData, setRefData] = useState(null);
   const [quizData, setQuizData] = useState(null);
 
+  const [tilOpen, setTilOpen] = useRecoilState(TilIntoThree);
+
   useEffect(() => {
     getMissionData();
     getRefListData();
     getQuizData();
   }, []);
 
-  useEffect(()=>{}, [mData]);
-  useEffect(()=>{}, [mData, refData, quizData]);
+  useEffect(() => {}, [mData]);
+  useEffect(() => {}, [mData, refData, quizData]);
 
   async function getMissionData() {
     await http.connect_axios
@@ -40,28 +43,27 @@ const MissionHTML = (prop = defaultValue) => {
 
   async function getRefListData() {
     await http.connect_axios
-        .get(`/reference?uid=${misId}`)
-        .then((res)=>{
-            setRefData(res.data);
-        })
-        .catch((err)=>{
-            console.log(err);
-        })      
+      .get(`/reference?uid=${misId}`)
+      .then((res) => {
+        setRefData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   async function getQuizData() {
     await http.connect_axios
-    .get(`/quiz?uid=${misId}`)
-    .then((res)=>{
-    })
-    .catch((err)=>{
+      .get(`/quiz?uid=${misId}`)
+      .then((res) => {})
+      .catch((err) => {
         console.log(err);
-    })
+      });
   }
 
   const goUpTil = (prop) => {
-
-  }
+    tilOpen ? setTilOpen(false) : setTilOpen(true);
+  };
 
   return (
     <>
@@ -78,18 +80,17 @@ const MissionHTML = (prop = defaultValue) => {
         )}
       </DescWrapper>
       <RefListWrapper>
-          {refData !== null ? (
-            <RefList refData={refData}/>
-          ) : (
-            <div>데이터를 불러오는 중입니다.</div>
-          )}
+        {refData !== null ? (
+          <RefList refData={refData} />
+        ) : (
+          <div>데이터를 불러오는 중입니다.</div>
+        )}
       </RefListWrapper>
       <QuizWrapper>
         <button> 퀴즈 풀기</button>
       </QuizWrapper>
       <MissTILWrapper>
-        <TilEditor mUId={misId}/>
-        {/* <button onClick={()=> goUpTil(misId)}>TIL작성하기</button> */}
+        <button onClick={() => goUpTil(misId)}>TIL작성하기</button>
       </MissTILWrapper>
     </>
   );

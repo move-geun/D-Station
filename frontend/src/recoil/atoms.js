@@ -41,3 +41,10 @@ export const UserInfo = atom({
   },
   effects_UNSTABLE: [persistAtom],
 });
+
+
+export const TilIntoThree = atom({
+  key: "TilIntoThree",
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+});
