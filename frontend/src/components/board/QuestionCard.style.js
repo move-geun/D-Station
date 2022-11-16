@@ -15,4 +15,8 @@ const LinkBox = styled.div`
   margin-right: 10px;
 `;
 
-export { Interval, TagBox, LinkBox };
+const Button = styled.button`
+  border: solid 3px blue;
+`;
+
+export { Interval, TagBox, LinkBox, Button };
