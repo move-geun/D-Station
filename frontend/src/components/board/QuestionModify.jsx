@@ -133,7 +133,12 @@ const QuestionModify = () => {
       </Box>
       <FormControl>
         <FormLabel style={blank}>제목</FormLabel>
-        <Textarea value={title} minRows={1} onChange={titleHandler}></Textarea>
+        <Textarea
+          placeholder={title}
+          value={title}
+          minRows={1}
+          onChange={titleHandler}
+        ></Textarea>
         <FormLabel style={blank}>내용</FormLabel>
         <Editor
           apiKey="mv47x1bf7revpqmsvwdqta54w2b390xyi1wmkmlthp83qlkj"

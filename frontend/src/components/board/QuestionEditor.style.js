@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+const Container = styled.div`
+  margin-bottom: 50px;
+`
+
 const Button = styled.button`
   display: flex;
   justify-content: center;
@@ -20,4 +24,4 @@ const Button = styled.button`
   }
 `;
 
-export { Button };
+export { Container, Button };
