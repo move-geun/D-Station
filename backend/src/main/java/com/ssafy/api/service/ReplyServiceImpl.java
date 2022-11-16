@@ -11,6 +11,7 @@ import com.ssafy.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -75,7 +76,9 @@ public class ReplyServiceImpl implements ReplyService{
         Optional<User> user = userRepository.getUsersById(userId);
         if (user.isPresent()) {
             Reply reply = Reply.builder()
+                    .uid(uid)
                     .content(replyPostReq.getContent())
+                    .regDate(LocalDateTime.now())
                     .user(user.get())
                     .jisickin(jisickinRepository.getOne(replyPostReq.getJisickinUid()))
                     .build();

@@ -20,6 +20,9 @@ public class JisickinDetailRes {
     @ApiModelProperty(name = "태그")
     String tag;
 
+    @ApiModelProperty(name = "작성자 아이디")
+    String userId;
+
     @ApiModelProperty(name = "질문자")
     String nickname;
 
@@ -37,6 +40,7 @@ public class JisickinDetailRes {
         JisickinDetailRes res = new JisickinDetailRes();
         res.setUid(jisickin.getUid());
         res.setTag(jisickin.getTag());
+        res.setUserId(jisickin.getUser().getId());
         res.setNickname(jisickin.getUser().getNickname());
         res.setTitle(jisickin.getTitle());
         res.setContent(jisickin.getContent());

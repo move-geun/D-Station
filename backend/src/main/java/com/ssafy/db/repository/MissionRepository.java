@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.db.entity.Mission;
@@ -20,4 +21,7 @@ public interface MissionRepository extends JpaRepository<Mission, Long> {
     Optional<Mission> getMissionByUid(Long uid);
     
     Mission findMissionByUid(long uid);
+
+    @Query(value = "select count(m) from Mission m where m.pUid=:puid")
+    int countAllByPUid(Long puid);
 }

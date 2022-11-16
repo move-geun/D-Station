@@ -29,7 +29,7 @@ public class Satellite {
     private String sName;
 
     // 위성 설명
-    @Column(name = "s_description", length = 300)
+    @Column(name = "s_description", length = 1000)
     private String sDescription;
     
     // 은하 uid
