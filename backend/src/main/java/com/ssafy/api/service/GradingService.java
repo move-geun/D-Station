@@ -9,4 +9,5 @@ public interface GradingService {
     String gradingJava(String code) throws IOException;
     String gradingPython(int uid, String code) throws IOException;
     GradingRes getProblem(int uid);
+    GradingRes getProblemByMUid(long uid);
 }

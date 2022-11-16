@@ -107,4 +107,11 @@ public class GradingServiceImpl implements GradingService{
 		Problem problem = problemRepository.getOne((long)uid);
 		return GradingRes.of(problem);
 	}
+
+	@Override
+	public GradingRes getProblemByMUid(long uid) {
+		System.out.println(uid);
+		Problem problem = problemRepository.findProblemBymUid((long)uid);
+		return GradingRes.of(problem);
+	}
 }

@@ -39,6 +39,10 @@ public class Problem {
     // output
     @Column(name = "output")
     private String output;
+    
+    // 미션 UID
+    @Column(name = "m_uid")
+    private String mUid;
 
 
 }
