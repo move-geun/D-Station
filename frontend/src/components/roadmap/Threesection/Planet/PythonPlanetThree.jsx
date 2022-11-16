@@ -20,6 +20,7 @@ import { Sll1 } from "../Satellite/PythonPlanet/Sll1";
 import { Sll2 } from "../Satellite/PythonPlanet/Sll2";
 import { Sll3 } from "../Satellite/PythonPlanet/Sll3";
 import { Sll4 } from "../Satellite/PythonPlanet/Sll4";
+import { Sll6 } from "../Satellite/PythonPlanet/Sll6";
 
 
 
@@ -57,15 +58,15 @@ export function PlanetPython() {
             ref={earthRef} 
             // position={[-2, 0, -4]}
             >
-            <sphereGeometry args={[2, 32, 32]} />
-            <meshStandardMaterial
+            {/* <sphereGeometry args={[2, 32, 32]} /> */}
+            {/* <meshStandardMaterial
                 map={colorMap}
                 metalness={0.4}
                 normalMap={normalMap}
                 displacementMap={bumpMap}    
                 displacementScale={0.5}
                 roughness={0.8}            
-            />
+            /> */}
      
             <OrbitControls
                 enableZoom={true}
@@ -83,6 +84,7 @@ export function PlanetPython() {
             <Sll2/>
             <Sll3 />
             <Sll4/>
+            <Sll6 position={[0,0,0]}/>
         </object3D>   
       </>
     );

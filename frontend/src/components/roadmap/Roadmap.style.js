@@ -25,8 +25,8 @@ const ThreeWrapper = styled.div`
 
 const DescWrapper = styled.div`
     height: 30%;
-    padding: 4rem 1rem 1rem 1rem;
-    margin: 1rem;
+    padding: 4rem 1rem 0rem 1rem;
+    margin: 0.5rem;
     /* word-break:break-all; */
 
     .name{
@@ -35,10 +35,12 @@ const DescWrapper = styled.div`
 
     .des{
         width: 100%;
-        height: 60%;
+        height: 100px;
         white-space: normal;
         /* overflow: hidden; */
         text-overflow: ellipsis;
+        font-size: small;
+    
 
 }
 `
@@ -50,6 +52,8 @@ const ListWrapper = styled.div`
 `
 
 const RefListWrapper = styled.div`
+    margin: 1rem;
+    padding: 1rem;
     background-color: lightpink;
 `
 

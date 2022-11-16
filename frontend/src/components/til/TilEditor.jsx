@@ -11,21 +11,26 @@ import http from "../../api/http";
 import { UserIdState, UserState, PATState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 import { getUserId } from "../../api/JWT";
+import { EditorContainer } from "./TilEditor.style";
 
-export default function QuestionEditor() {
+
+const defaultValue = {};
+export default function TilEditor(prop = defaultValue) {
   const [tilContent, setTilContent] = useState({
     title: "",
     content: "",
     message: "",
   });
 
+  const missionId = prop.mUId;
+  console.log("에디터 misiionid    ",missionId);
 
-    const titleRef = useRef();
-    const editorRef = useRef();
-    const userId = getUserId();
-
+  const titleRef = useRef();
+  const editorRef = useRef();
+  const userId = getUserId();
 
   useEffect(() => {}, [tilContent]);
+  useEffect(()=>{}, [prop])
 
   const blank = {
     marginTop: "20px",
@@ -46,8 +51,8 @@ export default function QuestionEditor() {
         ...tilContent,
         content: editorRef.current.getContent(),
       });
-      sendData();
     }
+  
   };
 
   const MessageHandler = (e) => {
@@ -82,20 +87,21 @@ export default function QuestionEditor() {
       fileName: tilContent.title,
       id: userId,
       message: tilContent.message,
-      missionUid: "1000",
+      missionUid: missionId,
     };
 
     // 여기에 html 을 백에 보냄
-    http.connect_axios.post(`/til/crate`, JSON.stringify(data), {
+    http.connect_axios.post(`/til/create`, JSON.stringify(data), {
       headers: {
         "Content-Type": `application/json`,
       },
-    });
-    console.log("알려줘!", data.id);
+    })
+    .then((res)=> {console.log("전송전송     ", data.missionUid)})
+    .catch((err)=> {console.log(err)});
   };
 
   return (
-    <>
+    <EditorContainer>
       <FormControl>
         <FormLabel style={blank}>제목</FormLabel>
         <Textarea
@@ -115,11 +121,6 @@ export default function QuestionEditor() {
             menubar: false,
             toolbar: false,
             statusbar: false,
-            // toolbar:
-            //   "undo redo | blocks | " +
-            //   "bold italic forecolor | alignleft aligncenter " +
-            //   "alignright alignjustify | bullist numlist outdent indent | " +
-            //   "removeformat | help",
             content_style:
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
@@ -134,13 +135,13 @@ export default function QuestionEditor() {
         />
         <Button
           style={blank}
-          onClick={log}
+          onClick={sendData}
           variant="contained"
           endIcon={<SendIcon />}
         >
           작성완료
         </Button>
       </FormControl>
-    </>
+    </EditorContainer>
   );
 }

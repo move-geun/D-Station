@@ -12,7 +12,6 @@ export function Universe() {
     const object3D = new THREE.Object3D;
     const objRef = useRef();
 
-
     //회전을 위해
     useFrame(({ clock }) => {
         const elapsedTime = clock.getElapsedTime();
@@ -37,12 +36,7 @@ export function Universe() {
 
   const BaseBackground = () => {
     return(
-      <>
         <Universe/>
-      </>
-
-
-
         // <>
         //     <Canvas>
         //         <directionalLight position={[0,5,0]}/>

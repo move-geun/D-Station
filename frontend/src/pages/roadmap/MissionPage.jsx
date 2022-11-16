@@ -8,12 +8,11 @@ import {MissionContainer } from "./RoadmapPage.style";
 
 import { Canvas } from "@react-three/fiber";
 import BaseBackground from "../../components/roadmap/Threesection/Base/BaseBackground";
-import ManTest from "../../components/roadmap/Threesection/Mission/ManTest";
 import { Man } from "../../components/roadmap/Threesection/Mission/Man";
 
 
 const MissionPage = () => {
-    const misId = useParams().misNo;
+    const misId = useParams().missNo;
     useEffect(()=>{MisRouter()},[])
 
     function MisRouter() {
@@ -28,8 +27,8 @@ const MissionPage = () => {
                     <directionalLight position={[0,5,0]}/>
                     <ambientLight/>
                     <BaseBackground />
-                    {/* {MisRouter()} */}
-                    {/* <Man/> */}
+                        {MisRouter()}
+                
 
                 </Canvas>
             </ThreeWrapper>

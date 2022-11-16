@@ -25,6 +25,7 @@ import isAuthenticated from "./api/isAuthenticated";
 
 // global css
 import GlobalStyle from "./styles/global";
+import RefRedirectPage from "./pages/roadmap/RefRedirectPage";
 
 function App() {
   return (
@@ -108,6 +109,19 @@ function App() {
           path="/satellite/:sllNo"
           element={
             isAuthenticated() ? <SatellitePage /> : <Navigate to="/login" />
+          }
+        />
+         <Route
+          path="/mission/:missNo"
+          element={
+            isAuthenticated() ? <MissionPage/> : <Navigate to="/login" />
+          }
+        />
+
+        <Route
+          path ="/refredirect"
+          element={
+            isAuthenticated() ? <RefRedirectPage /> :  <Navigate to="/login" />
           }
         />
       </Routes>
