@@ -37,7 +37,7 @@ export function PlanetPython() {
     //회전을 위해
     useFrame(({ clock }) => {
         const elapsedTime = clock.getElapsedTime();
-        objRef.current.rotation.y += 0.0015;
+        // objRef.current.rotation.y += 0.0015;
         earthRef.current.rotation.y = elapsedTime / 6;
     });
   
@@ -78,26 +78,25 @@ export function PlanetPython() {
             />
 
             </mesh>
-            {/* <Sate1 ref={moonRef}/> */}
             <Sll1 ref={moonRef} />
-            <Sll2/>
+            {/* <Sll2/>
             <Sll3 />
-            <Sll4/>
+            <Sll4/> */}
+
         </object3D>   
       </>
     );
   }
-const PythonPlanetThree = () => {
-    return(
-        <>
-            <Canvas>
-                <directionalLight position={[0,5,0]}/>
-                <ambientLight/>
-                <PlanetPython/>
+// const PythonPlanetThree = () => {
+//     return(
+//         <>
+//             <Canvas>
+//                 <directionalLight position={[0,5,0]}/>
+//                 <ambientLight/>
+//                 <PlanetPython/>
                 
-            </Canvas>
-        </>
-    )
-};
+//             </Canvas>
+//         </>
+//     )
+// };
 
-export default PythonPlanetThree;

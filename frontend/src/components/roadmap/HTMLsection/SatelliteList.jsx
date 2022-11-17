@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import http from "../../../api/http";
-import { ListWrapper } from "./SllList.style";
+import { ListWrapper } from "./RoadList.style";
 
 const defaultValue = {};
 const SatelliteList = (prop = defaultValue) => {

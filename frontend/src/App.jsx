@@ -25,6 +25,7 @@ import { useRecoilValue } from "recoil";
 
 // global css
 import GlobalStyle from "./styles/global";
+import RefRedirectPage from "./pages/roadmap/RefRedirectPage";
 
 function App() {
   const isLogin = useRecoilValue(UserLogin);
@@ -89,12 +90,27 @@ function App() {
         />
         {/* <Route path="/planet/:id" element={<PlanetPage/>} />  */}
         <Route
-          path="/planet"
-          element={isLogin ? <PlanetPage /> : <Navigate to="/login" />}
+          path="/planet/:plantNo"
+          element={
+            isAuthenticated() ? <PlanetPage /> : <Navigate to="/login" />
+          }
         />
         <Route
           path="/satellite/:sllNo"
           element={isLogin ? <SatellitePage /> : <Navigate to="/login" />}
+        />
+         <Route
+          path="/mission/:missNo"
+          element={
+            isAuthenticated() ? <MissionPage/> : <Navigate to="/login" />
+          }
+        />
+
+        <Route
+          path ="/refredirect"
+          element={
+            isAuthenticated() ? <RefRedirectPage /> :  <Navigate to="/login" />
+          }
         />
       </Routes>
     </BrowserRouter>

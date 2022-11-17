@@ -5,7 +5,7 @@ const ListWrapper = styled.div`
     border-radius: 12px;
     padding: 15px 15px 20px;
     display: grid;
-    row-gap: 8px;
+    /* row-gap: 8px; */
     background-color: lightskyblue;
     height: 300px;
 
@@ -27,5 +27,9 @@ const ListWrapper = styled.div`
         }
     }
 `;
+
+
+
+
 
 export {ListWrapper};

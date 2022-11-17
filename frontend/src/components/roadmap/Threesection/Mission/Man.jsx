@@ -4,39 +4,31 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { Scene } from "three";
 
 
-
-
-
-
-
-
-
-
 export function Man() {
 
 
-	const group = useRef();
-	const myMesh = React.useRef();
-	const {nodes, materials} = useGLTF("../../../../assets/facecap.glb");
-	console.log("======== ", nodes);
+	// const group = useRef();
+	// const myMesh = React.useRef();
+	// const {nodes, materials} = useGLTF("../../../../assets/facecap.glb");
+	// console.log("======== ", nodes);
 
-	return(
-		<group ref={group} dispose={null}>
-			<group name="Scene" ref={myMesh}>
-			<primitive object={nodes.Hips} />
-			<Scene />
+	// return(
+	// 	<group ref={group} dispose={null}>
+	// 		<group name="Scene" ref={myMesh}>
+	// 		<primitive object={nodes.Hips} />
+	// 		<Scene />
 			
-			<mesh 
-				castShadow
-				receiveShadow
-				geometry={nodes.scene.children[0]}/>
+	// 		<mesh 
+	// 			castShadow
+	// 			receiveShadow
+	// 			geometry={nodes.scene.children[0]}/>
 
 
-			</group>
+	// 		</group>
 			
-		</group>
-	)
+	// 	</group>
+	// )
 }
 
 
-useGLTF.preload("../../../../assets/facecap.glb");
+// useGLTF.preload("../../../../assets/facecap.glb");
