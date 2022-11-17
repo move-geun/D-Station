@@ -16,7 +16,9 @@ const LinkBox = styled.div`
 `;
 
 const Button = styled.button`
-  border: solid 3px blue;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 export { Interval, TagBox, LinkBox, Button };
