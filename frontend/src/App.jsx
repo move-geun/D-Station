@@ -92,7 +92,7 @@ function App() {
         <Route
           path="/planet/:plantNo"
           element={
-            isAuthenticated() ? <PlanetPage /> : <Navigate to="/login" />
+            isLogin ? <PlanetPage /> : <Navigate to="/login" />
           }
         />
         <Route
@@ -102,14 +102,14 @@ function App() {
          <Route
           path="/mission/:missNo"
           element={
-            isAuthenticated() ? <MissionPage/> : <Navigate to="/login" />
+            isLogin ? <MissionPage/> : <Navigate to="/login" />
           }
         />
 
         <Route
           path ="/refredirect"
           element={
-            isAuthenticated() ? <RefRedirectPage /> :  <Navigate to="/login" />
+            isLogin ? <RefRedirectPage /> :  <Navigate to="/login" />
           }
         />
       </Routes>
