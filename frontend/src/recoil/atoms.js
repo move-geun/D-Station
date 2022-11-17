@@ -21,9 +21,9 @@ export const UserIdState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const CameraSight = atom({
-  key: "CameraSight",
-  default: { fov: 10, position: [0, 0, 0] },
+export const CameraZoom = atom({
+  key: "CameraZoom",
+  default: true,
   effects_UNSTABLE: [persistAtom],
 });
 

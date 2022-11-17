@@ -8,8 +8,8 @@ import { Taeria } from "./Taeria";
 import { MarsOne } from "./Mars_1";
 import { SaturnOne } from "./Saturn_1";
 import { PlanetTao } from "./Planet_tao_seti_prime";
-import { Openmap, Opennews } from "../../recoil/atoms";
-import { useRecoilValue } from "recoil";
+import { Openmap, Opennews, CameraZoom } from "../../recoil/atoms";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 function Marker({ children, ...props }) {
   const [occluded, occlude] = useState();
@@ -33,13 +33,20 @@ function Marker({ children, ...props }) {
 export function TestBack(props) {
   const ismapopen = useRecoilValue(Openmap);
   const isnewsopen = useRecoilValue(Opennews);
+  const [cameraZoom, setCameraZoom] = useRecoilState(CameraZoom);
   const myMesh = React.useRef();
   useFrame(({ clock }) => {
     const a = clock.getElapsedTime() / 3;
-    myMesh.current.rotation.y = a;
-    myMesh.current.position.x = -400;
-    myMesh.current.position.y = 50;
-    myMesh.current.position.z = -100;
+    if (cameraZoom) {
+      myMesh.current.rotation.y = a;
+      myMesh.current.position.x = -400;
+      myMesh.current.position.y = 50;
+      myMesh.current.position.z = -100;
+    } else {
+      myMesh.current.position.x = -400;
+      myMesh.current.position.y = 50;
+      myMesh.current.position.z = -100;
+    }
     // myMesh.current.position.x = 200 * (Math.sin(a) * 0.005);
     // myMesh.current.position.z = 200 * (Math.cos(a) * 0.005);
   });

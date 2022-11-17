@@ -142,14 +142,18 @@ const Survey = () => {
         <div className="nav"></div>
         <ResultContent>
           <div className="neonText">{result.type}</div>
-          <div className="neonText">{result.title}</div>
-          <div className="neonText">{result.description}</div>
+          <div className="d">{result.title}</div>
+          <div className="d">{result.description}</div>
+          <div className="d">
+            <div>개발자로서 당신은</div>
+            <div>{result.bigSort}!</div>
+          </div>
           <img src={result.imgsrc} alt="" />
-          <div className="neonText">{result.bigSort}</div>
+          <div>다음과 같은 직업군들이 있어요!</div>
           {result.smallSort
             ? result.smallSort.map((small, idx) => {
                 return (
-                  <div className="neonText" key={idx}>
+                  <div className="d" key={idx}>
                     {small}
                   </div>
                 );

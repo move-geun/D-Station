@@ -90,27 +90,22 @@ const ResultContent = styled.div`
   height: 700px;
   background-color: black;
   border-radius: 10px;
-  color: black;
+  color: white;
 
-  @keyframes flicker {
-    0%,
-    18%,
-    22%,
-    25%,
-    53%,
-    57%,
+  @keyframes pulsate {
     100% {
-      text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #0fa,
-        0 0 80px #0fa, 0 0 90px #0fa, 0 0 100px #0fa, 0 0 150px #0fa;
+      /* Larger blur radius */
+      text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #f09,
+        0 0 80px #f09, 0 0 90px #f09, 0 0 100px #f09, 0 0 150px #f09;
     }
-    20%,
-    24%,
-    55% {
-      text-shadow: none;
+    0% {
+      /* A slightly smaller blur radius */
+      text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #f09,
+        0 0 73px #f09, 0 0 80px #f09, 0 0 94px #f09, 0 0 140px #f09;
     }
   }
   .neonText {
-    animation: flicker 1.5s infinite alternate;
+    animation: pulsate 0.11s ease-in-out infinite alternate;
   }
 `;
 
