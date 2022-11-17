@@ -46,8 +46,8 @@ const Question = () => {
         </Carousel>
       </Container>
       <Ui>
-        <button className="left" onClick={handleLeft}>{"<<"}</button>
-        <button className="right" onClick={handleRight}>{">>"}</button>
+        <button onClick={handleLeft}>{"<<"}</button>
+        <button onClick={handleRight}>{">>"}</button>
       </Ui>
     </div>
   );

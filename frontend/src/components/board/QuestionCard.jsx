@@ -35,7 +35,7 @@ const QuestionCard = ({ Tag, Title, theDate, Nickname, Uid }) => {
             <Link
               to="/questiondetail"
               state={{ id: { Uid } }}
-              style={{ display: "flex", textAlign: "end", color: "red" }}
+              style={{ display: "flex", textAlign: "end", color: "orangered" }}
             >
               🔎Detail
             </Link>
