@@ -20,8 +20,6 @@ import { Sll1 } from "../Satellite/PythonPlanet/Sll1";
 import { Sll2 } from "../Satellite/PythonPlanet/Sll2";
 import { Sll3 } from "../Satellite/PythonPlanet/Sll3";
 import { Sll4 } from "../Satellite/PythonPlanet/Sll4";
-import { Sll6 } from "../Satellite/PythonPlanet/Sll6";
-
 
 
 
@@ -80,28 +78,25 @@ export function PlanetPython() {
             />
 
             </mesh>
-            {/* <Sate1 ref={moonRef}/> */}
             <Sll1 ref={moonRef} />
-            <Sll2/>
+            {/* <Sll2/>
             <Sll3 />
-            <Sll4/>
-            {/* <Sll6 position={[0,0,0]}/> */}
-            {/* <DecoWood/> */}
+            <Sll4/> */}
+
         </object3D>   
       </>
     );
   }
-const PythonPlanetThree = () => {
-    return(
-        <>
-            <Canvas>
-                <directionalLight position={[0,5,0]}/>
-                <ambientLight/>
-                <PlanetPython/>
+// const PythonPlanetThree = () => {
+//     return(
+//         <>
+//             <Canvas>
+//                 <directionalLight position={[0,5,0]}/>
+//                 <ambientLight/>
+//                 <PlanetPython/>
                 
-            </Canvas>
-        </>
-    )
-};
+//             </Canvas>
+//         </>
+//     )
+// };
 
-export default PythonPlanetThree;

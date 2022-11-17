@@ -94,10 +94,10 @@ const MissionHTML = (prop = defaultValue) => {
         )}
       </RefListWrapper>
       <QuizWrapper>
-        <button onClick={() => goUpQuiz(misId)}> 퀴즈 풀기</button>
+        <div className="btn" onClick={() => goUpQuiz(misId)}> 퀴즈 풀기 <div className="dot"></div></div>
       </QuizWrapper>
       <MissTILWrapper>
-        <button onClick={() => goUpTil(misId)}>TIL작성하기</button>
+        <div className="btn" onClick={() => goUpTil(misId)}>TIL작성하기 <div className="dot"></div></div>
       </MissTILWrapper>
     </>
   );

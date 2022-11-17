@@ -100,7 +100,7 @@ function App() {
         />
         {/* <Route path="/planet/:id" element={<PlanetPage/>} />  */}
         <Route
-          path="/planet"
+          path="/planet/:plantNo"
           element={
             isAuthenticated() ? <PlanetPage /> : <Navigate to="/login" />
           }
