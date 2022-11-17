@@ -14,6 +14,9 @@ const SearchWraper = styled.div`
     font-style: bold;
     text-align: left;
     margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 
   @keyframes flicker {

@@ -36,7 +36,22 @@ const SearchMap = () => {
 
   return (
     <SearchWraper>
-      <div className="title neonText">🌌 Navigation</div>
+      <div className="title">
+        <div>🌌</div>
+        <div className="neonText">Navigation</div>
+      </div>
+      <SearchFunction>
+        <div className="search">
+          <input
+            className="searchInput"
+            type="text"
+            placeholder="search"
+            onChange={(e) => searchHandler(e)}
+            onKeyUp={(e) => getSearch(e)}
+          />
+          <SearchIcon style={{ color: "black" }} />
+        </div>
+      </SearchFunction>
       <ContentWrapper>
         <RecoSide>
           <div className="title">⭐추천 과정</div>
@@ -64,18 +79,6 @@ const SearchMap = () => {
           </div>
         </RecoSide>
         <SearchSide>
-          <SearchFunction>
-            <div className="search">
-              <input
-                className="searchInput"
-                type="text"
-                placeholder="search"
-                onChange={(e) => searchHandler(e)}
-                onKeyUp={(e) => getSearch(e)}
-              />
-              <SearchIcon style={{ color: "black" }} />
-            </div>
-          </SearchFunction>
           {resultList ? <div className="search_title">검색 결과 🚀</div> : null}
 
           {resultList
