@@ -1,24 +1,18 @@
 import React , {useRef, useState}from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Canvas, useThree, useFrame, useLoader } from "@react-three/fiber";
+import {useFrame, useLoader } from "@react-three/fiber";
 import {Object3D, TextureLoader } from "three";
-import * as THREE from "three";
-import {
-  OrbitControls,
-  Stars,
-  Billboard,
-  Html,
-} from "@react-three/drei";
+import {OrbitControls} from "@react-three/drei";
 
-import SatelliteColor from "../../../../../assets/images/canyonRockColor.jpg";
-import SatelliteBump from "../../../../../assets/images/canyonRockBump.png";
-import SatelliteRough from "../../../../../assets/images/canyonRockColorRoughness.jpg";
-import SatelliteNormal from "../../../../../assets/images/canyonRockNormal.jpg";
+import SatelliteColor from "../../../../../assets/images/PaddedBase.jpg";
+import SatelliteBump from "../../../../../assets/images/PaddedBump.png";
+import SatelliteRough from "../../../../../assets/images/PaddedRough.jpg";
+import SatelliteNormal from "../../../../../assets/images/PaddedNormal.jpg";
 import { useEffect } from "react";
 
 
-  export function Sll1() {
+  export function GloSll1() {
     const [colorMap, bumpMap, roughMap, normalMap] = useLoader(
       TextureLoader,[SatelliteColor, SatelliteBump, SatelliteRough, SatelliteNormal]
     );
@@ -48,7 +42,7 @@ import { useEffect } from "react";
       <>
         <mesh 
             ref={sateRef} 
-            position={[3, 0, 0]}
+            position={[3, 3, 0]}
             onPointerOver={(event) => setHover(true)}
             onPointerOut={(event) => setHover(false)}
             onClick={()=> setClickActive(true)}

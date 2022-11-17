@@ -44,7 +44,7 @@ export function Sll4() {
       <>
         <mesh 
             ref={sateRef} 
-            position={[-3, -1, 1]}
+            position={[-3, 0, 1]}
             // onPointerOver={(event) => setHover(true)}
             // onPointerOut={(event) => setHover(false)}
             onClick={()=> setClickActive(true)}
@@ -52,7 +52,7 @@ export function Sll4() {
 
             {/* {hovered? <Html position={[2, 0.6, 0]}>자료구조</Html> : <></>} */}
 
-            <sphereGeometry args={[0.3, 32, 32]} />
+            <sphereGeometry args={[0.2, 32, 32]} />
             <meshPhongMaterial specularMap={specularMap} />
             <meshStandardMaterial
                 map={colorMap}

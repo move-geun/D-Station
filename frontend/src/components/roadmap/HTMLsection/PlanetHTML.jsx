@@ -8,7 +8,6 @@ import SatelliteList from "./SatelliteList";
 
 const defaultValue = {};
 const PlanetHTML = (prop = defaultValue) => {
-
     const [pData, setPData] = useState(null);
     useEffect(()=>{
         if(prop.Pdata.uid){

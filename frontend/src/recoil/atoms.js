@@ -54,3 +54,9 @@ export const QuizIntoThree = atom({
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const CTIntoThree = atom({
+  key: "CTIntoThree",
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+})
