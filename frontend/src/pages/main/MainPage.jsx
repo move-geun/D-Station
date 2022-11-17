@@ -9,12 +9,13 @@ import {
   RocketMap,
   Newsmap,
 } from "./MainPage.style";
+import { TestDev } from "../../components/scene/TestDev";
 import { TestBack } from "../../components/scene/TestBack";
 import { TestFront } from "../../components/scene/TestFront";
 import SearchMap from "../../components/main/SearchMap";
 import MapNav from "../../components/main/MapNav";
 import DailyContent from "../../components/main/DailyContent";
-import { CameraSight } from "../../recoil/atoms";
+import { Openmap, Opennews } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userInfoSelector } from "../../recoil/selector";
 import { useState, useEffect } from "react";
@@ -45,28 +46,22 @@ function Loader() {
 }
 
 const MainPage = ({ ...props }) => {
-  const [mapOpen, setMapOpen] = useState(false);
+  const [openMap, setOpenmap] = useRecoilState(Openmap);
+  const [openNews, setOpennews] = useRecoilState(Opennews);
   const [newsOpen, setNewsOpen] = useState(false);
   const user = useRecoilValue(userInfoSelector);
   const imgsrc = "../assets/" + user.imageUrl;
 
   const openmap = () => {
-    setMapOpen(!mapOpen);
+    setOpenmap(!openMap);
   };
 
   const closemap = () => {
-    setMapOpen(false);
-    setNewsOpen(false);
+    setOpenmap(false);
+    setOpennews(false);
   };
   const opennews = () => {
-    setNewsOpen(!newsOpen);
-  };
-
-  const [getCamera, setGetCamera] = useRecoilState(CameraSight);
-
-  const change = () => {
-    setGetCamera({ fov: 110, zoom: [700, 200, 0], near: -1 });
-    console.log("클릭");
+    setOpennews(!openNews);
   };
 
   // const check = useRecoilValue(userInfoSelector);
@@ -74,9 +69,8 @@ const MainPage = ({ ...props }) => {
   return (
     <MainWrapper>
       <CanvasWrapper onClick={closemap}>
-        <Canvas className="tmp" camera={getCamera}>
+        <Canvas className="tmp" camera={{ fov: 75, position: [-10, 0, 250] }}>
           <CameraControls />
-          <directionalLight position={[0, 0, 5]} />
           <Suspense fallback={<Loader />}>
             <Stars
               radius={300}
@@ -87,8 +81,10 @@ const MainPage = ({ ...props }) => {
               fade={false}
             />
             <ambientLight />
-            <pointLight position={[10, 10, 10]} />
+            <pointLight position={[500, 200, 0]} intensity={1} />
+            <directionalLight position={[500, 200, 0]} intensity={2} />
             <TestBack />
+            <TestDev />
             <TestFront />
           </Suspense>
         </Canvas>
@@ -120,11 +116,11 @@ const MainPage = ({ ...props }) => {
           </div>
           <div onClick={opennews} className="news">
             <DailyContent></DailyContent>
-            {newsOpen ? <Newsmap></Newsmap> : null}
+            {openNews ? <Newsmap></Newsmap> : null}
           </div>
         </div>
       </FootNav>
-      {mapOpen ? (
+      {openMap ? (
         <RocketMap>
           <SearchMap></SearchMap>
         </RocketMap>

@@ -23,7 +23,19 @@ export const UserIdState = atom({
 
 export const CameraSight = atom({
   key: "CameraSight",
-  default: { fov: 110, position: [0, 0, 300] },
+  default: { fov: 10, position: [0, 0, 0] },
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const Openmap = atom({
+  key: "Openmap",
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const Opennews = atom({
+  key: "Opennews",
+  default: false,
   effects_UNSTABLE: [persistAtom],
 });
 
