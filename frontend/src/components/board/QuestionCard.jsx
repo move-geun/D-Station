@@ -1,14 +1,16 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import { CardContent, Typography } from "@mui/material";
 import { Interval, LinkBox, TagBox, Button } from "./QuestionCard.style";
+import { useEffect, useState } from "react";
 
 const QuestionCard = ({ Tag, Title, theDate, Nickname, Uid }) => {
-  const navigate = useNavigate();
-  const navi = () => {
-    navigate(`/questiondetail`);
-  };
+  const [date, setDate] = useState(null);
+  useEffect(() => {
+    setDate(theDate?.substring(0, 16));
+  }, [theDate]);
+
   return (
     <Interval>
       <Card sx={{ minWidth: 250, marginRight: 3 }}>
@@ -28,7 +30,7 @@ const QuestionCard = ({ Tag, Title, theDate, Nickname, Uid }) => {
           <Typography sx={{ mb: 1.5, mt: 5 }} color="text.secondary">
             {Nickname}
           </Typography>
-          <Typography variant="body2">{theDate}</Typography>
+          <Typography variant="body2">{date}</Typography>
         </CardContent>
         <LinkBox>
           <Button>
