@@ -38,11 +38,11 @@ const Profile = styled.div`
   margin: 2rem 0 1rem 0;
 
   .profile {
-    width: 150px;
     height: 150px;
     margin-left: 6rem;
     margin-right: 1rem;
     border-radius: 50%;
+    justify-content: left;
     img {
       width: 100%;
       height: 100%;
@@ -53,7 +53,7 @@ const Profile = styled.div`
     font-size: 30px;
   }
   .name {
-    font-size: 50px;
+    font-size: 40px;
     font-style: bold;
     margin-right: 1rem;
   }

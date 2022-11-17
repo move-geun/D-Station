@@ -3,9 +3,9 @@ import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
 
-export const UserState = atom({
-  key: "UserState",
-  default: "",
+export const UserLogin = atom({
+  key: "UserLogin",
+  default: false,
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -17,7 +17,7 @@ export const PATState = atom({
 
 export const UserIdState = atom({
   key: "UserIdState",
-  default: "",
+  default: "guest",
   effects_UNSTABLE: [persistAtom],
 });
 

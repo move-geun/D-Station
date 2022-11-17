@@ -2,10 +2,11 @@ import React, { useRef, useState } from "react";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import http from "../../api/http";
 import { getUserId } from "../../api/JWT";
+import { ButtonBox, Button } from "./CommentEditor.style";
 
 export default function CommentEditor(props) {
   const userId = getUserId();
@@ -16,11 +17,6 @@ export default function CommentEditor(props) {
     marginTop: "20px",
     fontSize: "20px",
     width: "100px",
-  };
-
-  const buttonBox = {
-    display: "flex",
-    justifyContent: "end",
   };
 
   const writeComment = () => {
@@ -77,16 +73,14 @@ export default function CommentEditor(props) {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
         />
-        <div style={buttonBox}>
-          <Button
-            style={blank}
-            onClick={writeComment}
-            variant="contained"
-            endIcon={<CheckCircleIcon />}
-          >
-            등록
+        <ButtonBox>
+          <Button onClick={writeComment}>
+            댓글 등록
+            <div>
+              <CheckCircleIcon />
+            </div>
           </Button>
-        </div>
+        </ButtonBox>
       </FormControl>
     </>
   );

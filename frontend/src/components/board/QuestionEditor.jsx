@@ -4,8 +4,8 @@ import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import { Container, Button } from "./QuestionEditor.style";
 // api 연결 관련 import구문
 import http from "../../api/http";
 import { getUserId } from "../../api/JWT";
@@ -27,16 +27,21 @@ export default function QuestionEditor() {
   const userId = getUserId();
   const [titleCreate, setTitleCreate] = useState();
   const editorRef = useRef();
-  const [selected, setSelected] = React.useState("");
+  const [selected, setSelected] = useState("");
+  const [checkTag, setCheckTag] = useState(false);
+  const [checkTitle, setCheckTitle] = useState(false);
+  const [checkContent, setCheckContent] = useState(false);
 
   useEffect(() => {}, [titleCreate]);
   const titleHandler = (e) => {
     setTitleCreate(e.target.value);
+    setCheckTitle(true);
   };
 
   const contentHandler = (e) => {
     if (editorRef.current) {
       const editorCreate = editorRef.current.getContent();
+      setCheckContent(true);
     }
   };
 
@@ -61,7 +66,7 @@ export default function QuestionEditor() {
   };
 
   return (
-    <>
+    <Container>
       <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
         <Box>
           <Typography level="h2" fontSize="lg" id="best-movie" mb={2}>
@@ -98,6 +103,7 @@ export default function QuestionEditor() {
                       onChange={(event) => {
                         if (event.target.checked) {
                           setSelected(name);
+                          setCheckTag(true);
                         }
                       }}
                     />
@@ -153,15 +159,13 @@ export default function QuestionEditor() {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
         />
-        <Button
-          style={blank}
-          onClick={writeQuestion}
-          variant="contained"
-          endIcon={<SendIcon />}
-        >
-          작성완료
-        </Button>
+        {checkTag && checkTitle && checkContent ? (
+          <Button onClick={writeQuestion}>
+            작성완료
+            <SendIcon />
+          </Button>
+        ) : null}
       </FormControl>
-    </>
+    </Container>
   );
 }

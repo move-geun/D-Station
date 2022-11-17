@@ -1,7 +1,12 @@
 import React from "react";
 import { AchieveContainer, Board } from "./Achievement.style";
 
+import { useRecoilValue } from "recoil";
+import { userStudySelector } from "../../recoil/selector";
+
 const Achievement = () => {
+  const userStudy = useRecoilValue(userStudySelector);
+
   return (
     <AchieveContainer>
       <div>

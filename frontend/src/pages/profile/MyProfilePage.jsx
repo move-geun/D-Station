@@ -1,22 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Profile, Percent } from "./MyProfilePage.style";
 import Achievement from "../../components/profile/Achievement";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { UserIdState } from "../../recoil/atoms";
+import { userInfoSelector } from "../../recoil/selector";
 
 const MyProfilePage = () => {
-  const a = "76";
-  const [nik, setNik] = useState(null);
+  const [nik, setNik] = useRecoilState(UserIdState);
+  const [lownik, setLowNik] = useState(nik);
+  const user = useRecoilValue(userInfoSelector);
+  const imgsrc = "../assets/" + user.imageUrl;
+
   useEffect(() => {
-    setNik(window.localStorage.getItem("userId").toLowerCase());
+    setLowNik(nik.toLowerCase());
+    console.log(user);
   }, []);
+  // 유저 픽셀라 이미지 주소
   const pix =
-    "https://pixe.la/v1/users/" + nik + "/graphs/" + nik + "?appearance=dark";
+    "https://pixe.la/v1/users/" +
+    lownik +
+    "/graphs/" +
+    lownik +
+    "?appearance=dark";
+
   return (
     <Container>
       <Profile>
-        <img className="profile" src="../assets/profile.png" alt="" />
-        <div className="name">개린이</div>
+        <img className="profile" src={imgsrc} alt="유저 등급사진" />
+        <div className="name">{user.userNickname}</div>
         <div className="user">님의 행성</div>
       </Profile>
       <Percent>
@@ -27,16 +40,24 @@ const MyProfilePage = () => {
       <Percent>
         <div className="title">
           <div className="status">
-            설거지 당번
-            <div className="per">76%</div>
+            {user.rankName}
+            {user.exp >= 300 ? null : <div className="per">{user.expPer}%</div>}
           </div>
-          <div className="status">
-            우주선 청소부
-            <div className="per">까지 24%</div>
-          </div>
+          {user.exp >= 300 ? (
+            <div className="per">100%</div>
+          ) : (
+            <div className="status">
+              {user.nextRank}
+              <div className="per">까지 {100 - user.expPer}%</div>
+            </div>
+          )}
         </div>
         <div className="perbox">
-          <div className="nowper" style={{ width: `${a}%` }}></div>
+          {user.exp >= 300 ? (
+            <div className="nowper" style={{ width: "100%" }}></div>
+          ) : (
+            <div className="nowper" style={{ width: `${user.expPer}%` }}></div>
+          )}
         </div>
       </Percent>
       <Achievement></Achievement>

@@ -5,4 +5,18 @@ const Interval = styled.div`
   height: 250px;
 `;
 
-export { Interval };
+const TagBox = styled.div`
+  border-bottom: solid 2px teal;
+`;
+
+const LinkBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+`;
+
+const Button = styled.button`
+  border: solid 3px blue;
+`;
+
+export { Interval, TagBox, LinkBox, Button };

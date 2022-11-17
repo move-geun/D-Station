@@ -29,6 +29,11 @@ const ButtonGroup = styled.div`
     border: solid 1px green;
     color: green;
     font-weight: bold;
+    :hover {
+      background-color: green;
+      color: white;
+      transition: 0.5s;
+    }
   }
 
   .delete {
@@ -39,6 +44,11 @@ const ButtonGroup = styled.div`
     border: solid 1px red;
     color: red;
     font-weight: bold;
+    :hover {
+      background-color: red;
+      color: white;
+      transition: 0.5s;
+    }
   }
 `;
 

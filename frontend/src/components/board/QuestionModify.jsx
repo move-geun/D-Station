@@ -6,7 +6,6 @@ import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import CheckIcon from "@mui/icons-material/Check";
 import Box from "@mui/joy/Box";
@@ -15,6 +14,7 @@ import Radio from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Typography from "@mui/joy/Typography";
 import { Container } from "./QuestionModify.style";
+import { Button } from "./QuestionModify.style";
 
 const QuestionModify = () => {
   const navigate = useNavigate();
@@ -28,6 +28,11 @@ const QuestionModify = () => {
   const [titleCreate, setTitleCreate] = useState();
   const editorRef = useRef();
   const [selected, setSelected] = useState(tag);
+
+  // 버튼 조건용
+  const [checkTag, setCheckTag] = useState(false);
+  const [checkTitle, setCheckTitle] = useState(false);
+  const [checkContent, setCheckContent] = useState(false);
 
   const blank = {
     marginTop: "20px",
@@ -62,7 +67,7 @@ const QuestionModify = () => {
         console.log("수정 완료");
         console.log(res.data);
         alert("수정이 완료되었습니다.");
-        navigate(``);
+        navigate(`/questionlist`);
       })
       .catch((err) => {
         console.log(err);
@@ -73,12 +78,13 @@ const QuestionModify = () => {
   useEffect(() => {}, [titleCreate]);
   const titleHandler = (e) => {
     setTitleCreate(e.target.value);
+    setCheckTitle(true);
   };
 
   const contentHandler = (e) => {
     if (editorRef.current) {
       const editorCreate = editorRef.current.getContent();
-      console.log(editorCreate);
+      setCheckContent(true);
     }
   };
 
@@ -121,6 +127,7 @@ const QuestionModify = () => {
                       onChange={(event) => {
                         if (event.target.checked) {
                           setSelected(name);
+                          setCheckTag(true);
                         }
                       }}
                     />
@@ -133,7 +140,12 @@ const QuestionModify = () => {
       </Box>
       <FormControl>
         <FormLabel style={blank}>제목</FormLabel>
-        <Textarea value={title} minRows={1} onChange={titleHandler}></Textarea>
+        <Textarea
+          placeholder={title}
+          value={title}
+          minRows={1}
+          onChange={titleHandler}
+        ></Textarea>
         <FormLabel style={blank}>내용</FormLabel>
         <Editor
           apiKey="mv47x1bf7revpqmsvwdqta54w2b390xyi1wmkmlthp83qlkj"
@@ -172,14 +184,12 @@ const QuestionModify = () => {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
         />
-        <Button
-          style={blank}
-          variant="contained"
-          endIcon={<SendIcon />}
-          onClick={modify}
-        >
-          작성완료
-        </Button>
+        {checkTag && checkTitle && checkContent ? (
+          <Button onClick={modify}>
+            작성완료
+            <SendIcon />
+          </Button>
+        ) : null}
       </FormControl>
     </Container>
   );

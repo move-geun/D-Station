@@ -24,6 +24,17 @@ const FootNav = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  .profile {
+    margin-left: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
   .flexWrapInfo {
     width: 50%;
     display: flex;
@@ -35,6 +46,29 @@ const FootNav = styled.div`
 
     div {
       margin: 0 8px;
+    }
+    .expBar {
+      width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      .perbox {
+        position: relative;
+        background-color: gray;
+        margin-top: 5px;
+        border-radius: 10px;
+        width: 100%;
+        height: 20px;
+
+        .nowper {
+          position: absolute;
+          background-color: tomato;
+          border-radius: 10px;
+          height: 20px;
+          left: -8px;
+        }
+      }
     }
   }
   .flexWrap {

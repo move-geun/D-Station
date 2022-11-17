@@ -6,18 +6,40 @@ import {
   SearchSide,
   SearchFunction,
 } from "./SearchMap.style";
+import http from "../../api/http";
+import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Stack from "@mui/material/Stack";
 
 const SearchMap = () => {
+  const [content, setContent] = useState(null);
+  const [resultList, setResultList] = useState(null);
+  // search 값 받기
+  const searchHandler = (e) => {
+    e.preventDefault();
+    setContent(e.target.value);
+  };
+  // 검색
+  const getSearch = async (e) => {
+    if (e.keyCode === 13) {
+      await http.connect_axios
+        .get("satellite/search/", {
+          params: { keyword: content },
+        })
+        .then((res) => {
+          setResultList(res.data.list);
+          console.log(resultList);
+        });
+    }
+  };
+
   return (
     <SearchWraper>
-      <div className="title">Navigation</div>
+      <div className="title neonText">🌌 Navigation</div>
       <ContentWrapper>
         <RecoSide>
-          <div className="title">추천 과정</div>
+          <div className="title">⭐추천 과정</div>
           <div className="logo_container">
             <div className="logobox">
               <img src="../assets/python.png" alt="" />
@@ -44,50 +66,39 @@ const SearchMap = () => {
         <SearchSide>
           <SearchFunction>
             <div className="search">
-              <input className="searchInput" type="text" placeholder="search" />
-              <SearchIcon />
+              <input
+                className="searchInput"
+                type="text"
+                placeholder="search"
+                onChange={(e) => searchHandler(e)}
+                onKeyUp={(e) => getSearch(e)}
+              />
+              <SearchIcon style={{ color: "black" }} />
             </div>
           </SearchFunction>
-          <div className="search_title">검색 결과 . . .</div>
-          <Stack spacing={2} className="spacing">
-            <Breadcrumbs separator="›" aria-label="breadcrumb" color="white">
-              <div underline="hover" key="1" color="inherit">
-                Start
-              </div>
-              <div underline="hover" key="2" color="inherit">
-                Core
-              </div>
-              <div key="3" color="text.primary" href="/">
-                Breadcrumb
-              </div>
-            </Breadcrumbs>
-          </Stack>
-          <Stack spacing={2} className="spacing">
-            <Breadcrumbs separator="›" aria-label="breadcrumb" color="white">
-              <div underline="hover" key="1" color="inherit">
-                Start
-              </div>
-              <div underline="hover" key="2" color="inherit">
-                Core
-              </div>
-              <div key="3" color="text.primary" href="/">
-                Breadcrumb
-              </div>
-            </Breadcrumbs>
-          </Stack>
-          <Stack spacing={2} className="spacing">
-            <Breadcrumbs separator="›" aria-label="breadcrumb" color="white">
-              <div underline="hover" key="1" color="inherit">
-                Start
-              </div>
-              <div underline="hover" key="2" color="inherit">
-                Core
-              </div>
-              <div key="3" color="text.primary" href="/">
-                Breadcrumb
-              </div>
-            </Breadcrumbs>
-          </Stack>
+          {resultList ? <div className="search_title">검색 결과 🚀</div> : null}
+
+          {resultList
+            ? resultList.map((result, idx) => (
+                <Stack spacing={2} className="spacing" key={idx}>
+                  <Breadcrumbs
+                    separator="›"
+                    aria-label="breadcrumb"
+                    color="white"
+                  >
+                    <div underline="hover" key="1" color="inherit">
+                      {result.gname}
+                    </div>
+                    <div underline="hover" key="2" color="inherit">
+                      {result.pname}
+                    </div>
+                    <div key="3" color="text.primary" href="/">
+                      {result.sname}
+                    </div>
+                  </Breadcrumbs>
+                </Stack>
+              ))
+            : null}
         </SearchSide>
       </ContentWrapper>
     </SearchWraper>

@@ -6,8 +6,9 @@ import {
   Tag,
   Content,
   Buttons,
-  Button,
-  Comment,
+  Modi,
+  Del,
+  Lst,
 } from "./QuestionDetail.style";
 import CommentEditor from "../../components/board/CommentEditor";
 import CommentDetail from "../../components/board/Comment";
@@ -81,26 +82,21 @@ const QuestionDetail = () => {
         {isAuthenticated() && userId == checkId ? (
           <>
             <Link to="/questionModify" state={{ id: { id } }}>
-              <Button style={{ color: "yellow" }} onClick={modify}>
-                수정
-              </Button>
+              <Modi onClick={modify}>수정</Modi>
             </Link>
-            <Button style={{ color: "orangered" }} onClick={del}>
+            <Del onClick={del} key={del}>
               삭제
-            </Button>
+            </Del>
           </>
         ) : null}
-        <Button style={{ color: "yellowgreen" }}>
-          <Link
-            to="/questionlist"
-            style={{ textDecoration: "none", color: "yellowgreen" }}
-          >
+        <Lst>
+          <Link to="/questionlist" className="link">
             목록으로
           </Link>
-        </Button>
+        </Lst>
       </Buttons>
       {/* 댓글시작 */}
-      <h1>댓글</h1>
+      <h1>📌댓글</h1>
       {comments ? (
         comments.map((comment, idx) => {
           return (
