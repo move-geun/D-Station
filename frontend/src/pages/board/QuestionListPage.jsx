@@ -9,6 +9,8 @@ import { Stars, useProgress, Html } from "@react-three/drei";
 import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { SpaceStation } from "../../components/scene/Space_station";
+import http from "../../api/http";
+import { useState } from "react";
 
 extend({ OrbitControls });
 
@@ -37,6 +39,29 @@ function Loader() {
 
 const QuestionListPage = () => {
   const userId = getUserId();
+  const [search, setSearch] = useState("");
+
+  const onChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const searching = () => {
+    http.connect_axios
+      .get(`http://k7e106.p.ssafy.io:8081/api/ask/search?keyword=${search}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("해당하는 검색 결과가 없습니다.");
+      });
+  };
+
+  const onKeyPress = (e) => {
+    if (e.key == "Enter") {
+      searching();
+    }
+  };
 
   return (
     <>
@@ -66,8 +91,15 @@ const QuestionListPage = () => {
           </div>
         ) : null}
         <div className="search">
-          <input className="searchInput" type="text" placeholder="search" />
-          <a className="searchBtn" href="#">
+          <input
+            className="searchInput"
+            type="text"
+            placeholder="검색어를 입력해주세요."
+            value={search}
+            onChange={onChange}
+            onKeyPress={onKeyPress}
+          />
+          <a className="searchBtn" onClick={searching}>
             <SearchIcon />
           </a>
         </div>
