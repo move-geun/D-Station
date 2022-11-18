@@ -5,7 +5,10 @@ import {
   Bubble,
   ResultContainer,
   ResultContent,
+  ResultList,
+  Total,
 } from "./Survey.style";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Survey = () => {
@@ -62,6 +65,11 @@ const Survey = () => {
     opt2: aws2[idx],
   });
   const [result, setResult] = useState(null);
+  const navigate = useNavigate();
+
+  const goback = () => {
+    navigate("/myprofile");
+  };
 
   const first = () => {
     setIdx(idx + 1);
@@ -138,26 +146,39 @@ const Survey = () => {
     );
   } else {
     return (
-      <ResultContainer>
-        <div className="nav"></div>
-        <ResultContent>
-          <div className="neonText">{result.type}</div>
-          <div className="neonText">{result.title}</div>
-          <div className="neonText">{result.description}</div>
-          <img src={result.imgsrc} alt="" />
-          <div className="neonText">{result.bigSort}</div>
-          {result.smallSort
-            ? result.smallSort.map((small, idx) => {
-                return (
-                  <div className="neonText" key={idx}>
-                    {small}
-                  </div>
-                );
-              })
-            : null}
-        </ResultContent>
-        <button> 메인페이지로 가기</button>
-      </ResultContainer>
+      <Total>
+        <ResultContainer>
+          <ResultContent>
+            <img src={result.imgsrc} alt="" />
+            <div className="content">
+              <div className="d">
+                <p className="d">{result.title} 인 당신은</p>
+                <h1 className="neonText">{result.bigSort}!</h1>
+              </div>
+              <p className="d">MBTI는 {result.type}</p>
+              <p className="description">{result.description}</p>
+            </div>
+          </ResultContent>
+          <ResultList>
+            <div className="title">다음과 같은 직업들을 추천드려요!</div>
+            <div>
+              {result.smallSort
+                ? result.smallSort.map((small, idx) => {
+                    return (
+                      <div className="d" key={idx}>
+                        {small}
+                      </div>
+                    );
+                  })
+                : null}
+            </div>
+          </ResultList>
+          <div className="back" onClick={goback}>
+            🪐
+            <div className="neonText">돌아가기</div>
+          </div>
+        </ResultContainer>
+      </Total>
     );
   }
 };
