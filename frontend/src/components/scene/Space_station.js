@@ -12,9 +12,9 @@ export function SpaceStation(props) {
   return (
     <group {...props} dispose={null} ref={myMesh}>
       <group
-        position={[2.06, -0.76, 0]}
+        position={[0, 0, 0]}
         // rotation={[-Math.PI / 2, 0.56, 0]}
-        rotation={[0, 0.56, 0]}
+        rotation={[0, 15, 3]}
         scale={1}
       >
         <group rotation={[Math.PI / 2, 0, 0]}>

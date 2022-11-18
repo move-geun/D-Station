@@ -57,7 +57,7 @@ const QuestionListPage = () => {
 
   return (
     <>
-      <Canvas camera={{ fov: 110, position: [0, 0, 400] }}>
+      <Canvas camera={{ fov: 70, position: [0, 0, 400] }}>
         <CameraControls />
         <directionalLight position={[10, 10, 5]} />
         <pointLight position={[10, 10, 10]} />
@@ -71,7 +71,7 @@ const QuestionListPage = () => {
             saturation={7}
             fade={false}
           />
-          <SpaceStation position={[500, -300, 0]} />
+          <SpaceStation position={[300, -150, 0]} />
         </Suspense>
       </Canvas>
       <Function>
