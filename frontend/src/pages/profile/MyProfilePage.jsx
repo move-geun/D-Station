@@ -3,19 +3,18 @@ import { Container, Profile, Percent } from "./MyProfilePage.style";
 import Achievement from "../../components/profile/Achievement";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { UserIdState } from "../../recoil/atoms";
 import { userInfoSelector } from "../../recoil/selector";
 
 const MyProfilePage = () => {
-  const [nik, setNik] = useRecoilState(UserIdState);
+  const nik = useRecoilValue(UserIdState);
   const [lownik, setLowNik] = useState(nik);
   const user = useRecoilValue(userInfoSelector);
   const imgsrc = "../assets/" + user.imageUrl;
 
   useEffect(() => {
     setLowNik(nik.toLowerCase());
-    console.log(user);
   }, []);
   // 유저 픽셀라 이미지 주소
   const pix =
