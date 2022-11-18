@@ -24,10 +24,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aspose.words.Document;
-import com.ssafy.api.request.til.SatelliteTILReq;
 import com.ssafy.api.request.til.TILCreateReq;
 import com.ssafy.api.request.til.TILRepoReq;
+import com.ssafy.api.response.mission.MissionRes;
 import com.ssafy.api.response.til.MissionDirRes;
+import com.ssafy.api.response.til.MissionTILRes;
 import com.ssafy.api.response.til.SatelliteTILRes;
 import com.ssafy.api.response.til.TILListByUserRes;
 import com.ssafy.db.entity.Mission;
@@ -208,7 +209,7 @@ public class TILServiceImpl implements TILService {
 		String gitLink = "";
 		String gitLink2 = "";
 		String pixelaId = tILCreateReq.getId().toLowerCase();
-		
+
 		// user id로 user 정보 얻어오기
 		User user = userRepository.getUsersById(tILCreateReq.getId()).get();
 		String repoName = user.getRepo();
@@ -340,9 +341,9 @@ public class TILServiceImpl implements TILService {
 
 	// 사용자 별 위성 별 til 얻기
 	@Override
-	public ArrayList<SatelliteTILRes> getUserTILBySatellite(SatelliteTILReq satelliteTILReq) {
-		long userUid = userRepository.getUsersById(satelliteTILReq.getId()).get().getUid();
-		Optional<Satellite> satellite = satelliteRepository.getSatelliteByUid(satelliteTILReq.getSUid());
+	public ArrayList<SatelliteTILRes> getUserTILBySatellite(String id, long sUid) {
+		long userUid = userRepository.getUsersById(id).get().getUid();
+		Optional<Satellite> satellite = satelliteRepository.getSatelliteByUid(sUid);
 		ArrayList<SatelliteTILRes> stresList = new ArrayList<>();
 
 		if (satellite.isPresent()) {
@@ -367,6 +368,23 @@ public class TILServiceImpl implements TILService {
 			return stresList;
 		}
 		return stresList;
+	}
+
+	// 사용자 별 미션 별 til 얻기
+	@Override
+	public MissionTILRes getUserTILByMission(String id, long mUid) {
+		long userUid = userRepository.getUsersById(id).get().getUid();
+
+		ArrayList<TIL> list = tilRepository.getTILByUserUid(userUid);
+
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getMission().getUid() == mUid) {
+				return MissionTILRes.of(list.get(i));
+			}
+		}
+
+		return null;
+
 	}
 
 	// 파일 읽어드리는 함수

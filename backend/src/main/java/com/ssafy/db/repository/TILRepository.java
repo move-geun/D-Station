@@ -15,5 +15,5 @@ import com.ssafy.db.entity.TIL;
 public interface TILRepository extends JpaRepository<TIL, Long> {
 	
 	ArrayList<TIL> getTILByUserUid(long uid);
-
+	
 }
