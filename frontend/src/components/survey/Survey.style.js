@@ -72,46 +72,97 @@ const Bubble = styled.div`
   }
 `;
 
+const Total = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  @keyframes pulsate {
+    100% {
+      /* Larger blur radius */
+      text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #f09,
+        0 0 80px #f09, 0 0 90px #f09, 0 0 100px #f09, 0 0 150px #f09;
+    }
+    0% {
+      /* A slightly smaller blur radius */
+      text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 18px #fff, 0 0 38px #f09,
+        0 0 73px #f09, 0 0 80px #f09, 0 0 94px #f09, 0 0 140px #f09;
+    }
+  }
+  .neonText {
+    /* animation: pulsate 0.11s ease-in-out infinite alternate; */
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #f09,
+      0 0 1500px #f09, 0 0 2000px #f09, 0 0 1000px #f09, 0 0 200px #f09;
+  }
+`;
+
 const ResultContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  margin: 120px auto 0 auto;
+  width: 700px;
+  height: 700px;
+  border: 2px solid #fff;
+  border-radius: 30px;
+  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #0fa, 0 0 0.8rem #0fa,
+    0 0 2.8rem #0fa, inset 0 0 1.3rem #0fa;
 
   .nav {
     height: 80px;
+  }
+
+  .description {
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+  .back {
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
   }
 `;
 
 const ResultContent = styled.div`
   width: 700px;
-  height: 700px;
-  background-color: black;
   border-radius: 10px;
-  color: black;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
 
-  @keyframes flicker {
-    0%,
-    18%,
-    22%,
-    25%,
-    53%,
-    57%,
-    100% {
-      text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #0fa,
-        0 0 80px #0fa, 0 0 90px #0fa, 0 0 100px #0fa, 0 0 150px #0fa;
-    }
-    20%,
-    24%,
-    55% {
-      text-shadow: none;
-    }
-  }
-  .neonText {
-    animation: flicker 1.5s infinite alternate;
+  .content {
+    width: 350px;
   }
 `;
 
-export { SurveyContainer, Bubble, ResultContainer, ResultContent };
+const ResultList = styled.div`
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+
+  div {
+    width: 100%;
+    text-align: center;
+    margin: 7px;
+  }
+  .title {
+    font-size: 2rem;
+  }
+`;
+
+export {
+  SurveyContainer,
+  Bubble,
+  ResultContainer,
+  ResultContent,
+  ResultList,
+  Total,
+};
