@@ -37,7 +37,16 @@ const ListWrapper = styled.div`
         cursor: pointer;
         transition: transform .25s cubic-bezier(.7,.98,.86,.98), box-shadow .25s cubic-bezier(.7,.98,.86,.98);
        
-     
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+
+    .doneTil {
+        cursor: pointer;
+        transition: transform .25s cubic-bezier(.7,.98,.86,.98), box-shadow .25s cubic-bezier(.7,.98,.86,.98);
+       
         &:hover {
             transform: scale(1.05);
         }

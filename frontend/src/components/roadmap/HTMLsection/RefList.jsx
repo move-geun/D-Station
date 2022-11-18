@@ -22,7 +22,7 @@ const RefList = (prop = defaultValue) => {
 
   return (
     <ListWrapper>
-    <h3 className="refTitle"> Reference </h3>
+    <h2 className="refTitle"> Reference </h2>
     {/* <hr/> */}
         {refList ? (
           refList.map((item, idx) => {

@@ -65,6 +65,10 @@ const MissionHTML = (prop = defaultValue) => {
     setWhichOne(prop);
   }
 
+  function goToTilPage(prop){
+    window.open(`${prop}`, '_blank');
+  }
+
   return (
     <>
       <DescWrapper>
@@ -88,19 +92,22 @@ const MissionHTML = (prop = defaultValue) => {
       </RefListWrapper>
       
       <MissTILWrapper>
-        {whichOne === "tilSuccess" ? (
-          <ListWrapper>
-            {doneTilData? 
-              <>{doneTilData.fileName}{doneTilData.regDate}</> 
+        {doneTilData? 
+            (
+              <ListWrapper>
+                <h2> 작성한 TIL</h2>
+                <div className="doneTil" onClick={()=>goToTilPage(doneTilData.link)}> {doneTilData.fileName}</div>
+            </ListWrapper>
+            )
             : 
-              <></>
+            (
+              <div className="btn" onClick={() => goUp("til")}>
+                TIL작성하기 <div className="dot"></div>
+              </div>
+            )
             }
-          </ListWrapper>
-        ) : (
-          <div className="btn" onClick={() => goUp("til")}>
-            TIL작성하기 <div className="dot"></div>
-          </div>
-        )}
+         
+        
       </MissTILWrapper>
       <QuizWrapper>
         {quizORct ? (

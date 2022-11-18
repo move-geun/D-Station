@@ -13,7 +13,9 @@ import { Canvas } from "@react-three/fiber";
 import BaseBackground from "../../components/roadmap/Threesection/Base/BaseBackground";
 import { Man } from "../../components/roadmap/Threesection/Mission/Man";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { CTIntoThree, NavMissionIntoThree, QuizIntoThree, TilIntoThree } from "../../recoil/atoms";
+import {
+  NavMissionIntoThree,
+} from "../../recoil/atoms";
 import TilEditor from "../../components/til/TilEditor";
 import { DecoWood } from "../../components/scene/DecoWood.jsx";
 import { Html } from "@react-three/drei";
@@ -43,40 +45,35 @@ const MissionPage = () => {
     }
   }
 
-
-
   async function getQuizData() {
     await http.connect_axios
       .get(`/quiz?uid=${misId}`)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setQuizData(res.data);
       })
       .catch((err) => {
         setQuizOrCT(false);
         // 퀴즈데이터 요청해서 500 반환하면 코테데이터 요청
         http.connect_axios
-        .get(`/grading/muid?uid=${misId}`)
-        .then((res)=>{
-         
-        })
-        .catch((err)=> {console.log(err)})
-        console.log(err);   
+          .get(`/grading/muid?uid=${misId}`)
+          .then((res) => {})
+          .catch((err) => {
+            console.log(err);
+          });
+        console.log(err);
       });
   }
 
-  async function getTilDone(){
+  async function getTilDone() {
     await http.connect_axios
-    .get(`/til/mission?id=${userId}&mUid=${misId}`)
-    .then((res)=> {
-      console.log(res)
-      setDoneTilData(res.data);
-      setWhichOne("tilSuccess");
-      }
-    )
-    
-      
-    .catch((err)=> console.log(err))
+      .get(`/til/mission?id=${userId}&mUid=${misId}`)
+      .then((res) => {
+        console.log(res);
+        setDoneTilData(res.data);
+      })
+
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -88,17 +85,23 @@ const MissionPage = () => {
           <directionalLight position={[0, 5, 0]} />
           <ambientLight />
           <BaseBackground />
-          {one === "quiz"? <DecoWood data = {quizData} /> : <Html></Html> }
-          {one === "quizSuccess"? <Html> 정답</Html> : <Html/>}
-          {one === "code"? <></>:<></>}
-          {one === "codeSuccess"? <Html> 코드 풀기 성공 </Html> : <Html/>}
-          {doneTilData !== null ? <Html> Til 작성 완료을 완료하였습니다. </Html> : <Html/>}
-          
+          {one === "quiz" ? <DecoWood data={quizData} /> : <Html></Html>}
+          {one === "quizSuccess" ? <Html> 정답입니다 🍕 </Html> : <Html />}
+          {one === "quizFail" ? <Html> 틀렸습니다. 😈 </Html> : <Html />}
+          {one === "code" ? <></> : <></>}
+          {one === "codeSuccess" ? <Html> 코드 풀기 성공 </Html> : <Html />}
+          {one === "tilSuccess" ? <Html> TIL 작성 완료 </Html>: <Html/>}
+          {/* {doneTilData !== null ? <Html> Til 작성 완료을 완료하였습니다. </Html> : <Html/>} */}
+
           {MisRouter()}
         </Canvas>
       </ThreeWrapper>
       <HTMLWrapper>
-        <MissionHTML mUId={misId} whichOne = {quizORct} doneTilData ={doneTilData}/>
+        <MissionHTML
+          mUId={misId}
+          whichOne={quizORct}
+          doneTilData={doneTilData}
+        />
       </HTMLWrapper>
     </MissionContainer>
   );
