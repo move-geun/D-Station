@@ -21,19 +21,19 @@ const RefList = (prop = defaultValue) => {
   };
 
   return (
-    <>
-    <div> Reference </div>
-    <hr/>
+    <ListWrapper>
+    <h3 className="refTitle"> Reference </h3>
+    {/* <hr/> */}
         {refList ? (
           refList.map((item, idx) => {
             return (
-              <div key={idx} onClick={()=> goToRef(item.rurl)}>{item.title}</div>
+              <div key={idx} className="rlist" onClick={()=> goToRef(item.rurl)}>{item.title}</div>
             );
           })
         ) : (
           <div> 데이터를 불러오는 중입니다.</div>
         )}
-    </>
+    </ListWrapper>
   );
 };
 

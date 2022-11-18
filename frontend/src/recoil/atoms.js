@@ -60,3 +60,9 @@ export const CTIntoThree = atom({
   default: false,
   effects_UNSTABLE: [persistAtom],
 })
+
+export const NavMissionIntoThree = atom({
+  key: "NavMissionIntoThree",
+  default: null,
+  effects_UNSTABLE: [persistAtom],
+})

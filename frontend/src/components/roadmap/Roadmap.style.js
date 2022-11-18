@@ -12,9 +12,12 @@ const HTMLWrapper = styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: rgba( 0, 50, 100, 0.5 );
     border-radius: 50px 0 0 50px;
     word-break:break-all;
+  
+
+    background: rgb(5,0,19);
+background: linear-gradient(180deg, rgba(5,0,19,0.9668242296918768) 0%, rgba(10,9,50,1) 30%, rgba(11,29,53,1) 60%, rgba(5,27,25,1) 100%);
 `;
 
 
@@ -28,11 +31,12 @@ const ThreeWrapper = styled.div`
 
 const DescWrapper = styled.div`
     height: 30%;
-    padding: 4rem 1rem 0rem 1rem;
-    /* margin: 0.5rem; */
+    padding: 4.5rem 2rem 0rem 2rem;
+    margin: 0.5rem;
     /* word-break:break-all; */
 
     .name{
+        text-align: center;
         height: 50px;
     }
 
@@ -41,22 +45,25 @@ const DescWrapper = styled.div`
         /* height: 100px; */
         white-space: normal;
         /* overflow: hidden; */
-        text-overflow: ellipsis;
-        font-size: small;
+        /* text-overflow: ellipsis; */
+        font-size: x-small;
+        line-height: 150%;
+
     
 
 }
 `
 
 const ListWrapper = styled.div`
-    height: 70%;
+    /* height: 70%; */
     float: bottom;
-    padding: 2rem;
+    padding: 1rem;
 `
 
 const RefListWrapper = styled.div`
-    /* margin: 1rem; */
+    margin: 1rem;
     padding: 1rem;
+  
 `
 
 const QuizWrapper = styled.div`
@@ -81,8 +88,8 @@ const QuizWrapper = styled.div`
         content: '';
         position: absolute;
         top: 0;
-        width: calc(var(--btn-w)*.2);
-        height: 100%;
+        width: 5px;
+        height: 5px;
         border-radius: 100%;
         transition: all 300ms ease;
         display: none;
@@ -94,8 +101,8 @@ const QuizWrapper = styled.div`
         position: absolute;
         left: calc(50% - .4em);
         top: -.4em;
-        height: .8em;
-        width: .8em;
+        height: .5em;
+        width: .5em;
         background: gold;
         border-radius: 1em;
         border: .25em solid #fff;

@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import { useParams } from "react-router-dom";
+
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import Textarea from "@mui/joy/Textarea";
@@ -8,7 +10,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { useState, useEffect } from "react";
 
 import http from "../../api/http";
-import { UserIdState, UserState, PATState, TilIntoThree } from "../../recoil/atoms";
+import { UserIdState, UserState, PATState, TilIntoThree, NavMissionIntoThree } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { getUserId } from "../../api/JWT";
 import { EditorContainer } from "./TilEditor.style";
@@ -22,14 +24,18 @@ export default function TilEditor(prop = defaultValue) {
     message: "",
   });
   const [tilOpen, setTilOpen] = useRecoilState(TilIntoThree);
-  const missionId = prop.mUId;
+  const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
+  const misId = useParams().missNo;
+
 
   const titleRef = useRef();
   const editorRef = useRef();
   const userId = getUserId();
 
   useEffect(() => {}, [tilContent]);
-  useEffect(()=>{}, [prop])
+  useEffect(()=>{
+
+  }, [prop])
 
   const blank = {
     marginTop: "20px",
@@ -86,7 +92,7 @@ export default function TilEditor(prop = defaultValue) {
       fileName: tilContent.title,
       id: userId,
       message: tilContent.message,
-      missionUid: missionId,
+      missionUid: misId,
     };
 
     // 여기에 html 을 백에 보냄
@@ -95,11 +101,15 @@ export default function TilEditor(prop = defaultValue) {
         "Content-Type": `application/json`,
       },
     })
-    .then((res)=> {console.log("전송전송     ", data.missionUid)
+    .then((res)=> {
+      console.log(res);
+      // 작성 성공했을 때, threejs section에 성공 띄우기  
+      setWhichOne("tilSuccess");
+    
+
       setTilOpen(false);
-  
   })
-    .catch((err)=> {console.log(err)});
+    .catch((err)=> {console.log(data)});
   };
 
   return (

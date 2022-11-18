@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { CTIntoThree, QuizIntoThree, TilIntoThree } from "../../../recoil/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  NavMissionIntoThree,
+} from "../../../recoil/atoms";
 import http from "../../../api/http";
-import TilEditor from "../../til/TilEditor";
+
 
 import {
   DescWrapper,
@@ -11,6 +13,7 @@ import {
   RefListWrapper,
 } from "../Roadmap.style";
 import RefList from "./RefList";
+import { ListWrapper } from "./RoadList.style";
 
 const defaultValue = {};
 const MissionHTML = (prop = defaultValue) => {
@@ -19,22 +22,22 @@ const MissionHTML = (prop = defaultValue) => {
   const [mData, setMData] = useState(null);
   const [refData, setRefData] = useState(null);
   const [quizData, setQuizData] = useState(null);
+  const [doneTilData, setDoneTilData] = useState(null);
 
-
-  const [tilOpen, setTilOpen] = useRecoilState(TilIntoThree);
-  const [quizOpen, setQuizOpen] = useRecoilState(QuizIntoThree);
-  const [ctOpen, setCTOpen] = useRecoilState(CTIntoThree);
   const [quizORct, setQuizOrCT] = useState(null);
-
+  const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
+  const one = useRecoilValue(NavMissionIntoThree);
 
   useEffect(() => {
     getMissionData();
     getRefListData();
   }, []);
 
-  useEffect(() => {}, [mData, refData, quizData, quizORct]);
-  useEffect(()=>{
-    setQuizOrCT(prop.whichOne)},[prop])
+  useEffect(() => {}, [mData, refData, quizData, quizORct, doneTilData]);
+  useEffect(() => {
+    setQuizOrCT(prop.whichOne);
+    setDoneTilData(prop.doneTilData);
+  }, [prop]);
 
   async function getMissionData() {
     await http.connect_axios
@@ -58,35 +61,8 @@ const MissionHTML = (prop = defaultValue) => {
       });
   }
 
-  
-
-  function goUpTil(prop){
-    tilOpen ? 
-    setTilOpen(false) 
-    : 
-    setTilOpen(true);
-    setQuizOpen(false);
-    setCTOpen(false);
-  };
-
-  function goUpQuiz(prop){
-    quizOpen ? 
-    setQuizOpen(false)
-    : 
-    setQuizOpen(true);
-    setTilOpen(false);
-    setCTOpen(false);
- 
-    
-  }
-
-  function goUpCT(prop){
-    ctOpen?
-    setCTOpen(false)
-    :
-    setCTOpen(true);
-    setTilOpen(false);
-    setQuizOpen(false);
+  function goUp(prop) {
+    setWhichOne(prop);
   }
 
   return (
@@ -110,17 +86,35 @@ const MissionHTML = (prop = defaultValue) => {
           <div>데이터를 불러오는 중입니다.</div>
         )}
       </RefListWrapper>
-      <QuizWrapper>
-        {quizORct ? 
-        (<div className="btn" onClick={() => goUpQuiz(misId)}> 퀴즈 풀기 <div className="dot"></div></div>)
-        :
-        (<div className="btn" onClick={() => goUpCT(misId)}> 코드 풀기 <div className="dot"></div></div>)
-      }
-        
-      </QuizWrapper>
+      
       <MissTILWrapper>
-        <div className="btn" onClick={() => goUpTil(misId)}>TIL작성하기 <div className="dot"></div></div>
+        {whichOne === "tilSuccess" ? (
+          <ListWrapper>
+            {doneTilData? 
+              <>{doneTilData.fileName}{doneTilData.regDate}</> 
+            : 
+              <></>
+            }
+          </ListWrapper>
+        ) : (
+          <div className="btn" onClick={() => goUp("til")}>
+            TIL작성하기 <div className="dot"></div>
+          </div>
+        )}
       </MissTILWrapper>
+      <QuizWrapper>
+        {quizORct ? (
+          <div className="btn" onClick={() => goUp("quiz")}>
+            {" "}
+            퀴즈 풀기 <div className="dot"></div>
+          </div>
+        ) : (
+          <div className="btn" onClick={() => goUp("code")}>
+            {" "}
+            코드 풀기 <div className="dot"></div>
+          </div>
+        )}
+      </QuizWrapper>
     </>
   );
 };
