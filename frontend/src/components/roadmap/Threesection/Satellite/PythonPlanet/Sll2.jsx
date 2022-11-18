@@ -11,15 +11,15 @@ import {
   Html,
 } from "@react-three/drei";
 
-import SatelliteColor from "../../../../../assets/images/TilesHexagonsColor.jpg";
-import SatelliteBump from "../../../../../assets/images/TilesHexagonsBump.png";
-import SatelliteSpecular from "../../../../../assets/images/TilesHexagonsRoughness.jpg";
-import SatelliteNormal from "../../../../../assets/images/TilesHexagonsNormal.jpg";
+import SatelliteColor from "../../../../../assets/images/canyonRockColor.jpg";
+import SatelliteBump from "../../../../../assets/images/canyonRockBump.png";
+import SatelliteRough from "../../../../../assets/images/canyonRockColorRoughness.jpg";
+import SatelliteNormal from "../../../../../assets/images/canyonRockNormal.jpg";
 import { useEffect } from "react";
 
 export function Sll2() {
     const [colorMap, bumpMap, specularMap, normalMap] = useLoader(
-      TextureLoader,[SatelliteColor, SatelliteBump, SatelliteSpecular, SatelliteNormal]
+      TextureLoader,[SatelliteColor, SatelliteBump, SatelliteRough, SatelliteNormal]
     );
     // const [hovered, setHover] = useState(false);
     const [clickActive, setClickActive] = useState(false);
@@ -33,7 +33,7 @@ export function Sll2() {
     //회전을 위해
     useFrame(({ clock }) => {
       const elapsedTime = clock.getElapsedTime();
-      sateRef.current.rotation.y = elapsedTime / 6;
+      sateRef.current.rotation.y = elapsedTime / 2;
     });
 
     const goToSatellite = () => {
@@ -44,7 +44,7 @@ export function Sll2() {
       <>
         <mesh 
             ref={sateRef} 
-            position={[1, 1, 3]}
+            position={[1, 0, 3]}
             // onPointerOver={(event) => setHover(true)}
             // onPointerOut={(event) => setHover(false)}
             onClick={()=> setClickActive(true)}
@@ -52,7 +52,7 @@ export function Sll2() {
 
             {/* {hovered? <Html position={[2, 0.6, 0]}>자료구조</Html> : <></>} */}
 
-            <sphereGeometry args={[0.3, 32, 32]} />
+            <sphereGeometry args={[0.2, 32, 32]} />
             <meshPhongMaterial specularMap={specularMap} />
             <meshStandardMaterial
                 map={colorMap}

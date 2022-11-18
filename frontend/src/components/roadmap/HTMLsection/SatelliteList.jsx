@@ -37,7 +37,7 @@ const SatelliteList = (prop = defaultValue) => {
                 key={idx}
                 onClick={() => goToSll(item.uid)}
               >
-                {item.uid} {item.sname}
+                {item.sname}
               </div>
             );
           })

@@ -1,5 +1,4 @@
 import React , {useRef, useState, useEffect}from "react";
-import { useNavigate } from "react-router-dom";
 
 import {useFrame, useLoader } from "@react-three/fiber";
 import {Object3D, TextureLoader } from "three";
@@ -12,22 +11,37 @@ import EarthSpecularMap from "../../../../assets/images/PebblesColor.jpg";
 import PebbleNormal from "../../../../assets/images/PebblesNormal.jpg";
 
 import { Sll1 } from "../Satellite/PythonPlanet/Sll1";
-import { Sll2 } from "../Satellite/PythonPlanet/Sll2";
-import { Sll3 } from "../Satellite/PythonPlanet/Sll3";
-import { Sll4 } from "../Satellite/PythonPlanet/Sll4";
+import { GloSll1 } from "../Satellite/GlobalPlanet/GloSll1";
 
 
+const defaultValue = {};
+export function PlanetModule(prop = defaultValue) {
 
-export function PlanetPython() {
+    const [sllCnt, setSllCnt] = useState(null);
+    useEffect(()=>{setSllCnt(prop.sllCnt)}, [prop]);
+    useEffect(()=>{}, [sllCnt]);
+
+    // 위성 개수만큼 sll컴포 리턴하기
+    function CntHandler(){
+        let list, i;
+
+        for(i = 0; i < sllCnt; i++){
+            list += <GloSll1/>
+        }
+
+        const GloSllList = list;
+        console.log("Glolist  ", GloSllList);
+        return GloSllList;
+    }
+
+
     const [colorMap, bumpMap, specularMap, normalMap] = useLoader(
-      TextureLoader,
-      [EarthDayMap, EarthBumpMap, EarthSpecularMap, PebbleNormal]
+      TextureLoader,[EarthDayMap, EarthBumpMap, EarthSpecularMap, PebbleNormal]
     );
 
     const object3D = new THREE.Object3D;
     const objRef = useRef();
     const earthRef = useRef();
-    const moonRef = useRef();
 
     //회전을 위해
     useFrame(({ clock }) => {
@@ -50,23 +64,17 @@ export function PlanetPython() {
                 displacementMap={bumpMap}    
                 displacementScale={0.5}
                 roughness={0.8}            
-            />
-     
+            />     
             <OrbitControls
                 enableZoom={true}
                 enablePan={true}
                 enableRotate={true}
                 zoomSpeed={0.6}
                 panSpeed={0.5}
-                rotateSpeed={0.4}
-                
+                rotateSpeed={0.4}                
             />
-
             </mesh>
-            <Sll1 ref={moonRef} />
-            <Sll2/>
-            <Sll3 />
-            <Sll4/>
+            {CntHandler()}
 
         </object3D>   
       </>

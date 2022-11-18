@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import http from "../../api/http";
+import { getUserId } from "../../api/JWT";
 import MissionHTML from "../../components/roadmap/HTMLsection/MissionHTML";
 import {
   HTMLWrapper,
@@ -12,7 +13,9 @@ import { Canvas } from "@react-three/fiber";
 import BaseBackground from "../../components/roadmap/Threesection/Base/BaseBackground";
 import { Man } from "../../components/roadmap/Threesection/Mission/Man";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { QuizIntoThree, TilIntoThree } from "../../recoil/atoms";
+import {
+  NavMissionIntoThree,
+} from "../../recoil/atoms";
 import TilEditor from "../../components/til/TilEditor";
 import { DecoWood } from "../../components/scene/DecoWood.jsx";
 import { Html } from "@react-three/drei";
@@ -21,17 +24,20 @@ const MissionPage = () => {
   const misId = useParams().missNo;
 
   const [quizData, setQuizData] = useState(null);
-  const [tilOpen, setTilOpen] = useRecoilState(TilIntoThree);
-  const [quizOpen, setQuizOpen] = useRecoilState(QuizIntoThree);
-  const [whichOneOpen, setWhichOneOpen] = useState(null);
+  const [quizORct, setQuizOrCT] = useState(true);
+  const [doneTilData, setDoneTilData] = useState(null);
+
+  const userId = getUserId();
+  const one = useRecoilValue(NavMissionIntoThree);
+  const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
 
   useEffect(() => {
     MisRouter();
     getQuizData();
+    getTilDone();
   }, []);
 
-  useEffect(() => {}, [quizData]);
-  useEffect(() => { WhichOneOpenHandler()}, [tilOpen, quizOpen]);
+  useEffect(() => {}, [quizData, quizORct, doneTilData]);
 
   function MisRouter() {
     if (misId === "1") {
@@ -39,47 +45,63 @@ const MissionPage = () => {
     }
   }
 
-  function WhichOneOpenHandler(){
-    if(tilOpen && quizOpen){setWhichOneOpen(null)}
-
-  }
-
   async function getQuizData() {
     await http.connect_axios
       .get(`/quiz?uid=${misId}`)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setQuizData(res.data);
       })
       .catch((err) => {
-        
+        setQuizOrCT(false);
+        // 퀴즈데이터 요청해서 500 반환하면 코테데이터 요청
         http.connect_axios
-        .get(`/grading/muid?uid=${misId}`)
-        .then((res)=>{
-          console.log("코테코테", res);
-        })
-        .catch((err)=> {console.log(err)})
+          .get(`/grading/muid?uid=${misId}`)
+          .then((res) => {})
+          .catch((err) => {
+            console.log(err);
+          });
         console.log(err);
-
-        
       });
+  }
+
+  async function getTilDone() {
+    await http.connect_axios
+      .get(`/til/mission?id=${userId}&mUid=${misId}`)
+      .then((res) => {
+        console.log(res);
+        setDoneTilData(res.data);
+      })
+
+      .catch((err) => console.log(err));
   }
 
   return (
     <MissionContainer>
       <ThreeWrapper>
-        {tilOpen === true ? <TilEditor /> : <div>til 안 열었음</div>}
+        {one === "til" ? <TilEditor /> : <div></div>}
+
         <Canvas>
           <directionalLight position={[0, 5, 0]} />
           <ambientLight />
           <BaseBackground />
-          {quizOpen === true ? <DecoWood data = {quizData} /> : <Html>퀴즈 가져오는 중</Html>}
-          
+          {one === "quiz" ? <DecoWood data={quizData} /> : <Html></Html>}
+          {one === "quizSuccess" ? <Html> 정답입니다 🍕 </Html> : <Html />}
+          {one === "quizFail" ? <Html> 틀렸습니다. 😈 </Html> : <Html />}
+          {one === "code" ? <></> : <></>}
+          {one === "codeSuccess" ? <Html> 코드 풀기 성공 </Html> : <Html />}
+          {one === "tilSuccess" ? <Html> TIL 작성 완료 </Html>: <Html/>}
+          {/* {doneTilData !== null ? <Html> Til 작성 완료을 완료하였습니다. </Html> : <Html/>} */}
+
           {MisRouter()}
         </Canvas>
       </ThreeWrapper>
       <HTMLWrapper>
-        <MissionHTML mUId={misId} />
+        <MissionHTML
+          mUId={misId}
+          whichOne={quizORct}
+          doneTilData={doneTilData}
+        />
       </HTMLWrapper>
     </MissionContainer>
   );
