@@ -72,25 +72,10 @@ const Bubble = styled.div`
   }
 `;
 
-const ResultContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const Total = styled.div`
   width: 100%;
   height: 100%;
-
-  .nav {
-    height: 80px;
-  }
-`;
-
-const ResultContent = styled.div`
-  width: 700px;
-  height: 700px;
-  background-color: black;
-  border-radius: 10px;
-  color: white;
+  display: flex;
 
   @keyframes pulsate {
     100% {
@@ -105,8 +90,79 @@ const ResultContent = styled.div`
     }
   }
   .neonText {
-    animation: pulsate 0.11s ease-in-out infinite alternate;
+    /* animation: pulsate 0.11s ease-in-out infinite alternate; */
+    text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #f09,
+      0 0 1500px #f09, 0 0 2000px #f09, 0 0 1000px #f09, 0 0 200px #f09;
   }
 `;
 
-export { SurveyContainer, Bubble, ResultContainer, ResultContent };
+const ResultContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 120px auto 0 auto;
+  width: 700px;
+  height: 700px;
+  border: 2px solid #fff;
+  border-radius: 30px;
+  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #0fa, 0 0 0.8rem #0fa,
+    0 0 2.8rem #0fa, inset 0 0 1.3rem #0fa;
+
+  .nav {
+    height: 80px;
+  }
+
+  .description {
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+  .back {
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+  }
+`;
+
+const ResultContent = styled.div`
+  width: 700px;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .content {
+    width: 350px;
+  }
+`;
+
+const ResultList = styled.div`
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+
+  div {
+    width: 100%;
+    text-align: center;
+    margin: 7px;
+  }
+  .title {
+    font-size: 2rem;
+  }
+`;
+
+export {
+  SurveyContainer,
+  Bubble,
+  ResultContainer,
+  ResultContent,
+  ResultList,
+  Total,
+};
