@@ -10,6 +10,7 @@ import { SatelliteContatiner } from "./RoadmapPage.style";
 
 
 import { Canvas } from "@react-three/fiber";
+import { useBounds } from "@react-three/drei";
 import BaseBackground from "../../components/roadmap/Threesection/Base/BaseBackground";
 import { Sll1 } from "../../components/roadmap/Threesection/Satellite/PythonPlanet/Sll1";
 import { Sll2 } from "../../components/roadmap/Threesection/Satellite/PythonPlanet/Sll2";
@@ -32,6 +33,20 @@ const SatellitePage = () => {
         else if(sllId === "6"){return (<><Sll6/></>)}
     }
 
+    function SelectToZoom({ children }) {
+        const api = useBounds();
+        return (
+          <group
+            onClick={(e) => (
+              e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit()
+            )}
+            onPointerMissed={(e) => e.button === 0 && api.refresh().fit()}
+          >
+            {children}
+          </group>
+        );
+      }
+
 
 
     return(
@@ -42,8 +57,9 @@ const SatellitePage = () => {
                     <directionalLight position={[0,5,0]}/>
                     <ambientLight/>
                     <BaseBackground />
-                    {SllRouter()}
-
+                    <SelectToZoom>
+                        {SllRouter()}
+                    </SelectToZoom>
                 </Canvas>
             </ThreeWrapper>
             <HTMLWrapper>

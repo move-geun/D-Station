@@ -104,7 +104,7 @@ function Jumbo({ children }) {
   };
   return (
     <Text
-      position={[-5.5, 1, 0]}
+      position={[-3.5, 0, 0]}
       // lineHeight={0.8}
       font="../../assets/fonts/Ki-Medium.ttf"
       onClick={() => setActive(true)}
@@ -165,19 +165,19 @@ const IntroThree2Page = () => {
       <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 15] }}>
         <directionalLight position={[0, 5, 0]} />
         <ambientLight />
-        {/* <Html
+        <Html
         position={[-6, 2, 0]}
         style={{
           fontSize: "50px",
           fontFamily:"verdana",
           fontWeight: 1000,
         }}>
-        <div>반가워요 😀 </div>
+        <div> 개발 공부 로드맵 서비스 </div>
     
-      </Html> */}
+      </Html>
         <Jumbo>{`START\n`}</Jumbo>
         <Earth />
-        <Box position={[-3, -1, 0]} />
+        {/* <Box position={[-3, -1, 0]} /> */}
         <Rig />
       </Canvas>
     </>
