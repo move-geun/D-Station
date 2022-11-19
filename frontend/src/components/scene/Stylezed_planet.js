@@ -1,12 +1,20 @@
 import React, { useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
 export function StylezedPlanet(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/glb/stylized_planet.glb");
-  const { actions } = useAnimations(animations, group);
+  const myMesh = React.useRef();
+  useFrame(({ clock }) => {
+    const a = clock.getElapsedTime() / 3;
+    myMesh.current.rotation.y = a;
+    // myMesh.current.position.x = 700 * (Math.sin(a) * 0.05);
+    // myMesh.current.position.y = 700 * (Math.sin(a) * 0.05);
+    // myMesh.current.position.z = 700 * (Math.cos(a) * 0.05);
+  });
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null} scale={30} ref={myMesh}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[-1.54, -0.06, 0]}>
           <group name="root">

@@ -3,7 +3,8 @@ import styled from "styled-components";
 const Function = styled.div`
   display: flex;
   margin-left: 5%;
-  position: relative;
+  position: absolute;
+  top: 150px;
   align-items: center;
 
   .write {
@@ -91,7 +92,10 @@ const Function = styled.div`
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  position: absolute;
+  top: 250px;
+  left: 150px;
+  width: 80%;
 `;
 
 const Page = styled.div`

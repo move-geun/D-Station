@@ -1,17 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import { Editor } from "@tinymce/tinymce-react";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import http from "../../api/http";
+import { getUserId } from "../../api/JWT";
+import { ButtonBox, Button } from "./CommentEditor.style";
 
-export default function CommentEditor() {
+export default function CommentEditor(props) {
+  const userId = getUserId();
   const editorRef = useRef();
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+  const Uid = props.uid;
 
   const blank = {
     marginTop: "20px",
@@ -19,9 +19,18 @@ export default function CommentEditor() {
     width: "100px",
   };
 
-  const buttonBox = {
-    display: "flex",
-    justifyContent: "end",
+  const writeComment = () => {
+    const comment = editorRef.current.getContent();
+    http.connect_axios
+      .post(`reply/?userId=${userId}&content=${comment}&jisickinUid=${Uid}`)
+      .then((res) => {
+        console.log(res);
+        alert("댓글 등록 성공");
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert("댓글 등록 실패");
+      });
   };
 
   return (
@@ -64,16 +73,14 @@ export default function CommentEditor() {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
         />
-        <div style={buttonBox}>
-          <Button
-            style={blank}
-            onClick={log}
-            variant="contained"
-            endIcon={<CheckCircleIcon />}
-          >
-            등록
+        <ButtonBox>
+          <Button onClick={writeComment}>
+            댓글 등록
+            <div>
+              <CheckCircleIcon />
+            </div>
           </Button>
-        </div>
+        </ButtonBox>
       </FormControl>
     </>
   );
