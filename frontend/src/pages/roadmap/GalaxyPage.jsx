@@ -21,24 +21,12 @@ const GalaxyPage = () => {
   const galaxyId = useParams().galaxyNo;
 
   function GalaxyRouter() {
-    if (galaxyId === "1") { return <TestFront />
-    } else if (galaxyId === "2") { return <TestBack />
-    } else if (galaxyId === "3") { return <TestDev />}
+    if (galaxyId === "1") { return 
+    } else if (galaxyId === "2") { return 
+    } else if (galaxyId === "3") { return}
   }
 
-  function SelectToZoom({ children }) {
-    const api = useBounds();
-    return (
-      <group
-        onClick={(e) => (
-          e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit()
-        )}
-        onPointerMissed={(e) => e.button === 0 && api.refresh().fit()}
-      >
-        {children}
-      </group>
-    );
-  }
+
 
   return (
     <GalaxyContainer>

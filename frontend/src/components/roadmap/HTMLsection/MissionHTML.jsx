@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { NavMissionIntoThree } from "../../../recoil/atoms";
 import http from "../../../api/http";
+import {getUserId} from "../../../api/JWT";
 
 import {
   DescWrapper,
@@ -14,8 +15,9 @@ import { ListWrapper } from "./RoadList.style";
 
 const defaultValue = {};
 const MissionHTML = (prop = defaultValue) => {
-  console.log("코드야 퀴즈야  ", prop);
+
   const misId = prop.mUId;
+  const userId = getUserId();
   const [mData, setMData] = useState(null);
   const [refData, setRefData] = useState(null);
   const [quizData, setQuizData] = useState(null);
@@ -36,10 +38,18 @@ const MissionHTML = (prop = defaultValue) => {
     setDoneTilData(prop.doneTilData);
   }, [prop]);
 
+  useEffect(()=>{
+    if(one === "tilSuccess"){
+      console.log("이거 실행됐음?");
+      getTilDone();
+    }
+  }, [one]);
+
   async function getMissionData() {
     await http.connect_axios
       .get(`/mission/uid?uid=${misId}`)
       .then((res) => {
+        console.log(res);
         setMData(res.data);
       })
       .catch((err) => {
@@ -57,6 +67,18 @@ const MissionHTML = (prop = defaultValue) => {
         console.log(err);
       });
   }
+
+  
+  async function getTilDone() {
+    await http.connect_axios
+      .get(`/til/mission?id=${userId}&mUid=${misId}`)
+      .then((res) => {
+        setDoneTilData(res.data);
+      })
+
+      .catch((err) => console.log(err));
+  }
+
 
   function goUp(prop) {
     setWhichOne(prop);
@@ -100,7 +122,7 @@ const MissionHTML = (prop = defaultValue) => {
               {doneTilData.fileName}
             </div>
           </ListWrapper>
-        ) : (
+        ) : (          
           <div className="btn" onClick={() => goUp("til")}>
             TIL작성하기 <div className="dot"></div>
           </div>

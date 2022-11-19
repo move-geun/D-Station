@@ -69,12 +69,13 @@ const MissionPage = () => {
     await http.connect_axios
       .get(`/til/mission?id=${userId}&mUid=${misId}`)
       .then((res) => {
-        console.log(res);
         setDoneTilData(res.data);
       })
 
       .catch((err) => console.log(err));
   }
+
+ 
 
   return (
     <MissionContainer>
@@ -92,8 +93,8 @@ const MissionPage = () => {
           {one === "codeSuccess" ? <Html> 코드 풀기 성공 </Html> : <Html />}
           {one === "tilSuccess" ? <Html> TIL 작성 완료 </Html>: <Html/>}
           {/* {doneTilData !== null ? <Html> Til 작성 완료을 완료하였습니다. </Html> : <Html/>} */}
-
-          {MisRouter()}
+          {/* <Man/> */}
+          {/* {MisRouter()} */}
         </Canvas>
       </ThreeWrapper>
       <HTMLWrapper>

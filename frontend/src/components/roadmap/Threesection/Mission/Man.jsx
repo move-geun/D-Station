@@ -9,7 +9,7 @@ export function Man() {
 
 	// const group = useRef();
 	// const myMesh = React.useRef();
-	// const {nodes, materials} = useGLTF("../../../../assets/facecap.glb");
+	// const nodes = useGLTF("../../../../../public/glb/face.glb");
 	// console.log("======== ", nodes);
 
 	// return(
@@ -31,4 +31,4 @@ export function Man() {
 }
 
 
-// useGLTF.preload("../../../../assets/facecap.glb");
+useGLTF.preload("../../../../../public/glb/face.glb");

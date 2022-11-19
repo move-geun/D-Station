@@ -1,9 +1,12 @@
-import React , {useRef, useState}from "react";
+import React , {useEffect, useRef, useState}from "react";
 import { useNavigate } from "react-router-dom";
+
+import { useRecoilState } from "recoil";
+import {CameraZoom} from "../../../../../recoil/atoms";
 
 import { Canvas, useThree, useFrame, useLoader } from "@react-three/fiber";
 import {Object3D, TextureLoader } from "three";
-import * as THREE from "three";
+
 import {
   OrbitControls,
   Stars,
@@ -15,7 +18,7 @@ import SatelliteColor from "../../../../../assets/images/canyonRockColor.jpg";
 import SatelliteBump from "../../../../../assets/images/canyonRockBump.png";
 import SatelliteRough from "../../../../../assets/images/canyonRockColorRoughness.jpg";
 import SatelliteNormal from "../../../../../assets/images/canyonRockNormal.jpg";
-import { useEffect } from "react";
+
 
 
   export function Sll1() {
@@ -24,6 +27,7 @@ import { useEffect } from "react";
     );
     const [hovered, setHover] = useState(false);
     const [clickActive, setClickActive] = useState(false);
+    const [cameraZoom, setCameraZoom] = useRecoilState(CameraZoom);
 
     const sateRef = useRef();
     const navigate = useNavigate();
@@ -38,6 +42,8 @@ import { useEffect } from "react";
     useFrame(({ clock }) => {
       const elapsedTime = clock.getElapsedTime();
       sateRef.current.rotation.y = elapsedTime / 20;
+
+
     });
 
     const goToSatellite = () => {
