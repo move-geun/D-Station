@@ -9,14 +9,15 @@ const CodeExam = ({ Uid }) => {
 
   useEffect(() => {
     http.connect_axios
-      .get(`/grading/muid?uid=${Uid}`)
+      .get(`/grading/muid?uid=1`)
       .then((res) => {
-        console.log(res);
-        setName(res.name);
-        setContent(res.content);
+        // console.log(res);
+        setName(res.data.name);
+        setContent(res.data.content);
       })
       .catch((err) => {
         console.log(err);
+        alert("문제가 존재하지 않습니다.");
       });
   });
 
