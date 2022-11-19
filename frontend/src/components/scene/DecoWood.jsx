@@ -69,12 +69,12 @@ export function DecoWood(props = defaultValue) {
         <Html
            position={[-0.35, -0.3, 1]}
         >
-          <h1>QUIZ</h1>
+          {/* <h1>QUIZ</h1> */}
         </Html>
         <Html
            position={[-5, 10, -1.06]}
           >
-            {quizData !== null ? (
+            {/* {quizData !== null ? (
               // <div>안뇽</div>
             <p>{quizData.content}</p>
             )
@@ -84,7 +84,7 @@ export function DecoWood(props = defaultValue) {
               <span onClick={()=> AnsHandler(true)}>⭕</span>
               <span onClick={()=> AnsHandler(false)}>❌</span>
       
-              <div>{quizResultMessage}</div>
+              <div>{quizResultMessage}</div> */}
           </Html>
 
 
