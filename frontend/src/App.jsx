@@ -8,7 +8,6 @@ import QuestionDetail from "./pages/board/QuestionDetail";
 import QuestionModify from "./components/board/QuestionModify";
 import NotFoundPage from "./pages/notFound/NotFoundPage";
 import Survey from "./components/survey/Survey";
-import Mission from "./pages/mission/Mission";
 import GithubRedirectPage from "./pages/auth/GithubRedirectPage";
 import SignupPage from "./pages/auth/SignupPage";
 import WriteTilPage from "./pages/til/WriteTilPage";
@@ -105,7 +104,7 @@ function App() {
           path="/satellite/:sllNo"
           element={isLogin ? <SatellitePage /> : <Navigate to="/login" />}
         />
-         <Route
+        <Route
           path="/mission/:missNo"
           element={
             isLogin ? <MissionPage/> : <Navigate to="/login" />
