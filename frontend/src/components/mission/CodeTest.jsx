@@ -6,19 +6,22 @@ import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { CodeBox, ButtonBox } from "./CodeTest.style";
 import http from "../../api/http";
+import "ace-builds/webpack-resolver";
 
-const CodeTest = () => {
+const CodeTest = ({ uid }) => {
   const [code, setCode] = useState();
 
   const submit = () => {
     http.connect_axios
-      .post(`/grading/python?code=${code}&uid=1`)
+      .post(`/grading/python?code=${code}&uid=${uid}`)
       .then((res) => {
         console.log(res);
         console.log(code);
+        alert("정답입니다.");
       })
       .catch((err) => {
         console.log(err);
+        alert("정답이 아닙니다.");
       });
   };
 
