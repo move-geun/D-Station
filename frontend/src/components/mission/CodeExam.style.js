@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 80%;
-  margin: 10% 10%;
+  margin: 5% 10% 0% 10%;
   justify-content: center;
   /* border: solid 2px white; */
   /* border-radius: 10px; */
 `;
 const Title = styled.div`
   height: 50px;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
   border-bottom: solid 2px white;
 
   p {

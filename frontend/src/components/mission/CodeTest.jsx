@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import AceEditor from "react-ace";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { ButtonBox } from "./CodeTest.style";
+import { CodeBox, ButtonBox } from "./CodeTest.style";
 import http from "../../api/http";
 
 const CodeTest = () => {
+  const [code, setCode] = useState();
+
   const submit = () => {
     http.connect_axios
-      .post(`/grading/python?code=print(%22Hello%20World%22)&uid=1`)
+      .post(`/grading/python?code=${code}&uid=1`)
       .then((res) => {
         console.log(res);
+        console.log(code);
       })
       .catch((err) => {
         console.log(err);
@@ -25,9 +29,29 @@ const CodeTest = () => {
   };
 
   return (
-    <>
+    <CodeBox>
       <FormControl>
         <FormLabel style={blank}>코드작성</FormLabel>
+        <AceEditor
+          width="1000px"
+          placeholder="코드를 입력해주세요."
+          // mode="python"
+          name="codeInput"
+          // onLoad={this.onLoad}
+          onChange={setCode}
+          fontSize={18}
+          showPrintMargin
+          showGutter
+          highlightActiveLine
+          // value={``}
+          setOptions={{
+            // enableBasicAutocompletion: true,
+            // enableLiveAutocompletion: true,
+            // enableSnippets: true,
+            // showLineNumbers: true,
+            tabSize: 4,
+          }}
+        />
         <ButtonBox>
           <Button
             style={blank}
@@ -39,7 +63,7 @@ const CodeTest = () => {
           </Button>
         </ButtonBox>
       </FormControl>
-    </>
+    </CodeBox>
   );
 };
 
