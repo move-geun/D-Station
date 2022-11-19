@@ -12,9 +12,9 @@ import http from "../../api/http";
 const CodeTest = () => {
   const EditorRef = useRef();
   const log = () => {
-    if (EditorRef.current) {
-      console.log(EditorRef.current.getContent());
-    }
+    // if (EditorRef.current) {
+    //   console.log(EditorRef.current.getContent());
+    // }
     http.connect_axios
       .post(`/grading/python?code=print(%22Hello%20World%22)&uid=1`)
       .then((res) => {
@@ -38,35 +38,12 @@ const CodeTest = () => {
         <Editor
           apiKey="mv47x1bf7revpqmsvwdqta54w2b390xyi1wmkmlthp83qlkj"
           onInit={(evt, editor) => (EditorRef.current = editor)}
-          initialValue="<p>Format탭의 Code를 이용해 코드를 작성해주세요.</p>"
+          initialValue="<p><code>코드를 작성해주세요.</code></p>"
           init={{
             height: 300,
-            menubar: true,
-            plugins: [
-              "advlist",
-              "autolink",
-              "lists",
-              "link",
-              "image",
-              "charmap",
-              "preview",
-              "anchor",
-              "searchreplace",
-              "visualblocks",
-              "code",
-              "fullscreen",
-              "insertdatetime",
-              "media",
-              "table",
-              "code",
-              "help",
-              "wordcount",
-            ],
-            toolbar:
-              "undo redo | blocks | " +
-              "bold italic forecolor | alignleft aligncenter " +
-              "alignright alignjustify | bullist numlist outdent indent | " +
-              "removeformat | help",
+            menubar: false,
+            toolbar: false,
+            statusbar: false,
             content_style:
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
