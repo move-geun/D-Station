@@ -12,12 +12,14 @@ import {
 } from "../Roadmap.style";
 import RefList from "./RefList";
 import { ListWrapper } from "./RoadList.style";
+import { useNavigate } from "react-router-dom";
 
 const defaultValue = {};
 const MissionHTML = (prop = defaultValue) => {
 
   const misId = prop.mUId;
   const userId = getUserId();
+  const navigate = useNavigate();
   const [mData, setMData] = useState(null);
   const [refData, setRefData] = useState(null);
   const [quizData, setQuizData] = useState(null);
@@ -82,6 +84,10 @@ const MissionHTML = (prop = defaultValue) => {
 
   function goUp(prop) {
     setWhichOne(prop);
+
+    if(prop === "code"){
+      navigate(`/mission/${misId}/codeexam`);
+    }
   }
 
   function goToTilPage(prop) {
