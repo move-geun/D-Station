@@ -13,7 +13,7 @@ const GithubLogIn = () => {
     }
 
     return(
-        <div> 깃헙 로그인 
+        <div>
          <GithubBtn onClick={handleLogIn}/>
         {/* <a href={GITHUB_AUTH_URL}> Github Login</a>         */}
         </div>

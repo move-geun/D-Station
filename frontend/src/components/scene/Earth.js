@@ -1,10 +1,19 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
 export function Earth(props) {
   const { nodes, materials } = useGLTF("/glb/earth.glb");
+  const myMesh = React.useRef();
+  useFrame(({ clock }) => {
+    const a = clock.getElapsedTime() / 12;
+    myMesh.current.rotation.y = a;
+    myMesh.current.position.x = 1200 * (Math.sin(a) * 0.04);
+    myMesh.current.position.y = 1200 * (Math.cos(a) * 0.04);
+    myMesh.current.position.z = 1200 * (Math.sin(a) * 0.04);
+  });
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={70} ref={myMesh}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <mesh

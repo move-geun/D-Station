@@ -4,11 +4,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   text-align: start;
+  margin-top: 5%;
   margin-left: 15%;
   margin-right: 15%;
 `;
 const Title = styled.div`
-  border-bottom: solid 2px white;
+  /* border-bottom: solid 2px white; */
 
   .title {
     font-size: 40px;
@@ -24,7 +25,7 @@ const Tag = styled.div`
 
 const Content = styled.div`
   height: fit-content;
-  margin-top: 50px;
+  margin-top: 0px;
   margin-bottom: 50px;
   font-size: 20px;
 `;
@@ -41,12 +42,76 @@ const Button = styled.button`
   font-size: 15px;
   font-weight: bold;
   background-color: transparent;
-  border: solid 1px;
+
+  .lst {
+    border: solid 1px yellowgreen;
+    border-radius: 10px;
+    color: yellowgreen;
+    :hover {
+      background-color: red;
+      color: white;
+      transition: 0.5s;
+    }
+  }
+`;
+
+const Modi = styled.button`
+  margin: 5px;
+  width: fit-content;
+  height: 40px;
+  font-size: 15px;
+  font-weight: bold;
+  border: solid 1px yellow;
   border-radius: 10px;
+  color: yellow;
+  background-color: transparent;
+  :hover {
+    background-color: yellow;
+    color: black;
+    transition: 0.5s;
+  }
 `;
 
-const Comment = styled.div`
-  font-size: 30px;
+const Del = styled.button`
+  margin: 5px;
+  width: fit-content;
+  height: 40px;
+  font-size: 15px;
+  font-weight: bold;
+  border: solid 1px orangered;
+  border-radius: 10px;
+  color: orangered;
+  background-color: transparent;
+  :hover {
+    background-color: orangered;
+    color: black;
+    transition: 0.5s;
+  }
 `;
 
-export { Container, Title, Tag, Content, Buttons, Button, Comment };
+const Lst = styled.button`
+  margin: 5px;
+  width: fit-content;
+  height: 40px;
+  font-size: 15px;
+  font-weight: bold;
+  border: solid 1px yellowgreen;
+  border-radius: 10px;
+  color: yellowgreen;
+  background-color: transparent;
+  :hover {
+    background-color: yellowgreen;
+    color: white;
+    transition: 0.5s;
+  }
+
+  .link {
+    text-decoration: none;
+    color: yellowgreen;
+    :hover {
+      color: black;
+    }
+  }
+`;
+
+export { Container, Title, Tag, Content, Buttons, Modi, Del, Lst };

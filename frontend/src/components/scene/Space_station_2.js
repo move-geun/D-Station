@@ -4,7 +4,7 @@ import { useGLTF } from "@react-three/drei";
 export function SpaceStationTwo(props) {
   const { nodes, materials } = useGLTF("/glb/space_station_2.glb");
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={12}>
       <group rotation={[-1.45, -0.1, 0]} scale={1.19}>
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
           <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
