@@ -7,12 +7,22 @@ import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { ButtonBox } from "./CodeTest.style";
 
+import http from "../../api/http";
+
 const CodeTest = () => {
   const EditorRef = useRef();
   const log = () => {
     if (EditorRef.current) {
       console.log(EditorRef.current.getContent());
     }
+    http.connect_axios
+      .post(`/grading/python?code=print(%22Hello%20World%22)&uid=1`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const blank = {
