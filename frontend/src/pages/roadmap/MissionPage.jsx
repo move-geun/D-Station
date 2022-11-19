@@ -85,7 +85,7 @@ const MissionPage = () => {
           {one === "quiz" ? <DecoWood data={quizData} /> : <Html></Html>}
           {one === "quizSuccess" ? <Html> 정답입니다 🍕 </Html> : <Html />}
           {one === "quizFail" ? <Html> 틀렸습니다. 😈 </Html> : <Html />}
-          {one === "code" ? <CodeExam Uid={misId} /> : <Html />}
+          {/* {one === "code" ? <CodeExam Uid={misId} /> : null} */}
           {one === "codeSuccess" ? <Html> 코드 풀기 성공 </Html> : <Html />}
           {one === "tilSuccess" ? <Html> TIL 작성 완료 </Html> : <Html />}
           {/* {doneTilData !== null ? <Html> Til 작성 완료을 완료하였습니다. </Html> : <Html/>} */}

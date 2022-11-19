@@ -17,6 +17,7 @@ import RoadmapPage from "./pages/roadmap/RoadmapPage";
 import PlanetPage from "./pages/roadmap/PlanetPage";
 import SatellitePage from "./pages/roadmap/SatellitePage";
 import MissionPage from "./pages/roadmap/MissionPage";
+import CodeExam from "./components/mission/CodeExam";
 
 // 로그인 확인
 import { UserLogin } from "./recoil/atoms";
@@ -40,7 +41,6 @@ function App() {
         <Route path="/questionlist" element={<QuestionListPage />} />
         <Route path="/questiondetail" element={<QuestionDetail />} />
         <Route path="/*" element={<NotFoundPage />} />
-
         {/* 로그인시 접근불가 */}
         <Route
           path="/login"
@@ -54,7 +54,6 @@ function App() {
           path="/signup"
           element={!isLogin ? <SignupPage /> : <Navigate to="/main" />}
         />
-
         {/* 로그인 필수 */}
         <Route
           path="/main"
@@ -90,15 +89,11 @@ function App() {
         />
         <Route
           path="/galaxy/:galaxyNo"
-          element={
-            isLogin ? <GalaxyPage/>: <Navigate to="/login" />
-          }
+          element={isLogin ? <GalaxyPage /> : <Navigate to="/login" />}
         />
         <Route
           path="/planet/:plantNo"
-          element={
-            isLogin ? <PlanetPage /> : <Navigate to="/login" />
-          }
+          element={isLogin ? <PlanetPage /> : <Navigate to="/login" />}
         />
         <Route
           path="/satellite/:sllNo"
@@ -106,16 +101,15 @@ function App() {
         />
         <Route
           path="/mission/:missNo"
-          element={
-            isLogin ? <MissionPage/> : <Navigate to="/login" />
-          }
+          element={isLogin ? <MissionPage /> : <Navigate to="/login" />}
         />
-
         <Route
-          path ="/refredirect"
-          element={
-            isLogin ? <RefRedirectPage /> :  <Navigate to="/login" />
-          }
+          path="/refredirect"
+          element={isLogin ? <RefRedirectPage /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/mission/:missNo/codeexam"
+          element={isLogin ? <CodeExam /> : <Navigate to="/login" />}
         />
       </Routes>
     </BrowserRouter>
