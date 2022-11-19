@@ -9,7 +9,7 @@ const CodeExam = ({ Uid }) => {
 
   useEffect(() => {
     http.connect_axios
-      .get(`/grading/muid?uid=%{Uid}`)
+      .get(`/grading/muid?uid=${Uid}`)
       .then((res) => {
         console.log(res);
         setName(res.name);
