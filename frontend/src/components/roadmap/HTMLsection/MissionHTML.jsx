@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  NavMissionIntoThree,
-} from "../../../recoil/atoms";
+import { NavMissionIntoThree } from "../../../recoil/atoms";
 import http from "../../../api/http";
-
 
 import {
   DescWrapper,
@@ -65,8 +62,8 @@ const MissionHTML = (prop = defaultValue) => {
     setWhichOne(prop);
   }
 
-  function goToTilPage(prop){
-    window.open(`${prop}`, '_blank');
+  function goToTilPage(prop) {
+    window.open(`${prop}`, "_blank");
   }
 
   return (
@@ -90,24 +87,24 @@ const MissionHTML = (prop = defaultValue) => {
           <div>데이터를 불러오는 중입니다.</div>
         )}
       </RefListWrapper>
-      
+
       <MissTILWrapper>
-        {doneTilData? 
-            (
-              <ListWrapper>
-                <h2> 작성한 TIL</h2>
-                <div className="doneTil" onClick={()=>goToTilPage(doneTilData.link)}> {doneTilData.fileName}</div>
-            </ListWrapper>
-            )
-            : 
-            (
-              <div className="btn" onClick={() => goUp("til")}>
-                TIL작성하기 <div className="dot"></div>
-              </div>
-            )
-            }
-         
-        
+        {doneTilData ? (
+          <ListWrapper>
+            <h2> 작성한 TIL</h2>
+            <div
+              className="doneTil"
+              onClick={() => goToTilPage(doneTilData.link)}
+            >
+              {" "}
+              {doneTilData.fileName}
+            </div>
+          </ListWrapper>
+        ) : (
+          <div className="btn" onClick={() => goUp("til")}>
+            TIL작성하기 <div className="dot"></div>
+          </div>
+        )}
       </MissTILWrapper>
       <QuizWrapper>
         {quizORct ? (
