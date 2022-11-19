@@ -12,7 +12,7 @@ export function DecoWood(props = defaultValue) {
   const userId = getUserId();
   const [quizData, setQuizData] = useState(null);
   const [quizAnswer, setQuizAnswer] = useState();
-  const { nodes, materials } = useGLTF("/glb/decorative_wooden_plate.glb");
+  const { nodes, materials } = useGLTF("/glb/decorative_wooden.glb");
   const [quizResult, setQuizResult] = useState(null);
   const [quizResultMessage, setQuizResultMessage] = useState("");
   const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
@@ -93,4 +93,4 @@ export function DecoWood(props = defaultValue) {
   );
 }
 
-useGLTF.preload("/glb/decorative_wooden_plate.glb");
+useGLTF.preload("/glb/decorative_wooden.glb");
