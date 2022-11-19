@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  justify-content: start;
-  border: solid 2px white;
-  border-radius: 10px;
+  width: 80%;
+  margin: 5% 10% 0% 10%;
+  justify-content: center;
+  /* border: solid 2px white; */
+  /* border-radius: 10px; */
 `;
 const Title = styled.div`
   height: 50px;
@@ -13,6 +15,7 @@ const Title = styled.div`
   p {
     margin: 2% 1%;
     font-size: 30px;
+    font-weight: bold;
   }
 `;
 
