@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { NavMissionIntoThree } from "../../../recoil/atoms";
+import { NavMissionIntoThree, TilState } from "../../../recoil/atoms";
 import http from "../../../api/http";
 import {getUserId} from "../../../api/JWT";
 
@@ -27,6 +27,8 @@ const MissionHTML = (prop = defaultValue) => {
 
   const [quizORct, setQuizOrCT] = useState(null);
   const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
+  const [tilState, setTilState] = useRecoilState(TilState);
+
   const one = useRecoilValue(NavMissionIntoThree);
 
   useEffect(() => {
@@ -76,6 +78,7 @@ const MissionHTML = (prop = defaultValue) => {
       .get(`/til/mission?id=${userId}&mUid=${misId}`)
       .then((res) => {
         setDoneTilData(res.data);
+        setTilState(true);
       })
 
       .catch((err) => console.log(err));
@@ -117,21 +120,25 @@ const MissionHTML = (prop = defaultValue) => {
       </RefListWrapper>
 
       <MissTILWrapper>
-        {doneTilData ? (
-          <ListWrapper>
-            <h2> 작성한 TIL</h2>
-            <div
-              className="doneTil"
-              onClick={() => goToTilPage(doneTilData.link)}
-            >
-              {" "}
-              {doneTilData.fileName}
-            </div>
-          </ListWrapper>
-        ) : (          
-          <div className="btn" onClick={() => goUp("til")}>
+        {tilState ? (
+            doneTilData ? (
+              <ListWrapper>
+                <h2> 작성한 TIL</h2>
+                <div
+                  className="doneTil"
+                  onClick={() => goToTilPage(doneTilData.link)}
+                >
+                  {" "}
+                  {doneTilData.fileName}
+                </div>
+              </ListWrapper>
+            ) : <><div className="btn" onClick={() => goUp("til")}>
             TIL작성하기 <div className="dot"></div>
-          </div>
+          </div></>
+        ):(
+          <div className="btn" onClick={() => goUp("til")}>
+          TIL작성하기 <div className="dot"></div>
+        </div>
         )}
       </MissTILWrapper>
       <QuizWrapper>

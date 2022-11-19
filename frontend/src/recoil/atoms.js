@@ -54,7 +54,7 @@ export const UserInfo = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-
+// true 일 때 작성완료, false 일 때 작성 기록 없음
 export const TilState = atom({
   key: "TilState",
   default: false,
