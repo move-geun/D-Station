@@ -9,7 +9,7 @@ const Container = styled.div`
   margin-right: 15%;
 `;
 const Title = styled.div`
-  border-bottom: solid 2px white;
+  /* border-bottom: solid 2px white; */
 
   .title {
     font-size: 40px;
@@ -25,7 +25,7 @@ const Tag = styled.div`
 
 const Content = styled.div`
   height: fit-content;
-  margin-top: 50px;
+  margin-top: 0px;
   margin-bottom: 50px;
   font-size: 20px;
 `;

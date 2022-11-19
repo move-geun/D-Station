@@ -10,8 +10,9 @@ const Contents = styled.p`
 `;
 
 const Name = styled.p`
-  font-size: 15px;
+  font-size: 18px;
   color: gray;
+  font-weight: bold;
 `;
 
 const ButtonGroup = styled.div`
