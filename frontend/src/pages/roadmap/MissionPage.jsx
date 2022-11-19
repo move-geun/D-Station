@@ -57,7 +57,7 @@ const MissionPage = () => {
         // 퀴즈데이터 요청해서 500 반환하면 코테데이터 요청
         http.connect_axios
           .get(`/grading/muid?uid=${misId}`)
-          .then((res) => {})
+          .then((res) => {console.log("코테",res)})
           .catch((err) => {
             console.log(err);
           });
