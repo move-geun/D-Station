@@ -30,11 +30,11 @@ const SearchMap = () => {
         })
         .then((res) => {
           setResultList(res.data.list);
-          console.log(resultList);
         });
     }
   };
 
+  console.log(resultList);
   return (
     <SearchWraper>
       <TitleWrapper>

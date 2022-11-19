@@ -24,6 +24,14 @@ const Board = styled.div`
   align-items: center;
   justify-content: flex-start;
 
+  .progressbox {
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   img {
     :first-child {
       margin-left: 10px;

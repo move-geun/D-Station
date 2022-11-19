@@ -54,7 +54,6 @@ export const UserInfo = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-
 export const TilIntoThree = atom({
   key: "TilIntoThree",
   default: false,
@@ -71,10 +70,10 @@ export const CTIntoThree = atom({
   key: "CTIntoThree",
   default: false,
   effects_UNSTABLE: [persistAtom],
-})
+});
 
 export const NavMissionIntoThree = atom({
   key: "NavMissionIntoThree",
   default: null,
   effects_UNSTABLE: [persistAtom],
-})
+});
