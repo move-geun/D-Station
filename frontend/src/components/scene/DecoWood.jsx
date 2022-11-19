@@ -12,7 +12,7 @@ export function DecoWood(props = defaultValue) {
   const userId = getUserId();
   const [quizData, setQuizData] = useState(null);
   const [quizAnswer, setQuizAnswer] = useState();
-  const { nodes, materials } = useGLTF("/glb/decorative_wooden.glb");
+  const { nodes, materials } = useGLTF("/glb/decorative_wooden_plate.glb");
   const [quizResult, setQuizResult] = useState(null);
   const [quizResultMessage, setQuizResultMessage] = useState("");
   const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
@@ -74,7 +74,7 @@ export function DecoWood(props = defaultValue) {
         <Html
            position={[-5, 10, -1.06]}
           >
-            {/* {quizData !== null ? (
+            {quizData !== null ? (
               // <div>안뇽</div>
             <p>{quizData.content}</p>
             )
@@ -84,7 +84,7 @@ export function DecoWood(props = defaultValue) {
               <span onClick={()=> AnsHandler(true)}>⭕</span>
               <span onClick={()=> AnsHandler(false)}>❌</span>
       
-              <div>{quizResultMessage}</div> */}
+              <div>{quizResultMessage}</div>
           </Html>
 
 
@@ -93,4 +93,4 @@ export function DecoWood(props = defaultValue) {
   );
 }
 
-useGLTF.preload("/glb/decorative_wooden.glb");
+useGLTF.preload("/glb/decorative_wooden_plate.glb");
