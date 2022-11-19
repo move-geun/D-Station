@@ -14,6 +14,7 @@ import BaseBackground from "../../components/roadmap/Threesection/Base/BaseBackg
 import { TestFront } from "../../components/scene/TestFront";
 import { TestBack } from "../../components/scene/TestBack";
 import { TestDev } from "../../components/scene/TestDev";
+import { Bounds, OrbitControls, useBounds } from "@react-three/drei";
 
 
 const GalaxyPage = () => {
@@ -25,6 +26,20 @@ const GalaxyPage = () => {
     } else if (galaxyId === "3") { return <TestDev />}
   }
 
+  function SelectToZoom({ children }) {
+    const api = useBounds();
+    return (
+      <group
+        onClick={(e) => (
+          e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit()
+        )}
+        onPointerMissed={(e) => e.button === 0 && api.refresh().fit()}
+      >
+        {children}
+      </group>
+    );
+  }
+
   return (
     <GalaxyContainer>
       <ThreeWrapper>
@@ -32,7 +47,12 @@ const GalaxyPage = () => {
           <directionalLight position={[0, 5, 0]} />
           <ambientLight />
           <BaseBackground />
-          {GalaxyRouter()}
+          <OrbitControls
+                enableZoom={true}
+                enablePan={true}
+                enableRotate={true}          
+            />  
+              {GalaxyRouter()}   
         </Canvas>
       </ThreeWrapper>
       <HTMLWrapper>
