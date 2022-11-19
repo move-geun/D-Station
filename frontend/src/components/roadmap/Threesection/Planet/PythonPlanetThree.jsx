@@ -6,7 +6,7 @@ import {Object3D, TextureLoader } from "three";
 import * as THREE from "three";
 import {OrbitControls} from "@react-three/drei";
 
-import EarthDayMap from "../../../../assets/images/PebblesColor.jpg";
+import EarthDayMap from "../../../../assets/images/PLogo.png";
 import EarthBumpMap from "../../../../assets/images/PebblesBump.png";
 import EarthSpecularMap from "../../../../assets/images/PebblesColor.jpg";
 import PebbleNormal from "../../../../assets/images/PebblesNormal.jpg";
@@ -15,6 +15,7 @@ import { Sll1 } from "../Satellite/PythonPlanet/Sll1";
 import { Sll2 } from "../Satellite/PythonPlanet/Sll2";
 import { Sll3 } from "../Satellite/PythonPlanet/Sll3";
 import { Sll4 } from "../Satellite/PythonPlanet/Sll4";
+
 
 
 

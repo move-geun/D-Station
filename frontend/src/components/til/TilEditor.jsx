@@ -68,6 +68,11 @@ export default function TilEditor(prop = defaultValue) {
     });
   };
 
+  async function setOne(){
+    setTimeout(await setWhichOne(null), 3000);
+    
+  }
+
   const sendData = () => {
     if (tilContent.title.length < 1) {
       alert("제목을 입력해주세요");
@@ -105,7 +110,7 @@ export default function TilEditor(prop = defaultValue) {
       console.log(res);
       // 작성 성공했을 때, threejs section에 성공 띄우기  
       setWhichOne("tilSuccess");
-    
+      // setOne();
 
       setTilOpen(false);
   })
