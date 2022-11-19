@@ -31,4 +31,4 @@ export function Man() {
 }
 
 
-useGLTF.preload("../../../../../public/glb/face.glb");
+// useGLTF.preload("../../../../../public/glb/face.glb");

@@ -11,7 +11,7 @@ import { MissionContainer } from "./RoadmapPage.style";
 
 import { Canvas } from "@react-three/fiber";
 import BaseBackground from "../../components/roadmap/Threesection/Base/BaseBackground";
-import { Man } from "../../components/roadmap/Threesection/Mission/Man";
+// import { Man } from "../../components/roadmap/Threesection/Mission/Man";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   NavMissionIntoThree,
@@ -32,18 +32,18 @@ const MissionPage = () => {
   const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
 
   useEffect(() => {
-    MisRouter();
+    // MisRouter();
     getQuizData();
     getTilDone();
   }, []);
 
   useEffect(() => {}, [quizData, quizORct, doneTilData]);
 
-  function MisRouter() {
-    if (misId === "1") {
-      return <Man />;
-    }
-  }
+  // function MisRouter() {
+  //   if (misId === "1") {
+  //     return <Man />;
+  //   }
+  // }
 
   async function getQuizData() {
     await http.connect_axios
