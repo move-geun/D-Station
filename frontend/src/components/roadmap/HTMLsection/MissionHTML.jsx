@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { NavMissionIntoThree } from "../../../recoil/atoms";
+import { NavMissionIntoThree, TilState } from "../../../recoil/atoms";
 import http from "../../../api/http";
 import {getUserId} from "../../../api/JWT";
 
@@ -12,12 +12,14 @@ import {
 } from "../Roadmap.style";
 import RefList from "./RefList";
 import { ListWrapper } from "./RoadList.style";
+import { useNavigate } from "react-router-dom";
 
 const defaultValue = {};
 const MissionHTML = (prop = defaultValue) => {
 
   const misId = prop.mUId;
   const userId = getUserId();
+  const navigate = useNavigate();
   const [mData, setMData] = useState(null);
   const [refData, setRefData] = useState(null);
   const [quizData, setQuizData] = useState(null);
@@ -25,6 +27,8 @@ const MissionHTML = (prop = defaultValue) => {
 
   const [quizORct, setQuizOrCT] = useState(null);
   const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
+  const [tilState, setTilState] = useRecoilState(TilState);
+
   const one = useRecoilValue(NavMissionIntoThree);
 
   useEffect(() => {
@@ -74,6 +78,7 @@ const MissionHTML = (prop = defaultValue) => {
       .get(`/til/mission?id=${userId}&mUid=${misId}`)
       .then((res) => {
         setDoneTilData(res.data);
+        setTilState(true);
       })
 
       .catch((err) => console.log(err));
@@ -82,6 +87,10 @@ const MissionHTML = (prop = defaultValue) => {
 
   function goUp(prop) {
     setWhichOne(prop);
+
+    if(prop === "code"){
+      navigate(`/mission/${misId}/codeexam`);
+    }
   }
 
   function goToTilPage(prop) {
@@ -111,21 +120,25 @@ const MissionHTML = (prop = defaultValue) => {
       </RefListWrapper>
 
       <MissTILWrapper>
-        {doneTilData ? (
-          <ListWrapper>
-            <h2> 작성한 TIL</h2>
-            <div
-              className="doneTil"
-              onClick={() => goToTilPage(doneTilData.link)}
-            >
-              {" "}
-              {doneTilData.fileName}
-            </div>
-          </ListWrapper>
-        ) : (          
-          <div className="btn" onClick={() => goUp("til")}>
+        {tilState ? (
+            doneTilData ? (
+              <ListWrapper>
+                <h2> 작성한 TIL</h2>
+                <div
+                  className="doneTil"
+                  onClick={() => goToTilPage(doneTilData.link)}
+                >
+                  {" "}
+                  {doneTilData.fileName}
+                </div>
+              </ListWrapper>
+            ) : <><div className="btn" onClick={() => goUp("til")}>
             TIL작성하기 <div className="dot"></div>
-          </div>
+          </div></>
+        ):(
+          <div className="btn" onClick={() => goUp("til")}>
+          TIL작성하기 <div className="dot"></div>
+        </div>
         )}
       </MissTILWrapper>
       <QuizWrapper>
