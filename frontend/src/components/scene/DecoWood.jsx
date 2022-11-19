@@ -69,7 +69,7 @@ export function DecoWood(props = defaultValue) {
         <Html
            position={[-0.35, -0.3, 1]}
         >
-          <h1>QUIZ</h1>
+          {/* <h1>QUIZ</h1> */}
         </Html>
         <Html
            position={[-5, 10, -1.06]}
