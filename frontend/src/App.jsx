@@ -95,7 +95,7 @@ function App() {
           path="/galaxy/:galaxyNo"
           element={isLogin ? <GalaxyPage /> : <Navigate to="/login" />}
         />
-        {/* <Route
+        <Route
           path="/planet/:plantNo"
           element={isLogin ? <PlanetPage /> : <Navigate to="/login" />}
         />
@@ -106,7 +106,7 @@ function App() {
         <Route
           path="/mission/:missNo"
           element={isLogin ? <MissionPage /> : <Navigate to="/login" />}
-        /> */}
+        />
         <Route
           path="/refredirect"
           element={isLogin ? <RefRedirectPage /> : <Navigate to="/login" />}
@@ -118,7 +118,7 @@ function App() {
 
 
         {/* 테스트용 !!!! */}
-        <Route
+        {/* <Route
           path="/mission/:missNo"
           element={<MissionPage />}
         />
@@ -129,7 +129,7 @@ function App() {
         <Route
           path="/planet/:plantNo"
           element={<PlanetPage /> }
-        />
+        /> */}
 
       </Routes>
     </BrowserRouter>
