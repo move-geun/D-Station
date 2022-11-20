@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -24,10 +25,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aspose.words.Document;
-import com.ssafy.api.request.til.SatelliteTILReq;
 import com.ssafy.api.request.til.TILCreateReq;
 import com.ssafy.api.request.til.TILRepoReq;
+import com.ssafy.api.response.mission.MissionRes;
 import com.ssafy.api.response.til.MissionDirRes;
+import com.ssafy.api.response.til.MissionTILRes;
 import com.ssafy.api.response.til.SatelliteTILRes;
 import com.ssafy.api.response.til.TILListByUserRes;
 import com.ssafy.db.entity.Mission;
@@ -221,10 +223,54 @@ public class TILServiceImpl implements TILService {
 		String fileName = (tILCreateReq.getFileName()).replace(" ", "_");
 
 		//////// 파일 변환 시작
-		String filePath = "./json/testDir/"; // 파일 경로
+		//String filePath = "./json/testDir/"; // 파일 경로
 
-		File file1 = new File(filePath + "document.html");
-		File file2 = new File(filePath + "Output.md");
+
+
+
+		///////////////////////////
+//      System.err.println("============================================================================");
+//        try {
+//         File fileee = new File(this.getClass().getResource("testDir/document.html").toURI());
+//         System.err.println(fileee);
+//      } catch (URISyntaxException e2) {
+//         // TODO Auto-generated catch block
+//         System.err.println("안된다고요~~~");
+//      }
+//      System.err.println("============================================================================");
+
+//      String testPath = "json/testDir/document.html"; // 파일 경로
+//      String testPath2 = "/json/testDir/document.html"; // 파일 경로
+//
+//      URL htmlURL = getClass().getClassLoader().getResource (testPath);
+//      URL htmlURL2 = getClass().getResource(testPath2);
+//        System.err.println ("found html at " + htmlURL);
+//        System.err.println ("found html at " + htmlURL2);
+//
+//
+//      System.err.println("classLoader 간다잉");
+//      ClassLoader classLoader = getClass().getClassLoader();
+//      System.err.println("classLoader 통과 ");
+//      System.err.println("classLoader : " + classLoader.toString());
+//
+//      File jarfile1 = new File(classLoader.getResource("document.html").getFile());
+//      System.err.println("여기까지 올까?");
+//      File jarfile2 = new File(classLoader.getResource("Output.md").getFile());
+//      System.err.println(jarfile1);
+//      System.err.println(jarfile2);
+//
+//      if (jarfile1.exists() || jarfile1.exists()) {
+//         if (jarfile2.delete() && jarfile2.delete()) {
+//            System.out.println("파일삭제 성공");
+//         } else {
+//            System.out.println("파일삭제 실패");
+//         }
+//      }
+
+		///////////////////////////////////
+		/////////////////////////////////
+		File file1 = new File("document.html");
+		File file2 = new File("Output.md");
 
 		// 이전에 파일이 있다면 삭제하기
 		if (file1.exists() || file2.exists()) {
@@ -241,7 +287,7 @@ public class TILServiceImpl implements TILService {
 		// 전달 받은 내용(html)으로 파일 생성하기
 		FileWriter fw;
 		try {
-			fw = new FileWriter(filePath + "document.html");
+			fw = new FileWriter("document.html");
 			fw.write(content);
 			fw.close();
 		} catch (IOException e) {
@@ -251,14 +297,14 @@ public class TILServiceImpl implements TILService {
 		// html to markdown
 		Document doc;
 		try {
-			doc = new Document(filePath + "document.html");
-			doc.save(filePath + "Output.md");
+			doc = new Document("document.html");
+			doc.save("Output.md");
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 
 		// markdown 파일 입력받기
-		byte[] binary = getFileBinary(filePath + "Output.md");
+		byte[] binary = getFileBinary("Output.md");
 
 		// markdown to base64
 		String base64data = Base64.getEncoder().encodeToString(binary);
@@ -340,9 +386,9 @@ public class TILServiceImpl implements TILService {
 
 	// 사용자 별 위성 별 til 얻기
 	@Override
-	public ArrayList<SatelliteTILRes> getUserTILBySatellite(SatelliteTILReq satelliteTILReq) {
-		long userUid = userRepository.getUsersById(satelliteTILReq.getId()).get().getUid();
-		Optional<Satellite> satellite = satelliteRepository.getSatelliteByUid(satelliteTILReq.getSUid());
+	public ArrayList<SatelliteTILRes> getUserTILBySatellite(String id, long sUid) {
+		long userUid = userRepository.getUsersById(id).get().getUid();
+		Optional<Satellite> satellite = satelliteRepository.getSatelliteByUid(sUid);
 		ArrayList<SatelliteTILRes> stresList = new ArrayList<>();
 
 		if (satellite.isPresent()) {
@@ -367,6 +413,23 @@ public class TILServiceImpl implements TILService {
 			return stresList;
 		}
 		return stresList;
+	}
+
+	// 사용자 별 미션 별 til 얻기
+	@Override
+	public MissionTILRes getUserTILByMission(String id, long mUid) {
+		long userUid = userRepository.getUsersById(id).get().getUid();
+
+		ArrayList<TIL> list = tilRepository.getTILByUserUid(userUid);
+
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getMission().getUid() == mUid) {
+				return MissionTILRes.of(list.get(i));
+			}
+		}
+
+		return null;
+
 	}
 
 	// 파일 읽어드리는 함수
@@ -400,9 +463,9 @@ public class TILServiceImpl implements TILService {
 			bw.write(""); // 버퍼에 담기
 			bw.flush(); // 버퍼
 
-//			System.out.println("=============ContentLength : " + conn.getContentLength());
-//			System.out.println("=============ResponseMessage : " + conn.getResponseMessage());
-//			System.out.println("=============ResponseCode : " + conn.getResponseCode());
+//         System.out.println("=============ContentLength : " + conn.getContentLength());
+//         System.out.println("=============ResponseMessage : " + conn.getResponseMessage());
+//         System.out.println("=============ResponseCode : " + conn.getResponseCode());
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = "";
@@ -411,14 +474,14 @@ public class TILServiceImpl implements TILService {
 				sb.append(line);
 			}
 
-//			System.out.println("=============sb: " + sb.toString());
+//         System.out.println("=============sb: " + sb.toString());
 
 			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
 			isSuccess = obj.getBoolean("isSuccess");
 			return isSuccess;
 		} catch (Exception e) {
 			System.out.println("========" + e);
-//			System.err.println("실패실패");
+//         System.err.println("실패실패");
 			return isSuccess;
 		}
 	}
