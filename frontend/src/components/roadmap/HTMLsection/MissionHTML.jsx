@@ -87,6 +87,10 @@ const MissionHTML = (prop = defaultValue) => {
       } );
   }
 
+  async function missionCompleted(){
+    
+  }
+
   function goUp(prop) {
     setWhichOne(prop);
 
