@@ -46,11 +46,11 @@ _- 로드맵 및 학습 관리 서비스 -_
 - Swagger
 - Gradle
 - MySQL
+- Oauth
 
 **Frontend**
 
 - React
-- openVidu browser
 - HTML
 - JavaScript
 - CSS
@@ -62,7 +62,6 @@ _- 로드맵 및 학습 관리 서비스 -_
 - SSL
 - Docker
 - Jenkins
-- openVidu KMS
 
 ---
 
@@ -247,19 +246,19 @@ backend
 
 ---
 
-- [Gitlab](https://lab.ssafy.com/s07-webmobile1-sub2/S07P12E103)
-- [Notion](https://www.notion.so/Semononda-26223a897b784d8d88ec1e02a79df4b2)
-- [JIRA](https://jira.ssafy.com/secure/RapidBoard.jspa?rapidView=12719&projectKey=S07P12E103&view=planning.nodetail&issueLimit=100)
-- [Figma](https://www.figma.com/file/RXpNubjb9F9pGdmKwbLVOk/%EC%84%B8%EB%AA%A8%EB%85%BC%EB%8B%A4?node-id=0%3A1)
-- [MatterMost](https://meeting.ssafy.com/s07p11e1/channels/333)
-- [Webex](https://ssafyclass.webex.com/meet/kjmk1007)
+- [Gitlab](https://lab.ssafy.com/s07-final/S07P31E106)
+- [Notion](https://diligent-cent-c07.notion.site/E106-3bb4be8141f541e1aeb45222fa79e04e)
+- [JIRA](https://ssafy.atlassian.net/jira/software/c/projects/S07P31E106/boards/133/roadmap)
+- [Figma](https://www.figma.com/file/ll0gCzfnEzjV78gekLmVid/Untitled?node-id=18%3A2)
+- [MatterMost](https://meeting.ssafy.com/s07p30e1/channels/e106)
+- [Webex](https://ssafyclass.webex.com/wbxmjs/joinservice/sites/ssafyclass/meeting/download/4cfcc806017e4553b1bed28def8fc288)
 
 ## ✔ 협업 환경
 
 ---
 
-- 요구사항 명세서/IA 구성도/API 명세서
-  - [구글 드라이브](https://docs.google.com/spreadsheets/d/1Szz6Hn31rGLiAI0DS68rMQKO8MfN0WhXfXgDKB41ufs/edit#gid=0)에서 기획 내용을 공유 및 수정
+- 요구사항 명세서/API 명세서
+  - [구글 드라이브](https://docs.google.com/spreadsheets/d/1AY91HPQE2U5A4moqEUbk0ArZB9k_AmO43n0VHn3FC4Q/edit#gid=538209592)에서 기획 내용을 공유 및 수정
 - Gitlab
   - 코드 버전 관리
   - MR 템플릿 사용
@@ -290,20 +289,17 @@ backend
 
 |   Name   | 김가흔           | 정민지                  | 이동근           | 김대영                        | 김유정                          | 박찬호                             |
 | :------: | ---------------- | ----------------------- | ---------------- | ----------------------------- | ------------------------------- | ---------------------------------- |
-| Profile  |      |              |        |                   | ![김유정](https://user-images.githubusercontent.com/51036842/185786075-586f3cae-09af-4332-bc42-b168a92ecf27.png)                      | ![박찬호](https://user-images.githubusercontent.com/51036842/185786083-433277e3-8b93-446b-a73a-f26ac7225e60.png)                  |
+| Profile  |   ![김가흔](/uploads/8e4bfadbc69770ccf7be699e20385daa/김가흔.png)   | ![정민지](/uploads/ba5a4fd8dc0d626ab71c61e8d6e435d4/정민지.png) |  ![이동근](/uploads/96aaf0bd1e1300f130a6cebe5c925c05/이동근.png)    |   ![김대영](/uploads/80716a763ccf75a4dee497fc47cbd193/김대영.png) | ![김유정](https://user-images.githubusercontent.com/51036842/185786075-586f3cae-09af-4332-bc42-b168a92ecf27.png) | ![박찬호](https://user-images.githubusercontent.com/51036842/185786083-433277e3-8b93-446b-a73a-f26ac7225e60.png)                  |
 | Position | Frontend & UI/UX | 팀장 & Frontend & UI/UX | Frontend & UI/UX | Backend Develop & CI/CD | Backend Develop & CI/CD | Backend Develop & CI/CD |
-|   Git    |            |                   |            |                         | [yujeonge](https://github.com/yujeonge)                          | [taurus429](https://github.com/taurus429)                             |
+|   Git    |    [gheun0712](https://github.com/gheun0712)   |    [minzzz1st7](https://github.com/minzzz1st7) |    [move-geun](https://github.com/move-geun)        |   [gresbin](https://github.com/gresbin)  | [yujeonge](https://github.com/yujeonge)                          | [taurus429](https://github.com/taurus429)                             |
 
 ## ✔ 설계 산출물
 
 ---
 
-- [설계 문서]()
+- [설계 문서](https://docs.google.com/spreadsheets/d/1AY91HPQE2U5A4moqEUbk0ArZB9k_AmO43n0VHn3FC4Q/edit#gid=538209592)
   - 요구사항 정의서
   - API 명세서
-
-- 플로우 차트
-- 사이트 맵
 - [ERD](https://www.erdcloud.com/d/AnyvDMRshSL5Ac3DX)
 
 ## ✔ 프로젝트 결과물
