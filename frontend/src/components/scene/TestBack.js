@@ -8,7 +8,7 @@ import { Taeria } from "./Taeria";
 import { MarsOne } from "./Mars_1";
 import { SaturnOne } from "./Saturn_1";
 import { PlanetTao } from "./Planet_tao_seti_prime";
-import { Openmap, Opennews, CameraZoom } from "../../recoil/atoms";
+import { Openmap, Opennews, CameraZoom, Galaxy } from "../../recoil/atoms";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 function Marker({ children, ...props }) {
@@ -34,6 +34,7 @@ export function TestBack(props) {
   const ismapopen = useRecoilValue(Openmap);
   const isnewsopen = useRecoilValue(Opennews);
   const [cameraZoom, setCameraZoom] = useRecoilState(CameraZoom);
+  const [galaxy, setGalaxy] = useRecoilState(Galaxy);
   const myMesh = React.useRef();
   useFrame(() => {
     myMesh.current.position.x = -400;
@@ -41,7 +42,7 @@ export function TestBack(props) {
     myMesh.current.position.z = -100;
   });
   return (
-    <group>
+    <group onClick={() => setGalaxy(2)}>
       <group rotation={[0, 0, 0]} ref={myMesh}>
         <SaturnOne />
         <Moon />

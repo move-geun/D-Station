@@ -81,6 +81,6 @@ export const NavMissionIntoThree = atom({
 
 export const Galaxy = atom({
   key: "Galaxy",
-  default: null,
+  default: 1,
   effects_UNSTABLE: [persistAtom],
 });

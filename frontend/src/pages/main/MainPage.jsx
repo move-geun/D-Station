@@ -24,12 +24,13 @@ import MapNav from "../../components/main/MapNav";
 import DailyContent from "../../components/main/DailyContent";
 import { Openmap, Opennews, CameraZoom } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { userInfoSelector } from "../../recoil/selector";
+import { userInfoSelector, GalaxySelector } from "../../recoil/selector";
 
 const MainPage = ({ ...props }) => {
   const [openMap, setOpenmap] = useRecoilState(Openmap);
   const [openNews, setOpennews] = useRecoilState(Opennews);
   const [camerzoom, setCameraZoom] = useRecoilState(CameraZoom);
+  const galaxyList = useRecoilValue(GalaxySelector);
   const user = useRecoilValue(userInfoSelector);
   const imgsrc = "../assets/" + user.imageUrl;
   const navigate = useNavigate();
@@ -71,6 +72,7 @@ const MainPage = ({ ...props }) => {
 
   useEffect(() => {
     setOpenmap(false);
+    console.log(galaxyList.data);
   }, []);
   // const check = useRecoilValue(userInfoSelector);
 
