@@ -71,4 +71,16 @@ public class MissionController {
         return ResponseEntity.status(404).body(BaseResponseBody.of(404, "해당 위성이 존재하지 않습니다."));
     }
 
+    	// 미션 완료 조회
+	@GetMapping("/iscompleted")
+	@ApiOperation(value = "미션 완료 여부 조회", notes = "<strong>미션 uid와 사용자 아이디로</strong>해당 미션의 완료 여부를 반환한다.")
+	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = MissionRes.class) })
+	public ResponseEntity<Boolean> getMissionsCompletedByMuidAndUserUid(
+			@RequestParam @ApiParam(value = "미션 uid", required = true) Long mUid, String id) {
+		
+		boolean IsCompleted = missionService.getMissionsCompletedByMuidAndUserUid(mUid, id);
+		
+		return ResponseEntity.status(200).body(IsCompleted);
+	}
+
 }

@@ -68,7 +68,7 @@ export function DecoWood(props = defaultValue) {
           // position={[-0.07, 1.39, -1.06]}
           scale={0.04}
         />
-        <Html position={[-0.8, -0.3, 1]}>
+        <Html position={[-0.8, 0, 1]}>
             <span
                 style={{
                   fontSize: 70,
@@ -95,7 +95,11 @@ export function DecoWood(props = defaultValue) {
           )}
 
           <span
-            style={{fontSize: 100}}
+            style={{
+              position: "absolute",
+              fontSize: 100,
+              left: 240,
+            }}
             onClick={() => AnsHandler(true)}
             onPointerOver={(event) => setHover(true)}
             onPointerOut={(event) => setHover(false)}
@@ -104,7 +108,11 @@ export function DecoWood(props = defaultValue) {
             ⭕
           </span>
           <span
-            style={{fontSize: 100}}
+            style={{
+              position: "absolute",
+              fontSize: 100,
+              left: 370,
+            }}
             onClick={() => AnsHandler(false)}
             onPointerOver={(event) => setHover(true)}
             onPointerOut={(event) => setHover(false)}
