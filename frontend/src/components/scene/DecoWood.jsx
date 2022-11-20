@@ -18,7 +18,6 @@ export function DecoWood(props = defaultValue) {
   const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
 
   useEffect(()=>{
-    console.log("우드우드", props);
     setQuizData(props.data);
   
   }, [props]);
