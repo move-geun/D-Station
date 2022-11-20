@@ -54,7 +54,7 @@ public class ProfileController {
             @ApiResponse(code = 200, message = "성공")
     })
     public ResponseEntity<?> getUserPioneer(
-            @RequestParam @ApiParam(name = "유저 id",required = true) String userId
+            @RequestParam @ApiParam(name = "userId",required = true) String userId
     ){
         User user = userService.getUserById(userId);
         if ( user != null ) {

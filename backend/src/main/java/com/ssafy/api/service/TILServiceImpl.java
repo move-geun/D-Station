@@ -223,7 +223,28 @@ public class TILServiceImpl implements TILService {
 
 		//////// 파일 변환 시작
 		String filePath = "./json/testDir/"; // 파일 경로
+		File file = new File(filePath);
+		String path = file.getPath();
+		System.err.println("path : " + path);
+		///////////////////////////
+		System.err.println("classLoader 간다잉");
+		ClassLoader classLoader = getClass().getClassLoader();
+		System.err.println("classLoader 통과 ");
+		File jarfile1 = new File(classLoader.getResource("document.html").getFile());
+		File jarfile2 = new File(classLoader.getResource("Output.md").getFile());
+		System.err.println(jarfile1);
+		System.err.println(jarfile2);
 
+		if (jarfile1.exists() || jarfile1.exists()) {
+			if (jarfile2.delete() && jarfile2.delete()) {
+				System.out.println("파일삭제 성공");
+			} else {
+				System.out.println("파일삭제 실패");
+			}
+		}
+		
+		///////////////////////////////////
+		/////////////////////////////////
 		File file1 = new File(filePath + "document.html");
 		File file2 = new File(filePath + "Output.md");
 

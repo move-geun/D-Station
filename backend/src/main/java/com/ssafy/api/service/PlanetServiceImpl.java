@@ -60,10 +60,11 @@ public class PlanetServiceImpl implements PlanetService{
     public List<PioneerPlanetRes> getPlanetListByUser(String userId) {
         // 유저 정보
         Optional<User> user = userRepository.getUsersById(userId);
+        System.out.println(missionCompletedRepository.getPlanetList(userId));
         List<PioneerPlanetRes> list = missionCompletedRepository.getPlanetList(userId)
                 .stream().map(m ->PioneerPlanetRes
                         .of(planetRepository.getOne(m),
-                                (double) missionCompletedRepository.countAllByUserAndMission_PUid(user.get()) / (double) missionRepository.countAllByPUid(m) * 100
+                                (double) missionCompletedRepository.countAllByUserAndMission_PUid(user.get(), m) / (double) missionRepository.countAllByPUid(m) * 100
                         )
                 ).collect(Collectors.toList());
         return list;
