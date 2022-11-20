@@ -33,6 +33,7 @@ const MissionHTML = (prop = defaultValue) => {
   useEffect(() => {
     getMissionData();
     getRefListData();
+    getTilDone();
   }, []);
 
   useEffect(() => {}, [mData, refData, quizData, quizORct, doneTilData]);
@@ -98,7 +99,7 @@ const MissionHTML = (prop = defaultValue) => {
     }
 
     if(whichOne === "code"){
-      navigate(`/mission/${misId}/codeexam`);
+      navigate(`/mission/${misId}/codeexam`, {state: misId});
       if(prop === "code"){    
         setWhichOne(null);
       }else{
