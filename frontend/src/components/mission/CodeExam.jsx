@@ -1,38 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { Container, Title, Content } from "./CodeExam.style";
+import { Box, Container, Title, Content } from "./CodeExam.style";
 import http from "../../api/http";
 import CodeTest from "./CodeTest";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CodeExam = () => {
-  const { state } = useLocation();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const Uid = location.state;
   const [name, setName] = useState();
   const [content, setContent] = useState();
 
   useEffect(() => {
     http.connect_axios
-      .get(`/grading/muid?uid=${state}`)
+      .get(`/grading/muid?uid=${Uid}`)
       .then((res) => {
-        // console.log(res);
         setName(res.data.name);
         setContent(res.data.content);
       })
       .catch((err) => {
         console.log(err);
         alert("문제가 존재하지 않습니다.");
+        navigate(-1);
       });
   });
 
   return (
     <Container>
       <Title>
-        <p>문제: {name}</p>
+        <p>{name}</p>
       </Title>
       <Content>
-        <p>문제내용 : {content}</p>
-        {/* <p>조건 : Python print문 이용하기</p> */}
+        <p>[문제]</p>
+        <p>{content}</p>
       </Content>
-      <CodeTest uid={state} />
+      <Box>
+        <CodeTest Uid={Uid} />
+      </Box>
     </Container>
   );
 };
