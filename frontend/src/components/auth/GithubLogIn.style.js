@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import GithubLogInBtn from "../assets/GithubLogInBtn.PNG";
 
 const GithubContainer = styled.div`
   width: 100%;

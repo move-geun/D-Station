@@ -9,8 +9,6 @@ const Container = styled.div`
   margin-right: 15%;
 `;
 const Title = styled.div`
-  /* border-bottom: solid 2px white; */
-
   .title {
     font-size: 40px;
     margin-bottom: 10px;

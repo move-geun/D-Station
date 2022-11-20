@@ -10,6 +10,6 @@ const Component = styled.div`
 const HeadGroup = styled.div`
   display: flex;
   justify-content: space-between;
-`
+`;
 
 export { Component, HeadGroup };

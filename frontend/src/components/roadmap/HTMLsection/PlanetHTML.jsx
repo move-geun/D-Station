@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
-import { AboutPlanetWrapper, DescWrapper, ListWrapper } from "../Roadmap.style";
+import { DescWrapper, ListWrapper } from "../Roadmap.style";
 import SatelliteList from "./SatelliteList";
 
 const defaultValue = {};

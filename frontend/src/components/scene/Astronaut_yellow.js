@@ -1,14 +1,10 @@
 import React, { useRef } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
-import { useEffect } from "react";
+import { useGLTF } from "@react-three/drei";
 
 export function AstronautYellow(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/glb/astronaut_yellow.glb");
-  // const { actions } = useAnimations(animations, group);
-  // useEffect(() => {
-  //   actions.play();
-  // });
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">

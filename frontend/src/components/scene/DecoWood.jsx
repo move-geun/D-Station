@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Html, useGLTF, useScroll, OrbitControls } from "@react-three/drei";
+import React, { useEffect, useState } from "react";
+import { Html, useGLTF } from "@react-three/drei";
 import http from "../../api/http";
 import { getUserId } from "../../api/JWT";
 import { useRecoilState } from "recoil";
@@ -16,14 +16,17 @@ export function DecoWood(props = defaultValue) {
   const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
   const [hovered, setHover] = useState(false);
 
-  useEffect(() => {setQuizData(props.data)}, [props]);
+  useEffect(() => {
+    setQuizData(props.data);
+  }, [props]);
   useEffect(() => {}, [quizData, quizAnswer]);
-  useEffect(() => {quizHandler()}, [quizResult]);
-  useEffect(()=> {
-    if(hovered){
-
+  useEffect(() => {
+    quizHandler();
+  }, [quizResult]);
+  useEffect(() => {
+    if (hovered) {
     }
-  }, [hovered])
+  }, [hovered]);
 
   function AnsHandler(prop) {
     setQuizAnswer(prop);
@@ -69,16 +72,15 @@ export function DecoWood(props = defaultValue) {
           scale={0.04}
         />
         <Html position={[-0.8, 0, 1]}>
-            <span
-                style={{
-                  fontSize: 70,
-                  letterSpacing: -0.5,
-                  color: "black",
-                }}
-              >
-                QUIZ
-              </span>
-
+          <span
+            style={{
+              fontSize: 70,
+              letterSpacing: -0.5,
+              color: "black",
+            }}
+          >
+            QUIZ
+          </span>
         </Html>
         <Html position={[-10, 10, -1.06]}>
           {quizData !== null ? (
@@ -103,7 +105,6 @@ export function DecoWood(props = defaultValue) {
             onClick={() => AnsHandler(true)}
             onPointerOver={(event) => setHover(true)}
             onPointerOut={(event) => setHover(false)}
-            
           >
             ⭕
           </span>

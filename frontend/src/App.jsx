@@ -13,7 +13,6 @@ import SignupPage from "./pages/auth/SignupPage";
 import WriteTilPage from "./pages/til/WriteTilPage";
 import Navbar from "./components/navbar/NavBar";
 import LoginPage from "./pages/auth/LoginPage";
-import RoadmapPage from "./pages/roadmap/RoadmapPage";
 import PlanetPage from "./pages/roadmap/PlanetPage";
 import SatellitePage from "./pages/roadmap/SatellitePage";
 import MissionPage from "./pages/roadmap/MissionPage";
@@ -84,18 +83,10 @@ function App() {
           element={isLogin ? <MissionPage /> : <Navigate to="/login" />}
         /> */}
         <Route
-          path="/roadmap"
-          element={isLogin ? <RoadmapPage /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/roadmap"
-          element={isLogin ? <RoadmapPage /> : <Navigate to="/login" />}
-        />
-        <Route
           path="/galaxy/:galaxyNo"
           element={isLogin ? <GalaxyPage /> : <Navigate to="/login" />}
         />
-        {/* <Route
+        <Route
           path="/planet/:plantNo"
           element={isLogin ? <PlanetPage /> : <Navigate to="/login" />}
         />
@@ -106,7 +97,7 @@ function App() {
         <Route
           path="/mission/:missNo"
           element={isLogin ? <MissionPage /> : <Navigate to="/login" />}
-        /> */}
+        />
         <Route
           path="/refredirect"
           element={isLogin ? <RefRedirectPage /> : <Navigate to="/login" />}
@@ -117,18 +108,9 @@ function App() {
         />
 
         {/* 테스트용 !!!! */}
-        <Route
-          path="/mission/:missNo"
-          element={<MissionPage />}
-        />
-        <Route
-          path="/satellite/:sllNo"
-          element={<SatellitePage />}
-        />
-        <Route
-          path="/planet/:plantNo"
-          element={<PlanetPage /> }
-        />
+        {/* <Route path="/mission/:missNo" element={<MissionPage />} />
+        <Route path="/satellite/:sllNo" element={<SatellitePage />} />
+        <Route path="/planet/:plantNo" element={<PlanetPage />} /> */}
       </Routes>
     </BrowserRouter>
   );

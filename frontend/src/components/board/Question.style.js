@@ -25,7 +25,7 @@ export const Ui = styled.div`
   left: 0%;
   right: 0%;
   top: 110%;
-  width:100%;
+  width: 100%;
 
   button {
     cursor: pointer;
