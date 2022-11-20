@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.db.entity.Jisickin;
@@ -13,6 +14,9 @@ import com.ssafy.db.entity.Jisickin;
  */
 @Repository
 public interface JisickinRepository extends JpaRepository<Jisickin, Long> {
+
+	@Query(value = "select j from Jisickin j order by j.uid desc")
+	List<Jisickin> findAll();
 
 	// 태그별 질문 조회
 	List<Jisickin> getJisickinsByTag(String tag);
