@@ -1,6 +1,6 @@
 import http from "../api/http";
 import { selector } from "recoil";
-import { UserIdState, Galaxy } from "./atoms";
+import { UserIdState } from "./atoms";
 
 export const userInfoSelector = selector({
   key: "userInfoSelector",
@@ -24,12 +24,31 @@ export const userStudySelector = selector({
   },
 });
 
-export const GalaxySelector = selector({
-  key: "GalaxySelector",
+export const FrontSelector = selector({
+  key: "FrontSelector",
   get: async ({ get }) => {
-    const galaxyId = get(Galaxy);
     const res = await http.connect_axios.get("/planet/list_by_galaxy", {
-      params: { uid: galaxyId },
+      params: { uid: 1 },
+    });
+    return res;
+  },
+});
+
+export const BackSelector = selector({
+  key: "BackSelector",
+  get: async ({ get }) => {
+    const res = await http.connect_axios.get("/planet/list_by_galaxy", {
+      params: { uid: 2 },
+    });
+    return res;
+  },
+});
+
+export const DevOpsSelector = selector({
+  key: "DevOpsSelector",
+  get: async ({ get }) => {
+    const res = await http.connect_axios.get("/planet/list_by_galaxy", {
+      params: { uid: 3 },
     });
     return res;
   },

@@ -33,7 +33,6 @@ const SearchMap = () => {
           })
           .then((res) => {
             setResultList(res.data.list);
-            console.log(res.data.list);
           });
       }
     } catch (err) {
@@ -127,7 +126,7 @@ const SearchMap = () => {
                 } else {
                   const glink = "/galaxy/" + result.guid;
                   const plink = "/planet/" + result.puid;
-                  const slink = "/satelite/" + result.suid;
+                  const slink = "/satellite/" + result.suid;
                   return (
                     <Stack className="spacing" key={idx}>
                       <Breadcrumbs

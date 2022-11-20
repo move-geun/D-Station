@@ -32,17 +32,23 @@ function Marker({ children, ...props }) {
 
 export function TestBack(props) {
   const ismapopen = useRecoilValue(Openmap);
-  const isnewsopen = useRecoilValue(Opennews);
+  const [isnewsopen, setIsNewsOpen] = useRecoilState(Opennews);
   const [cameraZoom, setCameraZoom] = useRecoilState(CameraZoom);
   const [galaxy, setGalaxy] = useRecoilState(Galaxy);
   const myMesh = React.useRef();
+
+  const backsetting = () => {
+    setGalaxy(2);
+    setIsNewsOpen(true);
+    console.log(isnewsopen);
+  };
   useFrame(() => {
     myMesh.current.position.x = -400;
     myMesh.current.position.y = 50;
     myMesh.current.position.z = -100;
   });
   return (
-    <group onClick={() => setGalaxy(2)}>
+    <group onClick={() => backsetting()}>
       <group rotation={[0, 0, 0]} ref={myMesh}>
         <SaturnOne />
         <Moon />
