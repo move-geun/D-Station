@@ -90,7 +90,7 @@ const SearchMap = () => {
               <div onClick={() => navigate("/satellite/350")}>
                 <img src="../assets/react.png" alt="" />
               </div>
-              <div onClick={() => navigate("/planet/")}>
+              <div onClick={() => navigate("/mission/628")}>
                 <img src="../assets/springboot.png" alt="" />
               </div>
               <div onClick={() => navigate("/satellite/352")}>
