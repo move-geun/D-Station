@@ -315,6 +315,7 @@ backend
 
 ### 1. 메인 화면
 ___
+![메인로드맵접속](/uploads/2c85fa1f0a1d29d62eb9e7d4cb249a0e/메인로드맵접속.gif)
   - #### 은하
     - three.js로 은하 표시
 
