@@ -5,23 +5,25 @@ import {useFrame, useLoader } from "@react-three/fiber";
 import {Object3D, TextureLoader } from "three";
 import {OrbitControls} from "@react-three/drei";
 
-import SatelliteColor from "../../../../../assets/images/PaddedBase.jpg";
-import SatelliteBump from "../../../../../assets/images/PaddedBump.png";
-import SatelliteRough from "../../../../../assets/images/PaddedRough.jpg";
-import SatelliteNormal from "../../../../../assets/images/PaddedNormal.jpg";
+import SatelliteColor from "../../../../../assets/images/Agate_001_COLOR.jpg";
+import SatelliteBump from "../../../../../assets/images/Agate_001_DISP.png";
+import SatelliteRough from "../../../../../assets/images/Agate_001_ROUGH.jpg";
+import SatelliteNormal from "../../../../../assets/images/Agate_001_NORM.jpg";
 import { useEffect } from "react";
 
 
-  export function GloSll1() {
+  export function GloSll1(prop) {
     const [colorMap, bumpMap, roughMap, normalMap] = useLoader(
       TextureLoader,[SatelliteColor, SatelliteBump, SatelliteRough, SatelliteNormal]
     );
     const [hovered, setHover] = useState(false);
     const [clickActive, setClickActive] = useState(false);
 
+
     const sateRef = useRef();
     const navigate = useNavigate();
 
+    useEffect(()=>{},[prop])
     useEffect(()=>{if(clickActive){goToSatellite()}}, [clickActive]);
 
     // 마우스 올렸을 때, 위성크기 키우기
@@ -35,17 +37,18 @@ import { useEffect } from "react";
     });
 
     const goToSatellite = () => {
-        navigate("/satellite/1");
+        // navigate("/satellite/1");
     }
   
     return (
       <>
         <mesh 
             ref={sateRef} 
-            position={[3, 3, 0]}
+            position={prop.pos}
             onPointerOver={(event) => setHover(true)}
             onPointerOut={(event) => setHover(false)}
             onClick={()=> setClickActive(true)}
+            
         >
             {/* {hovered? <Html position={[2, 0.6, 0]}>자료구조</Html> : <></>} */}
 

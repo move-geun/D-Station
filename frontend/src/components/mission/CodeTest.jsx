@@ -1,18 +1,28 @@
-import React from "react";
-import { useRef } from "react";
+import React, { useState } from "react";
+import AceEditor from "react-ace";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
-import { Editor } from "@tinymce/tinymce-react";
 import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { ButtonBox } from "./CodeTest.style";
+import { CodeBox, ButtonBox } from "./CodeTest.style";
+import http from "../../api/http";
+import "ace-builds/webpack-resolver";
 
-const CodeTest = () => {
-  const EditorRef = useRef();
-  const log = () => {
-    if (EditorRef.current) {
-      console.log(EditorRef.current.getContent());
-    }
+const CodeTest = ({ uid }) => {
+  const [code, setCode] = useState();
+
+  const submit = () => {
+    http.connect_axios
+      .post(`/grading/python?code=${code}&uid=${uid}`)
+      .then((res) => {
+        console.log(res);
+        console.log(code);
+        alert("정답입니다.");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("정답이 아닙니다.");
+      });
   };
 
   const blank = {
@@ -22,49 +32,33 @@ const CodeTest = () => {
   };
 
   return (
-    <>
+    <CodeBox>
       <FormControl>
         <FormLabel style={blank}>코드작성</FormLabel>
-        <Editor
-          apiKey="mv47x1bf7revpqmsvwdqta54w2b390xyi1wmkmlthp83qlkj"
-          onInit={(evt, editor) => (EditorRef.current = editor)}
-          initialValue="<p>Format탭의 Code를 이용해 코드를 작성해주세요.</p>"
-          init={{
-            height: 300,
-            menubar: true,
-            plugins: [
-              "advlist",
-              "autolink",
-              "lists",
-              "link",
-              "image",
-              "charmap",
-              "preview",
-              "anchor",
-              "searchreplace",
-              "visualblocks",
-              "code",
-              "fullscreen",
-              "insertdatetime",
-              "media",
-              "table",
-              "code",
-              "help",
-              "wordcount",
-            ],
-            toolbar:
-              "undo redo | blocks | " +
-              "bold italic forecolor | alignleft aligncenter " +
-              "alignright alignjustify | bullist numlist outdent indent | " +
-              "removeformat | help",
-            content_style:
-              "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+        <AceEditor
+          width="1000px"
+          placeholder="코드를 입력해주세요."
+          // mode="python"
+          name="codeInput"
+          // onLoad={this.onLoad}
+          onChange={setCode}
+          fontSize={18}
+          showPrintMargin
+          showGutter
+          highlightActiveLine
+          // value={``}
+          setOptions={{
+            // enableBasicAutocompletion: true,
+            // enableLiveAutocompletion: true,
+            // enableSnippets: true,
+            // showLineNumbers: true,
+            tabSize: 4,
           }}
         />
         <ButtonBox>
           <Button
             style={blank}
-            onClick={log}
+            onClick={submit}
             variant="contained"
             startIcon={<CheckCircleIcon />}
           >
@@ -72,7 +66,7 @@ const CodeTest = () => {
           </Button>
         </ButtonBox>
       </FormControl>
-    </>
+    </CodeBox>
   );
 };
 

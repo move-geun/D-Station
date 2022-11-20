@@ -8,17 +8,16 @@ import {
   ThreeWrapper,
 } from "../../components/roadmap/Roadmap.style";
 import { MissionContainer } from "./RoadmapPage.style";
-
+import CodeExam from "../../components/mission/CodeExam";
 import { Canvas } from "@react-three/fiber";
 import BaseBackground from "../../components/roadmap/Threesection/Base/BaseBackground";
-import { Man } from "../../components/roadmap/Threesection/Mission/Man";
+
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  NavMissionIntoThree,
-} from "../../recoil/atoms";
+import { NavMissionIntoThree, TilState } from "../../recoil/atoms";
 import TilEditor from "../../components/til/TilEditor";
 import { DecoWood } from "../../components/scene/DecoWood.jsx";
 import { Html } from "@react-three/drei";
+
 
 const MissionPage = () => {
   const misId = useParams().missNo;
@@ -29,21 +28,23 @@ const MissionPage = () => {
 
   const userId = getUserId();
   const one = useRecoilValue(NavMissionIntoThree);
+  const tilOne = useRecoilValue(TilState);
+
   const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
 
   useEffect(() => {
-    MisRouter();
+    // MisRouter();
     getQuizData();
     getTilDone();
   }, []);
 
   useEffect(() => {}, [quizData, quizORct, doneTilData]);
 
-  function MisRouter() {
-    if (misId === "1") {
-      return <Man />;
-    }
-  }
+  // function MisRouter() {
+  //   if (misId === "1") {
+  //     return <Man />;
+  //   }
+  // }
 
   async function getQuizData() {
     await http.connect_axios
@@ -57,7 +58,7 @@ const MissionPage = () => {
         // 퀴즈데이터 요청해서 500 반환하면 코테데이터 요청
         http.connect_axios
           .get(`/grading/muid?uid=${misId}`)
-          .then((res) => {})
+          .then((res) => {console.log("코테",res)})
           .catch((err) => {
             console.log(err);
           });
@@ -69,7 +70,6 @@ const MissionPage = () => {
     await http.connect_axios
       .get(`/til/mission?id=${userId}&mUid=${misId}`)
       .then((res) => {
-        console.log(res);
         setDoneTilData(res.data);
       })
 
@@ -79,8 +79,10 @@ const MissionPage = () => {
   return (
     <MissionContainer>
       <ThreeWrapper>
-        {one === "til" ? <TilEditor /> : <div></div>}
-
+        {/* {tilOne ? <></>: <TilEditor /> } */}
+        {doneTilData ? 
+        (<></>):
+        (one === "til" ? (<TilEditor/>): (<></>))}
         <Canvas>
           <directionalLight position={[0, 5, 0]} />
           <ambientLight />
@@ -88,12 +90,11 @@ const MissionPage = () => {
           {one === "quiz" ? <DecoWood data={quizData} /> : <Html></Html>}
           {one === "quizSuccess" ? <Html> 정답입니다 🍕 </Html> : <Html />}
           {one === "quizFail" ? <Html> 틀렸습니다. 😈 </Html> : <Html />}
-          {one === "code" ? <></> : <></>}
+          {/* {one === "code" ? <CodeExam Uid={misId} /> : null} */}
           {one === "codeSuccess" ? <Html> 코드 풀기 성공 </Html> : <Html />}
-          {one === "tilSuccess" ? <Html> TIL 작성 완료 </Html>: <Html/>}
+          {/* {one === "tilSuccess" ? <Html> TIL 작성 완료 </Html> : <Html />} */}
           {/* {doneTilData !== null ? <Html> Til 작성 완료을 완료하였습니다. </Html> : <Html/>} */}
-
-          {MisRouter()}
+          {/* {MisRouter()} */}
         </Canvas>
       </ThreeWrapper>
       <HTMLWrapper>

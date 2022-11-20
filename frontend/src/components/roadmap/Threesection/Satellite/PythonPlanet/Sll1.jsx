@@ -1,9 +1,12 @@
-import React , {useRef, useState}from "react";
+import React , {useEffect, useRef, useState}from "react";
 import { useNavigate } from "react-router-dom";
+
+import { useRecoilState } from "recoil";
+import {CameraZoom} from "../../../../../recoil/atoms";
 
 import { Canvas, useThree, useFrame, useLoader } from "@react-three/fiber";
 import {Object3D, TextureLoader } from "three";
-import * as THREE from "three";
+
 import {
   OrbitControls,
   Stars,
@@ -15,8 +18,6 @@ import SatelliteColor from "../../../../../assets/images/canyonRockColor.jpg";
 import SatelliteBump from "../../../../../assets/images/canyonRockBump.png";
 import SatelliteRough from "../../../../../assets/images/canyonRockColorRoughness.jpg";
 import SatelliteNormal from "../../../../../assets/images/canyonRockNormal.jpg";
-import { useEffect } from "react";
-
 
   export function Sll1() {
     const [colorMap, bumpMap, roughMap, normalMap] = useLoader(
@@ -24,6 +25,7 @@ import { useEffect } from "react";
     );
     const [hovered, setHover] = useState(false);
     const [clickActive, setClickActive] = useState(false);
+    const [cameraZoom, setCameraZoom] = useRecoilState(CameraZoom);
 
     const sateRef = useRef();
     const navigate = useNavigate();
@@ -38,6 +40,8 @@ import { useEffect } from "react";
     useFrame(({ clock }) => {
       const elapsedTime = clock.getElapsedTime();
       sateRef.current.rotation.y = elapsedTime / 20;
+
+
     });
 
     const goToSatellite = () => {
@@ -48,7 +52,7 @@ import { useEffect } from "react";
       <>
         <mesh 
             ref={sateRef} 
-            position={[3, 0, 0]}
+            position={[3, 0, -2]}
             onPointerOver={(event) => setHover(true)}
             onPointerOut={(event) => setHover(false)}
             onClick={()=> setClickActive(true)}
@@ -65,6 +69,7 @@ import { useEffect } from "react";
                 roughnessMap ={roughMap}
                 roughness={0.8}
             /> 
+            
              <OrbitControls
                 enableZoom={true}
                 enablePan={true}
@@ -74,6 +79,18 @@ import { useEffect } from "react";
                 rotateSpeed={0.4}
                 
             />
+
+              {/* <Html>
+                <div
+                style={{
+                  position: "absolute",
+                  fontSize: 80,
+                  letterSpacing: -0.5,
+                }}
+              >
+                기초
+              </div>
+            </Html> */}
 
         </mesh>
       </>
