@@ -48,7 +48,7 @@ import { useEffect } from "react";
       <>
         <mesh 
             ref={sateRef} 
-            position={[3, 0, 0]}
+            position={[-4, 0, -2]}
             onPointerOver={(event) => setHover(true)}
             onPointerOut={(event) => setHover(false)}
             onClick={()=> setClickActive(true)}
