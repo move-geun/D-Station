@@ -75,36 +75,55 @@ _- 로드맵 및 학습 관리 서비스 -_
 ```
 frontend
 ├─public
+│  ├─assets
+│  │  └─images
+│  │      ├─Canyon
+│  │      ├─Earth
+│  │      ├─frontend
+│  │      ├─Pebbles
+│  │      ├─tiles
+│  │      └─WoodCeiling
+│  └─glb
 └─src
-    ├─app
+    ├─api
     ├─assets
     │  ├─fonts
     │  └─images
-    ├─common
-    │  ├─api
+    ├─components
+    │  ├─auth
+    │  ├─board
+    │  ├─dots
+    │  ├─loader
+    │  ├─main
+    │  ├─mission
     │  ├─modal
-    │  └─navbar
-    └─features
-        ├─custom
-        │  └─page
-        ├─game
-        ├─gossip
-        │  └─page
-        ├─help
-        │  └─page
-        ├─home
-        │  └─page
-        ├─mypage
-        │  └─page
-        ├─notfound
-        ├─rank
-        │  └─page
-        ├─statistic
-        │  └─page
-        ├─user
-        │  └─page
-        └─userrank
-            └─page
+    │  ├─navbar
+    │  ├─profile
+    │  ├─roadmap
+    │  │  ├─HTMLsection
+    │  │  └─Threesection
+    │  │      ├─Base
+    │  │      ├─Mission
+    │  │      ├─Planet
+    │  │      └─Satellite
+    │  │          ├─GlobalPlanet
+    │  │          └─PythonPlanet
+    │  ├─scene
+    │  ├─survey
+    │  └─til
+    ├─pages
+    │  ├─auth
+    │  ├─board
+    │  ├─loader
+    │  ├─main
+    │  ├─notFound
+    │  ├─profile
+    │  ├─roadmap
+    │  └─til
+    ├─recoil
+    ├─service
+    ├─state
+    └─styles
 
 ```
 
@@ -112,76 +131,116 @@ frontend
 
 ```
 backend
-├─.gitlab
-│  └─merge_request_templates
-├─.gradle
-│  ├─6.7
-│  │  ├─fileChanges
-│  │  ├─fileHashes
-│  │  └─vcsMetadata-1
-│  ├─buildOutputCleanup
-│  ├─checksums
-│  ├─configuration-cache
-│  └─vcs-1
-├─.settings
-├─bin
-│  └─main
-│      ├─com
-│      │  └─ssafy
-│      │      ├─api
-│      │      │  ├─controller
-│      │      │  ├─request
-│      │      │  ├─response
-│      │      │  └─service
-│      │      ├─common
-│      │      │  ├─auth
-│      │      │  ├─exception
-│      │      │  │  └─handler
-│      │      │  ├─model
-│      │      │  │  └─response
-│      │      │  └─util
-│      │      ├─config
-│      │      ├─db
-│      │      │  ├─entity
-│      │      │  ├─qentity
-│      │      │  └─repository
-│      │      └─infos
-│      └─dist
-│          ├─css
-│          ├─fonts
-│          ├─img
-│          └─js
-├─gradle
-│  └─wrapper
-└─src
-    └─main
-        ├─java
-        │  └─com
-        │      └─ssafy
-        │          ├─api
-        │          │  ├─controller
-        │          │  ├─request
-        │          │  ├─response
-        │          │  └─service
-        │          ├─common
-        │          │  ├─auth
-        │          │  ├─exception
-        │          │  │  └─handler
-        │          │  ├─model
-        │          │  │  └─response
-        │          │  └─util
-        │          ├─config
-        │          ├─db
-        │          │  ├─entity
-        │          │  ├─qentity
-        │          │  └─repository
-        │          └─infos
-        └─resources
-            └─dist
-                ├─css
-                ├─fonts
-                ├─img
-                └─js
+    ├─.gradle
+    │  ├─6.7
+    │  │  ├─executionHistory
+    │  │  ├─fileChanges
+    │  │  ├─fileHashes
+    │  │  └─vcsMetadata-1
+    │  ├─buildOutputCleanup
+    │  ├─checksums
+    │  ├─configuration-cache
+    │  └─vcs-1
+    ├─.settings
+    ├─bin
+    │  ├─default
+    │  ├─main
+    │  │  └─com
+    │  │      └─ssafy
+    │  │          ├─api
+    │  │          │  ├─controller
+    │  │          │  ├─request
+    │  │          │  │  ├─jisickin
+    │  │          │  │  ├─MBTI
+    │  │          │  │  ├─quiz
+    │  │          │  │  ├─reply
+    │  │          │  │  ├─til
+    │  │          │  │  └─user
+    │  │          │  ├─response
+    │  │          │  │  ├─cs
+    │  │          │  │  ├─galaxy
+    │  │          │  │  ├─grading
+    │  │          │  │  ├─jisickin
+    │  │          │  │  ├─mbti
+    │  │          │  │  ├─mission
+    │  │          │  │  ├─planet
+    │  │          │  │  ├─profile
+    │  │          │  │  ├─quiz
+    │  │          │  │  ├─ReferenceData
+    │  │          │  │  ├─reply
+    │  │          │  │  ├─satellite
+    │  │          │  │  ├─til
+    │  │          │  │  └─user
+    │  │          │  └─service
+    │  │          ├─common
+    │  │          │  ├─auth
+    │  │          │  ├─exception
+    │  │          │  │  └─handler
+    │  │          │  ├─model
+    │  │          │  │  └─response
+    │  │          │  └─util
+    │  │          ├─config
+    │  │          └─db
+    │  │              ├─entity
+    │  │              ├─qentity
+    │  │              └─repository
+    │  └─querydsl
+    │      └─com
+    │          └─ssafy
+    │              └─db
+    │                  └─entity
+    ├─gradle
+    │  └─wrapper
+    ├─json
+    │  └─testDir
+    └─src
+        └─main
+            ├─generated
+            │  └─com
+            │      └─ssafy
+            │          └─db
+            │              └─entity
+            ├─java
+            │  └─com
+            │      └─ssafy
+            │          ├─api
+            │          │  ├─controller
+            │          │  ├─request
+            │          │  │  ├─jisickin
+            │          │  │  ├─MBTI
+            │          │  │  ├─quiz
+            │          │  │  ├─reply
+            │          │  │  ├─til
+            │          │  │  └─user
+            │          │  ├─response
+            │          │  │  ├─cs
+            │          │  │  ├─galaxy
+            │          │  │  ├─grading
+            │          │  │  ├─jisickin
+            │          │  │  ├─mbti
+            │          │  │  ├─mission
+            │          │  │  ├─planet
+            │          │  │  ├─profile
+            │          │  │  ├─quiz
+            │          │  │  ├─ReferenceData
+            │          │  │  ├─reply
+            │          │  │  ├─satellite
+            │          │  │  ├─til
+            │          │  │  └─user
+            │          │  └─service
+            │          ├─common
+            │          │  ├─auth
+            │          │  ├─exception
+            │          │  │  └─handler
+            │          │  ├─model
+            │          │  │  └─response
+            │          │  └─util
+            │          ├─config
+            │          └─db
+            │              ├─entity
+            │              ├─qentity
+            │              └─repository
+            └─resources
 ```
 
 ## ✔ 협업 툴
@@ -245,7 +304,7 @@ backend
 
 - 플로우 차트
 - 사이트 맵
-- ERD
+- [ERD](https://www.erdcloud.com/d/AnyvDMRshSL5Ac3DX)
 
 ## ✔ 프로젝트 결과물
 ---

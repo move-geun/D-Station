@@ -10,7 +10,7 @@ export const Carousel = styled.div`
   max-width: 1250px;
   width: 100%;
   padding: 0;
-  margin: 0 auto;
+  margin: 0 0 0 0;
   overflow: hidden;
   scroll-behavior: smooth;
   ::-webkit-scrollbar {
@@ -18,25 +18,14 @@ export const Carousel = styled.div`
   }
 `;
 
-export const Item = styled.div`
-  display: flex;
-  min-width: 150px;
-  flex-direction: column;
-  justify-content: space-around;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 16px;
-  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
-  flex: none;
-`;
-
 export const Ui = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  left: 10%;
-  top: 70%;
-  width: 80%;
+  left: 0%;
+  right: 0%;
+  top: 110%;
+  width:100%;
 
   button {
     cursor: pointer;
@@ -61,9 +50,4 @@ export const Ui = styled.div`
       border: 1px solid rgba(255, 255, 255, 1);
     }
   }
-`;
-
-export const Item3 = styled.div`
-  display: flex;
-  justify-content: space-between;
 `;

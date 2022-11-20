@@ -5,7 +5,28 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: center;
+  margin-top: 50px;
   /* padding-left: 6rem; */
+
+  .graph {
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 100%;
+  }
+
+  .hide {
+    width: 90%;
+    position: relative;
+    margin: 0 auto;
+
+    .hideblack {
+      width: 100%;
+      height: 61px;
+      position: absolute;
+      background-color: black;
+      bottom: 5px;
+    }
+  }
 `;
 
 const Profile = styled.div`
@@ -17,11 +38,11 @@ const Profile = styled.div`
   margin: 2rem 0 1rem 0;
 
   .profile {
-    width: 150px;
     height: 150px;
     margin-left: 6rem;
     margin-right: 1rem;
     border-radius: 50%;
+    justify-content: left;
     img {
       width: 100%;
       height: 100%;
@@ -32,7 +53,7 @@ const Profile = styled.div`
     font-size: 30px;
   }
   .name {
-    font-size: 50px;
+    font-size: 40px;
     font-style: bold;
     margin-right: 1rem;
   }

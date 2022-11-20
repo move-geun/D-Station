@@ -1,10 +1,19 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
 export function RoundStar(props) {
   const { nodes, materials } = useGLTF("/glb/round_star.glb");
+  const myMesh = React.useRef();
+  useFrame(({ clock }) => {
+    const a = clock.getElapsedTime() / 5;
+    myMesh.current.rotation.y = a;
+    myMesh.current.position.x = 500 * (Math.sin(a) * 0.1);
+    myMesh.current.position.y = 500 * (Math.cos(a) * 0.1);
+    myMesh.current.position.z = 600 * (Math.sin(a) * 0.1);
+  });
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={0.3} ref={myMesh}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]}>
           <group rotation={[-Math.PI / 2, 0, 0]}>

@@ -1,13 +1,22 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
 export function Mars(props) {
   const { nodes, materials } = useGLTF("/glb/mars.glb");
+  const myMesh = React.useRef();
+  useFrame(({ clock }) => {
+    const a = clock.getElapsedTime() / 5;
+    myMesh.current.rotation.y = a;
+    myMesh.current.position.x = 600 * (Math.sin(a) * 0.05);
+    myMesh.current.position.y = 580 * (Math.sin(a) * 0.05);
+    myMesh.current.position.z = 570 * (Math.cos(a) * 0.05);
+  });
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} ref={myMesh}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
-          <group scale={1.02}>
+          <group scale={5}>
             <mesh
               castShadow
               receiveShadow
@@ -15,7 +24,7 @@ export function Mars(props) {
               material={materials.AtmosphereSub}
             />
           </group>
-          <group scale={1.04}>
+          <group scale={4.86}>
             <mesh
               castShadow
               receiveShadow
@@ -23,258 +32,8 @@ export function Mars(props) {
               material={materials.AtmosphereSub2}
             />
           </group>
-          <group rotation={[-Math.PI / 2, 0, 0]}>
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0001.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0002.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0003.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0004.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0005.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0006.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0007.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0008.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0009.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0010.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0011.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0012.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0013.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0014.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0015.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0016.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0017.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0018.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0019.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0020.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0021.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0022.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0023.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0024.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0025.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0026.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0027.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0028.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0029.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0030.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0031.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0032.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0033.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0034.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0035.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0036.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0037.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0038.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0039.geometry}
-              material={materials.MarsSub}
-            />
-            <mesh
-              castShadow
-              receiveShadow
-              geometry={nodes.Mars2_MarsSub_0040.geometry}
-              material={materials.MarsSub}
-            />
-          </group>
         </group>
       </group>
     </group>
   );
 }
-
-useGLTF.preload("/glb/mars.glb");

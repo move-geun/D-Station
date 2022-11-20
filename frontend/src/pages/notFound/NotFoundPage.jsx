@@ -7,12 +7,14 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { StarCatcher } from "../../components/scene/Star_catcher";
 import { Compass } from "../../components/scene/Compass";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { UserLogin } from "../../recoil/atoms";
 
 extend({ OrbitControls });
 
 function Loader() {
   const { progress } = useProgress();
-  return <Html center>{progress} % 로딩중</Html>;
+  return <Html center>{Math.ceil(progress)} % 로딩중</Html>;
 }
 
 const CameraControls = () => {
@@ -68,9 +70,16 @@ function Marker({ children, ...props }) {
   );
 }
 const NotFoundPage = () => {
+  const isLogin = useRecoilValue(UserLogin);
   const navigate = useNavigate();
   const goMain = () => {
-    navigate("/");
+    // 로그인 돼있으면 main
+    if (isLogin) {
+      navigate("/main");
+      // 아니면 intro
+    } else {
+      navigate("/");
+    }
   };
   return (
     <Canvas camera={{ fov: 75, position: [0, 3, 13] }}>
