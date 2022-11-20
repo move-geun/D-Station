@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Box, Container, Title, Content } from "./CodeExam.style";
 import http from "../../api/http";
 import CodeTest from "./CodeTest";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CodeExam = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const Uid = location.state;
   const [name, setName] = useState();
   const [content, setContent] = useState();
@@ -20,6 +21,7 @@ const CodeExam = () => {
       .catch((err) => {
         console.log(err);
         alert("문제가 존재하지 않습니다.");
+        navigate(-1);
       });
   });
 
