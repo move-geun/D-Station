@@ -224,49 +224,49 @@ public class TILServiceImpl implements TILService {
 
 		//////// 파일 변환 시작
 		//String filePath = "./json/testDir/"; // 파일 경로
-		
-		
-		
-		
+
+
+
+
 		///////////////////////////
-//		System.err.println("============================================================================");
+//      System.err.println("============================================================================");
 //        try {
-//			File fileee = new File(this.getClass().getResource("testDir/document.html").toURI());
-//			System.err.println(fileee);
-//		} catch (URISyntaxException e2) {
-//			// TODO Auto-generated catch block
-//			System.err.println("안된다고요~~~");
-//		}
-//		System.err.println("============================================================================"); 
-        
-//		String testPath = "json/testDir/document.html"; // 파일 경로
-//		String testPath2 = "/json/testDir/document.html"; // 파일 경로
+//         File fileee = new File(this.getClass().getResource("testDir/document.html").toURI());
+//         System.err.println(fileee);
+//      } catch (URISyntaxException e2) {
+//         // TODO Auto-generated catch block
+//         System.err.println("안된다고요~~~");
+//      }
+//      System.err.println("============================================================================");
+
+//      String testPath = "json/testDir/document.html"; // 파일 경로
+//      String testPath2 = "/json/testDir/document.html"; // 파일 경로
 //
-//		URL htmlURL = getClass().getClassLoader().getResource (testPath);
-//		URL htmlURL2 = getClass().getResource(testPath2);
+//      URL htmlURL = getClass().getClassLoader().getResource (testPath);
+//      URL htmlURL2 = getClass().getResource(testPath2);
 //        System.err.println ("found html at " + htmlURL);
 //        System.err.println ("found html at " + htmlURL2);
-//		
-//		
-//		System.err.println("classLoader 간다잉");
-//		ClassLoader classLoader = getClass().getClassLoader();
-//		System.err.println("classLoader 통과 ");
-//		System.err.println("classLoader : " + classLoader.toString());
-//		
-//		File jarfile1 = new File(classLoader.getResource("document.html").getFile());
-//		System.err.println("여기까지 올까?");
-//		File jarfile2 = new File(classLoader.getResource("Output.md").getFile());
-//		System.err.println(jarfile1);
-//		System.err.println(jarfile2);
 //
-//		if (jarfile1.exists() || jarfile1.exists()) {
-//			if (jarfile2.delete() && jarfile2.delete()) {
-//				System.out.println("파일삭제 성공");
-//			} else {
-//				System.out.println("파일삭제 실패");
-//			}
-//		}
-		
+//
+//      System.err.println("classLoader 간다잉");
+//      ClassLoader classLoader = getClass().getClassLoader();
+//      System.err.println("classLoader 통과 ");
+//      System.err.println("classLoader : " + classLoader.toString());
+//
+//      File jarfile1 = new File(classLoader.getResource("document.html").getFile());
+//      System.err.println("여기까지 올까?");
+//      File jarfile2 = new File(classLoader.getResource("Output.md").getFile());
+//      System.err.println(jarfile1);
+//      System.err.println(jarfile2);
+//
+//      if (jarfile1.exists() || jarfile1.exists()) {
+//         if (jarfile2.delete() && jarfile2.delete()) {
+//            System.out.println("파일삭제 성공");
+//         } else {
+//            System.out.println("파일삭제 실패");
+//         }
+//      }
+
 		///////////////////////////////////
 		/////////////////////////////////
 		File file1 = new File("document.html");
@@ -463,9 +463,9 @@ public class TILServiceImpl implements TILService {
 			bw.write(""); // 버퍼에 담기
 			bw.flush(); // 버퍼
 
-//			System.out.println("=============ContentLength : " + conn.getContentLength());
-//			System.out.println("=============ResponseMessage : " + conn.getResponseMessage());
-//			System.out.println("=============ResponseCode : " + conn.getResponseCode());
+//         System.out.println("=============ContentLength : " + conn.getContentLength());
+//         System.out.println("=============ResponseMessage : " + conn.getResponseMessage());
+//         System.out.println("=============ResponseCode : " + conn.getResponseCode());
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String line = "";
@@ -474,14 +474,14 @@ public class TILServiceImpl implements TILService {
 				sb.append(line);
 			}
 
-//			System.out.println("=============sb: " + sb.toString());
+//         System.out.println("=============sb: " + sb.toString());
 
 			JSONObject obj = new JSONObject(sb.toString()); // json으로 변경 (역직렬화)
 			isSuccess = obj.getBoolean("isSuccess");
 			return isSuccess;
 		} catch (Exception e) {
 			System.out.println("========" + e);
-//			System.err.println("실패실패");
+//         System.err.println("실패실패");
 			return isSuccess;
 		}
 	}
