@@ -92,16 +92,23 @@ const RecoSide = styled.div`
   img {
     width: 60px;
     height: 60px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
 const SearchSide = styled.div`
   width: 100%;
-  height: 100%;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   .title {
     font-size: 1rem;
