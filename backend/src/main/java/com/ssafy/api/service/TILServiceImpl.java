@@ -227,10 +227,21 @@ public class TILServiceImpl implements TILService {
 		String path = file.getPath();
 		System.err.println("path : " + path);
 		///////////////////////////
+		String testPath = "testDir/document.html"; // 파일 경로
+
+		URL imageURL = getClass().getClassLoader().getResource (testPath);
+        System.out.println ("found image at " + imageURL);
+		
+		
+		
+		
 		System.err.println("classLoader 간다잉");
 		ClassLoader classLoader = getClass().getClassLoader();
 		System.err.println("classLoader 통과 ");
+		System.err.println("classLoader : " + classLoader.toString());
+		
 		File jarfile1 = new File(classLoader.getResource("document.html").getFile());
+		System.err.println("여기까지 올까?");
 		File jarfile2 = new File(classLoader.getResource("Output.md").getFile());
 		System.err.println(jarfile1);
 		System.err.println(jarfile2);
