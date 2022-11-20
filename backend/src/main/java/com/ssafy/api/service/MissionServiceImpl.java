@@ -54,4 +54,19 @@ public class MissionServiceImpl implements MissionService{
                 .stream().map(m -> MissionRes.of(m)).collect(Collectors.toList());
         return list;
     }
+
+    @Override
+	public Boolean getMissionsCompletedByMuidAndUserUid(long mUid, String id) {
+		User user = userRepository.getUsersById(id).get();
+		Mission mission = missionRepository.getMissionByUid(mUid).get();
+
+		Optional<MissionCompleted> mc = missionCompletedRepository.getMissionCompletedByUserAndMission(user, mission);
+
+		if (mc.isPresent()) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 }
