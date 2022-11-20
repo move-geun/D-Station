@@ -28,4 +28,7 @@ public interface JisickinService {
 
     // 질문 삭제
     boolean deleteAsk(Long uid, String userId);
+    
+    // 검색
+    List<JisickinRes> getJisickinByKeyword(String keyword);
 }

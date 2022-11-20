@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.api.request.til.SatelliteTILReq;
 import com.ssafy.api.request.til.TILCreateReq;
 import com.ssafy.api.request.til.TILRepoReq;
+import com.ssafy.api.response.til.MissionTILRes;
 import com.ssafy.api.response.til.RepoListRes;
 import com.ssafy.api.response.til.SatelliteTILRes;
 import com.ssafy.api.response.til.TILCreateRepoRes;
@@ -135,9 +135,10 @@ public class TILController {
 			@ApiResponse(code = 404, message = "사용자 없음", response = BaseResponseBody.class),
 			@ApiResponse(code = 500, message = "서버 오류", response = BaseResponseBody.class) })
 	public ResponseEntity<ArrayList<SatelliteTILRes>> getUserTILBySatellite(
-			@RequestBody @ApiParam(value = "", required = true) SatelliteTILReq satelliteTILReq) {
+			@RequestParam @ApiParam(value = "", required = true) String id,
+			@RequestParam @ApiParam(value = "", required = true) long sUid)  {
 
-		ArrayList<SatelliteTILRes> list = tilService.getUserTILBySatellite(satelliteTILReq);
+		ArrayList<SatelliteTILRes> list = tilService.getUserTILBySatellite(id, sUid);
 		if (list == null) {
 			return ResponseEntity.status(401).body(list);
 		} else {
@@ -145,5 +146,23 @@ public class TILController {
 		}
 	}
 	
+	
+	@GetMapping("/mission")
+	@ApiOperation(value = "미션별 til보기", notes = "<strong>사용자 id와 미션 uid를 통해 til을</strong>반환한다.")
+	@ApiResponses({ @ApiResponse(code = 200, message = "성공", response = UserLoginPostRes.class),
+			@ApiResponse(code = 401, message = "인증 실패", response = BaseResponseBody.class),
+			@ApiResponse(code = 404, message = "사용자 없음", response = BaseResponseBody.class),
+			@ApiResponse(code = 500, message = "서버 오류", response = BaseResponseBody.class) })
+	public ResponseEntity<MissionTILRes> getUserTILByMission(
+			@RequestParam @ApiParam(value = "", required = true) String id,
+			@RequestParam @ApiParam(value = "", required = true) long mUid)  {
+
+		MissionTILRes res = tilService.getUserTILByMission(id, mUid);
+		if (res == null) {
+			return ResponseEntity.status(401).body(res);
+		} else {
+			return ResponseEntity.status(200).body(res);
+		}
+	}
 
 }

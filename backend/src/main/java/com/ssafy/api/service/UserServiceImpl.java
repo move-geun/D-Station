@@ -27,7 +27,6 @@ import java.util.Optional;
 /**
  * 유저 관련 비즈니스 로직 처리를 위한 서비스 구현 정의.
  */
-@Component
 @Service("Userervice")
 public class UserServiceImpl implements UserService {
 
@@ -167,8 +166,8 @@ public class UserServiceImpl implements UserService {
 		String userId = "";
 
 		// 사용자 인가 code로 accessToken 얻어오기
-		// String redirectUri = "http://k7e106.p.ssafy.io:3000";
-		String redirectUri = "http://localhost:3000/github";
+		//String redirectUri = "http://localhost:3000/github";
+		String redirectUri = "http://k7e106.p.ssafy.io:3000/github";
 		String accessToken = "";
 
 		try {
