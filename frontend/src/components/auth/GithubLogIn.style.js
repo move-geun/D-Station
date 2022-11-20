@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-<<<<<<< HEAD
-=======
 const GithubContainer = styled.div`
   width: 100%;
   height: 100vh;
@@ -20,7 +18,6 @@ const GithubContainer = styled.div`
   }
 `;
 
->>>>>>> ad549b2e2d52c7905acc9d73d2d03557bd6dc51d
 const GithubBtn = styled.div`
   background-image: url("../assets/GithubLogInBtn.PNG");
   width: 300px;
@@ -30,8 +27,4 @@ const GithubBtn = styled.div`
   /* box-shadow: 5px 5px 20px 0.8px gray; */
 `;
 
-<<<<<<< HEAD
-export { GithubBtn };
-=======
 export { GithubContainer, GithubBtn };
->>>>>>> ad549b2e2d52c7905acc9d73d2d03557bd6dc51d
