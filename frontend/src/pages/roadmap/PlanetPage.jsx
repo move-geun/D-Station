@@ -21,11 +21,9 @@ const PlanetPage = () => {
   function PlantRouter() {
     if (planetId === "1") {
       return <PlanetPython sllCnt={satelliteList} />;
-    } else if (planetId === "4") {
+    } else{
       return <PlanetModule sllCnt={satelliteList}/>
-    } else if (planetId === "5") {
-      return <PlanetModule sllCnt={satelliteList}/>
-    } 
+    }
   }
   const [planetData, setPlanetData] = useState("");
   const [planetUid, setPlanetUid] = useState(null);

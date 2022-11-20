@@ -79,9 +79,13 @@ function App() {
           path="/writetil"
           element={isLogin ? <WriteTilPage /> : <Navigate to="/login" />}
         />
-        <Route
+        {/* <Route
           path="/mission"
           element={isLogin ? <MissionPage /> : <Navigate to="/login" />}
+        /> */}
+        <Route
+          path="/roadmap"
+          element={isLogin ? <RoadmapPage /> : <Navigate to="/login" />}
         />
         <Route
           path="/roadmap"
@@ -111,6 +115,22 @@ function App() {
           path="/mission/:missNo/codeexam"
           element={isLogin ? <CodeExam /> : <Navigate to="/login" />}
         />
+
+
+        {/* 테스트용 !!!! */}
+        {/* <Route
+          path="/mission/:missNo"
+          element={<MissionPage />}
+        />
+        <Route
+          path="/satellite/:sllNo"
+          element={<SatellitePage />}
+        />
+        <Route
+          path="/planet/:plantNo"
+          element={<PlanetPage /> }
+        /> */}
+
       </Routes>
     </BrowserRouter>
   );

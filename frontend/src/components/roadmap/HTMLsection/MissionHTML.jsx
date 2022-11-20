@@ -88,9 +88,31 @@ const MissionHTML = (prop = defaultValue) => {
   function goUp(prop) {
     setWhichOne(prop);
 
-    if(prop === "code"){
-      navigate(`/mission/${misId}/codeexam`);
+    if(whichOne === "quiz"){
+      if(prop === "quiz"){
+        setWhichOne(null);
+      }else{
+        setWhichOne(prop);
+      }
     }
+
+    if(whichOne === "code"){
+      navigate(`/mission/${misId}/codeexam`);
+      if(prop === "code"){    
+        setWhichOne(null);
+      }else{
+        setWhichOne(prop);
+      }
+    }
+
+    if(whichOne === "til"){
+      if(prop === "til"){
+        setWhichOne(null);
+      }else{
+        setWhichOne(prop);
+      }
+    }
+
   }
 
   function goToTilPage(prop) {

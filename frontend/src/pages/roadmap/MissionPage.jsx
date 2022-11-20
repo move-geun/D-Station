@@ -11,12 +11,13 @@ import { MissionContainer } from "./RoadmapPage.style";
 import CodeExam from "../../components/mission/CodeExam";
 import { Canvas } from "@react-three/fiber";
 import BaseBackground from "../../components/roadmap/Threesection/Base/BaseBackground";
-// import { Man } from "../../components/roadmap/Threesection/Mission/Man";
+
 import { useRecoilState, useRecoilValue } from "recoil";
 import { NavMissionIntoThree, TilState } from "../../recoil/atoms";
 import TilEditor from "../../components/til/TilEditor";
 import { DecoWood } from "../../components/scene/DecoWood.jsx";
 import { Html } from "@react-three/drei";
+
 
 const MissionPage = () => {
   const misId = useParams().missNo;
@@ -93,7 +94,6 @@ const MissionPage = () => {
           {one === "codeSuccess" ? <Html> 코드 풀기 성공 </Html> : <Html />}
           {/* {one === "tilSuccess" ? <Html> TIL 작성 완료 </Html> : <Html />} */}
           {/* {doneTilData !== null ? <Html> Til 작성 완료을 완료하였습니다. </Html> : <Html/>} */}
-          {/* <Man/> */}
           {/* {MisRouter()} */}
         </Canvas>
       </ThreeWrapper>
