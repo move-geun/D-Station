@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
   Html,
@@ -15,6 +15,7 @@ import {
   RocketMap,
   Newsmap,
 } from "./MainPage.style";
+import http from "../../api/http";
 import { useNavigate } from "react-router-dom";
 import { TestDev } from "../../components/scene/TestDev";
 import { TestBack } from "../../components/scene/TestBack";
@@ -29,14 +30,40 @@ import { userInfoSelector } from "../../recoil/selector";
 
 const MainPage = ({ ...props }) => {
   const [openMap, setOpenmap] = useRecoilState(Openmap);
-  const user = useRecoilValue(userInfoSelector);
   const [galaxy, setGalaxy] = useRecoilState(Galaxy);
+  const user = useRecoilValue(userInfoSelector);
+  const [rancs, setRanCs] = useState(null);
   const imgsrc = "../assets/" + user.imageUrl;
   const navigate = useNavigate();
 
+  const cs = () => {
+    http.connect_axios
+      .get("/cs")
+      .then((res) => {
+        setRanCs(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   function Loader() {
     const { progress } = useProgress();
-    return <Html center>{Math.ceil(progress)} % 로딩중</Html>;
+    return (
+      <Html position={[-200, 20, 0]}>
+        <div>{Math.ceil(progress)} % 로딩중</div>
+        <br />
+        {rancs ? (
+          <div style={{ width: "400px" }}>
+            <div>{rancs.csSubject}</div>
+            <div style={{ "white-space": "normal", "word-break": "keep-all" }}>
+              {rancs.csContnet}
+            </div>
+          </div>
+        ) : null}
+      </Html>
+    );
   }
 
   const openmap = () => {
@@ -63,6 +90,7 @@ const MainPage = ({ ...props }) => {
 
   useEffect(() => {
     setGalaxy(5);
+    cs();
   }, []);
 
   return (
