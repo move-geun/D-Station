@@ -98,7 +98,7 @@ public class ProfileDto {
                 .userNickname(user.getNickname())
                 .exp(user.getExp())
                 .expNow(userExpNow(user.getExp()))
-                .expPer(userExpPer(userExpNow(user.getExp())))
+                .expPer(userExpPer(user.getExp()))
                 .maxExp(userMaxExp(user.getExp()))
                 .build();
     }
