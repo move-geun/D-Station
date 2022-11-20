@@ -8,7 +8,7 @@ import { Taeria } from "./Taeria";
 import { MarsOne } from "./Mars_1";
 import { SaturnOne } from "./Saturn_1";
 import { PlanetTao } from "./Planet_tao_seti_prime";
-import { Openmap, Opennews, CameraZoom } from "../../recoil/atoms";
+import { Openmap, Opennews, CameraZoom, Galaxy } from "../../recoil/atoms";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 function Marker({ children, ...props }) {
@@ -32,26 +32,24 @@ function Marker({ children, ...props }) {
 
 export function TestBack(props) {
   const ismapopen = useRecoilValue(Openmap);
-  const isnewsopen = useRecoilValue(Opennews);
+  const [isnewsopen, setIsNewsOpen] = useRecoilState(Opennews);
   const [cameraZoom, setCameraZoom] = useRecoilState(CameraZoom);
+  const [galaxy, setGalaxy] = useRecoilState(Galaxy);
   const myMesh = React.useRef();
-  useFrame(({ clock }) => {
-    const a = clock.getElapsedTime() / 3;
-    if (cameraZoom) {
-      myMesh.current.rotation.y = a;
-      myMesh.current.position.x = -400;
-      myMesh.current.position.y = 50;
-      myMesh.current.position.z = -100;
-    } else {
-      myMesh.current.position.x = -400;
-      myMesh.current.position.y = 50;
-      myMesh.current.position.z = -100;
-    }
-    // myMesh.current.position.x = 200 * (Math.sin(a) * 0.005);
-    // myMesh.current.position.z = 200 * (Math.cos(a) * 0.005);
+
+  const backsetting = () => {
+    setGalaxy(2);
+    setIsNewsOpen(true);
+    console.log(isnewsopen);
+    console.log(galaxy);
+  };
+  useFrame(() => {
+    myMesh.current.position.x = -400;
+    myMesh.current.position.y = 50;
+    myMesh.current.position.z = -100;
   });
   return (
-    <group>
+    <group onClick={() => backsetting()}>
       <group rotation={[0, 0, 0]} ref={myMesh}>
         <SaturnOne />
         <Moon />

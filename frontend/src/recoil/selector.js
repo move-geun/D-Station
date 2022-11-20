@@ -23,3 +23,33 @@ export const userStudySelector = selector({
     return res;
   },
 });
+
+export const FrontSelector = selector({
+  key: "FrontSelector",
+  get: async ({ get }) => {
+    const res = await http.connect_axios.get("/planet/list_by_galaxy", {
+      params: { uid: 1 },
+    });
+    return res;
+  },
+});
+
+export const BackSelector = selector({
+  key: "BackSelector",
+  get: async ({ get }) => {
+    const res = await http.connect_axios.get("/planet/list_by_galaxy", {
+      params: { uid: 2 },
+    });
+    return res;
+  },
+});
+
+export const DevOpsSelector = selector({
+  key: "DevOpsSelector",
+  get: async ({ get }) => {
+    const res = await http.connect_axios.get("/planet/list_by_galaxy", {
+      params: { uid: 3 },
+    });
+    return res;
+  },
+});
