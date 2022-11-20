@@ -109,10 +109,9 @@ export default function TilEditor(prop = defaultValue) {
     })
     .then((res)=> {
       console.log("til 작성내용" ,data);
-      console.log(res);
       // 작성 성공했을 때, threejs section에 성공 띄우기  
       setWhichOne("tilSuccess");
-      // setTilState("fail")
+      setTilState(true);
       // setOne();
   })
     .catch((err)=> {console.log(data)});

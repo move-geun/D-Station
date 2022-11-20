@@ -33,20 +33,25 @@ const Board = styled.div`
     height: 70px;
     /* border-radius: 50%; */
   }
+`;
 
-  .progressbox {
-    width: 70px;
-    height: 110px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+const Progressbox = styled.div`
+  width: 70px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
 
-    img {
-      margin: 0px;
-      margin-bottom: 13px;
-    }
+  .proimg {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+  div {
+    margin-left: 10px;
   }
 `;
 
-export { AchieveContainer, Board };
+export { AchieveContainer, Board, Progressbox };

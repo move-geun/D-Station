@@ -67,6 +67,7 @@ const MainPage = ({ ...props }) => {
 
   useEffect(() => {
     setOpenmap(false);
+    console.log(user);
   }, []);
   // const check = useRecoilValue(userInfoSelector);
 
