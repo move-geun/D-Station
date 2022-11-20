@@ -41,7 +41,6 @@ const MainPage = ({ ...props }) => {
       .get("/cs")
       .then((res) => {
         setRanCs(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
