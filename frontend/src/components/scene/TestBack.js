@@ -8,7 +8,7 @@ import { Taeria } from "./Taeria";
 import { MarsOne } from "./Mars_1";
 import { SaturnOne } from "./Saturn_1";
 import { PlanetTao } from "./Planet_tao_seti_prime";
-import { Openmap, Opennews, Galaxy } from "../../recoil/atoms";
+import { Openmap, Galaxy } from "../../recoil/atoms";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 function Marker({ children, ...props }) {
@@ -32,7 +32,6 @@ function Marker({ children, ...props }) {
 
 export function TestBack(props) {
   const ismapopen = useRecoilValue(Openmap);
-  const [isnewsopen, setIsNewsOpen] = useRecoilState(Opennews);
   const [galaxy, setGalaxy] = useRecoilState(Galaxy);
   const myMesh = React.useRef();
 
@@ -54,7 +53,7 @@ export function TestBack(props) {
         <Mars />
         <MarsOne />
       </group>
-      {ismapopen || isnewsopen ? null : (
+      {ismapopen ? null : (
         <Marker rotation={[0, 0, 0]} position={[-440, -50, -100]}>
           <div
             style={{

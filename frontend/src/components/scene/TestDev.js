@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { SpaceStationTwo } from "./Space_station_2";
 import { SpaceSuit } from "./Space_suit";
-import { Openmap, Opennews, Galaxy } from "../../recoil/atoms";
+import { Openmap, Galaxy } from "../../recoil/atoms";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 function Marker({ children, ...props }) {
@@ -28,7 +28,6 @@ function Marker({ children, ...props }) {
 
 export function TestDev(props) {
   const ismapopen = useRecoilValue(Openmap);
-  const isnewsopen = useRecoilValue(Opennews);
   const [galaxy, setGalaxy] = useRecoilState(Galaxy);
   const myMesh = React.useRef();
   useFrame(({ clock }) => {
@@ -47,7 +46,7 @@ export function TestDev(props) {
         <SpaceStationTwo />
         <SpaceSuit />
       </group>
-      {ismapopen || isnewsopen ? null : (
+      {ismapopen ? null : (
         <Marker rotation={[0, 0, 0]} position={[10, -190, -50]}>
           <div
             style={{
