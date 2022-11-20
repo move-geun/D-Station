@@ -18,4 +18,6 @@ public interface MissionService {
     // 위성 uid로 미션 리스트 조회
     List<MissionRes> getMissionsBySUid(Long uid);
 
+    Boolean getMissionsCompletedByMuidAndUserUid(long mUid, String id);
+
 }
