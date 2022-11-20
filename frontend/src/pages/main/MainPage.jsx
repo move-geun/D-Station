@@ -19,17 +19,13 @@ import { useNavigate } from "react-router-dom";
 import { TestDev } from "../../components/scene/TestDev";
 import { TestBack } from "../../components/scene/TestBack";
 import { TestFront } from "../../components/scene/TestFront";
+import GalaxyList from "../../components/main/GalaxyList";
 import SearchMap from "../../components/main/SearchMap";
 import MapNav from "../../components/main/MapNav";
 import DailyContent from "../../components/main/DailyContent";
 import { Openmap, Opennews, CameraZoom } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userInfoSelector } from "../../recoil/selector";
-
-function Loader() {
-  const { progress } = useProgress();
-  return <Html center>{Math.ceil(progress)} % 로딩중</Html>;
-}
 
 const MainPage = ({ ...props }) => {
   const [openMap, setOpenmap] = useRecoilState(Openmap);
@@ -38,6 +34,11 @@ const MainPage = ({ ...props }) => {
   const user = useRecoilValue(userInfoSelector);
   const imgsrc = "../assets/" + user.imageUrl;
   const navigate = useNavigate();
+
+  function Loader() {
+    const { progress } = useProgress();
+    return <Html center>{Math.ceil(progress)} % 로딩중</Html>;
+  }
 
   const openmap = () => {
     setOpenmap(!openMap);
@@ -67,7 +68,8 @@ const MainPage = ({ ...props }) => {
 
   useEffect(() => {
     setOpenmap(false);
-    console.log(user);
+    setOpennews(false);
+    console.log("뉴스상태", openNews);
   }, []);
   // const check = useRecoilValue(userInfoSelector);
 
@@ -94,13 +96,13 @@ const MainPage = ({ ...props }) => {
             <Suspense fallback={null}></Suspense>
             <pointLight position={[500, 200, 0]} intensity={1} />
             <directionalLight position={[500, 200, 0]} intensity={2} />
-            <Bounds fit clip observe margin={1.2}>
-              <SelectToZoom>
-                <TestBack />
-                <TestDev />
-                <TestFront />
-              </SelectToZoom>
-            </Bounds>
+            {/* <Bounds fit clip observe margin={1.2}> */}
+            {/* <SelectToZoom> */}
+            <TestBack />
+            <TestDev />
+            <TestFront />
+            {/* </SelectToZoom> */}
+            {/* </Bounds> */}
           </Suspense>
           <OrbitControls
             makeDefault
@@ -132,12 +134,14 @@ const MainPage = ({ ...props }) => {
           </div>
         </div>
         <div className="flexWrap">
-          <div onClick={openmap}>
+          <div onClick={() => openmap()}>
             <MapNav></MapNav>
           </div>
-          <div onClick={opennews} className="news">
+          <div onClick={() => opennews()} className="news">
             <DailyContent></DailyContent>
-            {openNews ? <Newsmap></Newsmap> : null}
+            {openNews ? (
+              <Newsmap>{/* <GalaxyList></GalaxyList> */}</Newsmap>
+            ) : null}
           </div>
         </div>
       </FootNav>

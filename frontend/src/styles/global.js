@@ -15,6 +15,9 @@ body{
     font-family: 'MICEGothic Bold';
     color: white;
     height: 100%;
+      ::-webkit-scrollbar {
+    display: none;
+  }
     /* overflow-y: hidden; */
 }
 a{

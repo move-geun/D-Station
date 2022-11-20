@@ -11,6 +11,7 @@ const CanvasWrapper = styled.div`
   height: 90%;
   background-color: black;
   color: white;
+  z-index: 1;
 `;
 
 const FootNav = styled.div`
@@ -24,6 +25,7 @@ const FootNav = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  z-index: 999;
   .profile {
     margin-left: 50px;
     width: 50px;
@@ -102,13 +104,13 @@ const RocketMap = styled.div`
 `;
 
 const Newsmap = styled.div`
-  width: 350px;
-  height: 500px;
-  /* background-color: #110f1c; */
-  background-color: tomato;
+  width: 400px;
+  height: 580px;
+  background-color: #110f1c;
+  /* background-color: tomato; */
   position: absolute;
-  bottom: 45px;
-  left: -150px;
+  bottom: 50px;
+  left: -170px;
   border-radius: 3px;
   color: white;
 `;
