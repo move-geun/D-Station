@@ -84,7 +84,7 @@ const Navbar = () => {
           >
             {/* ------------------------------------- */}
             <>
-              {isAuthenticated()
+              {userLogin
                 ? loginPages.map((page, idx) => (
                     <Button
                       component="a"
@@ -106,7 +106,7 @@ const Navbar = () => {
             {/* ------------------------------------- */}
           </Box>
           <>
-            {isAuthenticated() ? (
+            {userLogin ? (
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Logout">
                   <IconButton onClick={logoutHandle} sx={{ color: "white" }}>
