@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -223,36 +224,46 @@ public class TILServiceImpl implements TILService {
 
 		//////// 파일 변환 시작
 		String filePath = "./json/testDir/"; // 파일 경로
-		File file = new File(filePath);
-		String path = file.getPath();
-		System.err.println("path : " + path);
+		
+		
 		///////////////////////////
-		String testPath = "testDir/document.html"; // 파일 경로
-
-		URL imageURL = getClass().getClassLoader().getResource (testPath);
-        System.out.println ("found image at " + imageURL);
-		
-		
-		
-		
-		System.err.println("classLoader 간다잉");
-		ClassLoader classLoader = getClass().getClassLoader();
-		System.err.println("classLoader 통과 ");
-		System.err.println("classLoader : " + classLoader.toString());
-		
-		File jarfile1 = new File(classLoader.getResource("document.html").getFile());
-		System.err.println("여기까지 올까?");
-		File jarfile2 = new File(classLoader.getResource("Output.md").getFile());
-		System.err.println(jarfile1);
-		System.err.println(jarfile2);
-
-		if (jarfile1.exists() || jarfile1.exists()) {
-			if (jarfile2.delete() && jarfile2.delete()) {
-				System.out.println("파일삭제 성공");
-			} else {
-				System.out.println("파일삭제 실패");
-			}
+        try {
+			File fileee = new File(this.getClass().getResource("testDir/document.html").toURI());
+			System.err.println(fileee);
+		} catch (URISyntaxException e2) {
+			// TODO Auto-generated catch block
+			System.err.println("안된다고요~~~");
 		}
+        
+        
+        
+//		String testPath = "json/testDir/document.html"; // 파일 경로
+//		String testPath2 = "/json/testDir/document.html"; // 파일 경로
+//
+//		URL htmlURL = getClass().getClassLoader().getResource (testPath);
+//		URL htmlURL2 = getClass().getResource(testPath2);
+//        System.err.println ("found html at " + htmlURL);
+//        System.err.println ("found html at " + htmlURL2);
+//		
+//		
+//		System.err.println("classLoader 간다잉");
+//		ClassLoader classLoader = getClass().getClassLoader();
+//		System.err.println("classLoader 통과 ");
+//		System.err.println("classLoader : " + classLoader.toString());
+//		
+//		File jarfile1 = new File(classLoader.getResource("document.html").getFile());
+//		System.err.println("여기까지 올까?");
+//		File jarfile2 = new File(classLoader.getResource("Output.md").getFile());
+//		System.err.println(jarfile1);
+//		System.err.println(jarfile2);
+//
+//		if (jarfile1.exists() || jarfile1.exists()) {
+//			if (jarfile2.delete() && jarfile2.delete()) {
+//				System.out.println("파일삭제 성공");
+//			} else {
+//				System.out.println("파일삭제 실패");
+//			}
+//		}
 		
 		///////////////////////////////////
 		/////////////////////////////////
