@@ -19,8 +19,6 @@ import SatelliteBump from "../../../../../assets/images/canyonRockBump.png";
 import SatelliteRough from "../../../../../assets/images/canyonRockColorRoughness.jpg";
 import SatelliteNormal from "../../../../../assets/images/canyonRockNormal.jpg";
 
-
-
   export function Sll1() {
     const [colorMap, bumpMap, roughMap, normalMap] = useLoader(
       TextureLoader,[SatelliteColor, SatelliteBump, SatelliteRough, SatelliteNormal]
@@ -54,7 +52,7 @@ import SatelliteNormal from "../../../../../assets/images/canyonRockNormal.jpg";
       <>
         <mesh 
             ref={sateRef} 
-            position={[3, 0, 0]}
+            position={[3, 0, -2]}
             onPointerOver={(event) => setHover(true)}
             onPointerOut={(event) => setHover(false)}
             onClick={()=> setClickActive(true)}
@@ -71,6 +69,7 @@ import SatelliteNormal from "../../../../../assets/images/canyonRockNormal.jpg";
                 roughnessMap ={roughMap}
                 roughness={0.8}
             /> 
+            
              <OrbitControls
                 enableZoom={true}
                 enablePan={true}
@@ -80,6 +79,18 @@ import SatelliteNormal from "../../../../../assets/images/canyonRockNormal.jpg";
                 rotateSpeed={0.4}
                 
             />
+
+              {/* <Html>
+                <div
+                style={{
+                  position: "absolute",
+                  fontSize: 80,
+                  letterSpacing: -0.5,
+                }}
+              >
+                기초
+              </div>
+            </Html> */}
 
         </mesh>
       </>

@@ -30,7 +30,7 @@ const SearchMap = () => {
         })
         .then((res) => {
           setResultList(res.data.list);
-          console.log(resultList);
+          console.log(res.data.list);
         });
     }
   };
@@ -85,25 +85,49 @@ const SearchMap = () => {
           {resultList ? <div className="search_title">검색 결과 🚀</div> : null}
 
           {resultList
-            ? resultList.map((result, idx) => (
-                <Stack className="spacing" key={idx}>
-                  <Breadcrumbs
-                    separator="›"
-                    aria-label="breadcrumb"
-                    color="white"
-                  >
-                    <div underline="hover" key="1" color="inherit">
-                      {result.gname}
-                    </div>
-                    <div underline="hover" key="2" color="inherit">
-                      {result.pname}
-                    </div>
-                    <div key="3" color="text.primary" href="/">
-                      {result.sname}
-                    </div>
-                  </Breadcrumbs>
-                </Stack>
-              ))
+            ? resultList.map((result, idx) => {
+                const plink = "/planet/" + result.puid;
+                if (result.sname === null) {
+                  return (
+                    <Stack className="spacing" key={idx}>
+                      <Breadcrumbs
+                        separator="›"
+                        aria-label="breadcrumb"
+                        color="white"
+                      >
+                        <div underline="hover" key="1" color="inherit">
+                          {result.gname}
+                        </div>
+                        <a key="2" color="inherit" href={plink}>
+                          {result.pname}
+                        </a>
+                      </Breadcrumbs>
+                    </Stack>
+                  );
+                } else {
+                  const plink = "/planet/" + result.puid;
+                  const slink = "/satelite/" + result.suid;
+                  return (
+                    <Stack className="spacing" key={idx}>
+                      <Breadcrumbs
+                        separator="›"
+                        aria-label="breadcrumb"
+                        color="white"
+                      >
+                        <div underline="hover" key="1" color="inherit">
+                          {result.gname}
+                        </div>
+                        <a key="2" color="inherit" href={plink}>
+                          {result.pname}
+                        </a>
+                        <a key="3" color="text.primary" href={slink}>
+                          {result.sname}
+                        </a>
+                      </Breadcrumbs>
+                    </Stack>
+                  );
+                }
+              })
             : null}
         </SearchSide>
       </ContentWrapper>

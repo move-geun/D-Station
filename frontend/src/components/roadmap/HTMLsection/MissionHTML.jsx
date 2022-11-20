@@ -52,7 +52,6 @@ const MissionHTML = (prop = defaultValue) => {
     await http.connect_axios
       .get(`/mission/uid?uid=${misId}`)
       .then((res) => {
-        console.log(res);
         setMData(res.data);
       })
       .catch((err) => {
@@ -75,19 +74,46 @@ const MissionHTML = (prop = defaultValue) => {
     await http.connect_axios
       .get(`/til/mission?id=${userId}&mUid=${misId}`)
       .then((res) => {
+        console.log("til 정보 가져와 ");
         setDoneTilData(res.data);
         setTilState(true);
       })
 
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setTilState(false);
+        console.log(err);
+        console.log("til 자료 없음")
+      } );
   }
 
   function goUp(prop) {
     setWhichOne(prop);
 
-    if (prop === "code") {
-      navigate(`/mission/${misId}/codeexam`, { state: misId });
+    if(whichOne === "quiz"){
+      if(prop === "quiz"){
+        setWhichOne(null);
+      }else{
+        setWhichOne(prop);
+      }
     }
+
+    if(whichOne === "code"){
+      navigate(`/mission/${misId}/codeexam`);
+      if(prop === "code"){    
+        setWhichOne(null);
+      }else{
+        setWhichOne(prop);
+      }
+    }
+
+    if(whichOne === "til"){
+      if(prop === "til"){
+        setWhichOne(null);
+      }else{
+        setWhichOne(prop);
+      }
+    }
+
   }
 
   function goToTilPage(prop) {

@@ -15,6 +15,7 @@ import {
   RocketMap,
   Newsmap,
 } from "./MainPage.style";
+import { useNavigate } from "react-router-dom";
 import { TestDev } from "../../components/scene/TestDev";
 import { TestBack } from "../../components/scene/TestBack";
 import { TestFront } from "../../components/scene/TestFront";
@@ -36,6 +37,7 @@ const MainPage = ({ ...props }) => {
   const [camerzoom, setCameraZoom] = useRecoilState(CameraZoom);
   const user = useRecoilValue(userInfoSelector);
   const imgsrc = "../assets/" + user.imageUrl;
+  const navigate = useNavigate();
 
   const openmap = () => {
     setOpenmap(!openMap);
@@ -63,6 +65,9 @@ const MainPage = ({ ...props }) => {
     );
   }
 
+  useEffect(() => {
+    setOpenmap(false);
+  }, []);
   // const check = useRecoilValue(userInfoSelector);
 
   return (
@@ -106,7 +111,8 @@ const MainPage = ({ ...props }) => {
       <FootNav>
         <div className="flexWrapInfo">
           <img className="profile" src={imgsrc} alt="유저 등급사진" />
-          <div>
+          <div onClick={() => navigate("/myprofile")}>
+            {/* <div> */}
             <div>안녕하세요, {user.userNickname}님</div>
             <div>🕹{user.rankName}</div>
           </div>
