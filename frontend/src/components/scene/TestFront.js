@@ -38,7 +38,9 @@ export function TestFront(props) {
   useFrame(({ clock }) => {
     const a = clock.getElapsedTime() / 3;
     myMesh.current.rotation.y = a;
-    myMesh.current.position.y = -30;
+    myMesh.current.position.x = -120;
+    myMesh.current.position.y = -80;
+    myMesh.current.position.z = 10;
     // myMesh.current.position.x = 200 * (Math.sin(a) * 0.005);
     // myMesh.current.position.z = 200 * (Math.cos(a) * 0.005);
   });
@@ -52,7 +54,7 @@ export function TestFront(props) {
         <RoundStar />
       </group>
       {ismapopen || isnewsopen ? null : (
-        <Marker rotation={[0, 0, 0]} position={[-45, -100, 0]}>
+        <Marker rotation={[0, 0, 0]} position={[-170, -150, 10]}>
           <div
             style={{
               position: "absolute",

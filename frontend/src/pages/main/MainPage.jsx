@@ -23,15 +23,14 @@ import GalaxyList from "../../components/main/GalaxyList";
 import SearchMap from "../../components/main/SearchMap";
 import MapNav from "../../components/main/MapNav";
 import DailyContent from "../../components/main/DailyContent";
-import { Openmap, Opennews, CameraZoom } from "../../recoil/atoms";
+import { Openmap, Galaxy } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userInfoSelector } from "../../recoil/selector";
 
 const MainPage = ({ ...props }) => {
   const [openMap, setOpenmap] = useRecoilState(Openmap);
-  const [openNews, setOpennews] = useRecoilState(Opennews);
-  const [camerzoom, setCameraZoom] = useRecoilState(CameraZoom);
   const user = useRecoilValue(userInfoSelector);
+  const [galaxy, setGalaxy] = useRecoilState(Galaxy);
   const imgsrc = "../assets/" + user.imageUrl;
   const navigate = useNavigate();
 
@@ -46,22 +45,16 @@ const MainPage = ({ ...props }) => {
 
   const closemap = () => {
     setOpenmap(false);
-    setOpennews(false);
-  };
-
-  const opennews = () => {
-    setOpennews(!openNews);
   };
 
   function SelectToZoom({ children }) {
     const api = useBounds();
-    setOpennews(true);
     return (
       <group
         onClick={(e) => (
           e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit()
         )}
-        onPointerMissed={(e) => e.button === 0 && api.refresh().fit()}
+        onPointerMissed={(e) => e.button === 0 && api.refresh(e.object).fit()}
       >
         {children}
       </group>
@@ -69,16 +62,13 @@ const MainPage = ({ ...props }) => {
   }
 
   useEffect(() => {
-    setOpenmap(false);
-    setOpennews(false);
-    console.log("뉴스상태", openNews);
+    setGalaxy(5);
   }, []);
-  // const check = useRecoilValue(userInfoSelector);
 
   return (
     <MainWrapper>
       <CanvasWrapper onClick={() => closemap()}>
-        <Canvas className="tmp" camera={{ fov: 75, position: [-10, 0, 250] }}>
+        <Canvas className="tmp" camera={{ fov: 75, position: [-15, -30, 230] }}>
           <Suspense fallback={<Loader />}>
             <Stars
               radius={300}
@@ -122,7 +112,9 @@ const MainPage = ({ ...props }) => {
             <div>🕹{user.rankName}</div>
           </div>
           <div className="expBar">
-            {user.exp >= 300 ? null : <div className="per">{user.expPer}%</div>}
+            {user.exp >= 300 ? null : (
+              <div className="per">{Math.ceil(user.expPer)}%</div>
+            )}
             <div className="perbox">
               {user.exp >= 300 ? (
                 <div className="nowper" style={{ width: "100%" }}></div>
@@ -139,15 +131,13 @@ const MainPage = ({ ...props }) => {
           <div onClick={() => openmap()}>
             <MapNav></MapNav>
           </div>
-          <div onClick={() => opennews()} className="news">
+          <div className="news">
             <DailyContent></DailyContent>
-            {openNews ? (
-              <Suspense>
-                <Newsmap>
-                  <GalaxyList></GalaxyList>
-                </Newsmap>
-              </Suspense>
-            ) : null}
+            <Suspense>
+              <Newsmap>
+                <GalaxyList></GalaxyList>
+              </Newsmap>
+            </Suspense>
           </div>
         </div>
       </FootNav>
