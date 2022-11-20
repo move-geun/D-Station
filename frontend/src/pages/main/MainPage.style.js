@@ -101,6 +101,7 @@ const RocketMap = styled.div`
   border-radius: 3px;
   color: white;
   border: 2px solid rgba(255, 255, 255);
+  z-index: 999;
 `;
 
 const Newsmap = styled.div`
@@ -113,6 +114,8 @@ const Newsmap = styled.div`
   left: -170px;
   border-radius: 3px;
   color: white;
+  border-radius: 20px;
+  z-index: 0;
 `;
 
 export { MainWrapper, CanvasWrapper, FootNav, RocketMap, Newsmap };
