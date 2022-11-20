@@ -1,4 +1,5 @@
-import React, { Suspense, useState, useRef } from "react";
+import React, { Suspense, useState, useRef, useEffect } from "react";
+import http from "../../api/http";
 import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Html, useProgress } from "@react-three/drei";
@@ -11,11 +12,6 @@ import { useRecoilValue } from "recoil";
 import { UserLogin } from "../../recoil/atoms";
 
 extend({ OrbitControls });
-
-function Loader() {
-  const { progress } = useProgress();
-  return <Html center>{Math.ceil(progress)} % 로딩중</Html>;
-}
 
 const CameraControls = () => {
   const {
@@ -70,6 +66,7 @@ function Marker({ children, ...props }) {
   );
 }
 const NotFoundPage = () => {
+  const [rancs, setRanCs] = useState(null);
   const isLogin = useRecoilValue(UserLogin);
   const navigate = useNavigate();
   const goMain = () => {
@@ -81,6 +78,41 @@ const NotFoundPage = () => {
       navigate("/");
     }
   };
+
+  const cs = () => {
+    http.connect_axios
+      .get("/cs")
+      .then((res) => {
+        setRanCs(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  function Loader() {
+    const { progress } = useProgress();
+    return (
+      <Html center>
+        <div>{Math.ceil(progress)} % 로딩중</div>
+        <br />
+        {rancs ? (
+          <div style={{ width: "400px" }}>
+            <div>{rancs.csSubject}</div>
+            <div style={{ "white-space": "normal", "word-break": "keep-all" }}>
+              {rancs.csContnet}
+            </div>
+          </div>
+        ) : null}
+      </Html>
+    );
+  }
+
+  useEffect(() => {
+    cs();
+  }, []);
+
   return (
     <Canvas camera={{ fov: 75, position: [0, 3, 13] }}>
       <CameraControls />
