@@ -11,11 +11,13 @@ import http from "../../api/http";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 
 const SearchMap = () => {
   const [content, setContent] = useState(null);
   const [resultList, setResultList] = useState(null);
+  const navigate = useNavigate();
   // search 값 받기
   const searchHandler = (e) => {
     e.preventDefault();
@@ -60,25 +62,43 @@ const SearchMap = () => {
           <div className="title">⭐추천 과정</div>
           <div className="logo_container">
             <div className="logobox">
-              <img src="../assets/python.png" alt="" />
-              <img src="../assets/c.png" alt="" />
-              <img src="../assets/java.png" alt="" />
+              <div onClick={() => navigate("/planet/1")}>
+                <img src="../assets/python.png" alt="" />
+              </div>
+              <div onClick={() => navigate("/satellite/136")}>
+                <img src="../assets/c.png" alt="" />
+              </div>
+              <div onClick={() => navigate("/planet/2")}>
+                <img src="../assets/java.png" alt="" />
+              </div>
             </div>
             <div className="logobox">
-              <img src="../assets/html.png" alt="" />
-              <img src="../assets/css.png" alt="" />
-              <img src="../assets/mysql.png" alt="" />
+              <div onClick={() => navigate("/planet/34")}>
+                <img src="../assets/html.png" alt="" />
+              </div>
+              <div onClick={() => navigate("/planet/35")}>
+                <img src="../assets/css.png" alt="" />
+              </div>
+              <div onClick={() => navigate("/satellite/242")}>
+                <img src="../assets/mysql.png" alt="" />
+              </div>
             </div>
             <div className="logobox">
-              <img src="../assets/react.png" alt="" />
-              <img src="../assets/springboot.png" alt="" />
-              <img src="../assets/vue.png" alt="" />
+              <div onClick={() => navigate("/satellite/350")}>
+                <img src="../assets/react.png" alt="" />
+              </div>
+              <div onClick={() => navigate("/planet/")}>
+                <img src="../assets/springboot.png" alt="" />
+              </div>
+              <div onClick={() => navigate("/satellite/352")}>
+                <img src="../assets/vue.png" alt="" />
+              </div>
             </div>
-            <div className="logobox">
+            {/* <div className="logobox">
               <img src="../assets/jenkins.png" alt="" />
               <img src="../assets/spring.png" alt="" />
               <img src="../assets/docker.png" alt="" />
-            </div>
+            </div> */}
           </div>
         </RecoSide>
         <SearchSide>
@@ -87,6 +107,7 @@ const SearchMap = () => {
           {resultList
             ? resultList.map((result, idx) => {
                 const plink = "/planet/" + result.puid;
+                const glink = "/galaxy/" + result.guid;
                 if (result.sname === null) {
                   return (
                     <Stack className="spacing" key={idx}>
@@ -95,9 +116,9 @@ const SearchMap = () => {
                         aria-label="breadcrumb"
                         color="white"
                       >
-                        <div underline="hover" key="1" color="inherit">
+                        <a key="1" color="inherit" href={glink}>
                           {result.gname}
-                        </div>
+                        </a>
                         <a key="2" color="inherit" href={plink}>
                           {result.pname}
                         </a>
@@ -105,6 +126,7 @@ const SearchMap = () => {
                     </Stack>
                   );
                 } else {
+                  const glink = "/galaxy/" + result.guid;
                   const plink = "/planet/" + result.puid;
                   const slink = "/satelite/" + result.suid;
                   return (
@@ -114,9 +136,9 @@ const SearchMap = () => {
                         aria-label="breadcrumb"
                         color="white"
                       >
-                        <div underline="hover" key="1" color="inherit">
+                        <a key="1" color="inherit" href={glink}>
                           {result.gname}
-                        </div>
+                        </a>
                         <a key="2" color="inherit" href={plink}>
                           {result.pname}
                         </a>

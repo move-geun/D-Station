@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { AchieveContainer, Board } from "./Achievement.style";
+import { AchieveContainer, Board, Progressbox } from "./Achievement.style";
 import { useRecoilValue } from "recoil";
+import profile from "../../assets/images/profile.png";
 import { userStudySelector } from "../../recoil/selector";
-
 const Achievement = () => {
   const userStudy = useRecoilValue(userStudySelector);
   const [studing, setStuding] = useState(null);
+
+  const onErrorImg = (e) => {
+    e.target.src = profile;
+  };
 
   useEffect(() => {
     setStuding(userStudy.data);
@@ -34,17 +38,21 @@ const Achievement = () => {
           {studing ? (
             studing.map((stu, idx) => {
               if (stu.progress < 100) {
+                const studycontent = stu.pimage.slice(0, stu.pimage.length - 4);
                 const imgsrc = "../assets/" + stu.pimage;
                 return (
-                  <div className="progressbox">
+                  <Progressbox>
                     <img
                       key={idx}
                       src={imgsrc}
-                      alt="해당 과정 이미지를 준비중입니다"
-                      style={{ width: `${stu.progress}%` }}
+                      className="proimg"
+                      alt=""
+                      onError={onErrorImg}
+                      style={{ opacity: `${stu.progress}%` }}
                     />
+                    <div>{studycontent}</div>
                     <div>{Math.ceil(stu.progress)}%</div>
-                  </div>
+                  </Progressbox>
                 );
               }
             })
