@@ -14,7 +14,6 @@ const Achievement = () => {
   useEffect(() => {
     setStuding(userStudy.data);
   }, []);
-  console.log(studing);
   return (
     <AchieveContainer>
       <div>
