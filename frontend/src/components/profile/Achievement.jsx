@@ -45,7 +45,7 @@ const Achievement = () => {
                       alt="해당 과정 이미지를 준비중입니다"
                       style={{ width: `${stu.progress}%` }}
                     />
-                    <p>{Math.ceil(stu.progress)}%</p>
+                    <div>{Math.ceil(stu.progress)}%</div>
                   </div>
                 );
               }

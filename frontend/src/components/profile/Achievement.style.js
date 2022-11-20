@@ -24,14 +24,6 @@ const Board = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  .progressbox {
-    width: 70px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
   img {
     :first-child {
       margin-left: 10px;
@@ -40,6 +32,20 @@ const Board = styled.div`
     width: 70px;
     height: 70px;
     /* border-radius: 50%; */
+  }
+
+  .progressbox {
+    width: 70px;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      margin: 0px;
+      margin-bottom: 13px;
+    }
   }
 `;
 

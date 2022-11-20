@@ -30,11 +30,11 @@ const SearchMap = () => {
         })
         .then((res) => {
           setResultList(res.data.list);
+          console.log(res.data.list);
         });
     }
   };
 
-  console.log(resultList);
   return (
     <SearchWraper>
       <TitleWrapper>
@@ -95,12 +95,12 @@ const SearchMap = () => {
                     <div underline="hover" key="1" color="inherit">
                       {result.gname}
                     </div>
-                    <div underline="hover" key="2" color="inherit">
+                    <a key="2" color="inherit" href="/planet/1">
                       {result.pname}
-                    </div>
-                    <div key="3" color="text.primary" href="/">
+                    </a>
+                    <a key="3" color="text.primary" href="/satellite/132">
                       {result.sname}
-                    </div>
+                    </a>
                   </Breadcrumbs>
                 </Stack>
               ))
