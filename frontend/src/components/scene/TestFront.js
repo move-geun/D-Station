@@ -7,7 +7,7 @@ import { Jupiter } from "./Jupiter";
 import { AstronautOne } from "./Astronaut_1";
 import { StylezedPlanet } from "./Stylezed_planet";
 import { RoundStar } from "./Round_star";
-import { Openmap, Opennews, Galaxy } from "../../recoil/atoms";
+import { Openmap, Galaxy } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 function Marker({ children, ...props }) {
@@ -32,7 +32,6 @@ function Marker({ children, ...props }) {
 
 export function TestFront(props) {
   const ismapopen = useRecoilValue(Openmap);
-  const isnewsopen = useRecoilValue(Opennews);
   const [galaxy, setGalaxy] = useRecoilState(Galaxy);
   const myMesh = React.useRef();
   useFrame(({ clock }) => {
@@ -53,7 +52,7 @@ export function TestFront(props) {
         <AstronautOne />
         <RoundStar />
       </group>
-      {ismapopen || isnewsopen ? null : (
+      {ismapopen ? null : (
         <Marker rotation={[0, 0, 0]} position={[-170, -150, 10]}>
           <div
             style={{
