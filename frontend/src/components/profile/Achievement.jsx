@@ -6,8 +6,6 @@ import { userStudySelector } from "../../recoil/selector";
 const Achievement = () => {
   const userStudy = useRecoilValue(userStudySelector);
   const [studing, setStuding] = useState(null);
-  const [finish, setSuccess] = useState(null);
-  const [progress, setProgress] = useState(null);
 
   useEffect(() => {
     setStuding(userStudy.data);
