@@ -54,11 +54,10 @@ function App() {
           element={!isLogin ? <SignupPage /> : <Navigate to="/main" />}
         />
         {/* 로그인 필수 */}
-        {/* <Route
+        <Route
           path="/main"
           element={isLogin ? <MainPage /> : <Navigate to="/login" />}
-        /> */}
-        <Route path="/main" element={<MainPage />} />
+        />
         <Route
           path="/myprofile"
           element={isLogin ? <MyProfilePage /> : <Navigate to="/login" />}
