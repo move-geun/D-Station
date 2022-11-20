@@ -57,7 +57,7 @@ const MainPage = ({ ...props }) => {
         {rancs ? (
           <div style={{ width: "400px" }}>
             <div>{rancs.csSubject}</div>
-            <div style={{ "white-space": "normal", "word-break": "keep-all" }}>
+            <div style={{ whiteSpace: "normal", wordBreak: "keep-all" }}>
               {rancs.csContnet}
             </div>
           </div>
