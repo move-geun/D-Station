@@ -41,6 +41,7 @@ export function TestBack(props) {
     setGalaxy(2);
     setIsNewsOpen(true);
     console.log(isnewsopen);
+    console.log(galaxy);
   };
   useFrame(() => {
     myMesh.current.position.x = -400;

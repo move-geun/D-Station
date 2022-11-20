@@ -48,12 +48,14 @@ const MainPage = ({ ...props }) => {
     setOpenmap(false);
     setOpennews(false);
   };
+
   const opennews = () => {
     setOpennews(!openNews);
   };
 
   function SelectToZoom({ children }) {
     const api = useBounds();
+    setOpennews(true);
     return (
       <group
         onClick={(e) => (
@@ -75,7 +77,7 @@ const MainPage = ({ ...props }) => {
 
   return (
     <MainWrapper>
-      <CanvasWrapper onClick={closemap}>
+      <CanvasWrapper onClick={() => closemap()}>
         <Canvas className="tmp" camera={{ fov: 75, position: [-10, 0, 250] }}>
           <Suspense fallback={<Loader />}>
             <Stars
@@ -96,13 +98,13 @@ const MainPage = ({ ...props }) => {
             <Suspense fallback={null}></Suspense>
             <pointLight position={[500, 200, 0]} intensity={1} />
             <directionalLight position={[500, 200, 0]} intensity={2} />
-            {/* <Bounds fit clip observe margin={1.2}> */}
-            {/* <SelectToZoom> */}
-            <TestBack />
-            <TestDev />
-            <TestFront />
-            {/* </SelectToZoom> */}
-            {/* </Bounds> */}
+            <Bounds fit clip observe margin={1.2}>
+              <SelectToZoom>
+                <TestBack />
+                <TestDev />
+                <TestFront />
+              </SelectToZoom>
+            </Bounds>
           </Suspense>
           <OrbitControls
             makeDefault
@@ -140,7 +142,11 @@ const MainPage = ({ ...props }) => {
           <div onClick={() => opennews()} className="news">
             <DailyContent></DailyContent>
             {openNews ? (
-              <Newsmap>{/* <GalaxyList></GalaxyList> */}</Newsmap>
+              <Suspense>
+                <Newsmap>
+                  <GalaxyList></GalaxyList>
+                </Newsmap>
+              </Suspense>
             ) : null}
           </div>
         </div>

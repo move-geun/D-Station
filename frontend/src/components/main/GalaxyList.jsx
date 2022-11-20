@@ -9,70 +9,61 @@ import {
 
 const GalaxyList = () => {
   const frontList = useRecoilValue(FrontSelector).data.list;
-  //   const backList = useRecoilValue(BackSelector).data.list;
-  //   const devOpsList = useRecoilValue(DevOpsSelector).data.list;
-  //   const galaxy = useRecoilValue(Galaxy);
-  return (
-    <div>
-      {frontList ? (
-        frontList.map((gal, idx) => {
-          return (
-            <div key={idx}>
-              <div>{gal.pname}</div>
-            </div>
-          );
-        })
-      ) : (
-        <div>값이 없습니다</div>
-      )}
-    </div>
-  );
+  const backList = useRecoilValue(BackSelector).data.list;
+  const devOpsList = useRecoilValue(DevOpsSelector).data.list;
+  const galaxy = useRecoilValue(Galaxy);
 
-  //   if (galaxy === 1) {
-  //     return (
-  //       <div>
-  //         {frontList
-  //           ? frontList.map((gal, idx) => {
-  //               return (
-  //                 <div key={idx}>
-  //                   <div>{gal.pname}</div>
-  //                 </div>
-  //               );
-  //             })
-  //           : null}
-  //       </div>
-  //     );
-  //   } else if (galaxy === 2) {
-  //     return (
-  //       <div>
-  //         {backList
-  //           ? backList.map((gal, idx) => {
-  //               return (
-  //                 <div key={idx}>
-  //                   <div>{gal.pname}</div>
-  //                 </div>
-  //               );
-  //             })
-  //           : null}
-  //       </div>
-  //     );
-  //   } else if (galaxy === 3) {
-  //     return (
-  //       <div>
-  //         {devOpsList
-  //           ? devOpsList.map((gal, idx) => {
-  //               return (
-  //                 <div key={idx}>
-  //                   <div>{gal.pname}</div>
-  //                 </div>
-  //               );
-  //             })
-  //           : null}
-  //       </div>
-  //     );
-  //   } else {
-  //     return <div>값을 찾을 수 없습니다.</div>;
-  //   }
+  if (galaxy === 1) {
+    return (
+      <div>
+        <h1>FrontEnd</h1>
+        {frontList
+          ? frontList.map((gal, idx) => {
+              const plink = "/planet/" + gal.uid;
+              return (
+                <div key={idx}>
+                  <a href={plink}>{gal.pname}</a>
+                </div>
+              );
+            })
+          : null}
+      </div>
+    );
+  } else if (galaxy === 2) {
+    return (
+      <div>
+        <h1>BackEnd</h1>
+        {backList
+          ? backList.map((gal, idx) => {
+              const plink = "/planet/" + gal.uid;
+              return (
+                <div key={idx}>
+                  <a href={plink}>{gal.pname}</a>
+                </div>
+              );
+            })
+          : null}
+      </div>
+    );
+  } else if (galaxy === 3) {
+    return (
+      <div>
+        <h1>DevOps</h1>
+        {devOpsList
+          ? devOpsList.map((gal, idx) => {
+              const plink = "/planet/" + gal.uid;
+              return (
+                <div key={idx}>
+                  <a href={plink}>{gal.pname}</a>
+                </div>
+              );
+            })
+          : null}
+      </div>
+    );
+  } else {
+    return <div>값을 찾을 수 없습니다.</div>;
+  }
 };
 
 export default GalaxyList;
