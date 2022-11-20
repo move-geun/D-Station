@@ -40,12 +40,6 @@ const MissionPage = () => {
 
   useEffect(() => {}, [quizData, quizORct, doneTilData]);
 
-  // function MisRouter() {
-  //   if (misId === "1") {
-  //     return <Man />;
-  //   }
-  // }
-
   async function getQuizData() {
     await http.connect_axios
       .get(`/quiz?uid=${misId}`)
@@ -76,6 +70,7 @@ const MissionPage = () => {
 
       .catch((err) => console.log(err));
   }
+
 
   return (
     <MissionContainer>
