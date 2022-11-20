@@ -33,6 +33,7 @@ const MissionHTML = (prop = defaultValue) => {
   useEffect(() => {
     getMissionData();
     getRefListData();
+    getTilDone();
   }, []);
 
   useEffect(() => {}, [mData, refData, quizData, quizORct, doneTilData]);

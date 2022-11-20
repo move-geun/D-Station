@@ -59,7 +59,6 @@ const MissionPage = () => {
         http.connect_axios
           .get(`/grading/muid?uid=${misId}`)
           .then((res) => {
-            console.log("코테",res)
           })
           .catch((err) => {
             console.log(err);
