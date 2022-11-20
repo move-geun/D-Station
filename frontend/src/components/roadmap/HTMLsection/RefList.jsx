@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import http from "../../../api/http";
 import { ListWrapper } from "./RoadList.style";
 
 const defaultValue = {};
@@ -15,10 +14,6 @@ const RefList = (prop = defaultValue) => {
   useEffect(() => {}, [refList]);
 
   const goToRef = (prop) => {
-    // navigate("/refredirect", {
-    //   state: {url: prop},
-    // });
-
     window.open(`${prop}`, "_blank");
   };
 

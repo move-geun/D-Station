@@ -1,8 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel from "@mui/joy/FormLabel";
 import { Editor } from "@tinymce/tinymce-react";
-// import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import http from "../../api/http";
 import { getUserId } from "../../api/JWT";
@@ -24,7 +23,6 @@ export default function CommentEditor(props) {
     http.connect_axios
       .post(`reply/?userId=${userId}&content=${comment}&jisickinUid=${Uid}`)
       .then((res) => {
-        console.log(res);
         alert("댓글 등록 성공");
         window.location.reload();
       })

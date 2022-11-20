@@ -12,11 +12,7 @@ const SllHTML = (prop = defaultValue) => {
   const sllId = prop.sUId;
   const [sData, setSData] = useState(null);
   const [missonList, setMissionList] = useState(null);
-  // useEffect(()=>{
-  //     if(prop.Pdata.uid){
-  //         setPData(prop.Pdata);
-  //     }
-  // }, [prop]);
+
   useEffect(() => {}, [sData]);
 
   useEffect(() => {

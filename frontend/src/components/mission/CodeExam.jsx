@@ -19,7 +19,6 @@ const CodeExam = () => {
         setContent(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
         alert("문제가 존재하지 않습니다.");
         navigate(-1);
       });

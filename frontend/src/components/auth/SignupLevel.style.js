@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 const MainContainer = styled.div`
   display: flex;
   align-items: center;
@@ -16,7 +15,6 @@ const MainContainer = styled.div`
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
- 
 `;
 
 const WelcomeText = styled.h2`
@@ -68,7 +66,7 @@ const ForgotPassword = styled.h4`
 `;
 
 const Input = styled.input`
-   background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   border-radius: 2rem;
   width: 80%;
@@ -91,12 +89,11 @@ const Input = styled.input`
     font-weight: 100;
     font-size: 1rem;
   }
-
 `;
 
 const Button = styled.button`
-   background: linear-gradient(to right, #14163c 0%, #03217b 59%);
-   /* background-color: aliceblue; */
+  background: linear-gradient(to right, #14163c 0%, #03217b 59%);
+  /* background-color: aliceblue; */
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   width: 65%;
@@ -105,7 +102,17 @@ const Button = styled.button`
   color: white;
   border-radius: 2rem;
   cursor: pointer;
-`
+`;
 
-export {MainContainer, WelcomeText, InputContainer, Input, ButtonContainer, Button, 
-  DesText, HorizontalRule, IconsContainer, ForgotPassword  };
+export {
+  MainContainer,
+  WelcomeText,
+  InputContainer,
+  Input,
+  ButtonContainer,
+  Button,
+  DesText,
+  HorizontalRule,
+  IconsContainer,
+  ForgotPassword,
+};

@@ -83,42 +83,39 @@ const MissionHTML = (prop = defaultValue) => {
       .catch((err) => {
         setTilState(false);
         console.log(err);
-        console.log("til 자료 없음")
-      } );
+        console.log("til 자료 없음");
+      });
   }
 
-  async function missionCompleted(){
-    
-  }
+  async function missionCompleted() {}
 
   function goUp(prop) {
     setWhichOne(prop);
 
-    if(whichOne === "quiz"){
-      if(prop === "quiz"){
+    if (whichOne === "quiz") {
+      if (prop === "quiz") {
         setWhichOne(null);
-      }else{
+      } else {
         setWhichOne(prop);
       }
     }
 
-    if(whichOne === "code"){
-      navigate(`/mission/${misId}/codeexam`, {state: misId});
-      if(prop === "code"){    
+    if (whichOne === "code") {
+      navigate(`/mission/${misId}/codeexam`, { state: misId });
+      if (prop === "code") {
         setWhichOne(null);
-      }else{
+      } else {
         setWhichOne(prop);
       }
     }
 
-    if(whichOne === "til"){
-      if(prop === "til"){
+    if (whichOne === "til") {
+      if (prop === "til") {
         setWhichOne(null);
-      }else{
+      } else {
         setWhichOne(prop);
       }
     }
-
   }
 
   function goToTilPage(prop) {

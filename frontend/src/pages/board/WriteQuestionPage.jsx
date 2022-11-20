@@ -3,9 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Component, HeadGroup } from "./WriteQuestionPage.style";
 import QuestionEditor from "../../components/board/QuestionEditor";
 
-
 const WriteQuestionPage = () => {
-
   return (
     <Component>
       <HeadGroup>

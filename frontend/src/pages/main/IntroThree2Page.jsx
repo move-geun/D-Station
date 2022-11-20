@@ -2,14 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Canvas, useThree, useFrame, useLoader } from "@react-three/fiber";
-import { BooleanKeyframeTrack, LineSegments, TextureLoader } from "three";
+import { TextureLoader } from "three";
 import * as THREE from "three";
-import {
-  OrbitControls,
-  Stars,
-  PresentationControls,
-  Html,
-} from "@react-three/drei";
+import { OrbitControls, Stars } from "@react-three/drei";
 import Text from "./Text";
 
 import EarthDayMap from "../../assets/images/earthmap1k.jpg";
@@ -165,16 +160,6 @@ const IntroThree2Page = () => {
       <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 15] }}>
         <directionalLight position={[0, 5, 0]} />
         <ambientLight />
-        <Html
-        position={[-6, 2, 0]}
-        style={{
-          fontSize: "50px",
-          fontFamily:"verdana",
-          fontWeight: 1000,
-        }}>
-        <div> 개발 공부 로드맵 서비스 </div>
-    
-      </Html>
         <Jumbo>{`START\n`}</Jumbo>
         <Earth />
         {/* <Box position={[-3, -1, 0]} /> */}

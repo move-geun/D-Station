@@ -10,11 +10,10 @@ import {
 } from "./SignupLevel.style";
 import { useEffect, useState } from "react";
 import http from "../../api/http";
-import { UserIdState, UserState, PATState } from "../../recoil/atoms";
+import { UserIdState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 
 const SignupLevel2 = ({ levelHandler }) => {
-  // const [userId, setUserId] = useState();
   const [repoMessage, setRepoMessage] = useState("");
   const [repoName, setRepoName] = useState();
   const [successRepo, setSuccessRepo] = useState(false);
@@ -30,9 +29,6 @@ const SignupLevel2 = ({ levelHandler }) => {
   useEffect(() => {}, [successRepo]);
 
   const repoNameHandler = (e) => {
-    // if(repoName.size < 5){
-    //    setRepoMessage('레포지토리명을 5글자 이상 입력해주세요');
-    // }
     setRepoName(e.target.value);
   };
 

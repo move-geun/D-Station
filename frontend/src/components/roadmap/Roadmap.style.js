@@ -1,12 +1,6 @@
 import styled from "styled-components";
 
 const HTMLWrapper = styled.div`
-  /* width: 30%;
-    height: 100%;
-    float: right;
-    background-color: rgba( 0, 50, 100, 0.42 );
-    border-radius: 50px 0 0 50px; */
-
   width: 30%;
   height: 100vh;
   position: relative;
@@ -34,10 +28,8 @@ const ThreeWrapper = styled.div`
 `;
 
 const DescWrapper = styled.div`
-  /* height: 30%; */
   padding: 4.5rem 2rem 0rem 1rem;
   margin: 1rem;
-  /* word-break:break-all; */
 
   .name {
     text-align: center;
@@ -46,17 +38,13 @@ const DescWrapper = styled.div`
 
   .des {
     width: 100%;
-    /* height: 100px; */
     white-space: normal;
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
     font-size: small;
     line-height: 150%;
   }
 `;
 
 const ListWrapper = styled.div`
-  /* height: 70%; */
   float: bottom;
   padding: 1rem;
 `;

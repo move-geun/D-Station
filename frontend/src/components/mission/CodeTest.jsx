@@ -14,12 +14,10 @@ const CodeTest = ({ Uid }) => {
     http.connect_axios
       .post(`/grading/python?code=${code}&uid=${Uid}`)
       .then((res) => {
-        console.log(code);
         alert("정답입니다.");
         navigate(-1);
       })
       .catch((err) => {
-        console.log(err);
         alert("정답이 아닙니다.");
       });
   };

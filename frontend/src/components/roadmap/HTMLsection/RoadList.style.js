@@ -10,7 +10,7 @@ const ListWrapper = styled.div`
   /* height: 300px; */
   box-shadow: 2px 7px 15px 8px rgba(0, 0, 0, 0.3);
 
-  .plist{
+  .plist {
     font-size: small;
     cursor: pointer;
     &:hover {

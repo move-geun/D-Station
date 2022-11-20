@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import React from "react";
 import { GithubBtn, GithubContainer } from "./GithubLogIn.style";
 
 const GithubLogIn = () => {

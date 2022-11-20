@@ -1,8 +1,7 @@
 import React, { useRef, useState } from "react";
-import { Canvas, useThree, useFrame, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
-import * as THREE from "three";
-import { OrbitControls, Stars, Billboard, Html } from "@react-three/drei";
+import { OrbitControls, Stars, Html } from "@react-three/drei";
 
 import EarthDayMap from "../../../assets/images/PebblesColor.jpg";
 import EarthNormalMap from "../../../assets/images/PebblesBump.png";
@@ -65,7 +64,6 @@ export function Earth() {
           panSpeed={0.5}
           rotateSpeed={0.4}
         />
-
       </mesh>
     </>
   );

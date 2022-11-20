@@ -10,11 +10,10 @@ import SendIcon from "@mui/icons-material/Send";
 import { useState, useEffect } from "react";
 
 import http from "../../api/http";
-import { UserIdState, UserState, PATState, TilState, NavMissionIntoThree } from "../../recoil/atoms";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { TilState, NavMissionIntoThree } from "../../recoil/atoms";
+import { useRecoilState } from "recoil";
 import { getUserId } from "../../api/JWT";
 import { EditorContainer } from "./TilEditor.style";
-
 
 const defaultValue = {};
 export default function TilEditor(prop = defaultValue) {
@@ -23,20 +22,17 @@ export default function TilEditor(prop = defaultValue) {
     content: "",
     message: "",
   });
- 
+
   const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
   const [tilState, setTilState] = useRecoilState(TilState);
   const misId = useParams().missNo;
-
 
   const titleRef = useRef();
   const editorRef = useRef();
   const userId = getUserId();
 
   useEffect(() => {}, [tilContent]);
-  useEffect(()=>{
-
-  }, [prop])
+  useEffect(() => {}, [prop]);
 
   const blank = {
     marginTop: "20px",
@@ -58,7 +54,6 @@ export default function TilEditor(prop = defaultValue) {
         content: editorRef.current.getContent(),
       });
     }
-  
   };
 
   const MessageHandler = (e) => {
@@ -69,9 +64,8 @@ export default function TilEditor(prop = defaultValue) {
     });
   };
 
-  async function setOne(){
+  async function setOne() {
     setTimeout(await setWhichOne(null), 3000);
-    
   }
 
   const sendData = () => {
@@ -102,19 +96,22 @@ export default function TilEditor(prop = defaultValue) {
     };
 
     // 여기에 html 을 백에 보냄
-    http.connect_axios.post(`/til/create`, JSON.stringify(data), {
-      headers: {
-        "Content-Type": `application/json`,
-      },
-    })
-    .then((res)=> {
-      console.log("til 작성내용" ,data);
-      // 작성 성공했을 때, threejs section에 성공 띄우기  
-      setWhichOne("tilSuccess");
-      setTilState(true);
-      // setOne();
-  })
-    .catch((err)=> {console.log(data)});
+    http.connect_axios
+      .post(`/til/create`, JSON.stringify(data), {
+        headers: {
+          "Content-Type": `application/json`,
+        },
+      })
+      .then((res) => {
+        console.log("til 작성내용", data);
+        // 작성 성공했을 때, threejs section에 성공 띄우기
+        setWhichOne("tilSuccess");
+        setTilState(true);
+        // setOne();
+      })
+      .catch((err) => {
+        console.log(data);
+      });
   };
 
   return (
