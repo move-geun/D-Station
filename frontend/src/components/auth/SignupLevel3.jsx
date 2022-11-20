@@ -13,6 +13,7 @@ import {
   Button,
   ButtonContainer,
   DesText,
+  TotalContainer,
 } from "./SignupLevel.style";
 
 const SignupLevel3 = ({ levelHandler }) => {
@@ -50,29 +51,35 @@ const SignupLevel3 = ({ levelHandler }) => {
   };
 
   return (
-    <MainContainer>
-      <WelcomeText>Welcome</WelcomeText>
-      <DesText>사용할 닉네임을 입력해주세요.</DesText>
-      <InputContainer>
-        <Input type="text" placeholder="nickname" onChange={nicknameHandler} />
-      </InputContainer>
+    <TotalContainer>
+      <MainContainer>
+        <WelcomeText>Welcome</WelcomeText>
+        <DesText>사용할 닉네임을 입력해주세요.</DesText>
+        <InputContainer>
+          <Input
+            type="text"
+            placeholder="nickname"
+            onChange={nicknameHandler}
+          />
+        </InputContainer>
 
-      <ButtonContainer>
-        <Button content="회원가입" onClick={signupHandler}>
-          회원가입
-        </Button>
-      </ButtonContainer>
-      <DesText>{nextMessage}</DesText>
-      <ButtonContainer>
-        <Button
-          content="다음"
-          disabled={!successSignup}
-          onClick={signupHandler}
-        >
-          다음
-        </Button>
-      </ButtonContainer>
-    </MainContainer>
+        <ButtonContainer>
+          <Button content="회원가입" onClick={signupHandler}>
+            회원가입
+          </Button>
+        </ButtonContainer>
+        <DesText>{nextMessage}</DesText>
+        <ButtonContainer>
+          <Button
+            content="다음"
+            disabled={!successSignup}
+            onClick={signupHandler}
+          >
+            다음
+          </Button>
+        </ButtonContainer>
+      </MainContainer>
+    </TotalContainer>
   );
 };
 
