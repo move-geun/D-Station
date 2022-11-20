@@ -26,11 +26,6 @@ import { Openmap, Opennews, CameraZoom } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userInfoSelector } from "../../recoil/selector";
 
-function Loader() {
-  const { progress } = useProgress();
-  return <Html center>{Math.ceil(progress)} % 로딩중</Html>;
-}
-
 const MainPage = ({ ...props }) => {
   const [openMap, setOpenmap] = useRecoilState(Openmap);
   const [openNews, setOpennews] = useRecoilState(Opennews);
@@ -38,6 +33,15 @@ const MainPage = ({ ...props }) => {
   const user = useRecoilValue(userInfoSelector);
   const imgsrc = "../assets/" + user.imageUrl;
   const navigate = useNavigate();
+
+  function Loader() {
+    const { progress } = useProgress();
+    if (openmap || opennews) {
+      return <Html center>{Math.ceil(progress)} % 로딩중</Html>;
+    } else {
+      return null;
+    }
+  }
 
   const openmap = () => {
     setOpenmap(!openMap);
@@ -67,7 +71,6 @@ const MainPage = ({ ...props }) => {
 
   useEffect(() => {
     setOpenmap(false);
-    console.log(user);
   }, []);
   // const check = useRecoilValue(userInfoSelector);
 

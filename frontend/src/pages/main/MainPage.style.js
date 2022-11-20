@@ -11,6 +11,7 @@ const CanvasWrapper = styled.div`
   height: 90%;
   background-color: black;
   color: white;
+  z-index: 1;
 `;
 
 const FootNav = styled.div`
@@ -24,6 +25,7 @@ const FootNav = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  z-index: 999;
   .profile {
     margin-left: 50px;
     width: 50px;

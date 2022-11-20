@@ -25,15 +25,19 @@ const SearchMap = () => {
   };
   // 검색
   const getSearch = async (e) => {
-    if (e.keyCode === 13) {
-      await http.connect_axios
-        .get("satellite/search/", {
-          params: { keyword: content },
-        })
-        .then((res) => {
-          setResultList(res.data.list);
-          console.log(res.data.list);
-        });
+    try {
+      if (e.keyCode === 13) {
+        await http.connect_axios
+          .get("satellite/search/", {
+            params: { keyword: content },
+          })
+          .then((res) => {
+            setResultList(res.data.list);
+            console.log(res.data.list);
+          });
+      }
+    } catch (err) {
+      setResultList("X");
     }
   };
 
@@ -94,11 +98,6 @@ const SearchMap = () => {
                 <img src="../assets/vue.png" alt="" />
               </div>
             </div>
-            {/* <div className="logobox">
-              <img src="../assets/jenkins.png" alt="" />
-              <img src="../assets/spring.png" alt="" />
-              <img src="../assets/docker.png" alt="" />
-            </div> */}
           </div>
         </RecoSide>
         <SearchSide>
