@@ -230,7 +230,9 @@ public class TILServiceImpl implements TILService {
 		System.err.println("classLoader 간다잉");
 		ClassLoader classLoader = getClass().getClassLoader();
 		System.err.println("classLoader 통과 ");
+		System.err.println("classLoader : " + classLoader.toString());
 		File jarfile1 = new File(classLoader.getResource("document.html").getFile());
+		System.err.println("여기까지 올까?");
 		File jarfile2 = new File(classLoader.getResource("Output.md").getFile());
 		System.err.println(jarfile1);
 		System.err.println(jarfile2);
