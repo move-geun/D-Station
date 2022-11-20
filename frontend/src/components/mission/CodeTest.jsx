@@ -1,23 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AceEditor from "react-ace";
-import FormControl from "@mui/joy/FormControl";
-import FormLabel from "@mui/joy/FormLabel";
-import { Button } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { CodeBox, ButtonBox } from "./CodeTest.style";
+import { Label, CodeBox, ButtonBox, Button } from "./CodeTest.style";
 import http from "../../api/http";
 import "ace-builds/webpack-resolver";
 
-const CodeTest = ({ uid }) => {
-  const [code, setCode] = useState();
+const CodeTest = ({ Uid }) => {
+  const navigate = useNavigate();
+  const [code, setCode] = useState(null);
 
   const submit = () => {
     http.connect_axios
-      .post(`/grading/python?code=${code}&uid=${uid}`)
+      .post(`/grading/python?code=${code}&uid=${Uid}`)
       .then((res) => {
-        console.log(res);
         console.log(code);
         alert("정답입니다.");
+        navigate(-1);
       })
       .catch((err) => {
         console.log(err);
@@ -25,47 +24,35 @@ const CodeTest = ({ uid }) => {
       });
   };
 
-  const blank = {
-    marginTop: "20px",
-    fontSize: "20px",
-    width: "100px",
-  };
-
   return (
     <CodeBox>
-      <FormControl>
-        <FormLabel style={blank}>코드작성</FormLabel>
-        <AceEditor
-          width="1000px"
-          placeholder="코드를 입력해주세요."
-          // mode="python"
-          name="codeInput"
-          // onLoad={this.onLoad}
-          onChange={setCode}
-          fontSize={18}
-          showPrintMargin
-          showGutter
-          highlightActiveLine
-          // value={``}
-          setOptions={{
-            // enableBasicAutocompletion: true,
-            // enableLiveAutocompletion: true,
-            // enableSnippets: true,
-            // showLineNumbers: true,
-            tabSize: 4,
-          }}
-        />
-        <ButtonBox>
-          <Button
-            style={blank}
-            onClick={submit}
-            variant="contained"
-            startIcon={<CheckCircleIcon />}
-          >
-            제출
-          </Button>
-        </ButtonBox>
-      </FormControl>
+      <Label>[코드작성]</Label>
+      <AceEditor
+        width="800px"
+        placeholder="코드를 입력해주세요."
+        // mode="python"
+        name="codeInput"
+        // onLoad={this.onLoad}
+        onChange={setCode}
+        fontSize={18}
+        showPrintMargin
+        showGutter
+        highlightActiveLine
+        // value={``}
+        setOptions={{
+          // enableBasicAutocompletion: true,
+          // enableLiveAutocompletion: true,
+          // enableSnippets: true,
+          // showLineNumbers: true,
+          tabSize: 4,
+        }}
+      />
+      <ButtonBox>
+        <Button onClick={submit}>
+          제출
+          <CheckCircleIcon />
+        </Button>
+      </ButtonBox>
     </CodeBox>
   );
 };
