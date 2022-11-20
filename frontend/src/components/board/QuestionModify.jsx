@@ -64,8 +64,6 @@ const QuestionModify = () => {
         `ask/detail?content=${data.content}&tag=${data.tag}&title=${data.title}&uid=${data.uId}&userId=${data.userId}`
       )
       .then((res) => {
-        console.log("수정 완료");
-        console.log(res.data);
         alert("수정이 완료되었습니다.");
         navigate(`/questionlist`);
       })

@@ -1,4 +1,4 @@
-import React , { useRef } from "react";
+import React, { useRef } from "react";
 
 import { Canvas, extend, useThree, useFrame } from "@react-three/fiber";
 import {
@@ -28,7 +28,7 @@ const CameraControls = () => {
     <orbitControls
       ref={controls}
       args={[camera, domElement]}
-    //   autoRotate={true}
+      //   autoRotate={true}
       enableZoom={true}
     />
   );
@@ -85,17 +85,14 @@ function Sphere() {
   );
 }
 
-
-
 const IntroThreePage = () => {
-    return (
-        <Canvas className="canvas">
-          <CameraControls />
-          <Sphere />
-          <SkyBox />
-        </Canvas>
-      );
-
-}
+  return (
+    <Canvas className="canvas">
+      <CameraControls />
+      <Sphere />
+      <SkyBox />
+    </Canvas>
+  );
+};
 
 export default IntroThreePage;

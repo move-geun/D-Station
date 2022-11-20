@@ -1,9 +1,8 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import http from "../../api/http";
-import { UserIdState, UserState, PATState } from "../../recoil/atoms";
+import { UserIdState } from "../../recoil/atoms";
 import { useRecoilValue } from "recoil";
 
 import {
@@ -44,7 +43,6 @@ const SignupLevel3 = ({ levelHandler }) => {
         console.log("회원가입 성공했서?   ", res);
         setNextMessage("회원가입이 완료되었습니다.");
         levelHandler(1);
-        // navigate('/');
       })
       .catch(function (err) {
         console.log(err);

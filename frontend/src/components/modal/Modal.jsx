@@ -1,11 +1,10 @@
 import React from "react";
- 
+
 function Modal(props) {
- 
-function closeModal() {
+  function closeModal() {
     props.closeModal();
   }
- 
+
   return (
     <div className="Modal" onClick={closeModal}>
       <div className="modalBody" onClick={(e) => e.stopPropagation()}>
@@ -17,5 +16,5 @@ function closeModal() {
     </div>
   );
 }
- 
+
 export default Modal;

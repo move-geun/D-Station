@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { deleteToken } from "../../api/JWT";
 import { useRecoilState } from "recoil";
@@ -58,7 +57,6 @@ const Navbar = () => {
     >
       <Container maxWidth="0">
         <Toolbar disableGutters>
-          {/* <LogoImgDesk src={"/assets/cap.png"}></LogoImgDesk> */}
           <Typography
             variant="h1"
             noWrap

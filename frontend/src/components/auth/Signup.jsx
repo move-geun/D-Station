@@ -1,18 +1,12 @@
 import React from "react";
 import { SignupWrapper } from "./Signup.style";
 
-
 const Signup = () => {
-
-return(
+  return (
     <SignupWrapper>
-        <div className="title">회원가입</div>
-        
+      <div className="title">회원가입</div>
     </SignupWrapper>
-        
-   
-)
-
-}
+  );
+};
 
 export default Signup;

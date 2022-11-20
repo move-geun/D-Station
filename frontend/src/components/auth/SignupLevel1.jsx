@@ -16,7 +16,6 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import http from "../../api/http";
 
 const SignupLevel1 = ({ levelHandler }) => {
-  // const [userId, setUserId] = useState();
   const [githubData, setGithubData] = useState({
     id: "",
     password: "",
