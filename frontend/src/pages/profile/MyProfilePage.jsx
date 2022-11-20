@@ -40,14 +40,16 @@ const MyProfilePage = () => {
         <div className="title">
           <div className="status">
             {user.rankName}
-            {user.exp >= 300 ? null : <div className="per">{user.expPer}%</div>}
+            {user.exp >= 300 ? null : (
+              <div className="per">{Math.ceil(user.expPer)}%</div>
+            )}
           </div>
           {user.exp >= 300 ? (
             <div className="per">100%</div>
           ) : (
             <div className="status">
               {user.nextRank}
-              <div className="per">까지 {100 - user.expPer}%</div>
+              <div className="per">까지 {100 - Math.ceil(user.expPer)}%</div>
             </div>
           )}
         </div>

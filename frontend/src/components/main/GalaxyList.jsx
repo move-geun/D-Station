@@ -13,7 +13,14 @@ const GalaxyList = () => {
   const devOpsList = useRecoilValue(DevOpsSelector).data.list;
   const galaxy = useRecoilValue(Galaxy);
 
-  if (galaxy === 1) {
+  if (galaxy === 5) {
+    return (
+      <div>
+        <h1>반갑습니다</h1>
+        <h3>은하를 선택하여 개발을 시작하여보세요</h3>
+      </div>
+    );
+  } else if (galaxy === 1) {
     return (
       <div>
         <h1>FrontEnd</h1>
