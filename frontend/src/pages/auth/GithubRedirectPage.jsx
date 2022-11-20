@@ -25,8 +25,6 @@ const GithubRedirectPage = () => {
       const res = await http.auth_axios.post(
         `/github/check?githubCode=${code}`
       );
-      console.log("!!!!11", res);
-      console.log("니 지금 로그인 상태", userLogIn);
       if (res.data.statusCode === 200) {
         const githubId = res.data.githubId;
 
