@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Container, Contents, Name, ButtonGroup } from "./Comment.style";
+import { Editor } from "@tinymce/tinymce-react";
 import http from "../../api/http";
 import isAuthenticated from "../../api/isAuthenticated";
 import { getUserId } from "../../api/JWT";
@@ -27,8 +28,25 @@ const Comment = ({ Uid, Nickname, Content, User, JisikinId }) => {
 
   return (
     <Container>
-      <Contents>{Content}</Contents>
       <Name>{Nickname}</Name>
+      <Contents>
+        <Editor
+          apiKey="mv47x1bf7revpqmsvwdqta54w2b390xyi1wmkmlthp83qlkj"
+          initialValue={Content}
+          init={{
+            readonly: 1,
+            selector: "textarea",
+            skin: "oxide-dark",
+            content_css: "dark",
+            height: 100,
+            menubar: false,
+            toolbar: false,
+            statusbar: false,
+            content_style:
+              "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+          }}
+        />
+      </Contents>
       {isAuthenticated() && userId == User ? (
         <ButtonGroup>
           <button className="modify" onClick={handleModi}>

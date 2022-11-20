@@ -10,6 +10,7 @@ import {
   Del,
   Lst,
 } from "./QuestionDetail.style";
+import { Editor } from "@tinymce/tinymce-react";
 import CommentEditor from "../../components/board/CommentEditor";
 import CommentDetail from "../../components/board/Comment";
 import http from "../../api/http";
@@ -30,19 +31,17 @@ const QuestionDetail = () => {
   const [comments, setComments] = useState();
   const [checkId, setCheckId] = useState();
 
-
   useEffect(() => {
     const Uid = location.state.id.Uid;
     http.connect_axios.get(`/ask/detail?uid=${Uid}`).then((res) => {
       setItems(res.data);
       setTitle(res.data.title);
-      setDate(res.data.theDate.substring(0,16));
+      setDate(res.data.theDate.substring(0, 16));
       setNickname(res.data.nickname);
       setTag(res.data.tag);
       setContent(res.data.content);
       setId(res.data.uid);
       setCheckId(res.data.userId);
-      console.log(setDate);
     });
     http.connect_axios.get(`reply/?jisickinUid=${Uid}`).then((res) => {
       setComments(res.data.list);
@@ -78,7 +77,24 @@ const QuestionDetail = () => {
         </Tag>
       </Title>
       {/* 게시내용 */}
-      <Content>{content}</Content>
+      <Content>
+        <Editor
+          apiKey="mv47x1bf7revpqmsvwdqta54w2b390xyi1wmkmlthp83qlkj"
+          initialValue={content}
+          init={{
+            readonly: 1,
+            selector: "textarea",
+            skin: "oxide-dark",
+            // content_css: "dark",
+            height: 300,
+            menubar: false,
+            toolbar: false,
+            statusbar: false,
+            content_style:
+              "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+          }}
+        />
+      </Content>
       {/* 버튼그룹 */}
       <Buttons>
         {isAuthenticated() && userId == checkId ? (

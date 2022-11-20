@@ -1,7 +1,13 @@
-import React, { Suspense, useRef } from "react";
-import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { Html, useProgress, Stars } from "@react-three/drei";
+import React, { Suspense, useEffect, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  Html,
+  useProgress,
+  Stars,
+  Bounds,
+  OrbitControls,
+  useBounds,
+} from "@react-three/drei";
 import {
   MainWrapper,
   CanvasWrapper,
@@ -9,36 +15,16 @@ import {
   RocketMap,
   Newsmap,
 } from "./MainPage.style";
+import { useNavigate } from "react-router-dom";
 import { TestDev } from "../../components/scene/TestDev";
 import { TestBack } from "../../components/scene/TestBack";
 import { TestFront } from "../../components/scene/TestFront";
 import SearchMap from "../../components/main/SearchMap";
 import MapNav from "../../components/main/MapNav";
 import DailyContent from "../../components/main/DailyContent";
-import { Openmap, Opennews } from "../../recoil/atoms";
+import { Openmap, Opennews, CameraZoom } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userInfoSelector } from "../../recoil/selector";
-import { useState, useEffect } from "react";
-
-extend({ OrbitControls });
-
-const CameraControls = () => {
-  const {
-    camera,
-    gl: { domElement },
-  } = useThree();
-
-  const controls = useRef();
-  useFrame(() => controls.current.update());
-  return (
-    <orbitControls
-      ref={controls}
-      args={[camera, domElement]}
-      autoRotate={false}
-      enableZoom={true}
-    />
-  );
-};
 
 function Loader() {
   const { progress } = useProgress();
@@ -48,9 +34,10 @@ function Loader() {
 const MainPage = ({ ...props }) => {
   const [openMap, setOpenmap] = useRecoilState(Openmap);
   const [openNews, setOpennews] = useRecoilState(Opennews);
-  const [newsOpen, setNewsOpen] = useState(false);
+  const [camerzoom, setCameraZoom] = useRecoilState(CameraZoom);
   const user = useRecoilValue(userInfoSelector);
   const imgsrc = "../assets/" + user.imageUrl;
+  const navigate = useNavigate();
 
   const openmap = () => {
     setOpenmap(!openMap);
@@ -64,13 +51,30 @@ const MainPage = ({ ...props }) => {
     setOpennews(!openNews);
   };
 
+  function SelectToZoom({ children }) {
+    const api = useBounds();
+    return (
+      <group
+        onClick={(e) => (
+          e.stopPropagation(), e.delta <= 2 && api.refresh(e.object).fit()
+        )}
+        onPointerMissed={(e) => e.button === 0 && api.refresh().fit()}
+      >
+        {children}
+      </group>
+    );
+  }
+
+  useEffect(() => {
+    setOpenmap(false);
+    console.log(user);
+  }, []);
   // const check = useRecoilValue(userInfoSelector);
 
   return (
     <MainWrapper>
       <CanvasWrapper onClick={closemap}>
         <Canvas className="tmp" camera={{ fov: 75, position: [-10, 0, 250] }}>
-          <CameraControls />
           <Suspense fallback={<Loader />}>
             <Stars
               radius={300}
@@ -81,18 +85,35 @@ const MainPage = ({ ...props }) => {
               fade={false}
             />
             <ambientLight />
+            <hemisphereLight
+              color="white"
+              groundColor="#ff0f00"
+              position={[-7, 25, 13]}
+              intensity={1}
+            />
+            <Suspense fallback={null}></Suspense>
             <pointLight position={[500, 200, 0]} intensity={1} />
             <directionalLight position={[500, 200, 0]} intensity={2} />
-            <TestBack />
-            <TestDev />
-            <TestFront />
+            <Bounds fit clip observe margin={1.2}>
+              <SelectToZoom>
+                <TestBack />
+                <TestDev />
+                <TestFront />
+              </SelectToZoom>
+            </Bounds>
           </Suspense>
+          <OrbitControls
+            makeDefault
+            minPolarAngle={0}
+            maxPolarAngle={Math.PI / 1.75}
+          />
         </Canvas>
       </CanvasWrapper>
       <FootNav>
         <div className="flexWrapInfo">
           <img className="profile" src={imgsrc} alt="유저 등급사진" />
-          <div>
+          <div onClick={() => navigate("/myprofile")}>
+            {/* <div> */}
             <div>안녕하세요, {user.userNickname}님</div>
             <div>🕹{user.rankName}</div>
           </div>

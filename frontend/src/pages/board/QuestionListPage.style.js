@@ -95,6 +95,7 @@ const Container = styled.div`
   position: absolute;
   top: 250px;
   left: 150px;
+  width: 80%;
 `;
 
 const Page = styled.div`

@@ -35,4 +35,23 @@ const Board = styled.div`
   }
 `;
 
-export { AchieveContainer, Board };
+const Progressbox = styled.div`
+  width: 70px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+
+  .proimg {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+  div {
+    margin-left: 10px;
+  }
+`;
+
+export { AchieveContainer, Board, Progressbox };

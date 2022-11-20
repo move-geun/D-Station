@@ -14,6 +14,9 @@ const SearchWraper = styled.div`
     font-style: bold;
     text-align: left;
     margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 
   @keyframes flicker {
@@ -37,13 +40,20 @@ const SearchWraper = styled.div`
     animation: flicker 1.5s infinite alternate;
   }
 `;
+const TitleWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+`;
 
 const ContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
@@ -80,8 +90,8 @@ const RecoSide = styled.div`
   }
 
   img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
 `;
 
@@ -98,7 +108,7 @@ const SearchSide = styled.div`
   }
 
   .spacing {
-    width: 80%;
+    width: 100%;
     text-align: start;
     margin: 5px 0;
   }
@@ -107,7 +117,7 @@ const SearchSide = styled.div`
     width: 100%;
     font-size: 1.2rem;
     text-align: start;
-    margin-top: 65px;
+    margin-top: 18px;
     margin-bottom: 10px;
   }
 `;
@@ -121,20 +131,25 @@ const SearchFunction = styled.div`
 
   .search {
     position: absolute;
-    padding: 10px;
-    top: 0px;
-    left: 130px;
+    padding: 5px;
+    top: -35px;
+    left: -20px;
     transform: translate(-100%, 0);
     height: 30px;
-    background-color: #fff;
-    border: 1px solid #51e3d4;
+    background-color: black;
+    color: white;
+    border: 1px solid #51e3d9;
     border-radius: 30px;
     transition: 0.4s;
     width: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 
   .search:hover {
-    box-shadow: 0px 0px 0.5px 1px #51e3d4;
+    box-shadow: 0px 0px 0.5px 1px #51e3d9;
     width: 282px;
   }
 
@@ -143,12 +158,12 @@ const SearchFunction = styled.div`
     float: right;
     width: 30px;
     height: 30px;
-    background-color: #fff;
+    background-color: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #51e3d4;
+    color: #51e3d9;
   }
 
   .search:hover > .searchBtn {
@@ -161,6 +176,7 @@ const SearchFunction = styled.div`
     width: 0px;
     border: none;
     background: none;
+    color: white;
     outline: none;
     float: left;
     font-size: 1rem;
@@ -174,4 +190,11 @@ const SearchFunction = styled.div`
   }
 `;
 
-export { SearchWraper, ContentWrapper, RecoSide, SearchSide, SearchFunction };
+export {
+  SearchWraper,
+  TitleWrapper,
+  ContentWrapper,
+  RecoSide,
+  SearchSide,
+  SearchFunction,
+};

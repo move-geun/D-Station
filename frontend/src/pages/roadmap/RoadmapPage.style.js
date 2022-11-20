@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+const GalaxyContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    position: relative;
+`
+
 const PlanetContatiner = styled.div`
     width: 100%;
     height: 100%;
@@ -17,4 +23,4 @@ const MissionContainer = styled.div`
     height: 100%;
     position: relative;
 `
-export {PlanetContatiner, SatelliteContatiner, MissionContainer};
+export {GalaxyContainer, PlanetContatiner, SatelliteContatiner, MissionContainer};

@@ -1,16 +1,15 @@
 import React from "react";
-import { Function, Container, Page } from "./QuestionListPage.style";
+import { Function, Container } from "./QuestionListPage.style";
 import Question from "../../components/board/Question";
+import QuestionSearch from "../../components/board/QuestionSearch";
 import CreateIcon from "@mui/icons-material/Create";
 import SearchIcon from "@mui/icons-material/Search";
 import { getUserId } from "../../api/JWT";
-import { Suspense, useRef } from "react";
+import { Suspense, useRef, useState } from "react";
 import { Stars, useProgress, Html } from "@react-three/drei";
 import { Canvas, useThree, extend, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { SpaceStation } from "../../components/scene/Space_station";
-import http from "../../api/http";
-import { useState } from "react";
 
 extend({ OrbitControls });
 
@@ -40,32 +39,25 @@ function Loader() {
 const QuestionListPage = () => {
   const userId = getUserId();
   const [search, setSearch] = useState("");
+  const [check, setCheck] = useState(false);
 
   const onChange = (e) => {
     setSearch(e.target.value);
   };
 
   const searching = () => {
-    http.connect_axios
-      .get(`http://k7e106.p.ssafy.io:8081/api/ask/search?keyword=${search}`)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("해당하는 검색 결과가 없습니다.");
-      });
+    setCheck(!check);
   };
 
   const onKeyPress = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       searching();
     }
   };
 
   return (
     <>
-      <Canvas camera={{ fov: 110, position: [0, 0, 400] }}>
+      <Canvas camera={{ fov: 70, position: [0, 0, 400] }}>
         <CameraControls />
         <directionalLight position={[10, 10, 5]} />
         <pointLight position={[10, 10, 10]} />
@@ -79,7 +71,7 @@ const QuestionListPage = () => {
             saturation={7}
             fade={false}
           />
-          <SpaceStation position={[500, -300, 0]} />
+          <SpaceStation position={[300, -150, 0]} />
         </Suspense>
       </Canvas>
       <Function>
@@ -105,7 +97,7 @@ const QuestionListPage = () => {
         </div>
       </Function>
       <Container>
-        <Question />
+        {check ? <QuestionSearch Search={search} /> : <Question />}
       </Container>
     </>
   );

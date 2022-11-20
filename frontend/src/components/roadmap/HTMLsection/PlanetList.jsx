@@ -1,43 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import http from "../../../api/http";
 import { ListWrapper } from "./RoadList.style";
 
 const defaultValue = {};
 const SatelliteList = (prop = defaultValue) => {
+  const galaxyId = useParams().galaxyNo;
   const navigate = useNavigate();
-  const [slist, setSList] = useState(null);
+  const [plist, setPList] = useState(null);
 
   useEffect(() => {
-    const planetId = prop.planetUId;
     http.connect_axios
-      .get(`/satellite/list_by_planet?uid=${planetId}`)
+      .get(`/planet/list_by_galaxy?uid=${galaxyId}`)
       .then((res) => {
-        setSList(res.data.list);
+        setPList(res.data.list);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [prop]);
 
-  useEffect(() => {}, [slist]);
+  useEffect(() => {}, [plist]);
 
-  const goToSll = (id) => {
-    navigate(`/satellite/${id}`);
+  const goToPlanet = (id) => {
+    navigate(`/planet/${id}`);
   };
 
   return (
     <>
       <ListWrapper>
-        {slist ? (
-          slist.map((item, idx) => {
+        {plist ? (
+          plist.map((item, idx) => {
             return (
               <div
-                className="slist"
+                className="plist"
                 key={idx}
-                onClick={() => goToSll(item.uid)}
+                onClick={() => goToPlanet(item.uid)}
               >
-                {item.sname}
+                {item.pname}
               </div>
             );
           })

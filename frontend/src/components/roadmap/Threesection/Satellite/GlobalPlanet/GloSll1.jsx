@@ -1,33 +1,29 @@
 import React , {useRef, useState}from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Canvas, useThree, useFrame, useLoader } from "@react-three/fiber";
+import {useFrame, useLoader } from "@react-three/fiber";
 import {Object3D, TextureLoader } from "three";
-import * as THREE from "three";
-import {
-  OrbitControls,
-  Stars,
-  Billboard,
-  Html,
-} from "@react-three/drei";
+import {OrbitControls} from "@react-three/drei";
 
-import SatelliteColor from "../../../../../assets/images/canyonRockColor.jpg";
-import SatelliteBump from "../../../../../assets/images/canyonRockBump.png";
-import SatelliteRough from "../../../../../assets/images/canyonRockColorRoughness.jpg";
-import SatelliteNormal from "../../../../../assets/images/canyonRockNormal.jpg";
+import SatelliteColor from "../../../../../assets/images/Agate_001_COLOR.jpg";
+import SatelliteBump from "../../../../../assets/images/Agate_001_DISP.png";
+import SatelliteRough from "../../../../../assets/images/Agate_001_ROUGH.jpg";
+import SatelliteNormal from "../../../../../assets/images/Agate_001_NORM.jpg";
 import { useEffect } from "react";
 
 
-  export function Sll6() {
+  export function GloSll1(prop) {
     const [colorMap, bumpMap, roughMap, normalMap] = useLoader(
       TextureLoader,[SatelliteColor, SatelliteBump, SatelliteRough, SatelliteNormal]
     );
     const [hovered, setHover] = useState(false);
     const [clickActive, setClickActive] = useState(false);
 
+
     const sateRef = useRef();
     const navigate = useNavigate();
 
+    useEffect(()=>{},[prop])
     useEffect(()=>{if(clickActive){goToSatellite()}}, [clickActive]);
 
     // 마우스 올렸을 때, 위성크기 키우기
@@ -37,25 +33,26 @@ import { useEffect } from "react";
     //회전을 위해
     useFrame(({ clock }) => {
       const elapsedTime = clock.getElapsedTime();
-      sateRef.current.rotation.y = elapsedTime / 6;
+      sateRef.current.rotation.y = elapsedTime / 20;
     });
 
     const goToSatellite = () => {
-        navigate("/satellite/6");
+        // navigate("/satellite/1");
     }
   
     return (
       <>
         <mesh 
             ref={sateRef} 
-            position={[3, 0, 1.5]}
+            position={prop.pos}
             onPointerOver={(event) => setHover(true)}
             onPointerOut={(event) => setHover(false)}
             onClick={()=> setClickActive(true)}
+            
         >
             {/* {hovered? <Html position={[2, 0.6, 0]}>자료구조</Html> : <></>} */}
 
-            <sphereGeometry args={[0.25, 32, 32]} />
+            <sphereGeometry args={[0.2, 32, 32]} />
             {/* <meshPhongMaterial specularMap={specularMap} /> */}
             <meshStandardMaterial
                 map={colorMap}
