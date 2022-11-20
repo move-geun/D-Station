@@ -82,6 +82,7 @@ const MissionHTML = (prop = defaultValue) => {
       .catch((err) => {
         setTilState(false);
         console.log(err);
+        console.log("til 자료 없음")
       } );
   }
 
