@@ -223,20 +223,20 @@ public class TILServiceImpl implements TILService {
 		String fileName = (tILCreateReq.getFileName()).replace(" ", "_");
 
 		//////// 파일 변환 시작
-		String filePath = "./json/testDir/"; // 파일 경로
+		//String filePath = "./json/testDir/"; // 파일 경로
 		
 		
 		
 		
 		///////////////////////////
-		System.err.println("============================================================================");
-        try {
-			File fileee = new File(this.getClass().getResource("testDir/document.html").toURI());
-			System.err.println(fileee);
-		} catch (URISyntaxException e2) {
-			// TODO Auto-generated catch block
-			System.err.println("안된다고요~~~");
-		}
+//		System.err.println("============================================================================");
+//        try {
+//			File fileee = new File(this.getClass().getResource("testDir/document.html").toURI());
+//			System.err.println(fileee);
+//		} catch (URISyntaxException e2) {
+//			// TODO Auto-generated catch block
+//			System.err.println("안된다고요~~~");
+//		}
 //		System.err.println("============================================================================"); 
         
 //		String testPath = "json/testDir/document.html"; // 파일 경로
@@ -269,8 +269,8 @@ public class TILServiceImpl implements TILService {
 		
 		///////////////////////////////////
 		/////////////////////////////////
-		File file1 = new File(filePath + "document.html");
-		File file2 = new File(filePath + "Output.md");
+		File file1 = new File("document.html");
+		File file2 = new File("Output.md");
 
 		// 이전에 파일이 있다면 삭제하기
 		if (file1.exists() || file2.exists()) {
@@ -287,7 +287,7 @@ public class TILServiceImpl implements TILService {
 		// 전달 받은 내용(html)으로 파일 생성하기
 		FileWriter fw;
 		try {
-			fw = new FileWriter(filePath + "document.html");
+			fw = new FileWriter("document.html");
 			fw.write(content);
 			fw.close();
 		} catch (IOException e) {
@@ -297,14 +297,14 @@ public class TILServiceImpl implements TILService {
 		// html to markdown
 		Document doc;
 		try {
-			doc = new Document(filePath + "document.html");
-			doc.save(filePath + "Output.md");
+			doc = new Document("document.html");
+			doc.save("Output.md");
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 
 		// markdown 파일 입력받기
-		byte[] binary = getFileBinary(filePath + "Output.md");
+		byte[] binary = getFileBinary("Output.md");
 
 		// markdown to base64
 		String base64data = Base64.getEncoder().encodeToString(binary);
