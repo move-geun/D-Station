@@ -33,6 +33,20 @@ const Board = styled.div`
     height: 70px;
     /* border-radius: 50%; */
   }
+
+  .progressbox {
+    width: 70px;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      margin: 0px;
+      margin-bottom: 13px;
+    }
+  }
 `;
 
 export { AchieveContainer, Board };
