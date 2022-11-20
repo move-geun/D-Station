@@ -226,7 +226,18 @@ public class TILServiceImpl implements TILService {
 		String filePath = "./json/testDir/"; // 파일 경로
 		
 		
+		
+		
 		///////////////////////////
+		System.err.println("============================================================================");
+        try {
+			File fileee = new File(this.getClass().getResource("testDir/document.html").toURI());
+			System.err.println(fileee);
+		} catch (URISyntaxException e2) {
+			// TODO Auto-generated catch block
+			System.err.println("안된다고요~~~");
+		}
+//		System.err.println("============================================================================"); 
         
 //		String testPath = "json/testDir/document.html"; // 파일 경로
 //		String testPath2 = "/json/testDir/document.html"; // 파일 경로
