@@ -14,16 +14,19 @@ import BaseBackground from "../../components/roadmap/Threesection/Base/BaseBackg
 import { TestFront } from "../../components/scene/TestFront";
 import { TestBack } from "../../components/scene/TestBack";
 import { TestDev } from "../../components/scene/TestDev";
+import { Bounds, OrbitControls, useBounds } from "@react-three/drei";
 
 
 const GalaxyPage = () => {
   const galaxyId = useParams().galaxyNo;
 
   function GalaxyRouter() {
-    if (galaxyId === "1") { return <TestFront />
-    } else if (galaxyId === "2") { return <TestBack />
-    } else if (galaxyId === "3") { return <TestDev />}
+    if (galaxyId === "1") { return 
+    } else if (galaxyId === "2") { return 
+    } else if (galaxyId === "3") { return}
   }
+
+
 
   return (
     <GalaxyContainer>
@@ -32,7 +35,12 @@ const GalaxyPage = () => {
           <directionalLight position={[0, 5, 0]} />
           <ambientLight />
           <BaseBackground />
-          {GalaxyRouter()}
+          <OrbitControls
+                enableZoom={true}
+                enablePan={true}
+                enableRotate={true}          
+            />  
+              {GalaxyRouter()}   
         </Canvas>
       </ThreeWrapper>
       <HTMLWrapper>

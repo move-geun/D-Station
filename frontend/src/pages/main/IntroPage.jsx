@@ -108,12 +108,6 @@ const IntroPage = () => {
         {/* <Login /> */}
         {/* <button onClick={()=> startBtnHandler()}> 시작하기 </button> */}
       </div>
-      <div className="divider"></div>
-      <div className="inner bg-pink">
-        <Signup />
-      </div>
-      <div className="divider"></div>
-      <div className="inner bg-yellow"></div>
     </IntroWrapper>
   );
 };
