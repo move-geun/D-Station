@@ -10,7 +10,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { useState, useEffect } from "react";
 
 import http from "../../api/http";
-import { UserIdState, UserState, PATState, TilIntoThree, NavMissionIntoThree } from "../../recoil/atoms";
+import { UserIdState, UserState, PATState, TilState, NavMissionIntoThree } from "../../recoil/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { getUserId } from "../../api/JWT";
 import { EditorContainer } from "./TilEditor.style";
@@ -23,8 +23,9 @@ export default function TilEditor(prop = defaultValue) {
     content: "",
     message: "",
   });
-  const [tilOpen, setTilOpen] = useRecoilState(TilIntoThree);
+ 
   const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
+  const [tilState, setTilState] = useRecoilState(TilState);
   const misId = useParams().missNo;
 
 
@@ -107,12 +108,11 @@ export default function TilEditor(prop = defaultValue) {
       },
     })
     .then((res)=> {
-      console.log(res);
+      console.log("til 작성내용" ,data);
       // 작성 성공했을 때, threejs section에 성공 띄우기  
       setWhichOne("tilSuccess");
+      setTilState(true);
       // setOne();
-
-      setTilOpen(false);
   })
     .catch((err)=> {console.log(data)});
   };

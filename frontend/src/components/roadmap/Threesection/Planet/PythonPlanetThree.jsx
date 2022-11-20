@@ -15,6 +15,8 @@ import { Sll1 } from "../Satellite/PythonPlanet/Sll1";
 import { Sll2 } from "../Satellite/PythonPlanet/Sll2";
 import { Sll3 } from "../Satellite/PythonPlanet/Sll3";
 import { Sll4 } from "../Satellite/PythonPlanet/Sll4";
+import { Sll5 } from "../Satellite/PythonPlanet/Sll5";
+import { Sll6 } from "../Satellite/PythonPlanet/Sll6";
 
 
 
@@ -68,6 +70,8 @@ export function PlanetPython() {
             <Sll2/>
             <Sll3 />
             <Sll4/>
+            <Sll5/>
+            <Sll6 />
 
         </object3D>   
       </>

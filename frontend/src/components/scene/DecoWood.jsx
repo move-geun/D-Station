@@ -5,10 +5,8 @@ import { getUserId } from "../../api/JWT";
 import { useRecoilState } from "recoil";
 import { NavMissionIntoThree } from "../../recoil/atoms";
 
-
 const defaultValue = {};
 export function DecoWood(props = defaultValue) {
-
   const userId = getUserId();
   const [quizData, setQuizData] = useState(null);
   const [quizAnswer, setQuizAnswer] = useState();
@@ -16,48 +14,52 @@ export function DecoWood(props = defaultValue) {
   const [quizResult, setQuizResult] = useState(null);
   const [quizResultMessage, setQuizResultMessage] = useState("");
   const [whichOne, setWhichOne] = useRecoilState(NavMissionIntoThree);
+  const [hovered, setHover] = useState(false);
 
-  useEffect(()=>{
-    console.log("우드우드", props);
-    setQuizData(props.data);
-  
-  }, [props]);
-  useEffect(()=>{}, [quizData, quizAnswer]);
-  useEffect(()=>{quizHandler()}, [quizResult])
+  useEffect(() => {setQuizData(props.data)}, [props]);
+  useEffect(() => {}, [quizData, quizAnswer]);
+  useEffect(() => {quizHandler()}, [quizResult]);
+  useEffect(()=> {
+    if(hovered){
 
-  function AnsHandler(prop){
+    }
+  }, [hovered])
+
+  function AnsHandler(prop) {
     setQuizAnswer(prop);
 
     const data = {
       id: userId,
       quid: quizData.quid,
       userAnswer: prop,
-    }
+    };
 
     http.connect_axios
-    .post(`/quiz/correct`, JSON.stringify(data), {
-      headers: {
-        "Content-Type": `application/json`,
-      },
-    })
-    .then((res)=> {
-      console.log("퀴즈 결과 보내기!!!" , res)
-      setQuizResult(res.data);
-      
-    })
-    .catch((err)=>{console.log(data)})
-
+      .post(`/quiz/correct`, JSON.stringify(data), {
+        headers: {
+          "Content-Type": `application/json`,
+        },
+      })
+      .then((res) => {
+        console.log("퀴즈 결과 보내기!!!", res);
+        setQuizResult(res.data);
+      })
+      .catch((err) => {
+        console.log(data);
+      });
   }
 
   function quizHandler() {
-    if(quizResult === true){setWhichOne("quizSuccess");}
-    else if(quizResult === false){setWhichOne("quizFail");}
+    if (quizResult === true) {
+      setWhichOne("quizSuccess");
+    } else if (quizResult === false) {
+      setWhichOne("quizFail");
+    }
   }
 
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
-
         <mesh
           castShadow
           receiveShadow
@@ -66,28 +68,51 @@ export function DecoWood(props = defaultValue) {
           // position={[-0.07, 1.39, -1.06]}
           scale={0.04}
         />
-        <Html
-           position={[-0.35, -0.3, 1]}
-        >
-          <h1>QUIZ</h1>
+        <Html position={[-0.8, -0.3, 1]}>
+            <span
+                style={{
+                  fontSize: 70,
+                  letterSpacing: -0.5,
+                  color: "black",
+                }}
+              >
+                QUIZ
+              </span>
+
         </Html>
-        <Html
-           position={[-5, 10, -1.06]}
+        <Html position={[-10, 10, -1.06]}>
+          {quizData !== null ? (
+            <div
+              style={{
+                fontSize: 30,
+                letterSpacing: -0.5,
+              }}
+            >
+              {quizData.content}
+            </div>
+          ) : (
+            <div>데이터를 불러오는 중입니다.</div>
+          )}
+
+          <span
+            style={{fontSize: 100}}
+            onClick={() => AnsHandler(true)}
+            onPointerOver={(event) => setHover(true)}
+            onPointerOut={(event) => setHover(false)}
+            
           >
-            {quizData !== null ? (
-              // <div>안뇽</div>
-            <p>{quizData.content}</p>
-            )
-            : 
-            (<div>데이터를 불러오는 중입니다.</div>)}
-
-              <span onClick={()=> AnsHandler(true)}>⭕</span>
-              <span onClick={()=> AnsHandler(false)}>❌</span>
-      
-              <div>{quizResultMessage}</div>
-          </Html>
-
-
+            ⭕
+          </span>
+          <span
+            style={{fontSize: 100}}
+            onClick={() => AnsHandler(false)}
+            onPointerOver={(event) => setHover(true)}
+            onPointerOut={(event) => setHover(false)}
+          >
+            ❌
+          </span>
+          <div>{quizResultMessage}</div>
+        </Html>
       </group>
     </group>
   );
