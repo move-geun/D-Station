@@ -46,7 +46,7 @@ const SearchMap = () => {
       <TitleWrapper>
         <div className="title">
           <div>🌌</div>
-          <div className="neonText">Navigation</div>
+          <div className="neonText">Path Finder</div>
         </div>
         <SearchFunction>
           <div className="search">

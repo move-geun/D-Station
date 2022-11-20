@@ -92,6 +92,9 @@ const RecoSide = styled.div`
   img {
     width: 60px;
     height: 60px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
