@@ -289,7 +289,7 @@ backend
 
 |   Name   | 김가흔           | 정민지                  | 이동근           | 김대영                        | 김유정                          | 박찬호                             |
 | :------: | ---------------- | ----------------------- | ---------------- | ----------------------------- | ------------------------------- | ---------------------------------- |
-| Profile  |   ![김가흔](/uploads/8e4bfadbc69770ccf7be699e20385daa/김가흔.png)   | ![정민지](/uploads/ba5a4fd8dc0d626ab71c61e8d6e435d4/정민지.png) |  ![이동근](/uploads/96aaf0bd1e1300f130a6cebe5c925c05/이동근.png)    |   ![김대영](/uploads/80716a763ccf75a4dee497fc47cbd193/김대영.png) | ![김유정](https://user-images.githubusercontent.com/51036842/185786075-586f3cae-09af-4332-bc42-b168a92ecf27.png) | ![박찬호](https://user-images.githubusercontent.com/51036842/185786083-433277e3-8b93-446b-a73a-f26ac7225e60.png)                  |
+| Profile  |  ![김가흔](https://user-images.githubusercontent.com/98456240/203209752-16a39ef9-2984-4fbf-b99a-7b06d66454aa.png)   | ![정민지](https://user-images.githubusercontent.com/98456240/203209768-acfe46ba-6991-48a8-83ce-489fced6138c.png) |  ![이동근](https://user-images.githubusercontent.com/98456240/203209764-27215605-d3e2-4232-ba13-b38b24c931a2.png)   |   ![김대영](https://user-images.githubusercontent.com/98456240/203209754-7e149081-ba3d-471c-8cd3-eb4cdb9b0fb2.png) | ![김유정](https://user-images.githubusercontent.com/51036842/185786075-586f3cae-09af-4332-bc42-b168a92ecf27.png) | ![박찬호](https://user-images.githubusercontent.com/51036842/185786083-433277e3-8b93-446b-a73a-f26ac7225e60.png)                  |
 | Position | Frontend & UI/UX | 팀장 & Frontend & UI/UX | Frontend & UI/UX | Backend Develop & CI/CD | Backend Develop & CI/CD | Backend Develop & CI/CD |
 |   Git    |    [gheun0712](https://github.com/gheun0712)   |    [minzzz1st7](https://github.com/minzzz1st7) |    [move-geun](https://github.com/move-geun)        |   [gresbin](https://github.com/gresbin)  | [yujeonge](https://github.com/yujeonge)                          | [taurus429](https://github.com/taurus429)                             |
 
@@ -315,7 +315,7 @@ backend
 
 ### 1. 메인 화면
 ___
-![메인로드맵접속](/uploads/2c85fa1f0a1d29d62eb9e7d4cb249a0e/메인로드맵접속.gif)
+![메인로드맵접속](https://user-images.githubusercontent.com/98456240/203209761-e331c606-ebf4-4454-87b0-5f431849715e.gif)
 
 
   - #### 은하
@@ -334,7 +334,7 @@ ___
 
 ### 2. 로드맵
 ___
-![로드맵](/uploads/a6b71f88337ab3481f250e817dddd9a8/로드맵.gif)
+![로드맵](https://user-images.githubusercontent.com/98456240/203209757-c3888743-9df2-487c-a7f0-661203aad014.gif)
 
   - #### 행성
     - 행성 정보와 위성 리스트 표시
@@ -343,14 +343,14 @@ ___
     - 위성 정보와 미션 리스트 표시
 
   - #### 미션
-  ![퀴즈](/uploads/22adbf76a9dcf300dd40477c88f22778/퀴즈.gif)
+![퀴즈](https://user-images.githubusercontent.com/98456240/203209773-751884a3-6412-4d24-a9bf-79a05857bcc8.gif)
     - 미션 정보 표시
     - TIL 작성 가능
     - 퀴즈 풀기 or 코드 풀기 가능
 
 ### 3. 질문하기
 ___
-![질문게시판](/uploads/0aaf37b8dd9501068953cddd4abaa9c1/질문게시판.gif)
+![질문게시판](https://user-images.githubusercontent.com/98456240/203209771-d3af7f11-0dac-4e62-a4c8-fc8d6b8ebd59.gif)
 
 
   - #### 질문 목록
@@ -369,7 +369,7 @@ ___
 
 ### 4. 마이페이지
 ___
-![mbti](/uploads/dd914b2e9c8e9be73387153cd7c557ce/mbti.gif)
+![mbti](https://user-images.githubusercontent.com/98456240/203209743-f54cd873-5b32-4b42-af50-9cbd80c72819.gif)
 
 
 - #### MBTI별 개발자 직종 추천받기
