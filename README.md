@@ -315,21 +315,24 @@ backend
 
 ### 1. 메인 화면
 ___
-![메인로드맵접속](https://user-images.githubusercontent.com/98456240/203209761-e331c606-ebf4-4454-87b0-5f431849715e.gif)
+![main](https://user-images.githubusercontent.com/85543481/220859934-968392e5-d3c3-42d0-a784-6580cbc0c4b0.gif)
 
 
   - #### 은하
     - three.js로 은하 표시
 
   - #### 네비게이션
-    - 추천 과정
-    - 검색
 
-  - #### 행성리스트
-    - 은하 선택 후 행성리스트 표시
+![path_finder](https://user-images.githubusercontent.com/85543481/220860143-31029a7b-b891-4ac6-9b26-1599d2b58d0e.gif)
 
-  - #### 로딩
-    - 로딩 중 CS지식 표시
+- 추천 과정
+- 검색
+
+#### 행성리스트
+- 은하 선택 후 행성리스트 표시
+
+#### 로딩
+- 로딩 중 CS지식 표시
 
 
 ### 2. 로드맵
@@ -342,15 +345,24 @@ ___
   - #### 위성
     - 위성 정보와 미션 리스트 표시
 
-  - #### 미션
-![퀴즈](https://user-images.githubusercontent.com/98456240/203209773-751884a3-6412-4d24-a9bf-79a05857bcc8.gif)
+  - #### 학습
+    ![refrence](https://user-images.githubusercontent.com/85543481/220861353-efb28379-43b8-4e96-871e-8397a5ddc411.gif)
+    
     - 미션 정보 표시
     - TIL 작성 가능
     - 퀴즈 풀기 or 코드 풀기 가능
+    
+    ![퀴즈](https://user-images.githubusercontent.com/98456240/203209773-751884a3-6412-4d24-a9bf-79a05857bcc8.gif)
+    
+    ![test](https://user-images.githubusercontent.com/85543481/220860632-5fe7c481-76ee-4dfe-ae68-7e05b66a15c1.gif)
 
 ### 3. 질문하기
 ___
-![질문게시판](https://user-images.githubusercontent.com/98456240/203209771-d3af7f11-0dac-4e62-a4c8-fc8d6b8ebd59.gif)
+![css](https://user-images.githubusercontent.com/85543481/220861838-5781318d-7840-4c90-bc8c-d6a08f8b0fc6.gif)
+
+![add-css](https://user-images.githubusercontent.com/85543481/220862025-89a7c297-708b-41a1-8c9c-bdc5e7742c91.gif)
+
+![add-answer](https://user-images.githubusercontent.com/85543481/220862206-d6832a5b-067f-4fb0-be3a-c9d514be8e81.gif)
 
 
   - #### 질문 목록
@@ -360,21 +372,29 @@ ___
     - 게시글의 제목 및 내용에 있는 키워드로 검색
 
   - #### 질문하기
+    
+    
     - 태그별로 선택 후, 질문글을 작성
     - 코드 작성 가능
-
+    
   - #### 댓글
     - 코드 작성 가능
     - 댓글 작성 
 
 ### 4. 마이페이지
 ___
-![mbti](https://user-images.githubusercontent.com/98456240/203209743-f54cd873-5b32-4b42-af50-9cbd80c72819.gif)
+![index-css profile](https://user-images.githubusercontent.com/85543481/220861547-4de9ca81-1873-42b6-ab14-d7c0ad4d5aa4.gif)
+
+
 
 
 - #### MBTI별 개발자 직종 추천받기
+  
+  ![mbti_test](https://user-images.githubusercontent.com/85543481/220860841-7a571139-4231-4457-a322-0bd945ad0b6f.gif)
+  
+  
   - 12개의 질문을 통해 사용자의 mbti 개발자 직종 추천
-
+  
 - #### 레벨업 게이지
   - TIL작성, 코드 및 퀴즈를 맞히면 게이지 상승
 
